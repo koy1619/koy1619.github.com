@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[linux48]]></title>
+  
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://linux48.com/"/>
+  <updated>2015-05-29T02:16:23.000Z</updated>
+  <id>http://linux48.com/</id>
+  
+  <author>
+    <name><![CDATA[koy]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <link href="http://linux48.com//archives/425/"/>
+    <id>http://linux48.com//archives/425/</id>
+    <published>2015-05-27T16:00:00.000Z</published>
+    <updated>2015-05-29T02:16:23.000Z</updated>
+    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<a id="more"></a>
+<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Welcome to <a href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>]]>
+    
+    </summary>
+    
+      <category term="Hello World" scheme="http://linux48.com/categories/Hello-World/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[awstats日志分析安装]]></title>
+    <link href="http://linux48.com//archives/424/"/>
+    <id>http://linux48.com//archives/424/</id>
+    <published>2015-03-12T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<p>Awstats是一个免费非常简洁而且强大有个性的网站日志分析工具。它可以统计您站点的如下信息：<br>一：访问量，访问次数，页面浏览量，点击数，数据流量等<br>二：精确到每月、每日、每小时的数据<br>三：访问者国家<br>四：访问者IP<br>五：Robots/Spiders的统计<br>六：访客持续时间<br>七：对不同Files type 的统计信息<br>八：Pages-URL的统计<br>九：访客操作系统浏览器等信息<br>十：其它信息（搜索关键字等等）<br><a id="more"></a></p>
+<h3 id="install_awstats">install awstats</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://sourceforge.net/projects/awstats/files/AWStats/<span class="number">7.3</span>/awstats-<span class="number">7.3</span>.zip</span><br><span class="line">unzip awstats-<span class="number">7.3</span>.zip</span><br><span class="line">cp -R awstats-<span class="number">7.3</span> /usr/<span class="built_in">local</span>/awstats/</span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/awstats/tools/</span><br><span class="line">perl awstats_configure.pl</span><br></pre></td></tr></table></figure>
+<h3 id="Set_webserver">Set webserver</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> awstats-<span class="number">7.3</span>/wwwroot</span><br><span class="line">cp -R * /home/wwwroot/awstats</span><br><span class="line"></span><br><span class="line">vim /etc/awstats/awstats.hero.conf</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen       <span class="number">81</span>;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">        root   /home/wwwroot/awstats;</span><br><span class="line">        index  index.html;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">allow <span class="number">192.168</span>.<span class="number">1.3</span>;</span><br><span class="line">deny all;</span><br><span class="line"></span><br><span class="line"><span class="comment">#auth_basic            "Restricted";</span></span><br><span class="line"><span class="comment">#auth_basic_user_file  /usr/local/senginx/conf/vhosts/hero.passwd;</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="GeoIP_install">GeoIP install</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">mkdir GeoIP</span><br><span class="line"><span class="built_in">cd</span> GeoIP</span><br><span class="line"></span><br><span class="line">wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz</span><br><span class="line">wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz</span><br><span class="line">wget http://geolite.maxmind.com/download/geoip/database/asnum/GeoIPASNum.dat.gz</span><br><span class="line">gunzip GeoIP.dat.gz</span><br><span class="line">gunzip GeoIPASNum.dat.gz</span><br><span class="line">gunzip GeoLiteCity.dat.gz</span><br><span class="line"></span><br><span class="line">wget http://geolite.maxmind.com/download/geoip/api/c/GeoIP-<span class="number">1.4</span>.<span class="number">8</span>.tar.gz</span><br><span class="line">tar zxvf GeoIP-<span class="number">1.4</span>.<span class="number">8</span>.tar.gz</span><br><span class="line"><span class="built_in">cd</span> GeoIP-<span class="number">1.4</span>.<span class="number">8</span>/</span><br><span class="line">libtoolize <span class="operator">-f</span></span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line">wget http://geolite.maxmind.com/download/geoip/api/perl/Geo-IP-<span class="number">1.39</span>.tar.gz</span><br><span class="line">tar zxvf Geo-IP-<span class="number">1.39</span>.tar.gz</span><br><span class="line"><span class="built_in">cd</span> Geo-IP-<span class="number">1.39</span></span><br><span class="line">perl Makefile.PL LIBS=<span class="string">'-L/usr/local/lib'</span></span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">vim /etc/awstats/awstats.hero.conf</span><br><span class="line"></span><br><span class="line">LoadPlugin=<span class="string">"geoip GEOIP_STANDARD /opt/GeoIP/GeoIP.dat"</span></span><br><span class="line">LoadPlugin=<span class="string">"geoip_city_maxmind GEOIP_STANDARD /opt/GeoIP/GeoLiteCity.dat"</span></span><br><span class="line">LoadPlugin=<span class="string">"geoip_org_maxmind GEOIP_STANDARD /opt/GeoIP/GeoIPASNum.dat"</span></span><br></pre></td></tr></table></figure>
+<h3 id="Set_the_log_format">Set the log format</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/<span class="built_in">local</span>/senginx/conf/vhosts/default.conf </span><br><span class="line"></span><br><span class="line"><span class="built_in">log</span>_format  awstats  <span class="string">'$remote_addr - $remote_user [$time_local] "$request" '</span></span><br><span class="line"><span class="string">'$status $body_bytes_sent "$http_referer" '</span></span><br><span class="line"><span class="string">'"$http_user_agent" "$http_x_forwarded_for"'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen       <span class="number">80</span>;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /data/<span class="built_in">source</span>/;</span><br><span class="line">        index  index.php;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        root           /data/<span class="built_in">source</span>/;</span><br><span class="line">        <span class="comment">#fastcgi_pass  127.0.0.1:9000;</span></span><br><span class="line">        fastcgi_pass   unix:/usr/<span class="built_in">local</span>/php/run/php.scoket;</span><br><span class="line">        fastcgi_index  index.php;</span><br><span class="line">        fastcgi_param  SCRIPT_FILENAME  fastcgi_script_name;</span><br><span class="line">        fastcgi_buffer_size <span class="number">128</span>k;</span><br><span class="line">        fastcgi_buffers <span class="number">4</span> <span class="number">128</span>k;</span><br><span class="line">        fastcgi_busy_buffers_size <span class="number">256</span>k;</span><br><span class="line">        fastcgi_temp_file_write_size <span class="number">256</span>k;</span><br><span class="line">        include      fastcgi.conf;</span><br><span class="line">        <span class="comment">#include        fastcgi_params;</span></span><br><span class="line">    &#125;</span><br><span class="line">        access_<span class="built_in">log</span> logs/access.log awstats;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vim /etc/awstats/awstats.hero.conf </span><br><span class="line">LogFile=<span class="string">"/app/local/senginx/logs/access_%YYYY-24%MM-24%DD-24.log"</span></span><br></pre></td></tr></table></figure>
+<h3 id="Set_crontab">Set crontab</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cat /opt/scripts/cut_nginx_logs.sh</span><br><span class="line"><span class="shebang">#!/bin/bash</span></span><br><span class="line">logs_path=<span class="string">"/app/local/senginx/logs/"</span></span><br><span class="line">mv <span class="variable">$&#123;logs_path&#125;</span>access.log <span class="variable">$&#123;logs_path&#125;</span>access_$(date <span class="operator">-d</span> <span class="string">"yesterday"</span> +<span class="string">"%Y%m%d"</span>).log</span><br><span class="line">/app/<span class="built_in">local</span>/senginx/sbin/nginx <span class="operator">-s</span> reload</span><br><span class="line"></span><br><span class="line">cat /opt/scripts/awstats.sh</span><br><span class="line"><span class="shebang">#!/bin/bash</span></span><br><span class="line">perl /usr/<span class="built_in">local</span>/awstats/tools/awstats_buildstaticpages.pl -update -config=hero -lang=cn -dir=/app/data/site/awstats/ -awstatsprog=/usr/<span class="built_in">local</span>/awstats/wwwroot/cgi-bin/awstats.pl</span><br><span class="line"></span><br><span class="line"><span class="number">01</span> <span class="number">00</span> * * * sh /opt/scripts/cut_nginx_logs.sh</span><br><span class="line"><span class="number">10</span> <span class="number">00</span> * * * sh /opt/scripts/awstats.sh</span><br></pre></td></tr></table></figure>]]></content>
+    <summary type="html">
+    <![CDATA[<p>Awstats是一个免费非常简洁而且强大有个性的网站日志分析工具。它可以统计您站点的如下信息：<br>一：访问量，访问次数，页面浏览量，点击数，数据流量等<br>二：精确到每月、每日、每小时的数据<br>三：访问者国家<br>四：访问者IP<br>五：Robots/Spiders的统计<br>六：访客持续时间<br>七：对不同Files type 的统计信息<br>八：Pages-URL的统计<br>九：访客操作系统浏览器等信息<br>十：其它信息（搜索关键字等等）<br>]]>
+    
+    </summary>
+    
+      <category term="awstats" scheme="http://linux48.com/tags/awstats/"/>
+    
+      <category term="log" scheme="http://linux48.com/tags/log/"/>
+    
+      <category term="monitor" scheme="http://linux48.com/categories/monitor/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[H3C划分VLAN命令]]></title>
+    <link href="http://linux48.com//archives/423/"/>
+    <id>http://linux48.com//archives/423/</id>
+    <published>2015-03-06T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<h3 id="H3C命令">H3C命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">华为默认不是access，先修改为access，在把接口加入到vlan中，</span><br><span class="line">批量修改</span><br><span class="line">[sw1]port-group <span class="number">1</span> </span><br><span class="line">[sw1-port-group-<span class="number">1</span>]group-member GigabitEthernet <span class="number">0</span>/<span class="number">0</span>/<span class="number">1</span> to GigabitEthernet <span class="number">0</span>/<span class="number">0</span>/<span class="number">48</span> 将端口加入到组</span><br><span class="line">[sw1-port-group-<span class="number">1</span>]port link-type access</span><br><span class="line"></span><br><span class="line">vlan <span class="number">1</span></span><br><span class="line">port GigabitEthernet <span class="number">0</span>/<span class="number">0</span>/<span class="number">1</span></span><br><span class="line"></span><br><span class="line">&lt;h3c&gt;reset save  删除搜索配置文件（需重启生效）</span><br><span class="line">&lt;h3c&gt;save        保存配置文件</span><br><span class="line">&lt;h3c&gt;reboot      重启</span><br></pre></td></tr></table></figure>
+<p>参考 <a href="http://skypegnu1.blog.51cto.com/8991766/1586778" target="_blank" rel="external">http://skypegnu1.blog.51cto.com/8991766/1586778</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="H3C命令">H3C命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line"]]>
+    </summary>
+    
+      <category term="h3c" scheme="http://linux48.com/tags/h3c/"/>
+    
+      <category term="vlan" scheme="http://linux48.com/tags/vlan/"/>
+    
+      <category term="路由交换" scheme="http://linux48.com/categories/%E8%B7%AF%E7%94%B1%E4%BA%A4%E6%8D%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[redis简易安装]]></title>
+    <link href="http://linux48.com//archives/422/"/>
+    <id>http://linux48.com//archives/422/</id>
+    <published>2015-03-04T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">yum -y install make gcc gcc-c++ tcl</span><br><span class="line">wget http://download.redis.io/releases/redis-<span class="number">2.8</span>.<span class="number">19</span>.tar.gz</span><br><span class="line">tar zxvf redis-<span class="number">2.8</span>.<span class="number">19</span>.tar.gz</span><br><span class="line"><span class="built_in">cd</span> redis-<span class="number">2.8</span>.<span class="number">19</span></span><br><span class="line">chmod <span class="number">777</span> -R *</span><br><span class="line">make PREFIX=/usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>  MALLOC=libc install</span><br><span class="line">cp ./redis.conf /usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>/</span><br><span class="line">mkdir -p  /data/redisdb</span><br><span class="line">vim /usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>/redis.conf</span><br><span class="line">nohup /usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>/bin/redis-server /usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>/redis.conf &amp;</span><br><span class="line">/usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>/bin/redis-cli</span><br></pre></td></tr></table></figure>]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class=]]>
+    </summary>
+    
+      <category term="nosql" scheme="http://linux48.com/tags/nosql/"/>
+    
+      <category term="redis" scheme="http://linux48.com/tags/redis/"/>
+    
+      <category term="database" scheme="http://linux48.com/categories/database/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[多版本php共存搭建]]></title>
+    <link href="http://linux48.com//archives/421/"/>
+    <id>http://linux48.com//archives/421/</id>
+    <published>2015-01-29T16:00:00.000Z</published>
+    <updated>2015-05-29T03:56:36.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="应用环境">应用环境</h1><p>LNMP的环境，当前PHP版本5.3.28，遇到一个应用需求只支持PHP 5.5.21，又希望保持现有应用还是用PHP 5.3.28。也就是说需要两个版本的PHP同时存在，供nginx根据需要调用不同版本。</p>
+<h1 id="思路">思路</h1><p>Nginx是通过PHP-FastCGI与PHP交互的。而PHP-FastCGI运行后会通过文件、或本地端口两种方式进行监听，<a id="more"></a>在Nginx中配置相应的FastCGI监听端口或文件即实现Nginx请求对PHP的解释。</p>
+<p>既然PHP-FastCGI是监听端口和文件的，那就可以让不同版本的PHP-FastCGI同时运行，监听不同的端口或文件，Nginx中根据需求配置调用不同的PHP-FastCGI端口或文件，即可实现不同版本PHP共存了。</p>
+<h1 id="配置记录">配置记录</h1><p>下面记录简单的配置流程，基于已经安装了lnmp的centos环境。当前版本的PHP是5.3.28，位于/app/local/php5.3.28,下面安装php5.5.21</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./configure  --with-openssl --prefix=/app/<span class="built_in">local</span>/php5.<span class="number">5.21</span> --with-config-file-path=/app/<span class="built_in">local</span>/php5.<span class="number">5.21</span>/etc --with-jpeg-dir --with-png-dir --with-zlib --enable-xml --disable-rpath --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --with-curlwrappers --enable-mbregex --enable-fpm --enable-mbstring --with-mcrypt --with-gd --enable-gd-native-ttf --with-mhash --enable-pcntl --enable-ftp --enable-zip --with-pdo-mysql=mysqlnd --enable-fpm --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-freetype-dir</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line"></span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>设置php的监听socket或者端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost <span class="built_in">local</span>]<span class="comment"># cat /app/local/php5.5.21/etc/php-fpm.conf |grep -v ";"       </span></span><br><span class="line"></span><br><span class="line">[global]</span><br><span class="line">pid = run/php-fpm.pid</span><br><span class="line">error_<span class="built_in">log</span> = <span class="built_in">log</span>/php-fpm.log</span><br><span class="line"></span><br><span class="line">[www]</span><br><span class="line">user = www</span><br><span class="line">group = www</span><br><span class="line"></span><br><span class="line">listen = run/php.scoket      </span><br><span class="line">;注意若果是监听端口则是 listen = <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">9001</span></span><br><span class="line"></span><br><span class="line">listen.owner = www</span><br><span class="line">listen.group = www</span><br><span class="line"> </span><br><span class="line">pm = static</span><br><span class="line">pm.max_children = <span class="number">250</span></span><br><span class="line">pm.start_servers = <span class="number">2</span></span><br><span class="line">pm.min_spare_servers = <span class="number">1</span></span><br><span class="line">pm.max_spare_servers = <span class="number">3</span></span><br><span class="line">pm.status_path = /php-fpm_status</span><br></pre></td></tr></table></figure>
+<p>其他参数根据服务器环境和需求自行定制。</p>
+<p>启动php-fpm</p>
+<pre><code><span class="regexp">/app/</span>local<span class="regexp">/php5.5.21/</span>sbin<span class="regexp">/php-fpm</span>
+</code></pre><h1 id="nginx配置">nginx配置</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen <span class="number">80</span>;</span><br><span class="line">        server_name test.com;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        index index.php index.html index.htm;</span><br><span class="line">        root  /www/<span class="built_in">test</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        error_page   <span class="number">404</span>     /<span class="number">404</span>.html;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        location ~ \.php$ &#123;</span><br><span class="line">            root           /www/<span class="built_in">test</span>;</span><br><span class="line">            fastcgi_pass   unix:/app/<span class="built_in">local</span>/php5.<span class="number">5.21</span>/run/php.scoket;</span><br><span class="line">            <span class="comment">#fastcgi_pass 127.0.0.1:9001; </span></span><br><span class="line">            fastcgi_index  index.php;</span><br><span class="line">            fastcgi_param  SCRIPT_FILENAME  fastcgi_script_name;</span><br><span class="line">            include        fastcgi.conf;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>今天安装好后nginx打开502，google了一下这位大神的文章<a href="http://xuanwobbs.com.cn/archives/2014-05/php5-5-12-502.html" target="_blank" rel="external">php5.5.12产生502错误解决方法</a>解决了</p>
+<blockquote>
+<ul>
+<li><p>如果有更多个php版本安装也是如此，此方法也可以适用于平滑升级php版本</p>
+</li>
+<li><p>一个版本的php也可以指定相关配置文件来启动多个php的master,启动命令如下</p>
+</li>
+</ul>
+</blockquote>
+<pre><code><span class="regexp">/app/</span>local<span class="regexp">/php5.3.28/</span>sbin<span class="regexp">/php-fpm -c /</span>app<span class="regexp">/local/</span>php5.<span class="number">3.28</span><span class="regexp">/etc/</span>php2.ini -y <span class="regexp">/app/</span>local<span class="regexp">/php5.3.28/</span>etc<span class="regexp">/php-fpm2.conf </span>
+</code></pre><p>show一下</p>
+<pre><code>[root<span class="annotation">@localhost</span> local]# ps -ef |grep php5
+root     <span class="number">16756</span>     <span class="number">1</span>  <span class="number">0</span> Jan29 ?        00:<span class="number">00</span>:<span class="number">08</span> php-<span class="string">fpm:</span> master process (<span class="regexp">/app/</span>local<span class="regexp">/php5.3.28/</span>etc/php-fpm2.conf)                                                
+root     <span class="number">16782</span>     <span class="number">1</span>  <span class="number">0</span> Jan29 ?        00:<span class="number">00</span>:<span class="number">15</span> php-<span class="string">fpm:</span> master process (<span class="regexp">/app/</span>local<span class="regexp">/php5.3.28/</span>etc/php-fpm.conf)
+root     <span class="number">23499</span>     <span class="number">1</span>  <span class="number">0</span> Jan30 ?        00:<span class="number">00</span>:<span class="number">09</span> php-<span class="string">fpm:</span> master process (<span class="regexp">/app/</span>local<span class="regexp">/php5.5.21/</span>etc/php-fpm.conf)
+root     <span class="number">44108</span> <span class="number">42716</span>  <span class="number">0</span> <span class="number">16</span>:<span class="number">36</span> pts/<span class="number">0</span>    <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> grep php5
+[root<span class="annotation">@localhost</span> local]# 
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="应用环境">应用环境</h1><p>LNMP的环境，当前PHP版本5.3.28，遇到一个应用需求只支持PHP 5.5.21，又希望保持现有应用还是用PHP 5.3.28。也就是说需要两个版本的PHP同时存在，供nginx根据需要调用不同版本。</p>
+<h1 id="思路">思路</h1><p>Nginx是通过PHP-FastCGI与PHP交互的。而PHP-FastCGI运行后会通过文件、或本地端口两种方式进行监听，]]>
+    
+    </summary>
+    
+      <category term="lnmp" scheme="http://linux48.com/tags/lnmp/"/>
+    
+      <category term="php" scheme="http://linux48.com/tags/php/"/>
+    
+      <category term="php" scheme="http://linux48.com/categories/php/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[shadowsocks的python和nodejs版搭建]]></title>
+    <link href="http://linux48.com//archives/420/"/>
+    <id>http://linux48.com//archives/420/</id>
+    <published>2015-01-20T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<p>shadowsocks的nodejs版的不是很稳定，今天又搞了一台香港的机器，果断换成python试试，果然给力<a id="more"></a></p>
+<h2 id="nodejs版搭建">nodejs版搭建</h2><p>nodejs环境搭建参见 <a href="https://gist.github.com/koy1619/3479170a3a763ffd8869" target="_blank" rel="external">https://gist.github.com/koy1619/3479170a3a763ffd8869</a></p>
+<pre><code>git <span class="built_in">clone</span> https://github.com/shadowsocks/shadowsocks-nodejs.git
+
+<span class="built_in">cd</span> shadowsocks-nodejs
+
+vim config.json
+
+{
+<span class="string">"server"</span>:<span class="string">".0.0.0.0"</span>,
+<span class="string">"server_port"</span>:<span class="number">8388</span>,
+<span class="string">"local_address"</span>:<span class="string">"0.0.0.0"</span>,
+<span class="string">"local_port"</span>:<span class="number">1080</span>,
+<span class="string">"password"</span>:<span class="string">"barfoo!"</span>,
+<span class="string">"timeout"</span>:<span class="number">600</span>,
+<span class="string">"method"</span>:<span class="string">"aes-256-cfb"</span>
+}
+</code></pre><p>启动服务</p>
+<pre><code><span class="label">nohup</span> /<span class="preprocessor">opt</span>/shadowsocks-nodejs/<span class="keyword">bin/ssserver </span>&amp;
+<span class="label">nohup</span> /<span class="preprocessor">opt</span>/shadowsocks-nodejs/<span class="keyword">bin/sslocal </span>&amp;
+</code></pre><p>查看进程</p>
+<pre><code><span class="attr_selector">[root@test ~]</span># <span class="tag">ps</span> <span class="tag">-ef</span> |<span class="tag">grep</span>  <span class="tag">node</span>
+<span class="tag">root</span>     <span class="tag">12969</span>     <span class="tag">1</span>  <span class="tag">0</span> <span class="tag">Jan16</span> ?        <span class="tag">00</span><span class="pseudo">:02</span><span class="pseudo">:07</span> <span class="tag">node</span> /<span class="tag">opt</span>/<span class="tag">shadowsocks-nodejs</span>/<span class="tag">bin</span>/<span class="tag">ssserver</span>
+<span class="tag">root</span>     <span class="tag">12971</span>     <span class="tag">1</span>  <span class="tag">0</span> <span class="tag">Jan16</span> ?        <span class="tag">00</span><span class="pseudo">:02</span><span class="pseudo">:05</span> <span class="tag">node</span> /<span class="tag">opt</span>/<span class="tag">shadowsocks-nodejs</span>/<span class="tag">bin</span>/<span class="tag">sslocal</span>
+<span class="tag">root</span>     <span class="tag">15118</span> <span class="tag">15104</span>  <span class="tag">0</span> <span class="tag">15</span><span class="pseudo">:48</span> <span class="tag">pts</span>/<span class="tag">0</span>    <span class="tag">00</span><span class="pseudo">:00</span><span class="pseudo">:00</span> <span class="tag">grep</span> <span class="tag">node</span>
+</code></pre><p>nodejs版的不是很稳定，今天又搞了一台香港的机器，果断换成python试试，果然给力</p>
+<h2 id="python版搭建">python版搭建</h2><pre><code>yum -y <span class="keyword">install</span> python-setuptools &amp;&amp; easy_install pip
+yum -y <span class="keyword">install</span> python-pip libevent python-devel git m2crypto
+pip <span class="keyword">install</span> shadowsocks
+pip <span class="keyword">install</span> gevent
+pip <span class="keyword">install</span> M2Crypto
+pip <span class="keyword">install</span> shadowsocks
+mkdir -p /etc/shadowsocks
+
+vim /etc/shadowsocks/config.json
+
+{
+<span class="string">"server"</span>:<span class="string">"0.0.0.0"</span>,
+<span class="string">"server_port"</span>:<span class="number">8388</span>,
+<span class="string">"local_address"</span>:<span class="string">"0.0.0.0"</span>,
+<span class="string">"local_port"</span>:<span class="number">1080</span>,
+<span class="string">"password"</span>:<span class="string">"barfoo!"</span>,
+<span class="string">"timeout"</span>:<span class="number">600</span>,
+<span class="string">"method"</span>:<span class="string">"table"</span>
+}
+</code></pre><p>启动服务</p>
+<pre><code><span class="built_in">cd</span> /etc/shadowsocks
+nohup ssserver &amp;
+nohup sslocal &amp;
+</code></pre><p>查看进程</p>
+<pre><code><span class="attr_selector">[root@10-8-1-5 ~]</span># <span class="tag">ps</span> <span class="tag">-ef</span> |<span class="tag">grep</span> <span class="tag">python</span>  
+<span class="tag">root</span>     <span class="tag">22599</span>     <span class="tag">1</span>  <span class="tag">0</span> <span class="tag">12</span><span class="pseudo">:36</span> ?        <span class="tag">00</span><span class="pseudo">:00</span><span class="pseudo">:07</span> /<span class="tag">usr</span>/<span class="tag">bin</span>/<span class="tag">python</span> /<span class="tag">usr</span>/<span class="tag">bin</span>/<span class="tag">ssserver</span>
+<span class="tag">root</span>     <span class="tag">22604</span>     <span class="tag">1</span>  <span class="tag">0</span> <span class="tag">12</span><span class="pseudo">:36</span> ?        <span class="tag">00</span><span class="pseudo">:00</span><span class="pseudo">:07</span> /<span class="tag">usr</span>/<span class="tag">bin</span>/<span class="tag">python</span> /<span class="tag">usr</span>/<span class="tag">bin</span>/<span class="tag">sslocal</span>
+<span class="tag">root</span>     <span class="tag">22797</span> <span class="tag">22772</span>  <span class="tag">0</span> <span class="tag">15</span><span class="pseudo">:54</span> <span class="tag">pts</span>/<span class="tag">1</span>    <span class="tag">00</span><span class="pseudo">:00</span><span class="pseudo">:00</span> <span class="tag">grep</span> <span class="tag">python</span>
+<span class="attr_selector">[root@10-8-1-5 ~]</span># 
+</code></pre><p>需要注意防火墙开放<strong>local_port</strong>的端口号</p>
+<p>Google Chrome浏览器安装SwitchyOmega插件导入下面的备份修改server地址即可使用。</p>
+<ul>
+<li><a href="http://pan.baidu.com/s/1pJ8zfv1" title="备份点我" target="_blank" rel="external">备份点我</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>shadowsocks的nodejs版的不是很稳定，今天又搞了一台香港的机器，果断换成python试试，果然给力]]>
+    
+    </summary>
+    
+      <category term="nodejs" scheme="http://linux48.com/tags/nodejs/"/>
+    
+      <category term="python" scheme="http://linux48.com/tags/python/"/>
+    
+      <category term="shadowsocks" scheme="http://linux48.com/tags/shadowsocks/"/>
+    
+      <category term="shadowsocks" scheme="http://linux48.com/categories/shadowsocks/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[linux下删除乱码文件]]></title>
+    <link href="http://linux48.com//archives/419/"/>
+    <id>http://linux48.com//archives/419/</id>
+    <published>2015-01-08T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<p>根据inode 来修改或删除linux 下乱码的文件<a id="more"></a></p>
+<ol>
+<li><p>创建测试文件：<br> touch 1?.txt</p>
+</li>
+<li><p>查询inode ：</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[oracle@<span class="built_in">test</span>]$ ll -i</span><br><span class="line">total <span class="number">14694452</span></span><br><span class="line"><span class="number">17956913</span> -rw-r--r-- <span class="number">1</span> oracle oinstall          <span class="number">0</span> Jan <span class="number">18</span> <span class="number">20</span>:<span class="number">24</span> <span class="number">1</span>?.txt</span><br></pre></td></tr></table></figure>
+<ol>
+<li>修改测试文件名：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -inum <span class="number">17956913</span> -exec mv &#123;&#125; file.txt \;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>检查修改结果</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[oracle@<span class="built_in">test</span>]$ ll</span><br><span class="line">total <span class="number">14694452</span></span><br><span class="line">....</span><br><span class="line">-rw-r--r-- <span class="number">1</span> oracle oinstall          <span class="number">0</span> Jan <span class="number">18</span> <span class="number">20</span>:<span class="number">24</span> file.txt</span><br></pre></td></tr></table></figure>
+<p>记录：删除乱码的文件可使用</p>
+<pre><code>find . -inum <span class="number">17956913</span> -exec rm {} \<span class="comment">;</span>
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>根据inode 来修改或删除linux 下乱码的文件]]>
+    
+    </summary>
+    
+      <category term="os" scheme="http://linux48.com/tags/os/"/>
+    
+      <category term="rm" scheme="http://linux48.com/tags/rm/"/>
+    
+      <category term="乱码" scheme="http://linux48.com/tags/%E4%B9%B1%E7%A0%81/"/>
+    
+      <category term="os" scheme="http://linux48.com/categories/os/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ruby环境sass编译中文出现 Invalid GBK character]]></title>
+    <link href="http://linux48.com//archives/418/"/>
+    <id>http://linux48.com//archives/418/</id>
+    <published>2015-01-06T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<p>sass文件编译时候使用ruby环境，无论是界面化的koala工具还是命令行模式的都无法通过，真是令人烦恼。</p>
+<p>容易出现中文注释时候无法编译通过，或者出现乱码，找了几天的解决方法终于解决了。</p>
+<p>这个问题的奇葩之处在于在xp环境中没有任何问题，只是在windows7环境中才出现的这个。</p>
+<p>sass编译时候出现如下错误的解决方法：</p>
+<pre><code>Syntax <span class="keyword">error</span>: Invalid GBK <span class="property">character</span> <span class="string">"\xE5"</span>
+</code></pre><p>解决办法：</p>
+<p>找到ruby的安装目录，里面也有sass模块，<a id="more"></a>如这个路径：</p>
+<pre><code>C:<span class="command">\Ruby</span>21-x64<span class="command">\lib</span><span class="command">\ruby</span><span class="command">\gems</span>\2.1.0<span class="command">\gems</span><span class="command">\sass</span>-3.4.8<span class="command">\lib</span><span class="command">\sass</span>.rb
+</code></pre><p>在这个文件里面engine.rb，添加一行代码（同方法1）</p>
+<pre><code>Encoding<span class="class">.default_external</span> = Encoding.<span class="function"><span class="title">find</span><span class="params">(<span class="string">'utf-8'</span>)</span></span>
+</code></pre><p>放在所有的require XXXX 之后即可。</p>
+<p>参考： <a href="https://github.com/imathis/octopress/issues/232" target="_blank" rel="external">https://github.com/imathis/octopress/issues/232</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>sass文件编译时候使用ruby环境，无论是界面化的koala工具还是命令行模式的都无法通过，真是令人烦恼。</p>
+<p>容易出现中文注释时候无法编译通过，或者出现乱码，找了几天的解决方法终于解决了。</p>
+<p>这个问题的奇葩之处在于在xp环境中没有任何问题，只是在windows7环境中才出现的这个。</p>
+<p>sass编译时候出现如下错误的解决方法：</p>
+<pre><code>Syntax <span class="keyword">error</span>: Invalid GBK <span class="property">character</span> <span class="string">"\xE5"</span>
+</code></pre><p>解决办法：</p>
+<p>找到ruby的安装目录，里面也有sass模块，]]>
+    
+    </summary>
+    
+      <category term="ruby" scheme="http://linux48.com/tags/ruby/"/>
+    
+      <category term="dev" scheme="http://linux48.com/categories/dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[如何搭master-slave-slave]]></title>
+    <link href="http://linux48.com//archives/417/"/>
+    <id>http://linux48.com//archives/417/</id>
+    <published>2015-01-05T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<p>假设现有M, Sa, Sb，Sa是M的slave, 要将Sb做为Sa的slave，M和Sa的binlog保证都是打开的</p>
+<p>在Sa的/etc/my.cnf中[mysqld]组中加入log_slave_updates=1（以保证Sa从M上同步的更新能被记录到binlog中）</p>
+<p>将Sa上的mysqld停掉，并清掉Sa上的binlog(注1）</p>
+<p>将Sa上的数据Copy到Sb上<a id="more"></a></p>
+<p>启动Sa</p>
+<p>启动Sb, change master to master_host=”Sa的ip”;</p>
+<p>在Sa和Sb上start slave</p>
+<p>注1：如果Sa上没有清掉binlog，第6步须: change master to master_host=”Sa的ip”, master_log_file=”Sa上最新的binlog”</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>假设现有M, Sa, Sb，Sa是M的slave, 要将Sb做为Sa的slave，M和Sa的binlog保证都是打开的</p>
+<p>在Sa的/etc/my.cnf中[mysqld]组中加入log_slave_updates=1（以保证Sa从M上同步的更新能被记录到binlog中）</p>
+<p>将Sa上的mysqld停掉，并清掉Sa上的binlog(注1）</p>
+<p>将Sa上的数据Copy到Sb上]]>
+    
+    </summary>
+    
+      <category term="insert" scheme="http://linux48.com/tags/insert/"/>
+    
+      <category term="mysql" scheme="http://linux48.com/tags/mysql/"/>
+    
+      <category term="database" scheme="http://linux48.com/categories/database/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[利用SVNListParentPath增加http浏览仓库根目录的功能]]></title>
+    <link href="http://linux48.com//archives/416/"/>
+    <id>http://linux48.com//archives/416/</id>
+    <published>2014-12-16T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<p>使用SVNParentPath的时候，直接访问根目录的时候，总是得到以下错误提示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">403</span> Forbidden</span><br><span class="line"></span><br><span class="line">Forbidden</span><br><span class="line">You don<span class="string">'t have permission to access / on this server.</span></span><br></pre></td></tr></table></figure>
+<p>下面的办法可以搞定它：<a id="more"></a></p>
+<p>一、首先，Subversion1.3及以后版本支持SVNListParentPath ON，之前的版本只能使用PHP自己做。</p>
+<p>二、Location 设置中最后要加上<strong>/</strong>，应该是<code>&lt;Location /svn/&gt;</code>而不是<code>&lt;Location /svn&gt;</code>否则可能不能访问。</p>
+<p>三、通过“<a href="http://localhost/svn/”" target="_blank" rel="external">http://localhost/svn/”</a> 来访问仓库列表，如果想让“<a href="http://localhost/svn”也起作用的话，需要在" target="_blank" rel="external">http://localhost/svn”也起作用的话，需要在</a>的后面增加重定向的设置：RedirectMatch ^(/svn)$ $1/  ，当然也可以采用RewriteEngine之类的办法。</p>
+<p>四、修改后的httpd.conf的对应部分如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;Location /svn/&gt;</span><br><span class="line">            DAV svn</span><br><span class="line">            SVNListParentPath on</span><br><span class="line">            SVNParentPath /code/svndata</span><br><span class="line">            AuthType Basic</span><br><span class="line">            AuthName <span class="string">"Subversion repository"</span></span><br><span class="line">            AuthUserFile /code/svndata/passwd</span><br><span class="line">            AuthzSVNAccessFile /code/svndata/authz</span><br><span class="line">            Require valid-user</span><br><span class="line">&lt;/Location&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>TIP: SVNPath 与 SVNParentPath区别</strong></p>
+<p>dav_svn.conf 的配置中有 SVNPath 与 SVNParentPath 两个选项.<br>SVNPath用于只有一个项目的情况,此时如果在主目录下面再建新项目,则不能访问.提示没有权限.<br>如果有多个项目的话，此时应该使用SVNParentPath来设置父目录来设置项目的父目录,这样子目录里面可以有多个项目了。然后auth文件里面可以定义子目录的权限，apache的/etc/httpd/conf.d/subversion.conf 配置文件里面设置一个location就可以了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;Location /svn&gt;</span><br><span class="line">DAV svn</span><br><span class="line">SVNParentPath /tmp/svntest/</span><br><span class="line">AuthType Basic</span><br><span class="line">AuthName <span class="string">"Subversion"</span></span><br><span class="line">AuthUserFile /tmp/svntest/passwd</span><br><span class="line">AuthzSVNAccessFile /tmp/svntest/authz</span><br><span class="line">Require valid-user</span><br><span class="line">&lt;/Location&gt;</span><br></pre></td></tr></table></figure>
+<p>以后多个子项目都是用同样的认证文件，访问方式就为 <a href="http://ip/svn/pro1" target="_blank" rel="external">http://ip/svn/pro1</a>    <a href="http://ip/svn/pro2" target="_blank" rel="external">http://ip/svn/pro2</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@svn svntest]<span class="comment"># ls</span></span><br><span class="line">authz  passwd  pro1  pro2</span><br><span class="line">[root@svn svntest]<span class="comment"># pwd</span></span><br><span class="line">/tmp/svntest</span><br></pre></td></tr></table></figure>
+<p>认证文件给子项目赋权。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@svn svntest]<span class="comment"># cat authz </span></span><br><span class="line">[pro1:/]</span><br><span class="line">user1 = rw</span><br><span class="line">[pro2:/]</span><br><span class="line">user1 = rw</span><br></pre></td></tr></table></figure>
+<p>参考<br><a href="http://blog.csdn.net/islq/article/details/666911" target="_blank" rel="external">http://blog.csdn.net/islq/article/details/666911</a><br><a href="http://54im.com/svn/svnpath-svnparentpath.html" target="_blank" rel="external">http://54im.com/svn/svnpath-svnparentpath.html</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>使用SVNParentPath的时候，直接访问根目录的时候，总是得到以下错误提示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">403</span> Forbidden</span><br><span class="line"></span><br><span class="line">Forbidden</span><br><span class="line">You don<span class="string">'t have permission to access / on this server.</span></span><br></pre></td></tr></table></figure>
+<p>下面的办法可以搞定它：]]>
+    
+    </summary>
+    
+      <category term="svn" scheme="http://linux48.com/tags/svn/"/>
+    
+      <category term="dev" scheme="http://linux48.com/categories/dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Chrome 浏览器加载 css Failed to load resource]]></title>
+    <link href="http://linux48.com//archives/415/"/>
+    <id>http://linux48.com//archives/415/</id>
+    <published>2014-12-14T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<p>Chrome 浏览器加载 <strong>css</strong> <code>Failed to load resource: net::ERR_BLOCKED_BY_CLIENT</code></p>
+<p>解决方案：停止过滤广告插件</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Chrome 浏览器加载 <strong>css</strong> <code>Failed to load resource: net::ERR_BLOCKED_BY_CLIENT</code></p>
+<p>解决方案：停止过滤广告插件</p>
+]]>
+    </summary>
+    
+      <category term="chrome" scheme="http://linux48.com/tags/chrome/"/>
+    
+      <category term="css" scheme="http://linux48.com/tags/css/"/>
+    
+      <category term="dev" scheme="http://linux48.com/categories/dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[centos gitlab一键安装]]></title>
+    <link href="http://linux48.com//archives/414/"/>
+    <id>http://linux48.com//archives/414/</id>
+    <published>2014-12-03T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<p><a href="https://downloads.bitnami.com/files/stacks/gitlab/7.4.3-0/bitnami-gitlab-7.4.3-0-linux-x64-installer.run" target="_blank" rel="external">centos gitlab一键安装脚本</a></p>
+<p>参见：<a href="http://www.tuicool.com/articles/iIR77v" target="_blank" rel="external">http://www.tuicool.com/articles/iIR77v</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><a href="https://downloads.bitnami.com/files/stacks/gitlab/7.4.3-0/bitnami-gitlab-7.4.3-0-linux-x64-installer.run" target="_blank" rel="e]]>
+    </summary>
+    
+      <category term="git" scheme="http://linux48.com/tags/git/"/>
+    
+      <category term="gitlab" scheme="http://linux48.com/tags/gitlab/"/>
+    
+      <category term="dev" scheme="http://linux48.com/categories/dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[linux sar命令]]></title>
+    <link href="http://linux48.com//archives/413/"/>
+    <id>http://linux48.com//archives/413/</id>
+    <published>2014-12-01T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<p>sar（System Activity Reporter系统活动情况报告）是目前 Linux 上最为全面的系统性能分析工具之一，可以从多方面对系统的活动进行报告，包括：文件的读写情况、系统调用的使用情况、磁盘I/O、CPU效率、内存使用状况、进程活动及IPC有关的活动等<a id="more"></a></p>
+<pre><code>yum <span class="keyword">install</span> sysstat
+</code></pre><p>sar命令常用格式</p>
+<pre><code><span class="tag">sar</span> <span class="attr_selector">[options]</span> <span class="attr_selector">[-A]</span> <span class="attr_selector">[-o file]</span> <span class="tag">t</span> <span class="attr_selector">[n]</span>
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>sar（System Activity Reporter系统活动情况报告）是目前 Linux 上最为全面的系统性能分析工具之一，可以从多方面对系统的活动进行报告，包括：文件的读写情况、系统调用的使用情况、磁盘I/O、CPU效率、内存使用状况、进程活动及IPC有关的活动等]]>
+    
+    </summary>
+    
+      <category term="sar" scheme="http://linux48.com/tags/sar/"/>
+    
+      <category term="command" scheme="http://linux48.com/categories/command/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ruby on rails 报错解决]]></title>
+    <link href="http://linux48.com//archives/412/"/>
+    <id>http://linux48.com//archives/412/</id>
+    <published>2014-11-23T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<p>ruby on rails 报错解决<br><a id="more"></a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="built_in">local</span>/ruby/lib/ruby/gems/<span class="number">2.1</span>.<span class="number">0</span>/gems/execjs-<span class="number">2.2</span>.<span class="number">2</span>/lib/execjs/runtimes.rb:<span class="number">51</span>:<span class="keyword">in</span> `autodetect<span class="string">': Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable)</span><br><span class="line">        from /usr/local/ruby/lib/ruby/gems/2.1.0/gems/execjs-2.2.2/lib/execjs.rb:5:in `&lt;module:ExecJS&gt;'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/gems/<span class="number">2.1</span>.<span class="number">0</span>/gems/execjs-<span class="number">2.2</span>.<span class="number">2</span>/lib/execjs.rb:<span class="number">4</span>:<span class="keyword">in</span> `&lt;top (required)&gt;<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/<span class="number">2.1</span>.<span class="number">0</span>/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/gems/2.1.0/gems/coffee-script-2.3.0/lib/coffee_script.rb:1:in `&lt;top (required)&gt;'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/<span class="number">2.1</span>.<span class="number">0</span>/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/gems/<span class="number">2.1</span>.<span class="number">0</span>/gems/coffee-script-<span class="number">2.3</span>.<span class="number">0</span>/lib/coffee-script.rb:<span class="number">1</span>:<span class="keyword">in</span> `&lt;top (required)&gt;<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/<span class="number">2.1</span>.<span class="number">0</span>/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/gems/2.1.0/gems/jekyll-coffeescript-1.0.1/lib/jekyll-coffeescript.rb:2:in `&lt;top (required)&gt;'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/<span class="number">2.1</span>.<span class="number">0</span>/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/gems/<span class="number">2.1</span>.<span class="number">0</span>/gems/jekyll-<span class="number">2.5</span>.<span class="number">2</span>/lib/jekyll/deprecator.rb:<span class="number">46</span>:<span class="keyword">in</span> `block <span class="keyword">in</span> gracefully_require<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/gems/2.1.0/gems/jekyll-2.5.2/lib/jekyll/deprecator.rb:44:in `each'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/gems/<span class="number">2.1</span>.<span class="number">0</span>/gems/jekyll-<span class="number">2.5</span>.<span class="number">2</span>/lib/jekyll/deprecator.rb:<span class="number">44</span>:<span class="keyword">in</span> `gracefully_require<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/gems/2.1.0/gems/jekyll-2.5.2/lib/jekyll.rb:166:in `&lt;top (required)&gt;'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/<span class="number">2.1</span>.<span class="number">0</span>/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/gems/<span class="number">2.1</span>.<span class="number">0</span>/gems/jekyll-<span class="number">2.5</span>.<span class="number">2</span>/bin/jekyll:<span class="number">6</span>:<span class="keyword">in</span> `&lt;top (required)&gt;<span class="string">'</span><br><span class="line">        from /usr/local/ruby/bin/jekyll:23:in `load'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/bin/jekyll:<span class="number">23</span>:<span class="keyword">in</span> `&lt;main&gt;<span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p>解决 </p>
+<pre><code>yum -y <span class="keyword">install</span> nodejs
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>ruby on rails 报错解决<br>]]>
+    
+    </summary>
+    
+      <category term="nodejs" scheme="http://linux48.com/tags/nodejs/"/>
+    
+      <category term="rails" scheme="http://linux48.com/tags/rails/"/>
+    
+      <category term="ruby" scheme="http://linux48.com/tags/ruby/"/>
+    
+      <category term="dev" scheme="http://linux48.com/categories/dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[AWK统计随笔记录]]></title>
+    <link href="http://linux48.com//archives/411/"/>
+    <id>http://linux48.com//archives/411/</id>
+    <published>2014-11-17T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<p>AWK统计随笔记录</p>
+<pre><code>netstat -ntlp | sed '/Active/d' | sed '/Proto/d' | sed 's/:::/:/g'| sed 's/::ffff:/ /g'| awk '{print $4,$7}' | awk -F':' '{print $2}' | sed 's/[<span class="link_label">0-9</span>][<span class="link_reference">0-9</span>][<span class="link_label">0-9</span>][<span class="link_reference">0-9</span>]\// /g'
+</code></pre><p>查看当前系统所有服务进程对应的端口</p>
+<pre><code>netstat -<span class="keyword">n</span> | awk '/^tcp/ {++S[<span class="label">$NF</span>]} END {<span class="keyword">for</span>(a <span class="keyword">in</span> S) <span class="keyword">print</span> a, S[a]}'
+</code></pre><a id="more"></a>
+<p>查看当前网络tcp连接</p>
+<pre><code>netstat -ntu |<span class="string"> awk '{print $5}' </span>|<span class="string"> cut -d: -f1 </span>|<span class="string"> sort </span>|<span class="string"> uniq -c </span>|<span class="string"> sort -nr</span>
+</code></pre><p>显示服务器上所有的每个IP多少个连接数</p>
+<h6 id="##########_★_以下为日志统计_★">########## ★ 以下为日志统计  ★</h6><pre><code><span class="keyword">cat</span> access.<span class="keyword">log</span> | grep <span class="string">"13/Jul/2013"</span> | awk '{<span class="keyword">print</span> <span class="label">$11}</span>' | <span class="keyword">sort</span> | uniq -c | <span class="keyword">sort</span> -nr | head -<span class="keyword">n</span> 10
+</code></pre><p>日志统计查看当天访问最多的页面,取前10</p>
+<pre><code><span class="keyword">cat</span> access.<span class="keyword">log</span> | grep <span class="string">"13/Jul/2013"</span> | awk '{<span class="keyword">print</span> <span class="label">$1}</span>' | <span class="keyword">sort</span> | uniq -c | <span class="keyword">sort</span> -nr | head -<span class="keyword">n</span> 10
+</code></pre><p>日志统计查看当天访问排名前10的ip连接数</p>
+<pre><code><span class="keyword">cat</span> access_20130811.<span class="keyword">log</span> |awk '{<span class="keyword">print</span> <span class="label">$NF}</span>' | <span class="keyword">sort</span> | uniq -c | <span class="keyword">sort</span> -nr | head -<span class="keyword">n</span> 15
+</code></pre><p>查找日志中,取值末尾,保留访问最多的前15个</p>
+<pre><code><span class="keyword">cat</span> access.<span class="keyword">log</span> | grep <span class="string">"13/Jul/2013"</span> | awk '{<span class="keyword">sum</span>+=<span class="label">$10}</span> END {<span class="keyword">print</span> <span class="keyword">sum</span>/1024/1024/1024}'
+</code></pre><p>统当天计网站流量（G)</p>
+<pre><code><span class="keyword">cat</span> access.<span class="keyword">log</span> | grep <span class="string">"13/Jul/2013"</span> |awk '{<span class="keyword">sum</span>+=<span class="label">$10}</span> END {<span class="keyword">print</span> <span class="keyword">sum</span>/1024/1024}'
+</code></pre><p>统计当天网站流量（M)</p>
+<pre><code><span class="keyword">cat</span> access.<span class="keyword">log</span> | grep <span class="string">"13/Jul/2013"</span> | awk '{counts[$(9)]+=1}; END {<span class="keyword">for</span>(code <span class="keyword">in</span> counts) <span class="keyword">print</span> code,counts[code]}'
+<span class="keyword">cat</span> access.<span class="keyword">log</span> | grep <span class="string">"13/Jul/2013"</span> |awk '{<span class="keyword">print</span> <span class="label">$9}</span>'|<span class="keyword">sort</span>|uniq -c|<span class="keyword">sort</span> -rn
+</code></pre><p>查看今日访问的http状态数</p>
+<pre><code><span class="keyword">cat</span> access.<span class="built_in">log</span> | <span class="keyword">grep</span> <span class="string">"13/Jul/2013"</span> | <span class="keyword">grep</span> <span class="string">"163.177.71.12"</span> | awk <span class="string">'{print $7}'</span> | <span class="built_in">sort</span> | uniq -<span class="keyword">c</span> | <span class="built_in">sort</span> -nr
+</code></pre><p>查看当天指定ip访问次数过的url和访问次数</p>
+<p>把IP数量直接输出显示：</p>
+<pre><code><span class="keyword">cat</span> access_log_2011_06_26.<span class="keyword">log</span> |awk '{<span class="keyword">print</span> <span class="label">$1}</span>'|uniq -c|wc -<span class="keyword">l</span>
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>AWK统计随笔记录</p>
+<pre><code>netstat -ntlp | sed '/Active/d' | sed '/Proto/d' | sed 's/:::/:/g'| sed 's/::ffff:/ /g'| awk '{print $4,$7}' | awk -F':' '{print $2}' | sed 's/[<span class="link_label">0-9</span>][<span class="link_reference">0-9</span>][<span class="link_label">0-9</span>][<span class="link_reference">0-9</span>]\// /g'
+</code></pre><p>查看当前系统所有服务进程对应的端口</p>
+<pre><code>netstat -<span class="keyword">n</span> | awk '/^tcp/ {++S[<span class="label">$NF</span>]} END {<span class="keyword">for</span>(a <span class="keyword">in</span> S) <span class="keyword">print</span> a, S[a]}'
+</code></pre>]]>
+    
+    </summary>
+    
+      <category term="awk" scheme="http://linux48.com/tags/awk/"/>
+    
+      <category term="system" scheme="http://linux48.com/categories/system/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[SVN强制提交commit]]></title>
+    <link href="http://linux48.com//archives/408/"/>
+    <id>http://linux48.com//archives/408/</id>
+    <published>2014-11-11T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<p>不少开发员提交修改的时候都不写注释，导致查看历史时很费劲，也不太符合规范。这时候就需要强制开发人员提交的时候填上注释，否则无法提交！</p>
+<p>利用svn的pre-commit钩子可简单实现此要求。</p>
+<p>进入仓库project1/hooks目录，找到pre-commit.tmpl文件，重命名，去掉后缀.tmpl</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@<span class="built_in">test</span> yunwei]<span class="comment"># cat hooks/pre-commit</span></span><br><span class="line"><span class="shebang">#!/bin/sh</span><br><span class="line"></span><br><span class="line"></span></span><br><span class="line">REPOS=<span class="string">"<span class="variable">$1</span>"</span></span><br><span class="line">TXN=<span class="string">"<span class="variable">$2</span>"</span></span><br><span class="line"></span><br><span class="line">SVNLOOK=/usr/bin/svnlook</span><br><span class="line"></span><br><span class="line">LOGMSG=`<span class="variable">$SVNLOOK</span> <span class="built_in">log</span> -t <span class="string">"<span class="variable">$TXN</span>"</span> <span class="string">"<span class="variable">$REPOS</span>"</span> | grep <span class="string">"[a-zA-Z0-9]"</span> | wc -c` </span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$LOGMSG</span>"</span> <span class="operator">-lt</span> <span class="number">8</span> ];</span><br><span class="line"><span class="keyword">then</span> </span><br><span class="line">   <span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"nLog message cann't be empty! you must input more than 8 chars as comment!."</span> <span class="number">1</span>&gt;&amp;<span class="number">2</span> </span><br><span class="line">   <span class="built_in">exit</span> <span class="number">1</span> </span><br><span class="line"><span class="keyword">fi</span> </span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> <span class="number">0</span></span><br><span class="line">[root@<span class="built_in">test</span> yunwei]<span class="comment">#</span></span><br></pre></td></tr></table></figure>]]></content>
+    <summary type="html">
+    <![CDATA[<p>不少开发员提交修改的时候都不写注释，导致查看历史时很费劲，也不太符合规范。这时候就需要强制开发人员提交的时候填上注释，否则无法提交！</p>
+<p>利用svn的pre-commit钩子可简单实现此要求。</p>
+<p>进入仓库project1/hooks目录，找到pre-commit.tmpl文件，重命名，去掉后缀.tmpl</p>]]>
+    
+    </summary>
+    
+      <category term="commit" scheme="http://linux48.com/tags/commit/"/>
+    
+      <category term="svn" scheme="http://linux48.com/tags/svn/"/>
+    
+      <category term="dev" scheme="http://linux48.com/categories/dev/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[rm Argument list too long的解决办法]]></title>
+    <link href="http://linux48.com//archives/409/"/>
+    <id>http://linux48.com//archives/409/</id>
+    <published>2014-11-11T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<p>当目录下文件太多时，用rm删除文件会报错：</p>
+<pre><code>-<span class="string">bash:</span> <span class="regexp">/bin/</span><span class="string">rm:</span> Argument list too <span class="typename">long</span>
+</code></pre><p>提示文件数目太多。</p>
+<p>解决的办法是使用如下命令：<a id="more"></a></p>
+<pre><code><span class="keyword">ls</span> | xargs -<span class="keyword">n</span> 10 <span class="keyword">rm</span> -fr <span class="keyword">ls</span>
+</code></pre><p>输出所有的文件名(用空格分割) xargs就是将ls的输出，每10个为一组(以空格为分隔符)，作为rm -rf的参数也就是说将所有文件名10个为一组，由rm -rf删除</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>当目录下文件太多时，用rm删除文件会报错：</p>
+<pre><code>-<span class="string">bash:</span> <span class="regexp">/bin/</span><span class="string">rm:</span> Argument list too <span class="typename">long</span>
+</code></pre><p>提示文件数目太多。</p>
+<p>解决的办法是使用如下命令：]]>
+    
+    </summary>
+    
+      <category term="bash" scheme="http://linux48.com/tags/bash/"/>
+    
+      <category term="rm" scheme="http://linux48.com/tags/rm/"/>
+    
+      <category term="system" scheme="http://linux48.com/categories/system/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Crontab导致Linux的线程数枯竭]]></title>
+    <link href="http://linux48.com//archives/410/"/>
+    <id>http://linux48.com//archives/410/</id>
+    <published>2014-11-11T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="症状描述：">症状描述：</h1><pre><code><span class="keyword">ps</span> -ef |<span class="keyword">grep</span> sendmail 满屏
+<span class="keyword">ps</span> -ef |<span class="keyword">grep</span> postdrop 满屏
+</code></pre><p>查看log疯狂刷屏<br><a id="more"></a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@<span class="number">10</span>-<span class="number">10</span>-<span class="number">11</span>-<span class="number">141</span> runtime]<span class="comment"># tail -f /var/log/maillog</span></span><br><span class="line">Nov <span class="number">12</span> <span class="number">18</span>:<span class="number">00</span>:<span class="number">24</span> <span class="number">10</span>-<span class="number">10</span>-<span class="number">11</span>-<span class="number">141</span> postfix/postdrop[<span class="number">3804</span>]: warning: mail_queue_enter: create file maildrop/<span class="number">634461.3804</span>: No such file or directory</span><br><span class="line">Nov <span class="number">12</span> <span class="number">18</span>:<span class="number">00</span>:<span class="number">24</span> <span class="number">10</span>-<span class="number">10</span>-<span class="number">11</span>-<span class="number">141</span> postfix/postdrop[<span class="number">4147</span>]: warning: mail_queue_enter: create file maildrop/<span class="number">634601.4147</span>: No such file or directory</span><br><span class="line">Nov <span class="number">12</span> <span class="number">18</span>:<span class="number">00</span>:<span class="number">24</span> <span class="number">10</span>-<span class="number">10</span>-<span class="number">11</span>-<span class="number">141</span> postfix/postdrop[<span class="number">1741</span>]: warning: mail_queue_enter: create file maildrop/<span class="number">634604.1741</span>: No such file or directory</span><br><span class="line">Nov <span class="number">12</span> <span class="number">18</span>:<span class="number">00</span>:<span class="number">24</span> <span class="number">10</span>-<span class="number">10</span>-<span class="number">11</span>-<span class="number">141</span> postfix/postdrop[<span class="number">1967</span>]: warning: mail_queue_enter: create file maildrop/<span class="number">843229.1967</span>: No such file or directory</span><br><span class="line">Nov <span class="number">12</span> <span class="number">18</span>:<span class="number">00</span>:<span class="number">25</span> <span class="number">10</span>-<span class="number">10</span>-<span class="number">11</span>-<span class="number">141</span> postfix/postdrop[<span class="number">3244</span>]: warning: mail_queue_enter: create file maildrop/<span class="number">135131.3244</span>: No such file or directory</span><br><span class="line">Nov <span class="number">12</span> <span class="number">18</span>:<span class="number">00</span>:<span class="number">25</span> <span class="number">10</span>-<span class="number">10</span>-<span class="number">11</span>-<span class="number">141</span> postfix/postdrop[<span class="number">2514</span>]: warning: mail_queue_enter: create file maildrop/<span class="number">135247.2514</span>: No such file or directory</span><br></pre></td></tr></table></figure></p>
+<p>同时<code>/var/spool/postfix/maildrop/</code>文件夹下出现大量簇文件</p>
+<h1 id="解决">解决</h1><p>使用<code>pstree|grep crond</code>，结果如下：</p>
+<pre><code><span class="comment">|</span><span class="literal">-</span><span class="comment">crond</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">125*</span><span class="title">[</span><span class="comment">crond</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">sendmail</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="comment">postdrop</span><span class="title">]</span>  
+</code></pre><p>可见crond守护进程启动了sendmail，进而启动了postdrop。查看crond的配置， crontab -e，都没有发现几秒就启动的程序，所以可能是sendmail自己一旦邮件发送不成功，就持续重新发送而导致持续启动postdrop，而postdrop总是执行失败，导致持续写入日志到日志文件。日志文件增大的速率超过了logrotate的删除频率，所以占据了100%的磁盘空间。并且线程数也不断的增加。</p>
+<p>首先停掉posfix <code>/etc/init.d/posfix stop</code>并删除<code>/var/spool/postfix/maildrop/</code>下面的全部簇文件，释放磁盘inode！</p>
+<p>然后就是手起刀落干掉sendmail和postdrop的进程，注意先干掉postdrop子进程</p>
+<pre><code><span class="keyword">kill</span> -<span class="number">9</span> <span class="variable">$(</span>ps -auwx | <span class="keyword">grep</span> postdrop | gawk -F<span class="string">' '</span> <span class="string">'{print $2}'</span>)
+<span class="keyword">kill</span> -<span class="number">9</span> <span class="variable">$(</span>ps -auwx | <span class="keyword">grep</span> sendmail | gawk -F<span class="string">' '</span> <span class="string">'{print $2}'</span>)
+</code></pre><p>之后还要设置crond的MAILTO为空</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@<span class="number">10</span>-<span class="number">10</span>-<span class="number">11</span>-<span class="number">141</span> runtime]<span class="comment"># cat /etc/cron.d/0hourly </span></span><br><span class="line">MAILTO=<span class="string">""</span></span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin</span><br><span class="line">HOME=/</span><br><span class="line"><span class="number">01</span> * * * * root run-parts /etc/cron.hourly</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@<span class="number">10</span>-<span class="number">10</span>-<span class="number">11</span>-<span class="number">141</span> runtime]<span class="comment"># cat /etc/crontab </span></span><br><span class="line">MAILTO=<span class="string">""</span></span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin</span><br><span class="line">HOME=/</span><br><span class="line"></span><br><span class="line"><span class="comment"># For details see man 4 crontabs</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Example of job definition:</span></span><br><span class="line"><span class="comment"># .---------------- minute (0 - 59)</span></span><br><span class="line"><span class="comment"># |  .------------- hour (0 - 23)</span></span><br><span class="line"><span class="comment"># |  |  .---------- day of month (1 - 31)</span></span><br><span class="line"><span class="comment"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span></span><br><span class="line"><span class="comment"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span></span><br><span class="line"><span class="comment"># |  |  |  |  |</span></span><br><span class="line"><span class="comment"># *  *  *  *  * user-name command to be executed</span></span><br><span class="line"></span><br><span class="line">[root@<span class="number">10</span>-<span class="number">10</span>-<span class="number">11</span>-<span class="number">141</span> runtime]<span class="comment"># service crond restart</span></span><br></pre></td></tr></table></figure>
+<p>最后整个世界都清静了！</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="症状描述：">症状描述：</h1><pre><code><span class="keyword">ps</span> -ef |<span class="keyword">grep</span> sendmail 满屏
+<span class="keyword">ps</span> -ef |<span class="keyword">grep</span> postdrop 满屏
+</code></pre><p>查看log疯狂刷屏<br>]]>
+    
+    </summary>
+    
+      <category term="crontab" scheme="http://linux48.com/tags/crontab/"/>
+    
+      <category term="pstree" scheme="http://linux48.com/tags/pstree/"/>
+    
+      <category term="sendmail" scheme="http://linux48.com/tags/sendmail/"/>
+    
+      <category term="os" scheme="http://linux48.com/categories/os/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[用二句Shell命令实现FTP批量上传文件夹]]></title>
+    <link href="http://linux48.com//archives/407/"/>
+    <id>http://linux48.com//archives/407/</id>
+    <published>2014-11-10T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<p>实现代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash </span></span><br><span class="line">updir=/root/tmp   <span class="comment">#要上传的文件夹</span></span><br><span class="line">todir=tmp          <span class="comment">#目标文件夹</span></span><br><span class="line">ip=<span class="number">127.0</span>.<span class="number">0.1</span>      <span class="comment">#服务器</span></span><br><span class="line">user=username  <span class="comment">#ftp用户名</span></span><br><span class="line">password=passwd        <span class="comment">#ftp密码</span></span><br><span class="line">sss=`find <span class="variable">$updir</span> -type d -printf <span class="variable">$todir</span>/<span class="string">'%P\n'</span>| awk <span class="string">'&#123;if ($0 == "")next;print "mkdir " $0&#125;'</span>` </span><br><span class="line">aaa=`find <span class="variable">$updir</span> -type f -printf <span class="string">'put %p %P \n'</span>` </span><br><span class="line">ftp -nv <span class="variable">$ip</span> &lt;&lt;EOF </span><br><span class="line">user <span class="variable">$user</span> <span class="variable">$password</span></span><br><span class="line"><span class="built_in">type</span> binary </span><br><span class="line">prompt </span><br><span class="line"><span class="variable">$sss</span> </span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$todir</span> </span><br><span class="line"><span class="variable">$aaa</span> </span><br><span class="line">quit </span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>简要说明:<br><a id="more"></a><br>核心思想:1.初始化上传目录结构</p>
+<p>2.初始化目录之后就可以直接使用put命令上传文件了</p>
+<p>3.主要还是使用ftp自身的命令</p>
+<p>4.格式化输出(可看作是FTP的宏命令)</p>
+<p>5.保守的重定向输入流</p>
+<p>核心语句只有两句：</p>
+<p>第一句：</p>
+<pre><code>sss=`find /root/sk -<span class="keyword">type</span> <span class="keyword">d</span> -printf '%P\<span class="keyword">n</span>'| awk '{<span class="keyword">if</span> (<span class="label">$0</span> == <span class="string">""</span>)next;<span class="keyword">print</span> <span class="string">"mkdir "</span> <span class="label">$0}</span>'`
+</code></pre><p>这句主要是使用find找出目录结构，然后格式化输出，最后就是添加到FTP初始化目录结构。</p>
+<p>第二句：</p>
+<pre><code>aaa=`<span class="keyword">find</span> /root/sk -<span class="built_in">type</span> <span class="keyword">f</span> -<span class="built_in">printf</span> <span class="string">'put %p %P \n'</span>`
+</code></pre><p>这句主要是使用find找出非目录文件，然后格式化输出，最后就是在初始化目录之后可以直接使用put上传文件。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>实现代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash </span></span><br><span class="line">updir=/root/tmp   <span class="comment">#要上传的文件夹</span></span><br><span class="line">todir=tmp          <span class="comment">#目标文件夹</span></span><br><span class="line">ip=<span class="number">127.0</span>.<span class="number">0.1</span>      <span class="comment">#服务器</span></span><br><span class="line">user=username  <span class="comment">#ftp用户名</span></span><br><span class="line">password=passwd        <span class="comment">#ftp密码</span></span><br><span class="line">sss=`find <span class="variable">$updir</span> -type d -printf <span class="variable">$todir</span>/<span class="string">'%P\n'</span>| awk <span class="string">'&#123;if ($0 == "")next;print "mkdir " $0&#125;'</span>` </span><br><span class="line">aaa=`find <span class="variable">$updir</span> -type f -printf <span class="string">'put %p %P \n'</span>` </span><br><span class="line">ftp -nv <span class="variable">$ip</span> &lt;&lt;EOF </span><br><span class="line">user <span class="variable">$user</span> <span class="variable">$password</span></span><br><span class="line"><span class="built_in">type</span> binary </span><br><span class="line">prompt </span><br><span class="line"><span class="variable">$sss</span> </span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$todir</span> </span><br><span class="line"><span class="variable">$aaa</span> </span><br><span class="line">quit </span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>简要说明:<br>]]>
+    
+    </summary>
+    
+      <category term="ftp" scheme="http://linux48.com/tags/ftp/"/>
+    
+      <category term="shell" scheme="http://linux48.com/tags/shell/"/>
+    
+      <category term="system" scheme="http://linux48.com/categories/system/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[redis 写磁盘出错Cannot allocate memory]]></title>
+    <link href="http://linux48.com//archives/406/"/>
+    <id>http://linux48.com//archives/406/</id>
+    <published>2014-11-09T16:00:00.000Z</published>
+    <updated>2015-05-29T03:23:50.000Z</updated>
+    <content type="html"><![CDATA[<p>查看 Redis 日志<br>发现系统在频繁报错：</p>
+<pre><code>[1821] 10 Nov 09:59:04.086 # Can't <span class="keyword">save</span> <span class="keyword">in</span> background: fork: Cannot allocate <span class="keyword">memory</span>
+[1821] 10 Nov 09:59:10.002 * 1 changes <span class="keyword">in</span> 900 seconds. Saving...
+</code></pre><p>在小内存的进程上做一个fork,<a id="more"></a>不需要太多资源，但当这个进程的内存空间以Ｇ为单位时，fork就成为一件很恐怖的操作。何况在16G内存的主机上fork 14G内存的进程呢？肯定会报内存无法分配的。更可气的是，越是改动频繁的主机上fork也越频繁，fork操作本身的代价恐怕也不会比假死好多少。</p>
+<p>找到原因之后，直接修改内核参数 <strong>vm.overcommit_memory = 1</strong></p>
+<p>Linux内核会根据参数<strong>vm.overcommit_memory</strong>参数的设置决定是否放行。</p>
+<p> 如果 <strong>vm.overcommit_memory = 1</strong>，直接放行<br><strong>vm.overcommit_memory = 0</strong>：则比较 此次请求分配的虚拟内存大小和系统当前空闲的物理内存加上swap，决定是否放行。<br><strong>vm.overcommit_memory = 2</strong>：则会比较 进程所有已分配的虚拟内存加上此次请求分配的虚拟内存和系统当前的空闲物理内存加上swap，决定是否放行。</p>
+<p>linux设置<strong>vm.overcommit_memory</strong> 方法<br>永久性修改内核参数</p>
+<p>在<code>/etc/sysctl.conf</code>文件里面加入或者直接删除也可以，因为它缺省值就是0</p>
+<pre><code>vm<span class="class">.overcommit_memory</span> = <span class="number">0</span>
+</code></pre><p>运行使之生效</p>
+<pre><code><span class="title">sysctl</span> -p
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>查看 Redis 日志<br>发现系统在频繁报错：</p>
+<pre><code>[1821] 10 Nov 09:59:04.086 # Can't <span class="keyword">save</span> <span class="keyword">in</span> background: fork: Cannot allocate <span class="keyword">memory</span>
+[1821] 10 Nov 09:59:10.002 * 1 changes <span class="keyword">in</span> 900 seconds. Saving...
+</code></pre><p>在小内存的进程上做一个fork,]]>
+    
+    </summary>
+    
+      <category term="nosql" scheme="http://linux48.com/tags/nosql/"/>
+    
+      <category term="redis" scheme="http://linux48.com/tags/redis/"/>
+    
+      <category term="database" scheme="http://linux48.com/categories/database/"/>
+    
+  </entry>
+  
+</feed>
