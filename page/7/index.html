@@ -369,6 +369,106 @@
           
           
             
+              <a class="post-title-link" href="/archives/67/">
+                oracle startup 故障：ORA-00845: MEMORY_TARGET
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2012-12-26
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/database/">database</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/67/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/67/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>书接上文，oracle startup上文报错解决之后又出现此问题</p>
+<p>Oracle 11g的Linux版本在修改了MEMORY_TARGET或者SGA_TARGET后启动可能会报错：</p>
+<p>SQL&gt; shutdown immediate<br>Database closed.<br>Database dismounted.<br>ORACLE instance shut down.<br>SQL&gt; startup<br>ORA-00845: MEMORY_TARGET not supported on this system</p>
+<p>这个问题是由于设置SGA的大小超过了操作系统/dev/shm的大小：</p>
+<p>解决这个问题只有两个方法，一种是修改初始化参数，使得初始化参数中SGA的设置小于/dev/shm的大小，另一种方法就是调整/dev/shm的大小。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/67/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+
+    
+    
+
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/oracle/"> #oracle </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/68/">
                 ORA-01102: cannot mount database in EXCLUSIVE mode
               </a>
@@ -482,8 +582,8 @@ ORACLE instance shut down.</pre>
           
           
             
-              <a class="post-title-link" href="/archives/67/">
-                oracle startup 故障：ORA-00845: MEMORY_TARGET
+              <a class="post-title-link" href="/links/">
+                友情链接
               </a>
             
           
@@ -492,28 +592,17 @@ ORACLE instance shut down.</pre>
 
       <div class="post-meta">
         <span class="post-time">
-          發表於 2012-12-26
+          發表於 2012-12-22
         </span>
 
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/database/">database</a>
-
-              
-              
-
-            
-          </span>
         
 
         
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/archives/67/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/67/"></span>
+            <a href="/links/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="links/"></span>
             </a>
           </span>
           
@@ -528,16 +617,39 @@ ORACLE instance shut down.</pre>
 
       
         
-          <p>书接上文，oracle startup上文报错解决之后又出现此问题</p>
-<p>Oracle 11g的Linux版本在修改了MEMORY_TARGET或者SGA_TARGET后启动可能会报错：</p>
-<p>SQL&gt; shutdown immediate<br>Database closed.<br>Database dismounted.<br>ORACLE instance shut down.<br>SQL&gt; startup<br>ORA-00845: MEMORY_TARGET not supported on this system</p>
-<p>这个问题是由于设置SGA的大小超过了操作系统/dev/shm的大小：</p>
-<p>解决这个问题只有两个方法，一种是修改初始化参数，使得初始化参数中SGA的设置小于/dev/shm的大小，另一种方法就是调整/dev/shm的大小。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/67/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
+          <style>
+p {
+    color: #6D6D6D;
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: 2px;
+    margin-top: -10px;
+}
+hr {
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+blockquote p {
+    line-height: 1.8;
+    letter-spacing: 0px;
+}
+</style>
+
+
+<h1 id="咦~~_米娜都去哪儿了呀~~~~">咦~~ 米娜都去哪儿了呀~~~~</h1><hr id="line">
+
+<ul>
+<li><a href="http://sell.moe/" target="_blank" rel="external">橙的记事本</a></li>
+<li><a href="http://akarin.xyz/" target="_blank" rel="external">机智的阿卡林酱</a></li>
+<li><a href="http://www.xinran001.com/" target="_blank" rel="external">波哥的前端世界</a></li>
+<li><a href="http://blog.linuxeye.com/" target="_blank" rel="external">Linux运维笔记</a></li>
+<li><a href="http://www.lixiaolong.org/" target="_blank" rel="external">李小龙IT技术控</a></li>
+<li><a href="http://www.ibirchs.com/" target="_blank" rel="external">LingByron</a></li>
+</ul>
+<hr>
+<p><img src="http://r.loli.io/RJNbay.jpg" alt=""></p>
+<embed src="http://www.xiami.com/widget/0_1769196206_360_260_CD5C5C_808080_1/multiPlayer.swf" type="application/x-shockwave-flash" width="360" height="98" wmode="transparent">
+
         
       
     </div>
@@ -552,12 +664,6 @@ ORACLE instance shut down.</pre>
 <! -- 添加捐赠图标 -->
 
 
-      
-        <div class="post-tags">
-          
-            <a href="/tags/oracle/"> #oracle </a>
-          
-        </div>
       
 
       
@@ -1081,106 +1187,6 @@ Allow <span class="keyword">from</span> <span class="literal">all</span><span cl
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/44/">
-                ios5.0.1降级4.3.3事件
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2012-06-10
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/apple/">apple</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/44/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/44/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>前一阵时间因为玩神仙道，众所周知501的各种卡，于是就想降级最老版本，只可恨当时还是小白不会备份SHSH，等到会了最老的也是能433咯，我的421呀~~~</p>
-<p>本教程很小白的，所以我就不麻烦截图了</p>
-<p>此种降级方法有以下好处
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/44/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-    
-    <! -- 添加捐赠图标 -->
-
-    
-    
-
-<! -- 添加捐赠图标 -->
-
-
-      
-        <div class="post-tags">
-          
-            <a href="/tags/ios/"> #ios </a>
-          
-            <a href="/tags/iphone/"> #iphone </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1220,7 +1226,7 @@ Allow <span class="keyword">from</span> <span class="literal">all</span><span cl
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">75</span>
+              <span class="site-state-item-count">76</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
