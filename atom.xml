@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-06-03T08:52:13.000Z</updated>
+  <updated>2015-06-03T08:56:17.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://linux48.com//archives/426/"/>
     <id>http://linux48.com//archives/426/</id>
     <published>2015-06-03T08:40:42.000Z</published>
-    <updated>2015-06-03T08:52:13.000Z</updated>
+    <updated>2015-06-03T08:56:17.000Z</updated>
     <content type="html"><![CDATA[<p>bitnami版gitlab默认安装好web端口为80</p>
 <p>为了便于开放到外部访问，需要把端口改为其他的，比如8080<br><a id="more"></a></p>
 <h1 id="修改apache主配置文件">修改apache主配置文件</h1><pre><code>[root@iZ23m1d4vwiZ ~]# <span class="keyword">vim</span> /<span class="keyword">opt</span>/gitlab-<span class="number">6.8</span>.<span class="number">1</span>-<span class="number">0</span>/apache2/<span class="keyword">conf</span>/httpd.<span class="keyword">conf</span>
@@ -73,7 +73,7 @@ production: &amp;base
     host: <span class="number">120.26</span>.103.123
     port: <span class="number">8080</span>
     https: false
-</code></pre><h2 id="重启服务">重启服务</h2><pre><code>[root@iZ23m1d4vwiZ ~]# <span class="keyword">sh</span> /<span class="keyword">opt</span>/gitlab-<span class="number">6.8</span>.<span class="number">1</span>-<span class="number">0</span>/ctlscript.<span class="keyword">sh</span>  restart
+</code></pre><h1 id="重启服务">重启服务</h1><pre><code>[root@iZ23m1d4vwiZ ~]# <span class="keyword">sh</span> /<span class="keyword">opt</span>/gitlab-<span class="number">6.8</span>.<span class="number">1</span>-<span class="number">0</span>/ctlscript.<span class="keyword">sh</span>  restart
 </code></pre>]]></content>
     <summary type="html">
     <![CDATA[<p>bitnami版gitlab默认安装好web端口为80</p>
