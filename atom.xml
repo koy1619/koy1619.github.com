@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-05-29T02:16:23.000Z</updated>
+  <updated>2015-06-03T08:52:13.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -13,6 +13,81 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[bitnami版gitlab修改端口]]></title>
+    <link href="http://linux48.com//archives/426/"/>
+    <id>http://linux48.com//archives/426/</id>
+    <published>2015-06-03T08:40:42.000Z</published>
+    <updated>2015-06-03T08:52:13.000Z</updated>
+    <content type="html"><![CDATA[<p>bitnami版gitlab默认安装好web端口为80</p>
+<p>为了便于开放到外部访问，需要把端口改为其他的，比如8080<br><a id="more"></a></p>
+<h1 id="修改apache主配置文件">修改apache主配置文件</h1><pre><code>[root@iZ23m1d4vwiZ ~]# <span class="keyword">vim</span> /<span class="keyword">opt</span>/gitlab-<span class="number">6.8</span>.<span class="number">1</span>-<span class="number">0</span>/apache2/<span class="keyword">conf</span>/httpd.<span class="keyword">conf</span>
+
+Listen <span class="number">8080</span>
+</code></pre><h1 id="修改apache的bitnami的配置文件">修改apache的bitnami的配置文件</h1><pre><code>[root@iZ23m1d4vwiZ ~]<span class="comment"># vim /opt/gitlab-6.8.1-0/apache2/conf/bitnami/bitnami.conf</span>
+<span class="comment"># Default Virtual Host configuration.</span>
+
+<span class="variable">&lt;IfVersion &lt; 2.3 &gt;</span>
+  NameVirtualHost *:<span class="number">8080</span>
+  NameVirtualHost *:<span class="number">443</span>
+<span class="variable">&lt;/IfVersion&gt;</span>
+
+<span class="variable">&lt;VirtualHost _default_:8080&gt;</span>
+  DocumentRoot <span class="string">"/opt/gitlab-6.8.1-0/apache2/htdocs"</span>
+  <span class="variable">&lt;Directory "/opt/gitlab-6.8.1-0/apache2/htdocs"&gt;</span>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    <span class="variable">&lt;IfVersion &lt; 2.3 &gt;</span>
+      Order allow,deny
+      Allow <span class="keyword">from</span> <span class="literal">all</span>
+    <span class="variable">&lt;/IfVersion&gt;</span>
+    <span class="variable">&lt;IfVersion &gt;</span>= <span class="number">2.3</span> &gt;
+      Require <span class="literal">all</span> granted
+    <span class="variable">&lt;/IfVersion&gt;</span>
+  <span class="variable">&lt;/Directory&gt;</span>
+</code></pre><h1 id="修改gitlab-shell的配置文件">修改gitlab-shell的配置文件</h1><pre><code>[root<span class="annotation">@iZ</span>23m1d4vwiZ ~]# vim <span class="regexp">/opt/</span>gitlab-<span class="number">6.8</span>.1-<span class="number">0</span><span class="regexp">/apps/</span>gitlab<span class="regexp">/gitlab-shell/</span>config.yml
+# GitLab user. git by <span class="keyword">default</span>
+<span class="string">user:</span> git
+
+# Url to gitlab instance. Used <span class="keyword">for</span> api calls. Should end with a slash.
+<span class="string">gitlab_url:</span> <span class="string">"http://120.26.103.123:8080/"</span>
+</code></pre><h1 id="修改gitlab的apache主目录配置文件">修改gitlab的apache主目录配置文件</h1><pre><code>[root@iZ23m1d4vwiZ ~]<span class="array"># vim </span>/opt/gitlab-<span class="number">6.8</span>.1-<span class="number">0</span>/apps/gitlab/htdocs/config/gitlab.yml
+<span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span>#
+<span class="array"># GitLab application config file  </span>#
+<span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span>#
+#
+<span class="array"># How to use</span>:
+<span class="array"># </span><span class="number">1.</span> copy file as gitlab.yml
+<span class="array"># </span><span class="number">2.</span> Replace gitlab -&gt; host with your domain
+<span class="array"># </span><span class="number">3.</span> Replace gitlab -&gt; email_from
+
+production: &amp;base
+  #
+  <span class="array"># </span><span class="number">1.</span> GitLab app settings
+  <span class="array"># </span>==========================
+
+  #<span class="array"># GitLab settings</span>
+  gitlab:
+    #<span class="array"># Web server settings </span>(note: host is the FQDN, do not include http:<span class="comment">//)</span>
+    host: <span class="number">120.26</span>.103.123
+    port: <span class="number">8080</span>
+    https: false
+</code></pre><h2 id="重启服务">重启服务</h2><pre><code>[root@iZ23m1d4vwiZ ~]# <span class="keyword">sh</span> /<span class="keyword">opt</span>/gitlab-<span class="number">6.8</span>.<span class="number">1</span>-<span class="number">0</span>/ctlscript.<span class="keyword">sh</span>  restart
+</code></pre>]]></content>
+    <summary type="html">
+    <![CDATA[<p>bitnami版gitlab默认安装好web端口为80</p>
+<p>为了便于开放到外部访问，需要把端口改为其他的，比如8080<br>]]>
+    
+    </summary>
+    
+      <category term="git" scheme="http://linux48.com/tags/git/"/>
+    
+      <category term="gitlab" scheme="http://linux48.com/tags/gitlab/"/>
+    
+      <category term="devops" scheme="http://linux48.com/categories/devops/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Hello World]]></title>
@@ -645,41 +720,6 @@ nohup sslocal &amp;
       <category term="shell" scheme="http://linux48.com/tags/shell/"/>
     
       <category term="system" scheme="http://linux48.com/categories/system/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[redis 写磁盘出错Cannot allocate memory]]></title>
-    <link href="http://linux48.com//archives/406/"/>
-    <id>http://linux48.com//archives/406/</id>
-    <published>2014-11-09T16:00:00.000Z</published>
-    <updated>2015-05-29T03:23:50.000Z</updated>
-    <content type="html"><![CDATA[<p>查看 Redis 日志<br>发现系统在频繁报错：</p>
-<pre><code>[1821] 10 Nov 09:59:04.086 # Can't <span class="keyword">save</span> <span class="keyword">in</span> background: fork: Cannot allocate <span class="keyword">memory</span>
-[1821] 10 Nov 09:59:10.002 * 1 changes <span class="keyword">in</span> 900 seconds. Saving...
-</code></pre><p>在小内存的进程上做一个fork,<a id="more"></a>不需要太多资源，但当这个进程的内存空间以Ｇ为单位时，fork就成为一件很恐怖的操作。何况在16G内存的主机上fork 14G内存的进程呢？肯定会报内存无法分配的。更可气的是，越是改动频繁的主机上fork也越频繁，fork操作本身的代价恐怕也不会比假死好多少。</p>
-<p>找到原因之后，直接修改内核参数 <strong>vm.overcommit_memory = 1</strong></p>
-<p>Linux内核会根据参数<strong>vm.overcommit_memory</strong>参数的设置决定是否放行。</p>
-<p> 如果 <strong>vm.overcommit_memory = 1</strong>，直接放行<br><strong>vm.overcommit_memory = 0</strong>：则比较 此次请求分配的虚拟内存大小和系统当前空闲的物理内存加上swap，决定是否放行。<br><strong>vm.overcommit_memory = 2</strong>：则会比较 进程所有已分配的虚拟内存加上此次请求分配的虚拟内存和系统当前的空闲物理内存加上swap，决定是否放行。</p>
-<p>linux设置<strong>vm.overcommit_memory</strong> 方法<br>永久性修改内核参数</p>
-<p>在<code>/etc/sysctl.conf</code>文件里面加入或者直接删除也可以，因为它缺省值就是0</p>
-<pre><code>vm<span class="class">.overcommit_memory</span> = <span class="number">0</span>
-</code></pre><p>运行使之生效</p>
-<pre><code><span class="title">sysctl</span> -p
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<p>查看 Redis 日志<br>发现系统在频繁报错：</p>
-<pre><code>[1821] 10 Nov 09:59:04.086 # Can't <span class="keyword">save</span> <span class="keyword">in</span> background: fork: Cannot allocate <span class="keyword">memory</span>
-[1821] 10 Nov 09:59:10.002 * 1 changes <span class="keyword">in</span> 900 seconds. Saving...
-</code></pre><p>在小内存的进程上做一个fork,]]>
-    
-    </summary>
-    
-      <category term="nosql" scheme="http://linux48.com/tags/nosql/"/>
-    
-      <category term="redis" scheme="http://linux48.com/tags/redis/"/>
-    
-      <category term="database" scheme="http://linux48.com/categories/database/"/>
     
   </entry>
   

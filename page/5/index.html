@@ -186,6 +186,107 @@
           
           
             
+              <a class="post-title-link" href="/archives/307/">
+                使用saltstack批量管理服务器 （一）
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2014-05-14
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/Automation/">Automation</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/307/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/307/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="saltstack初窥">saltstack初窥</h2><p>随着上线的服务器数量增多，如何批量有效的管理各个节点服务器正常运作是每个运维人员需要解决的难题。所幸的是在今天，已经有很多优秀的工具可供选择，提供了各种各样的解决方案，用户可以有很高的自由性自己选择适合的工具。本文主要介绍saltstack。</p>
+<p>一切源于那个亘古不变的真理：写个脚本，ssh跑一遍，服务器部署完毕。</p>
+<p>于是乎，就有了多台服务器需要部署同样的环境，for循环+ssh跑脚本。</p>
+<p>于是服务器的数量进一步上升，for循环跑脚本的形式已经变得让人无法忍受，更可怕的是这个过程如果出了错误，那么将是一件非常痛苦的事情，即使侥幸部署成功，以后配置需要更改，所有的环境要求同步变更，用ssh跑脚本的形式已经无法作为解决方案。</p>
+<p>在这种情况下，一些批量部署的工具应运而生，比如puppet，saltstack，chef等等……</p>
+<p>saltstack是使用python编写的开源自动化部署与管理工具，拥有良好的扩展性以及优秀的执行效率，配置简单，可以工作在多平台上，经常被描述为 Func加强版+Puppet精简版。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/307/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+
+    
+    
+
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/saltstack/"> #saltstack </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/274/">
                 msmtp+mutt 服务器批量发送邮件
               </a>
@@ -1071,103 +1172,6 @@ proc_get_status,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,</pre>
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/53/">
-                Centos平滑升级python事件
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2013-07-17
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/basic/">basic</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/53/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/53/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>误卸载python导致yum无法使用,所以要升级python不能卸载之前的版本，由于源码安装的python都是平滑安装的，它不会覆盖原python目录而是新建目录安装的</p>
-<p>所以需要升级python版本的源码安装就是了<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/53/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-    
-    <! -- 添加捐赠图标 -->
-
-    
-    
-
-<! -- 添加捐赠图标 -->
-
-
-      
-        <div class="post-tags">
-          
-            <a href="/tags/python/"> #python </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1207,7 +1211,7 @@ proc_get_status,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,</pre>
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">76</span>
+              <span class="site-state-item-count">77</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>

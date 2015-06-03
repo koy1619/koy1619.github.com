@@ -186,6 +186,112 @@
           
           
             
+              <a class="post-title-link" href="/archives/46/">
+                CentOS yum安装配置LAMP+tomcat
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2012-06-26
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/web/">web</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/46/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/46/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>yum安装LAMP+tomcat</p>
+<h2 id="一、准备篇：">一、准备篇：</h2><p>1.配置防火墙，开启80端口、8080端口、3306端口  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#vi /etc/sysconfig/iptables  </span></span><br><span class="line">-A INPUT -m state &amp;<span class="comment">#8211;state NEW -m tcp -p tcp &amp;#8211;dport 80 -j ACCEPT（允许apache的80端口通过防火墙）  </span></span><br><span class="line">-A INPUT -m state &amp;<span class="comment">#8211;state NEW -m tcp -p tcp &amp;#8211;dport 80 -j ACCEPT（允许tomcat的8080端口通过防火墙）  </span></span><br><span class="line">-A INPUT -m state &amp;<span class="comment">#8211;state NEW -m tcp -p tcp &amp;#8211;dport 3306 -j ACCEPT（允许mysql的3306端口通过防火墙 ）  </span></span><br><span class="line">重启防火墙使配置生效  </span><br><span class="line"><span class="comment">#/etc/init.d/iptables restart  </span></span><br><span class="line"><span class="comment">#service iptables restart</span></span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/46/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+
+    
+    
+
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/apache/"> #apache </a>
+          
+            <a href="/tags/mysql/"> #mysql </a>
+          
+            <a href="/tags/php/"> #php </a>
+          
+            <a href="/tags/tomcat/"> #tomcat </a>
+          
+            <a href="/tags/yum/"> #yum </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/44/">
                 ios5.0.1降级4.3.3事件
               </a>
@@ -810,7 +916,7 @@ vi /etc/snmp/snmpd.<span class="keyword">conf</span>
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">76</span>
+              <span class="site-state-item-count">77</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
