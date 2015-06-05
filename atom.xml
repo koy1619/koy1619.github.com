@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-06-03T08:56:17.000Z</updated>
+  <updated>2015-06-05T08:33:45.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -13,6 +13,112 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[MySQL的Grant赋权命令详解]]></title>
+    <link href="http://linux48.com//archives/427/"/>
+    <id>http://linux48.com//archives/427/</id>
+    <published>2015-06-05T08:30:42.000Z</published>
+    <updated>2015-06-05T08:33:45.000Z</updated>
+    <content type="html"><![CDATA[<p>本文实例，运行于 MySQL 5.0 及以上版本。</p>
+<p>MySQL 赋予用户权限命令的简单格式可概括为：</p>
+<pre><code>grant 权限 <span class="function_start"><span class="keyword">on</span></span> 数据库对象 <span class="keyword">to</span> 用户
+</code></pre><a id="more"></a>
+<h1 id="普通数据库用户权限">普通数据库用户权限</h1><p>一、grant 普通数据用户，查询、插入、更新、删除 数据库中所有表数据的权利。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> common_user@<span class="string">'%'</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">insert</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> common_user@<span class="string">'%'</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">update</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> common_user@<span class="string">'%'</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">delete</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> common_user@<span class="string">'%'</span></span></span><br></pre></td></tr></table></figure>
+<p>或者，用一条 MySQL 命令来替代：</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span>, <span class="keyword">insert</span>, <span class="keyword">update</span>, <span class="keyword">delete</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> common_user@<span class="string">'%'</span></span>
+</code></pre><h1 id="数据库开发人员权限">数据库开发人员权限</h1><p>二、grant 数据库开发人员，创建表、索引、视图、存储过程、函数。。。等权限。</p>
+<p>grant 创建、修改、删除 MySQL 数据表结构权限。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">grant</span> <span class="keyword">create</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">grant</span> <span class="keyword">alter</span>  <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">grant</span> <span class="keyword">drop</span>   <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span></span><br></pre></td></tr></table></figure>
+<p>grant 操作 MySQL 外键权限。</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">references</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span>
+</code></pre><p>grant 操作 MySQL 临时表权限。</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">create</span> <span class="keyword">temporary</span> <span class="keyword">tables</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span>
+</code></pre><p>grant 操作 MySQL 索引权限。</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">index</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span>
+</code></pre><p>grant 操作 MySQL 视图、查看视图源代码 权限。</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">create</span> <span class="keyword">view</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span>
+<span class="operator"><span class="keyword">grant</span> <span class="keyword">show</span>   <span class="keyword">view</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span>
+</code></pre><p>grant 操作 MySQL 存储过程、函数 权限。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">grant</span> <span class="keyword">create</span> routine <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span> <span class="comment">-- now, can show procedure status</span></span><br><span class="line"><span class="operator"><span class="keyword">grant</span> <span class="keyword">alter</span>  routine <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span> <span class="comment">-- now, you can drop a procedure</span></span><br><span class="line"><span class="operator"><span class="keyword">grant</span> <span class="keyword">execute</span>        <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span></span><br></pre></td></tr></table></figure>
+<h1 id="普通DBA权限">普通DBA权限</h1><p>三、grant 普通 DBA 管理某个 MySQL 数据库的权限。</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span> <span class="keyword">on</span> testdb <span class="keyword">to</span> dba@<span class="string">'localhost'</span></span>
+</code></pre><p>其中，关键字 “privileges” 可以省略。</p>
+<h1 id="高级DBA权限">高级DBA权限</h1><p>四、grant 高级 DBA 管理 MySQL 中所有数据库的权限。</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> dba@<span class="string">'localhost'</span></span>
+</code></pre><h1 id="实际运用">实际运用</h1><p>五、MySQL grant 权限，分别可以作用在多个层次上。</p>
+<ol>
+<li><p>grant 作用在整个 MySQL 服务器上：</p>
+<p> grant select on <em>.</em> to dba@localhost; — dba 可以查询 MySQL 中所有数据库中的表。<br> grant all    on <em>.</em> to dba@localhost; — dba 可以管理 MySQL 中的所有数据库</p>
+</li>
+</ol>
+<ol>
+<li><p>grant 作用在单个数据库上：</p>
+<p> grant select on testdb.* to dba@localhost; — dba 可以查询 testdb 中的表。</p>
+</li>
+</ol>
+<ol>
+<li><p>grant 作用在单个数据表上：</p>
+<p> grant select, insert, update, delete on testdb.orders to dba@localhost;</p>
+</li>
+</ol>
+<p>这里在给一个用户授权多张表时，可以多次执行以上语句。例如：</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span>(user_id,username) <span class="keyword">on</span> smp.users <span class="keyword">to</span> mo_user@<span class="string">'%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'123345'</span>;</span>
+<span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> smp.mo_sms <span class="keyword">to</span> mo_user@<span class="string">'%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'123345'</span>;</span>
+</code></pre><ol>
+<li><p>grant 作用在表中的列上：</p>
+<p> grant select(id, se, rank) on testdb.apache_log to dba@localhost;</p>
+</li>
+</ol>
+<ol>
+<li><p>grant 作用在存储过程、函数上：</p>
+<p> grant execute on procedure testdb.pr_add to ‘dba’@’localhost’<br> grant execute on function testdb.fn_add to ‘dba’@’localhost’</p>
+</li>
+</ol>
+<h1 id="查看权限">查看权限</h1><p>六、查看 MySQL 用户权限</p>
+<p>查看当前用户（自己）权限：</p>
+<pre><code><span class="operator"><span class="keyword">show</span> <span class="keyword">grants</span>;</span>
+</code></pre><p>查看其他 MySQL 用户权限：</p>
+<pre><code><span class="operator"><span class="keyword">show</span> <span class="keyword">grants</span> <span class="keyword">for</span> dba@localhost;</span>
+</code></pre><h1 id="撤销权限">撤销权限</h1><p>七、撤销已经赋予给 MySQL 用户权限的权限。</p>
+<p>revoke 跟 grant 的语法差不多，只需要把关键字 “to” 换成 “from” 即可：</p>
+<pre><code><span class="operator"><span class="keyword">grant</span>  <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">to</span>   dba@localhost;</span>
+<span class="operator"><span class="keyword">revoke</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">from</span> dba@localhost;</span>
+</code></pre><h1 id="注意事项">注意事项</h1><p>八、MySQL grant、revoke 用户权限注意事项</p>
+<ol>
+<li><p>grant, revoke 用户权限后，该用户只有重新连接 MySQL 数据库，权限才能生效。</p>
+</li>
+<li><p>如果想让授权的用户，也可以将这些权限 grant 给其他用户，需要选项 “grant option“</p>
+<p> grant select on testdb.* to dba@localhost with grant option;</p>
+</li>
+</ol>
+<p>这个特性一般用不到。实际中，数据库权限最好由 DBA 来统一管理。</p>
+<hr>
+<p>遇到 SELECT command denied to user ‘用户名’@’主机名’ for table ‘表名’ 这种错误，解决方法是需要把吧后面的表名授权，即是要你授权核心数据库也要。</p>
+<p>我遇到的是SELECT command denied to user ‘my’@’%’ for table ‘proc’，是调用存储过程的时候出现，原以为只要把指定的数据库授权就行了，什么存储过程、函数等都不用再管了，谁知道也要把数据库mysql的proc表授权</p>
+<hr>
+<p>参考：<a href="http://zhidao.baidu.com/question/19633785.html" target="_blank" rel="external">http://zhidao.baidu.com/question/19633785.html</a></p>
+<p>mysql授权表共有5个表：user、db、host、tables_priv和columns_priv。</p>
+<p>授权表的内容有如下用途：<br>user表<br>user表列出可以连接服务器的用户及其口令，并且它指定他们有哪种全局（超级用户）权限。在user表启用的任何权限均是全局权限，并适用于所有数据库。例如，如果你启用了DELETE权限，在这里列出的用户可以从任何表中删除记录，所以在你这样做之前要认真考虑。</p>
+<p>db表<br>db表列出数据库，而用户有权限访问它们。在这里指定的权限适用于一个数据库中的所有表。</p>
+<p>host表<br>host表与db表结合使用在一个较好层次上控制特定主机对数据库的访问权限，这可能比单独使用db好些。这个表不受GRANT和REVOKE语句的影响，所以，你可能发觉你根本不是用它。</p>
+<p>tables_priv表<br>tables_priv表指定表级权限，在这里指定的一个权限适用于一个表的所有列。</p>
+<p>columns_priv表<br>columns_priv表指定列级权限。这里指定的权限适用于一个表的特定列。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>本文实例，运行于 MySQL 5.0 及以上版本。</p>
+<p>MySQL 赋予用户权限命令的简单格式可概括为：</p>
+<pre><code>grant 权限 <span class="function_start"><span class="keyword">on</span></span> 数据库对象 <span class="keyword">to</span> 用户
+</code></pre>]]>
+    
+    </summary>
+    
+      <category term="mysql" scheme="http://linux48.com/tags/mysql/"/>
+    
+      <category term="database" scheme="http://linux48.com/categories/database/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[bitnami版gitlab修改端口]]></title>
@@ -684,42 +790,6 @@ nohup sslocal &amp;
       <category term="sendmail" scheme="http://linux48.com/tags/sendmail/"/>
     
       <category term="os" scheme="http://linux48.com/categories/os/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[用二句Shell命令实现FTP批量上传文件夹]]></title>
-    <link href="http://linux48.com//archives/407/"/>
-    <id>http://linux48.com//archives/407/</id>
-    <published>2014-11-10T16:00:00.000Z</published>
-    <updated>2015-05-29T03:23:50.000Z</updated>
-    <content type="html"><![CDATA[<p>实现代码如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash </span></span><br><span class="line">updir=/root/tmp   <span class="comment">#要上传的文件夹</span></span><br><span class="line">todir=tmp          <span class="comment">#目标文件夹</span></span><br><span class="line">ip=<span class="number">127.0</span>.<span class="number">0.1</span>      <span class="comment">#服务器</span></span><br><span class="line">user=username  <span class="comment">#ftp用户名</span></span><br><span class="line">password=passwd        <span class="comment">#ftp密码</span></span><br><span class="line">sss=`find <span class="variable">$updir</span> -type d -printf <span class="variable">$todir</span>/<span class="string">'%P\n'</span>| awk <span class="string">'&#123;if ($0 == "")next;print "mkdir " $0&#125;'</span>` </span><br><span class="line">aaa=`find <span class="variable">$updir</span> -type f -printf <span class="string">'put %p %P \n'</span>` </span><br><span class="line">ftp -nv <span class="variable">$ip</span> &lt;&lt;EOF </span><br><span class="line">user <span class="variable">$user</span> <span class="variable">$password</span></span><br><span class="line"><span class="built_in">type</span> binary </span><br><span class="line">prompt </span><br><span class="line"><span class="variable">$sss</span> </span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$todir</span> </span><br><span class="line"><span class="variable">$aaa</span> </span><br><span class="line">quit </span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-<p>简要说明:<br><a id="more"></a><br>核心思想:1.初始化上传目录结构</p>
-<p>2.初始化目录之后就可以直接使用put命令上传文件了</p>
-<p>3.主要还是使用ftp自身的命令</p>
-<p>4.格式化输出(可看作是FTP的宏命令)</p>
-<p>5.保守的重定向输入流</p>
-<p>核心语句只有两句：</p>
-<p>第一句：</p>
-<pre><code>sss=`find /root/sk -<span class="keyword">type</span> <span class="keyword">d</span> -printf '%P\<span class="keyword">n</span>'| awk '{<span class="keyword">if</span> (<span class="label">$0</span> == <span class="string">""</span>)next;<span class="keyword">print</span> <span class="string">"mkdir "</span> <span class="label">$0}</span>'`
-</code></pre><p>这句主要是使用find找出目录结构，然后格式化输出，最后就是添加到FTP初始化目录结构。</p>
-<p>第二句：</p>
-<pre><code>aaa=`<span class="keyword">find</span> /root/sk -<span class="built_in">type</span> <span class="keyword">f</span> -<span class="built_in">printf</span> <span class="string">'put %p %P \n'</span>`
-</code></pre><p>这句主要是使用find找出非目录文件，然后格式化输出，最后就是在初始化目录之后可以直接使用put上传文件。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>实现代码如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash </span></span><br><span class="line">updir=/root/tmp   <span class="comment">#要上传的文件夹</span></span><br><span class="line">todir=tmp          <span class="comment">#目标文件夹</span></span><br><span class="line">ip=<span class="number">127.0</span>.<span class="number">0.1</span>      <span class="comment">#服务器</span></span><br><span class="line">user=username  <span class="comment">#ftp用户名</span></span><br><span class="line">password=passwd        <span class="comment">#ftp密码</span></span><br><span class="line">sss=`find <span class="variable">$updir</span> -type d -printf <span class="variable">$todir</span>/<span class="string">'%P\n'</span>| awk <span class="string">'&#123;if ($0 == "")next;print "mkdir " $0&#125;'</span>` </span><br><span class="line">aaa=`find <span class="variable">$updir</span> -type f -printf <span class="string">'put %p %P \n'</span>` </span><br><span class="line">ftp -nv <span class="variable">$ip</span> &lt;&lt;EOF </span><br><span class="line">user <span class="variable">$user</span> <span class="variable">$password</span></span><br><span class="line"><span class="built_in">type</span> binary </span><br><span class="line">prompt </span><br><span class="line"><span class="variable">$sss</span> </span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$todir</span> </span><br><span class="line"><span class="variable">$aaa</span> </span><br><span class="line">quit </span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-<p>简要说明:<br>]]>
-    
-    </summary>
-    
-      <category term="ftp" scheme="http://linux48.com/tags/ftp/"/>
-    
-      <category term="shell" scheme="http://linux48.com/tags/shell/"/>
-    
-      <category term="system" scheme="http://linux48.com/categories/system/"/>
     
   </entry>
   

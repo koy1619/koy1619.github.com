@@ -186,6 +186,109 @@
           
           
             
+              <a class="post-title-link" href="/archives/49/">
+                Nginx、Apache目录浏览功能
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2012-07-05
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/web/">web</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/49/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/49/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>1，Apache http.conf的虚拟主机默认配置下已经开启了这个功能。</p>
+<pre><code>Options Indexes FollowSymLinks   <span class="comment">#开启功能&lt;br /&gt;</span>
+AllowOverride None<span class="variable">&lt;br /&gt;</span>
+Order allow,deny<span class="variable">&lt;br /&gt;</span>
+Allow <span class="keyword">from</span> <span class="literal">all</span><span class="variable">&lt;br /&gt;</span>
+</code></pre><p>如果想关闭，有两种方式：<br>1）将Indexes去掉<br>Options FollowSymLinks<br>2）在Indexes前加上“-”（+ 代表允许目录浏览；–代表禁止目录浏览）
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/49/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+
+    
+    
+
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/apache/"> #apache </a>
+          
+            <a href="/tags/nginx/"> #nginx </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/46/">
                 CentOS yum安装配置LAMP+tomcat
               </a>
@@ -916,7 +1019,7 @@ vi /etc/snmp/snmpd.<span class="keyword">conf</span>
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">77</span>
+              <span class="site-state-item-count">78</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
