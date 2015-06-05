@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-06-05T08:39:56.000Z</updated>
+  <updated>2015-06-05T08:42:02.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://linux48.com//archives/427/"/>
     <id>http://linux48.com//archives/427/</id>
     <published>2015-06-05T08:30:42.000Z</published>
-    <updated>2015-06-05T08:39:56.000Z</updated>
+    <updated>2015-06-05T08:42:02.000Z</updated>
     <content type="html"><![CDATA[<p>本文实例，运行于 MySQL 5.0 及以上版本。</p>
 <p>MySQL 赋予用户权限命令的简单格式可概括为：</p>
 <pre><code>grant 权限 <span class="function_start"><span class="keyword">on</span></span> 数据库对象 <span class="keyword">to</span> 用户
@@ -72,25 +72,23 @@ grant<span class="instruction"> execute </span>on function testdb.fn_add to 'dba
 <pre><code><span class="operator"><span class="keyword">grant</span>  <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">to</span>   dba@localhost;</span>
 <span class="operator"><span class="keyword">revoke</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">from</span> dba@localhost;</span>
 </code></pre><h1 id="注意事项">注意事项</h1><p>八、MySQL grant、revoke 用户权限注意事项</p>
-<ol>
-<li><p>grant, revoke 用户权限后，该用户只有重新连接 MySQL 数据库，权限才能生效。</p>
-</li>
-<li><p>如果想让授权的用户，也可以将这些权限 grant 给其他用户，需要选项 “grant option“</p>
-<p> grant select on testdb.* to dba@localhost with grant option;</p>
-</li>
-</ol>
-<p>这个特性一般用不到。实际中，数据库权限最好由 DBA 来统一管理。</p>
+<p>grant, revoke 用户权限后，该用户只有重新连接 MySQL 数据库，权限才能生效。</p>
+<p>如果想让授权的用户，也可以将这些权限 grant 给其他用户，需要选项 “grant option“</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> dba@localhost <span class="keyword">with</span> <span class="keyword">grant</span> <span class="keyword">option</span>;</span>
+</code></pre><p>这个特性一般用不到。实际中，数据库权限最好由 DBA 来统一管理。</p>
 <hr>
 <p>遇到 SELECT command denied to user ‘用户名’@’主机名’ for table ‘表名’ 这种错误，解决方法是需要把吧后面的表名授权，即是要你授权核心数据库也要。</p>
 <p>我遇到的是SELECT command denied to user ‘my’@’%’ for table ‘proc’，是调用存储过程的时候出现，原以为只要把指定的数据库授权就行了，什么存储过程、函数等都不用再管了，谁知道也要把数据库mysql的proc表授权</p>
 <hr>
 <p>参考：<a href="http://zhidao.baidu.com/question/19633785.html" target="_blank" rel="external">http://zhidao.baidu.com/question/19633785.html</a></p>
+<hr>
 <p>mysql授权表共有5个表：user、db、host、tables_priv和columns_priv。</p>
 <p>授权表的内容有如下用途：<br>user表<br>user表列出可以连接服务器的用户及其口令，并且它指定他们有哪种全局（超级用户）权限。在user表启用的任何权限均是全局权限，并适用于所有数据库。例如，如果你启用了DELETE权限，在这里列出的用户可以从任何表中删除记录，所以在你这样做之前要认真考虑。</p>
 <p>db表<br>db表列出数据库，而用户有权限访问它们。在这里指定的权限适用于一个数据库中的所有表。</p>
 <p>host表<br>host表与db表结合使用在一个较好层次上控制特定主机对数据库的访问权限，这可能比单独使用db好些。这个表不受GRANT和REVOKE语句的影响，所以，你可能发觉你根本不是用它。</p>
 <p>tables_priv表<br>tables_priv表指定表级权限，在这里指定的一个权限适用于一个表的所有列。</p>
 <p>columns_priv表<br>columns_priv表指定列级权限。这里指定的权限适用于一个表的特定列。</p>
+<hr>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>本文实例，运行于 MySQL 5.0 及以上版本。</p>
