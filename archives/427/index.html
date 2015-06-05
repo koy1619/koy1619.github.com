@@ -255,35 +255,21 @@
 <h1 id="高级DBA权限">高级DBA权限</h1><p>四、grant 高级 DBA 管理 MySQL 中所有数据库的权限。</p>
 <pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> dba@<span class="string">'localhost'</span></span>
 </code></pre><h1 id="实际运用">实际运用</h1><p>五、MySQL grant 权限，分别可以作用在多个层次上。</p>
-<ol>
-<li><p>grant 作用在整个 MySQL 服务器上：</p>
-<p> grant select on <em>.</em> to dba@localhost; — dba 可以查询 MySQL 中所有数据库中的表。<br> grant all    on <em>.</em> to dba@localhost; — dba 可以管理 MySQL 中的所有数据库</p>
-</li>
-</ol>
-<ol>
-<li><p>grant 作用在单个数据库上：</p>
-<p> grant select on testdb.* to dba@localhost; — dba 可以查询 testdb 中的表。</p>
-</li>
-</ol>
-<ol>
-<li><p>grant 作用在单个数据表上：</p>
-<p> grant select, insert, update, delete on testdb.orders to dba@localhost;</p>
-</li>
-</ol>
-<p>这里在给一个用户授权多张表时，可以多次执行以上语句。例如：</p>
+<h2 id="grant_作用在整个_MySQL_服务器上：">grant 作用在整个 MySQL 服务器上：</h2><pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> dba@localhost;</span> 
+<span class="comment">-- dba 可以查询 MySQL 中所有数据库中的表。</span>
+
+<span class="operator"><span class="keyword">grant</span> <span class="keyword">all</span>    <span class="keyword">on</span> *.* <span class="keyword">to</span> dba@localhost;</span> 
+<span class="comment">-- dba 可以管理 MySQL 中的所有数据库</span>
+</code></pre><h2 id="grant_作用在单个数据库上：">grant 作用在单个数据库上：</h2><pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> dba@localhost;</span> 
+<span class="comment">-- dba 可以查询 testdb 中的表。</span>
+</code></pre><h2 id="grant_作用在单个数据表上：">grant 作用在单个数据表上：</h2><pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span>, <span class="keyword">insert</span>, <span class="keyword">update</span>, <span class="keyword">delete</span> <span class="keyword">on</span> testdb.orders <span class="keyword">to</span> dba@localhost;</span>
+</code></pre><p>这里在给一个用户授权多张表时，可以多次执行以上语句。例如：</p>
 <pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span>(user_id,username) <span class="keyword">on</span> smp.users <span class="keyword">to</span> mo_user@<span class="string">'%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'123345'</span>;</span>
 <span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> smp.mo_sms <span class="keyword">to</span> mo_user@<span class="string">'%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'123345'</span>;</span>
-</code></pre><ol>
-<li><p>grant 作用在表中的列上：</p>
-<p> grant select(id, se, rank) on testdb.apache_log to dba@localhost;</p>
-</li>
-</ol>
-<ol>
-<li><p>grant 作用在存储过程、函数上：</p>
-<p> grant execute on procedure testdb.pr_add to ‘dba’@’localhost’<br> grant execute on function testdb.fn_add to ‘dba’@’localhost’</p>
-</li>
-</ol>
-<h1 id="查看权限">查看权限</h1><p>六、查看 MySQL 用户权限</p>
+</code></pre><h2 id="grant_作用在表中的列上：">grant 作用在表中的列上：</h2><pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span>(id, se, rank) <span class="keyword">on</span> testdb.apache_log <span class="keyword">to</span> dba@localhost;</span>
+</code></pre><h2 id="grant_作用在存储过程、函数上：">grant 作用在存储过程、函数上：</h2><pre><code>grant<span class="instruction"> execute </span>on procedure testdb.pr_add to 'dba'@'localhost'
+grant<span class="instruction"> execute </span>on function testdb.fn_add to 'dba'@'localhost'
+</code></pre><h1 id="查看权限">查看权限</h1><p>六、查看 MySQL 用户权限</p>
 <p>查看当前用户（自己）权限：</p>
 <pre><code><span class="operator"><span class="keyword">show</span> <span class="keyword">grants</span>;</span>
 </code></pre><p>查看其他 MySQL 用户权限：</p>
@@ -520,7 +506,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#普通数据库用户权限"><span class="nav-number">1.</span> <span class="nav-text">普通数据库用户权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库开发人员权限"><span class="nav-number">2.</span> <span class="nav-text">数据库开发人员权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#普通DBA权限"><span class="nav-number">3.</span> <span class="nav-text">普通DBA权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级DBA权限"><span class="nav-number">4.</span> <span class="nav-text">高级DBA权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实际运用"><span class="nav-number">5.</span> <span class="nav-text">实际运用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看权限"><span class="nav-number">6.</span> <span class="nav-text">查看权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#撤销权限"><span class="nav-number">7.</span> <span class="nav-text">撤销权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意事项"><span class="nav-number">8.</span> <span class="nav-text">注意事项</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#普通数据库用户权限"><span class="nav-number">1.</span> <span class="nav-text">普通数据库用户权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库开发人员权限"><span class="nav-number">2.</span> <span class="nav-text">数据库开发人员权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#普通DBA权限"><span class="nav-number">3.</span> <span class="nav-text">普通DBA权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级DBA权限"><span class="nav-number">4.</span> <span class="nav-text">高级DBA权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实际运用"><span class="nav-number">5.</span> <span class="nav-text">实际运用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#grant_作用在整个_MySQL_服务器上："><span class="nav-number">5.1.</span> <span class="nav-text">grant 作用在整个 MySQL 服务器上：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grant_作用在单个数据库上："><span class="nav-number">5.2.</span> <span class="nav-text">grant 作用在单个数据库上：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grant_作用在单个数据表上："><span class="nav-number">5.3.</span> <span class="nav-text">grant 作用在单个数据表上：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grant_作用在表中的列上："><span class="nav-number">5.4.</span> <span class="nav-text">grant 作用在表中的列上：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grant_作用在存储过程、函数上："><span class="nav-number">5.5.</span> <span class="nav-text">grant 作用在存储过程、函数上：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看权限"><span class="nav-number">6.</span> <span class="nav-text">查看权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#撤销权限"><span class="nav-number">7.</span> <span class="nav-text">撤销权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意事项"><span class="nav-number">8.</span> <span class="nav-text">注意事项</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

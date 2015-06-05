@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-06-05T08:33:45.000Z</updated>
+  <updated>2015-06-05T08:39:56.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://linux48.com//archives/427/"/>
     <id>http://linux48.com//archives/427/</id>
     <published>2015-06-05T08:30:42.000Z</published>
-    <updated>2015-06-05T08:33:45.000Z</updated>
+    <updated>2015-06-05T08:39:56.000Z</updated>
     <content type="html"><![CDATA[<p>本文实例，运行于 MySQL 5.0 及以上版本。</p>
 <p>MySQL 赋予用户权限命令的简单格式可概括为：</p>
 <pre><code>grant 权限 <span class="function_start"><span class="keyword">on</span></span> 数据库对象 <span class="keyword">to</span> 用户
@@ -48,35 +48,21 @@
 <h1 id="高级DBA权限">高级DBA权限</h1><p>四、grant 高级 DBA 管理 MySQL 中所有数据库的权限。</p>
 <pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> dba@<span class="string">'localhost'</span></span>
 </code></pre><h1 id="实际运用">实际运用</h1><p>五、MySQL grant 权限，分别可以作用在多个层次上。</p>
-<ol>
-<li><p>grant 作用在整个 MySQL 服务器上：</p>
-<p> grant select on <em>.</em> to dba@localhost; — dba 可以查询 MySQL 中所有数据库中的表。<br> grant all    on <em>.</em> to dba@localhost; — dba 可以管理 MySQL 中的所有数据库</p>
-</li>
-</ol>
-<ol>
-<li><p>grant 作用在单个数据库上：</p>
-<p> grant select on testdb.* to dba@localhost; — dba 可以查询 testdb 中的表。</p>
-</li>
-</ol>
-<ol>
-<li><p>grant 作用在单个数据表上：</p>
-<p> grant select, insert, update, delete on testdb.orders to dba@localhost;</p>
-</li>
-</ol>
-<p>这里在给一个用户授权多张表时，可以多次执行以上语句。例如：</p>
+<h2 id="grant_作用在整个_MySQL_服务器上：">grant 作用在整个 MySQL 服务器上：</h2><pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> dba@localhost;</span> 
+<span class="comment">-- dba 可以查询 MySQL 中所有数据库中的表。</span>
+
+<span class="operator"><span class="keyword">grant</span> <span class="keyword">all</span>    <span class="keyword">on</span> *.* <span class="keyword">to</span> dba@localhost;</span> 
+<span class="comment">-- dba 可以管理 MySQL 中的所有数据库</span>
+</code></pre><h2 id="grant_作用在单个数据库上：">grant 作用在单个数据库上：</h2><pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> dba@localhost;</span> 
+<span class="comment">-- dba 可以查询 testdb 中的表。</span>
+</code></pre><h2 id="grant_作用在单个数据表上：">grant 作用在单个数据表上：</h2><pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span>, <span class="keyword">insert</span>, <span class="keyword">update</span>, <span class="keyword">delete</span> <span class="keyword">on</span> testdb.orders <span class="keyword">to</span> dba@localhost;</span>
+</code></pre><p>这里在给一个用户授权多张表时，可以多次执行以上语句。例如：</p>
 <pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span>(user_id,username) <span class="keyword">on</span> smp.users <span class="keyword">to</span> mo_user@<span class="string">'%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'123345'</span>;</span>
 <span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> smp.mo_sms <span class="keyword">to</span> mo_user@<span class="string">'%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'123345'</span>;</span>
-</code></pre><ol>
-<li><p>grant 作用在表中的列上：</p>
-<p> grant select(id, se, rank) on testdb.apache_log to dba@localhost;</p>
-</li>
-</ol>
-<ol>
-<li><p>grant 作用在存储过程、函数上：</p>
-<p> grant execute on procedure testdb.pr_add to ‘dba’@’localhost’<br> grant execute on function testdb.fn_add to ‘dba’@’localhost’</p>
-</li>
-</ol>
-<h1 id="查看权限">查看权限</h1><p>六、查看 MySQL 用户权限</p>
+</code></pre><h2 id="grant_作用在表中的列上：">grant 作用在表中的列上：</h2><pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span>(id, se, rank) <span class="keyword">on</span> testdb.apache_log <span class="keyword">to</span> dba@localhost;</span>
+</code></pre><h2 id="grant_作用在存储过程、函数上：">grant 作用在存储过程、函数上：</h2><pre><code>grant<span class="instruction"> execute </span>on procedure testdb.pr_add to 'dba'@'localhost'
+grant<span class="instruction"> execute </span>on function testdb.fn_add to 'dba'@'localhost'
+</code></pre><h1 id="查看权限">查看权限</h1><p>六、查看 MySQL 用户权限</p>
 <p>查看当前用户（自己）权限：</p>
 <pre><code><span class="operator"><span class="keyword">show</span> <span class="keyword">grants</span>;</span>
 </code></pre><p>查看其他 MySQL 用户权限：</p>
