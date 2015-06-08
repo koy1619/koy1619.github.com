@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-06-08T14:07:31.000Z</updated>
+  <updated>2015-06-08T14:08:44.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://linux48.com//archives/428/"/>
     <id>http://linux48.com//archives/428/</id>
     <published>2015-06-08T06:30:42.000Z</published>
-    <updated>2015-06-08T14:07:31.000Z</updated>
+    <updated>2015-06-08T14:08:44.000Z</updated>
     <content type="html"><![CDATA[<p>php-fpm 必须注意<strong>backlog</strong>的设置，否则上压力就容易 无法连接、网关超时！</p>
 <a id="more"></a>
 <pre><code><span class="comment">;listen.backlog = -1</span>
@@ -29,8 +29,11 @@
 <p>安装php-fpm时backlog一定要重新设置，不能用fpm默认配置的-1 ，可以根据机器的并发量来设置，建议设置在1024以上，最好是2的幂值（因为内核会调整成2的n次幂）。</p>
 <p>有高并发的业务，就必须要调整backlog。对于PHP而言，需要注意的有3方面：</p>
 <blockquote>
-<p><em>1、操作系统 | sysctl
-</em>2、WEB前端 | 比如：Nginx<br>*3、PHP后台 | 比如：php-fpm</p>
+<ul>
+<li>1、操作系统 | sysctl</li>
+<li>2、WEB前端 | 比如：Nginx</li>
+<li>3、PHP后台 | 比如：php-fpm</li>
+</ul>
 </blockquote>
 <p>操作系统以CentOS为例，可通过默认配置 /etc/sysctl.conf 文件进行调整。比如：</p>
 <pre><code>net.core.<span class="variable">somaxconn =</span> <span class="number">1048576</span> <span class="comment"># 默认为128</span>

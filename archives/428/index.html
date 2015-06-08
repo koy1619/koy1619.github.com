@@ -236,8 +236,11 @@
 <p>安装php-fpm时backlog一定要重新设置，不能用fpm默认配置的-1 ，可以根据机器的并发量来设置，建议设置在1024以上，最好是2的幂值（因为内核会调整成2的n次幂）。</p>
 <p>有高并发的业务，就必须要调整backlog。对于PHP而言，需要注意的有3方面：</p>
 <blockquote>
-<p><em>1、操作系统 | sysctl
-</em>2、WEB前端 | 比如：Nginx<br>*3、PHP后台 | 比如：php-fpm</p>
+<ul>
+<li>1、操作系统 | sysctl</li>
+<li>2、WEB前端 | 比如：Nginx</li>
+<li>3、PHP后台 | 比如：php-fpm</li>
+</ul>
 </blockquote>
 <p>操作系统以CentOS为例，可通过默认配置 /etc/sysctl.conf 文件进行调整。比如：</p>
 <pre><code>net.core.<span class="variable">somaxconn =</span> <span class="number">1048576</span> <span class="comment"># 默认为128</span>
