@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-06-08T14:03:18.000Z</updated>
+  <updated>2015-06-08T14:05:19.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[MySQL的Grant赋权命令详解]]></title>
+    <title><![CDATA[关于PHP-FPM的backlog]]></title>
     <link href="http://linux48.com//archives/428/"/>
     <id>http://linux48.com//archives/428/</id>
     <published>2015-06-08T06:30:42.000Z</published>
-    <updated>2015-06-08T14:03:18.000Z</updated>
+    <updated>2015-06-08T14:05:19.000Z</updated>
     <content type="html"><![CDATA[<p>php-fpm 必须注意<strong>backlog</strong>的设置，否则上压力就容易 无法连接、网关超时！</p>
 <a id="more"></a>
 <pre><code><span class="comment">;listen.backlog = -1</span>
