@@ -239,7 +239,7 @@
 </code></pre><p>Warning提示“—log”已经过时，并将在以后的版本中删除。请使用’—general-log’</p>
 <p>有强迫症的我还是遵从官方的说明,使用<code>general-log</code>吧</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@<span class="built_in">test</span> mysql5.<span class="number">5</span>]<span class="comment"># cat /etc/my.cnf |grep -v "#" |grep "log"</span></span><br><span class="line">general-log = on</span><br><span class="line">general_<span class="built_in">log</span>_file = /data/mysql/binlog/general.log</span><br><span class="line">slow-query-log = on</span><br><span class="line">slow_query_<span class="built_in">log</span>_file = /data/mysql/binlog/slowquery_3.log</span><br><span class="line"><span class="built_in">log</span>-queries-not-using-indexes = <span class="literal">true</span></span><br><span class="line"><span class="built_in">log</span>-bin=mysql-bin</span><br><span class="line">binlog_format=mixed</span><br><span class="line">innodb_<span class="built_in">log</span>_group_home_dir = /data/mysql/data</span><br></pre></td></tr></table></figure>
-<p>通过分析，我们得到诸如下信息：</p>
+<p>通过分析全局log，我们可以得到诸如下信息：</p>
 <blockquote>
 <ul>
 <li>1、Mysql访问得最多的数据</li>
