@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-06-25T07:02:15.000Z</updated>
+  <updated>2015-06-25T07:05:48.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://linux48.com//archives/429/"/>
     <id>http://linux48.com//archives/429/</id>
     <published>2015-06-25T06:30:42.000Z</published>
-    <updated>2015-06-25T07:02:15.000Z</updated>
+    <updated>2015-06-25T07:05:48.000Z</updated>
     <content type="html"><![CDATA[<p>之前有写过<a href="http://linux48.com/archives/74/">Mysql慢查询设置</a>，现在需要对Mysql进行深入的分析，发现mysql性能瓶颈和寻找优化策略，这就要对全部的sql执行语句进行查询，慢查询是满足不了的，binlog也值是记录了update语句，这个时候就需要设置mysql的全局log了。</p>
 <a id="more"></a>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@<span class="built_in">test</span> mysql5.<span class="number">5</span>]<span class="comment"># cat /etc/my.cnf |grep -v "#" |grep "log"</span></span><br><span class="line"><span class="built_in">log</span>=/tmp/row.log</span><br><span class="line">slow-query-log = on</span><br><span class="line">slow_query_<span class="built_in">log</span>_file = /data/mysql/binlog/slowquery_3.log</span><br><span class="line"><span class="built_in">log</span>-queries-not-using-indexes = <span class="literal">true</span></span><br><span class="line"><span class="built_in">log</span>-bin=mysql-bin</span><br><span class="line">binlog_format=mixed</span><br><span class="line">innodb_<span class="built_in">log</span>_group_home_dir = /data/mysql/data</span><br></pre></td></tr></table></figure>
@@ -34,10 +34,14 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@<span class="built_in">test</span> mysql5.<span class="number">5</span>]<span class="comment"># cat /etc/my.cnf |grep -v "#" |grep "log"</span></span><br><span class="line">general-log = on</span><br><span class="line">general_<span class="built_in">log</span>_file = /data/mysql/binlog/general.log</span><br><span class="line">slow-query-log = on</span><br><span class="line">slow_query_<span class="built_in">log</span>_file = /data/mysql/binlog/slowquery_3.log</span><br><span class="line"><span class="built_in">log</span>-queries-not-using-indexes = <span class="literal">true</span></span><br><span class="line"><span class="built_in">log</span>-bin=mysql-bin</span><br><span class="line">binlog_format=mixed</span><br><span class="line">innodb_<span class="built_in">log</span>_group_home_dir = /data/mysql/data</span><br></pre></td></tr></table></figure>
 <p>通过分析，我们得到诸如下信息：</p>
 <blockquote>
-<p><em>1、Mysql访问得最多的数据
-</em>2、Mysql执行得最多的查询的种类<br><em>3、Mysql停留时间最长的状态
-</em>4、Mysql用来执行查询的使用得最频繁的子系统<br><em>5、Mysql查询过程中访问的数据种类
-</em>6、Mysql执行了多少种不同类型的活动，比如索引扫描。</p>
+<ul>
+<li>1、Mysql访问得最多的数据</li>
+<li>2、Mysql执行得最多的查询的种类</li>
+<li>3、Mysql停留时间最长的状态</li>
+<li>4、Mysql用来执行查询的使用得最频繁的子系统</li>
+<li>5、Mysql查询过程中访问的数据种类</li>
+<li>6、Mysql执行了多少种不同类型的活动，比如索引扫描。</li>
+</ul>
 </blockquote>
 ]]></content>
     <summary type="html">
