@@ -267,7 +267,7 @@ DBPassword=123456
 
 <p>7、启动守护进程server</p>
 <p>在服务器端运行启动zabbix_server</p>
-<pre>/usr/local/zabbix/sbin/zabbix_server</pre>
+<pre>/usr/local/zabbix-server/sbin/zabbix_server</pre>
 
 <p>server启动端口为10051</p>
 <p>iptables放行zabbix-server的10051端口</p>
@@ -288,7 +288,7 @@ chmod 755 /etc/init.d/zabbix_server</pre>
 --------------</pre>
 
 <p>将DAEMON后面的参数改成你自定义的路径</p>
-<pre>DAEMON=/usr/local/zabbix/sbin/zabbix_server</pre>
+<pre>DAEMON=/usr/local/zabbix-server/sbin/zabbix_server</pre>
 
 <p>加入开机启动</p>
 <pre>chkconfig --add zabbix_server  
