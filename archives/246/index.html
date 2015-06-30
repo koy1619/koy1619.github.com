@@ -251,11 +251,9 @@ mysql -uzabbix -p123456 zabbix &lt; database/mysql/data.sql
 </pre>
 
 <p>5.编译安装(server,agent)</p>
-<pre>./configure --prefix=/usr/local/zabbix-server --enable-server --enable-agent --with-mysql=/usr/local/mysql/ --enable-ipv6 --with-net-snmp --with-libcurl 
-make install
-</pre>
-
-<p>6.编辑server端配置文件</p>
+<pre><code><span class="string">.</span><span class="comment">/configure</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">prefix=/usr/local/zabbix</span><span class="literal">-</span><span class="comment">server</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">enable</span><span class="literal">-</span><span class="comment">server</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">enable</span><span class="literal">-</span><span class="comment">agent</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">with</span><span class="literal">-</span><span class="comment">mysql=/usr/local/mysql/bin/mysql_config</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">enable</span><span class="literal">-</span><span class="comment">ipv6</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">with</span><span class="literal">-</span><span class="comment">net</span><span class="literal">-</span><span class="comment">snmp</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">with</span><span class="literal">-</span><span class="comment">libcurl</span>
+<span class="comment">make</span> <span class="comment">install</span>
+</code></pre><p>6.编辑server端配置文件</p>
 <pre>vi /usr/local/zabbix-server/etc/zabbix_server.conf</pre>
 
 <p>修改以下参数</p>
