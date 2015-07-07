@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-07-07T07:40:30.000Z</updated>
+  <updated>2015-07-07T07:41:26.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -19,12 +19,15 @@
     <link href="http://linux48.com//archives/430/"/>
     <id>http://linux48.com//archives/430/</id>
     <published>2015-07-05T16:00:00.000Z</published>
-    <updated>2015-07-07T07:40:30.000Z</updated>
+    <updated>2015-07-07T07:41:26.000Z</updated>
     <content type="html"><![CDATA[<p>由于 redhat的yum在线更新是收费的，如果没有注册的话不能使用，如果要使用，需将redhat的yum卸载后，重启安装，再配置其他源.<br><a id="more"></a></p>
 <h1 id="删除redhat原有的yum">删除redhat原有的yum</h1><pre><code>rpm -a<span class="string">q|grep yum|</span>xargs rpm -e --nodeps 
 </code></pre><h1 id="下载yum安装文件">下载yum安装文件</h1><p>注意，由于官方不断更新版本，如果下载时找不到文件，就到：<a href="http://mirrors.163.com/centos/6/os/x86_64/Packages" target="_blank" rel="external">http://mirrors.163.com/centos/6/os/x86_64/Packages</a> 上查找相应的头文件。然后再下载。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget http://mirrors.<span class="number">163</span>.com/centos/<span class="number">6</span>/os/x86_64/Packages/yum-<span class="number">3.2</span>.<span class="number">29</span>-<span class="number">60</span>.el6.centos.noarch.rpm</span><br><span class="line"></span><br><span class="line">wget http://mirrors.<span class="number">163</span>.com/centos/<span class="number">6</span>/os/x86_64/Packages/yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">16</span>.el6.x86_64.rpm</span><br><span class="line"></span><br><span class="line">wget http://mirrors.<span class="number">163</span>.com/centos/<span class="number">6</span>/os/x86_64/Packages/yum-plugin-fastestmirror-<span class="number">1.1</span>.<span class="number">30</span>-<span class="number">30</span>.el6.noarch.rpm</span><br><span class="line"></span><br><span class="line">wget http://mirrors.<span class="number">163</span>.com/centos/<span class="number">6</span>/os/x86_64/Packages/python-iniparse-<span class="number">0.3</span>.<span class="number">1</span>-<span class="number">2.1</span>.el6.noarch.rpm</span><br></pre></td></tr></table></figure>
-<h1 id="进行安装yum">进行安装yum</h1><pre><code><span class="tag">rpm</span> <span class="tag">-ivh</span> <span class="tag">python-iniparse-0</span><span class="class">.3</span><span class="class">.1-2</span><span class="class">.1</span><span class="class">.el6</span><span class="class">.noarch</span><span class="class">.rpm</span>
+<pre><code>wget <span class="symbol">http:</span>/<span class="regexp">/mirrors.163.com/centos</span><span class="regexp">/6/os</span><span class="regexp">/x86_64/</span><span class="constant">Packages/</span>yum-<span class="number">3.2</span>.<span class="number">29</span>-<span class="number">60</span>.el6.centos.noarch.rpm
+wget <span class="symbol">http:</span>/<span class="regexp">/mirrors.163.com/centos</span><span class="regexp">/6/os</span><span class="regexp">/x86_64/</span><span class="constant">Packages/</span>yum-metadata-parser-<span class="number">1.1</span>.<span class="number">2</span>-<span class="number">16</span>.el6.x86_64.rpm
+wget <span class="symbol">http:</span>/<span class="regexp">/mirrors.163.com/centos</span><span class="regexp">/6/os</span><span class="regexp">/x86_64/</span><span class="constant">Packages/</span>yum-plugin-fastestmirror-<span class="number">1.1</span>.<span class="number">30</span>-<span class="number">30</span>.el6.noarch.rpm
+wget <span class="symbol">http:</span>/<span class="regexp">/mirrors.163.com/centos</span><span class="regexp">/6/os</span><span class="regexp">/x86_64/</span><span class="constant">Packages/</span>python-iniparse-<span class="number">0</span>.<span class="number">3.1</span>-<span class="number">2.1</span>.el6.noarch.rpm
+</code></pre><h1 id="进行安装yum">进行安装yum</h1><pre><code><span class="tag">rpm</span> <span class="tag">-ivh</span> <span class="tag">python-iniparse-0</span><span class="class">.3</span><span class="class">.1-2</span><span class="class">.1</span><span class="class">.el6</span><span class="class">.noarch</span><span class="class">.rpm</span>
 <span class="tag">rpm</span> <span class="tag">-ivh</span> <span class="tag">yum-metadata-parser-1</span><span class="class">.1</span><span class="class">.2-16</span><span class="class">.el6</span><span class="class">.x86_64</span><span class="class">.rpm</span>
 <span class="tag">rpm</span> <span class="tag">-ivh</span> <span class="tag">yum-3</span><span class="class">.2</span><span class="class">.29-40</span><span class="class">.el6</span><span class="class">.centos</span><span class="class">.noarch</span><span class="class">.rpm</span>
 <span class="tag">rpm</span> <span class="tag">-ivh</span> <span class="tag">yum-plugin-fastestmirror-1</span><span class="class">.1</span><span class="class">.30-14</span><span class="class">.el6</span><span class="class">.noarch</span><span class="class">.rpm</span>
