@@ -186,6 +186,106 @@
           
           
             
+              <a class="post-title-link" href="/archives/411/">
+                AWK统计随笔记录
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2014-11-17
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/system/">system</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/411/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/411/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>AWK统计随笔记录</p>
+<pre><code>netstat -ntlp | sed '/Active/d' | sed '/Proto/d' | sed 's/:::/:/g'| sed 's/::ffff:/ /g'| awk '{print $4,$7}' | awk -F':' '{print $2}' | sed 's/[<span class="link_label">0-9</span>][<span class="link_reference">0-9</span>][<span class="link_label">0-9</span>][<span class="link_reference">0-9</span>]\// /g'
+</code></pre><p>查看当前系统所有服务进程对应的端口</p>
+<pre><code>netstat -<span class="keyword">n</span> | awk '/^tcp/ {++S[<span class="label">$NF</span>]} END {<span class="keyword">for</span>(a <span class="keyword">in</span> S) <span class="keyword">print</span> a, S[a]}'
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/411/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+
+    
+    
+
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/awk/"> #awk </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/409/">
                 rm Argument list too long的解决办法
               </a>
@@ -1084,103 +1184,6 @@ _sites        预览时产生的文件都放在该文件夹中
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/404/">
-                将sublime text添加到右键菜单中
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2014-08-17
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/dev/">dev</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/404/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/404/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>使用的是免安装便携版的Sublime Text，所以右键加入菜单这样的事情也就是能自己手动来设置了。</p>
-<p>将下面的代码保存为*.reg的文件，然后导入到注册表中，这样就可以在右键的菜单中打开文件或者文件夹了。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/404/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-    
-    <! -- 添加捐赠图标 -->
-
-    
-    
-
-<! -- 添加捐赠图标 -->
-
-
-      
-        <div class="post-tags">
-          
-            <a href="/tags/sublime/"> #sublime </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1220,7 +1223,7 @@ _sites        预览时产生的文件都放在该文件夹中
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">81</span>
+              <span class="site-state-item-count">82</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1234,7 +1237,7 @@ _sites        预览时产生的文件都放在该文件夹中
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">83</span>
+              <span class="site-state-item-count">84</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

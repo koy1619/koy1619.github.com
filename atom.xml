@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-07-07T07:42:17.000Z</updated>
+  <updated>2015-07-07T08:29:39.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -13,6 +13,59 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[CentOS6安装subversion & 可视化管理工具iF.SVNAdmin]]></title>
+    <link href="http://linux48.com//archives/431/"/>
+    <id>http://linux48.com//archives/431/</id>
+    <published>2015-07-06T16:00:00.000Z</published>
+    <updated>2015-07-07T08:29:39.000Z</updated>
+    <content type="html"><![CDATA[<p>windows下的TortoiseSVN服务端是相当好用的，界面管理方便，增删改查用户和库都比较好用，但是linux下的svn就比较折腾人。<br><a id="more"></a></p>
+<p>之前安装过apache整合svn，虽然有web界面可以看，但是也不是那么好管理，昨天晚上受朋友所托，需要通过可视化工具来增删改查用户和库。</p>
+<p>试了一圈以后最后找到了这个svnadmin。是使用php写的。他吸引我的主要是安装和配置都非常简单和人性化。而且也有强大的功能。</p>
+<p>支持repo管理、用户管理、用户组管理、权限管理、LDAP等，界面可以算是中规中矩。</p>
+<blockquote>
+<ul>
+<li>操作系统：CentOS-6.5-64bit</li>
+<li>版本管理：Subversion-1.6.11</li>
+<li>管理软件：F.SVNAdmin-stable-1.6.2</li>
+<li>web引擎： Apache/2.2.3 (端口8888) &amp; nginx/1.4.4 (端口80) &amp; PHP 5.4.0</li>
+<li>ip地址：  192.168.1.2</li>
+</ul>
+</blockquote>
+<h1 id="1-源码编译安装lnmp">1.源码编译安装lnmp</h1><pre><code>git clone https:<span class="comment">//git.coding.net/svip/lnamp.git</span>
+<span class="keyword">sh</span> lnmp/lnmp.<span class="keyword">sh</span>
+</code></pre><p>这里使用源码编译lnmp环境主要是后面需要yum安装httpd和svn(这样子的好处是，默认会整合好apache和svn无需手动在整合配置)，apache只服务于svn，而nginx+php则是为了跑svnadmin</p>
+<h1 id="2-yum安装apache+svn">2.yum安装apache+svn</h1><pre><code><span class="label">yum</span> -y install httpd <span class="keyword">subversion </span>mod_dav_svn
+</code></pre><h1 id="3-配置apache的svn">3.配置apache的svn</h1><p>装完SVN后默认生成/etc/httpd/conf.d/subversion.conf文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ setup]<span class="comment"># cat /etc/httpd/conf.d/subversion.conf </span></span><br><span class="line"></span><br><span class="line">LoadModule dav_svn_module     modules/mod_dav_svn.so</span><br><span class="line">LoadModule authz_svn_module   modules/mod_authz_svn.so</span><br><span class="line"></span><br><span class="line">&lt;Location /project/&gt;</span><br><span class="line">            DAV svn</span><br><span class="line">            SVNListParentPath on</span><br><span class="line">            SVNParentPath /var/www/svn</span><br><span class="line">            AuthType Basic</span><br><span class="line">            AuthName <span class="string">"Subversion repository"</span></span><br><span class="line">            AuthUserFile /var/www/svnconfig/passwdfile</span><br><span class="line">            AuthzSVNAccessFile /var/www/svnconfig/accessfile</span><br><span class="line">            Require valid-user</span><br><span class="line">&lt;/Location&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="4-创建SVN_repo目录和权限信息目录">4.创建SVN repo目录和权限信息目录</h1><pre><code><span class="keyword">mkdir</span> /<span class="keyword">var</span>/www/svn
+<span class="keyword">mkdir</span> /<span class="keyword">var</span>/www/svnconfig
+</code></pre><h1 id="5-创建SVN权限文件和密码文件">5.创建SVN权限文件和密码文件</h1><p>创建权限控制文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ]<span class="comment"># cat /var/www/svnconfig/accessfile</span></span><br><span class="line"></span><br><span class="line">[aliases]</span><br><span class="line">[groups]</span><br><span class="line"></span><br><span class="line">[/]</span><br><span class="line">*=rw</span><br><span class="line"></span><br><span class="line">[qa_project:/]</span><br></pre></td></tr></table></figure></p>
+<p>创建用户密码文件，注意这里的密码必须是加密的，需要使用 <code>htpasswd -c 123 user1</code>生成<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ]<span class="comment"># cat /var/www/svnconfig/passwdfile</span></span><br><span class="line"></span><br><span class="line">[users]</span><br><span class="line"><span class="comment"># harry = harryssecret</span></span><br><span class="line"><span class="comment"># sally = sallyssecret</span></span><br><span class="line">user1:aWW1oIsRihOHc</span><br></pre></td></tr></table></figure></p>
+<h1 id="6-安装iF-SVnAdmin">6.安装iF.SVnAdmin</h1><pre><code>wget <span class="string">http:</span><span class="comment">//sourceforge.net/projects/ifsvnadmin/files/svnadmin-1.6.2.zip</span>
+unzip svnadmin-<span class="number">1.6</span>.2.zip
+mv iF.SVNAdmin-stable-<span class="number">1.6</span>.2 <span class="regexp">/home/</span>wwwroot/svnadmin
+chmod <span class="number">777</span> -R <span class="regexp">/home/</span>wwwroot<span class="regexp">/svnadmin/</span>data
+</code></pre><p>配置nginx,配置apache，注意2个web引擎的端口不要冲突，并开启相应端口到防火墙</p>
+<h1 id="7-初始化iF-SVnAdmin">7.初始化iF.SVnAdmin</h1><p>浏览器输入<a href="http://192.168.1.2/svnadmin/index.php" target="_blank" rel="external">http://192.168.1.2/svnadmin/index.php</a></p>
+<p>使用刚才生成的密码登陆进去可以看到下面的配置页面</p>
+<p><img src="http://r.loli.io/meMjmi.png" alt=""><br>选择Test提示没有写入权限的话chmod一下，</p>
+<p>登录后如下，可以看到软件版本信息、已有的仓库、用户、组、权限路径等</p>
+<h1 id="8-投入使用">8.投入使用</h1><p>svn管理地址   <a href="http://192.168.1.2/svnadmin/index.php" target="_blank" rel="external">http://192.168.1.2/svnadmin/index.php</a><br>svn项目地址   <a href="http://192.168.1.2:8888/project/qa_project/" target="_blank" rel="external">http://192.168.1.2:8888/project/qa_project/</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>windows下的TortoiseSVN服务端是相当好用的，界面管理方便，增删改查用户和库都比较好用，但是linux下的svn就比较折腾人。<br>]]>
+    
+    </summary>
+    
+      <category term="svn" scheme="http://linux48.com/tags/svn/"/>
+    
+      <category term="工具" scheme="http://linux48.com/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="os" scheme="http://linux48.com/categories/os/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Red Hat Enterprise Linux Server YUM配置]]></title>
@@ -758,53 +811,6 @@ nohup sslocal &amp;
       <category term="ruby" scheme="http://linux48.com/tags/ruby/"/>
     
       <category term="dev" scheme="http://linux48.com/categories/dev/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[AWK统计随笔记录]]></title>
-    <link href="http://linux48.com//archives/411/"/>
-    <id>http://linux48.com//archives/411/</id>
-    <published>2014-11-17T16:00:00.000Z</published>
-    <updated>2015-05-29T03:23:50.000Z</updated>
-    <content type="html"><![CDATA[<p>AWK统计随笔记录</p>
-<pre><code>netstat -ntlp | sed '/Active/d' | sed '/Proto/d' | sed 's/:::/:/g'| sed 's/::ffff:/ /g'| awk '{print $4,$7}' | awk -F':' '{print $2}' | sed 's/[<span class="link_label">0-9</span>][<span class="link_reference">0-9</span>][<span class="link_label">0-9</span>][<span class="link_reference">0-9</span>]\// /g'
-</code></pre><p>查看当前系统所有服务进程对应的端口</p>
-<pre><code>netstat -<span class="keyword">n</span> | awk '/^tcp/ {++S[<span class="label">$NF</span>]} END {<span class="keyword">for</span>(a <span class="keyword">in</span> S) <span class="keyword">print</span> a, S[a]}'
-</code></pre><a id="more"></a>
-<p>查看当前网络tcp连接</p>
-<pre><code>netstat -ntu |<span class="string"> awk '{print $5}' </span>|<span class="string"> cut -d: -f1 </span>|<span class="string"> sort </span>|<span class="string"> uniq -c </span>|<span class="string"> sort -nr</span>
-</code></pre><p>显示服务器上所有的每个IP多少个连接数</p>
-<h6 id="##########_★_以下为日志统计_★">########## ★ 以下为日志统计  ★</h6><pre><code><span class="keyword">cat</span> access.<span class="keyword">log</span> | grep <span class="string">"13/Jul/2013"</span> | awk '{<span class="keyword">print</span> <span class="label">$11}</span>' | <span class="keyword">sort</span> | uniq -c | <span class="keyword">sort</span> -nr | head -<span class="keyword">n</span> 10
-</code></pre><p>日志统计查看当天访问最多的页面,取前10</p>
-<pre><code><span class="keyword">cat</span> access.<span class="keyword">log</span> | grep <span class="string">"13/Jul/2013"</span> | awk '{<span class="keyword">print</span> <span class="label">$1}</span>' | <span class="keyword">sort</span> | uniq -c | <span class="keyword">sort</span> -nr | head -<span class="keyword">n</span> 10
-</code></pre><p>日志统计查看当天访问排名前10的ip连接数</p>
-<pre><code><span class="keyword">cat</span> access_20130811.<span class="keyword">log</span> |awk '{<span class="keyword">print</span> <span class="label">$NF}</span>' | <span class="keyword">sort</span> | uniq -c | <span class="keyword">sort</span> -nr | head -<span class="keyword">n</span> 15
-</code></pre><p>查找日志中,取值末尾,保留访问最多的前15个</p>
-<pre><code><span class="keyword">cat</span> access.<span class="keyword">log</span> | grep <span class="string">"13/Jul/2013"</span> | awk '{<span class="keyword">sum</span>+=<span class="label">$10}</span> END {<span class="keyword">print</span> <span class="keyword">sum</span>/1024/1024/1024}'
-</code></pre><p>统当天计网站流量（G)</p>
-<pre><code><span class="keyword">cat</span> access.<span class="keyword">log</span> | grep <span class="string">"13/Jul/2013"</span> |awk '{<span class="keyword">sum</span>+=<span class="label">$10}</span> END {<span class="keyword">print</span> <span class="keyword">sum</span>/1024/1024}'
-</code></pre><p>统计当天网站流量（M)</p>
-<pre><code><span class="keyword">cat</span> access.<span class="keyword">log</span> | grep <span class="string">"13/Jul/2013"</span> | awk '{counts[$(9)]+=1}; END {<span class="keyword">for</span>(code <span class="keyword">in</span> counts) <span class="keyword">print</span> code,counts[code]}'
-<span class="keyword">cat</span> access.<span class="keyword">log</span> | grep <span class="string">"13/Jul/2013"</span> |awk '{<span class="keyword">print</span> <span class="label">$9}</span>'|<span class="keyword">sort</span>|uniq -c|<span class="keyword">sort</span> -rn
-</code></pre><p>查看今日访问的http状态数</p>
-<pre><code><span class="keyword">cat</span> access.<span class="built_in">log</span> | <span class="keyword">grep</span> <span class="string">"13/Jul/2013"</span> | <span class="keyword">grep</span> <span class="string">"163.177.71.12"</span> | awk <span class="string">'{print $7}'</span> | <span class="built_in">sort</span> | uniq -<span class="keyword">c</span> | <span class="built_in">sort</span> -nr
-</code></pre><p>查看当天指定ip访问次数过的url和访问次数</p>
-<p>把IP数量直接输出显示：</p>
-<pre><code><span class="keyword">cat</span> access_log_2011_06_26.<span class="keyword">log</span> |awk '{<span class="keyword">print</span> <span class="label">$1}</span>'|uniq -c|wc -<span class="keyword">l</span>
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<p>AWK统计随笔记录</p>
-<pre><code>netstat -ntlp | sed '/Active/d' | sed '/Proto/d' | sed 's/:::/:/g'| sed 's/::ffff:/ /g'| awk '{print $4,$7}' | awk -F':' '{print $2}' | sed 's/[<span class="link_label">0-9</span>][<span class="link_reference">0-9</span>][<span class="link_label">0-9</span>][<span class="link_reference">0-9</span>]\// /g'
-</code></pre><p>查看当前系统所有服务进程对应的端口</p>
-<pre><code>netstat -<span class="keyword">n</span> | awk '/^tcp/ {++S[<span class="label">$NF</span>]} END {<span class="keyword">for</span>(a <span class="keyword">in</span> S) <span class="keyword">print</span> a, S[a]}'
-</code></pre>]]>
-    
-    </summary>
-    
-      <category term="awk" scheme="http://linux48.com/tags/awk/"/>
-    
-      <category term="system" scheme="http://linux48.com/categories/system/"/>
     
   </entry>
   
