@@ -24,7 +24,7 @@
 
 
 
-  <meta name="keywords" content="mysql,python," />
+  <meta name="keywords" content="My Opensource Life & Notepad" />
 
 
 
@@ -59,7 +59,7 @@
   </script>
 
 
-  <title> CentOS下python-mysqldb安装事件 // linux48 </title>
+  <title> 友情链接 // linux48 </title>
 </head>
 
 <body>
@@ -184,7 +184,7 @@
           
           
             
-              CentOS下python-mysqldb安装事件
+              友情链接
             
           
         </h1>
@@ -192,28 +192,17 @@
 
       <div class="post-meta">
         <span class="post-time">
-          發表於 2013-08-09
+          發表於 2012-12-22
         </span>
 
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/devops/">devops</a>
-
-              
-              
-
-            
-          </span>
         
 
         
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/archives/60/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/60/"></span>
+            <a href="/links/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="links/"></span>
             </a>
           </span>
           
@@ -227,34 +216,20 @@
       
 
       
-        <p>未安装python-mysqldb的时候导入MySQLdb报错</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python</span></span><br><span class="line"></span><br><span class="line">Python <span class="number">2.7</span>.<span class="number">2</span> (default, Jul <span class="number">13</span> <span class="number">2012</span>, <span class="number">18</span>:<span class="number">30</span>:<span class="number">00</span>)  </span><br><span class="line">[GCC <span class="number">4.4</span>.<span class="number">6</span> <span class="number">20120305</span> (Red Hat <span class="number">4.4</span>.<span class="number">6</span>-<span class="number">4</span>)] on linux2  </span><br><span class="line">Type <span class="built_in">help</span>, copyright credits or license <span class="keyword">for</span> more information.  </span><br><span class="line">&gt;&gt;&gt; import MySQLdb  </span><br><span class="line">Traceback (most recent call last):  </span><br><span class="line">File &lt;stdin&gt;, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;  </span><br><span class="line">ImportError: No module named MySQLdb  </span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
-<p>下载安装MySQL-python<a id="more"></a></p>
-<pre><code>wget http:<span class="comment">//pypi.python.org/packages/source/M/MySQL-python/MySQL-python-1.2.3.tar.gz#md5=215eddb6d853f6f4be5b4afc4154292f  </span>
-tar zxvf MySQL-python-<span class="number">1.2</span>.<span class="number">3</span><span class="class">.tar</span><span class="class">.gz</span>  
-cd MySQL-python-<span class="number">1.2</span>.<span class="number">3</span>  
-python setup<span class="class">.py</span> build  
-Traceback (most recent call last):  
-File setup<span class="class">.py</span>, line <span class="number">5</span>, <span class="keyword">in</span> &lt;module&gt;  
-from setuptools import setup, Extension  
-ImportError: No module named setuptools
-</code></pre><p>安装报错，还需下载安装setuptools</p>
-<pre><code>get <span class="symbol">http:</span>/<span class="regexp">/pypi.python.org/packages</span><span class="regexp">/2.7/s</span><span class="regexp">/setuptools/setuptools</span>-<span class="number">0</span>.<span class="number">6</span>c11-py2.<span class="number">7</span>.egg<span class="comment">#md5=fe1f997bc722265116870bc7919059ea</span>
-sh setuptools-<span class="number">0</span>.<span class="number">6</span>c11-py2.<span class="number">7</span>.egg  
-</code></pre><p>python导入setuptools成功</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python  </span><br><span class="line">Python <span class="number">2.7</span>.<span class="number">2</span> (default, Jul <span class="number">13</span> <span class="number">2012</span>, <span class="number">18</span>:<span class="number">30</span>:<span class="number">00</span>)  </span><br><span class="line">[GCC <span class="number">4.4</span>.<span class="number">6</span> <span class="number">20120305</span> (Red Hat <span class="number">4.4</span>.<span class="number">6</span>-<span class="number">4</span>)] on linux2  </span><br><span class="line">Type <span class="built_in">help</span> copyright credits or license <span class="keyword">for</span> more information.  </span><br><span class="line">&gt;&gt;&gt; import setuptools</span><br></pre></td></tr></table></figure>
-<p>继续编译安装MySQL-python</p>
-<pre><code>python setup<span class="class">.py</span> build 
-python setup<span class="class">.py</span> install
-</code></pre><p>python导入MySQLdb成功</p>
-<p>```bash </p>
+        <p><blockquote class="blockquote-center">轻击键盘，静候回音</blockquote><br><br></p>
 <blockquote>
-<blockquote>
-<blockquote>
-<p>import MySQLdb<br>/usr/local/lib/python2.7/site-packages/MySQL_python-1.2.3-py2.7-linux-x86_64.egg/_mysql.py:3: UserWarning: Module _mysql was already imported from /usr/local/lib/python2.7/site-packages/MySQL_python-1.2.3-py2.7-linux-x86_64.egg/_mysql.pyc, but /home/setup/MySQL-python-1.2.3 is being added to sys.path<br>import MySQLdb  </p>
+<p>最近访客</p>
 </blockquote>
-</blockquote>
-</blockquote>
+<p><div class="ds-recent-visitors" data-num-items="30" data-avatar-size="42" id="ds-recent-visitors"></div><br><br><br><br><br><br></p>
+<h1 id="小伙伴">小伙伴</h1><ul>
+<li><a href="http://sell.moe/" target="_blank" rel="external">橙的记事本</a></li>
+<li><a href="http://akarin.xyz/" target="_blank" rel="external">机智的阿卡林酱</a></li>
+<li><a href="http://www.xinran001.com/" target="_blank" rel="external">波哥的前端世界</a></li>
+<li><a href="http://www.lixiaolong.org/" target="_blank" rel="external">李小龙IT技术控</a></li>
+<li><a href="http://www.ibirchs.com/" target="_blank" rel="external">LingByron</a></li>
+</ul>
+<p><img src="http://r.loli.io/RJNbay.jpg" alt=""></p>
+<embed src="http://www.xiami.com/widget/0_1769196206_360_260_CD5C5C_808080_1/multiPlayer.swf" type="application/x-shockwave-flash" width="360" height="98" wmode="transparent">
 
       
     </div>
@@ -306,26 +281,18 @@ python setup<span class="class">.py</span> install
 
 
       
-        <div class="post-tags">
-          
-            <a href="/tags/mysql/"> #mysql </a>
-          
-            <a href="/tags/python/"> #python </a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/archives/100/">linux查看内存相关命令</a>
+              <a href="/archives/68/">ORA-01102: cannot mount database in EXCLUSIVE mode</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/archives/59/">sqlite3源码升级事件</a>
+              <a href="/archives/65/">centos install oracle 11g</a>
             
           </div>
         </div>
@@ -341,8 +308,8 @@ python setup<span class="class">.py</span> install
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="/archives/60/"
-               data-title="CentOS下python-mysqldb安装事件" data-url="http://linux48.com//archives/60/">
+          <div class="ds-thread" data-thread-key="links/"
+               data-title="友情链接" data-url="http://linux48.com/links/">
           </div>
         
       </div>
@@ -467,7 +434,7 @@ python setup<span class="class">.py</span> install
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目錄</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#小伙伴"><span class="nav-number">1.</span> <span class="nav-text">小伙伴</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
