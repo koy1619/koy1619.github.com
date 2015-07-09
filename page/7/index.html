@@ -976,106 +976,6 @@
           
           
             
-              <a class="post-title-link" href="/archives/67/">
-                oracle startup 故障：ORA-00845: MEMORY_TARGET
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2012-12-26
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/database/">database</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/67/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/67/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>书接上文，oracle startup上文报错解决之后又出现此问题</p>
-<p>Oracle 11g的Linux版本在修改了MEMORY_TARGET或者SGA_TARGET后启动可能会报错：</p>
-<p>SQL&gt; shutdown immediate<br>Database closed.<br>Database dismounted.<br>ORACLE instance shut down.<br>SQL&gt; startup<br>ORA-00845: MEMORY_TARGET not supported on this system</p>
-<p>这个问题是由于设置SGA的大小超过了操作系统/dev/shm的大小：</p>
-<p>解决这个问题只有两个方法，一种是修改初始化参数，使得初始化参数中SGA的设置小于/dev/shm的大小，另一种方法就是调整/dev/shm的大小。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/67/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-    
-    <! -- 添加捐赠图标 -->
-
-    
-    
-
-<! -- 添加捐赠图标 -->
-
-
-      
-        <div class="post-tags">
-          
-            <a href="/tags/oracle/"> #oracle </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
               <a class="post-title-link" href="/archives/68/">
                 ORA-01102: cannot mount database in EXCLUSIVE mode
               </a>
@@ -1178,6 +1078,106 @@ ORACLE instance shut down.</pre>
 
 
     
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/archives/67/">
+                oracle startup 故障：ORA-00845: MEMORY_TARGET
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2012-12-26
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/database/">database</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/67/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/67/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>书接上文，oracle startup上文报错解决之后又出现此问题</p>
+<p>Oracle 11g的Linux版本在修改了MEMORY_TARGET或者SGA_TARGET后启动可能会报错：</p>
+<p>SQL&gt; shutdown immediate<br>Database closed.<br>Database dismounted.<br>ORACLE instance shut down.<br>SQL&gt; startup<br>ORA-00845: MEMORY_TARGET not supported on this system</p>
+<p>这个问题是由于设置SGA的大小超过了操作系统/dev/shm的大小：</p>
+<p>解决这个问题只有两个方法，一种是修改初始化参数，使得初始化参数中SGA的设置小于/dev/shm的大小，另一种方法就是调整/dev/shm的大小。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/67/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+
+    
+    
+
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/oracle/"> #oracle </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
   </div>
 
   
@@ -1217,7 +1217,7 @@ ORACLE instance shut down.</pre>
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">82</span>
+              <span class="site-state-item-count">81</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
