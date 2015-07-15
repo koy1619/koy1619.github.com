@@ -244,8 +244,12 @@
 </blockquote>
 <p>解决方案：</p>
 <p>使用下面的命令将文件格式设置为unix格式即可解决上述错误。</p>
+<pre><code>vim test.sh
+<span class="attribute">:set fileformat=unix  #或者:set</span> ff=unix
+:wq
+</code></pre><p>unix转dos同理</p>
 <pre><code>vim <span class="keyword">test</span>.<span class="keyword">sh</span>
-:<span class="keyword">set</span> fileformat=unix
+:<span class="keyword">set</span> ff=dos
 :wq
 </code></pre>
       
