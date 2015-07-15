@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-07-15T17:25:15.000Z</updated>
+  <updated>2015-07-15T17:26:45.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[mysql双主互备]]></title>
+    <title><![CDATA[mysql双主互备设计搭建]]></title>
     <link href="http://linux48.com//archives/432/"/>
     <id>http://linux48.com//archives/432/</id>
     <published>2015-07-14T16:00:00.000Z</published>
-    <updated>2015-07-15T17:25:15.000Z</updated>
+    <updated>2015-07-15T17:26:45.000Z</updated>
     <content type="html"><![CDATA[<p>Master-Master复制的两台服务器，既是master，又是另一台服务器的slave。这样，任何一方所做的变更，都会通过复制应用到另外一方的数据库中。<br>这样做的好很多，主要是下面几点:</p>
 <blockquote>
 <ul>
@@ -35,10 +35,10 @@
 <li>对于异地热备，尤其适合灾备。</li>
 </ol>
 </li>
-<li>…<br>今天在测试环境部署一套下来，简单总结一下过程以及经验<a id="more"></a>
-</li>
+<li>…</li>
 </ul>
 </blockquote>
+<p>今天在测试环境部署一套下来，简单总结一下过程以及经验<br><a id="more"></a></p>
 <h1 id="mysql_备份工作原理">mysql 备份工作原理</h1>]]></content>
     <summary type="html">
     <![CDATA[<p>Master-Master复制的两台服务器，既是master，又是另一台服务器的slave。这样，任何一方所做的变更，都会通过复制应用到另外一方的数据库中。<br>这样做的好很多，主要是下面几点:</p>
@@ -56,7 +56,10 @@
 <li>对于异地热备，尤其适合灾备。</li>
 </ol>
 </li>
-<li>…<br>今天在测试环境部署一套下来，简单总结一下过程以及经验]]>
+<li>…</li>
+</ul>
+</blockquote>
+<p>今天在测试环境部署一套下来，简单总结一下过程以及经验<br>]]>
     
     </summary>
     
