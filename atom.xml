@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-07-09T09:47:36.000Z</updated>
+  <updated>2015-07-15T17:23:06.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -13,6 +13,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[mysql双主互备]]></title>
+    <link href="http://linux48.com//archives/432/"/>
+    <id>http://linux48.com//archives/432/</id>
+    <published>2015-07-14T16:00:00.000Z</published>
+    <updated>2015-07-15T17:23:06.000Z</updated>
+    <content type="html"><![CDATA[<p>Master-Master复制的两台服务器，既是master，又是另一台服务器的slave。这样，任何一方所做的变更，都会通过复制应用到另外一方的数据库中。<br>这样做的好很多，主要是下面几点:</p>
+<blockquote>
+<ul>
+<li><ol>
+<li>可以做灾备，其中一个坏了可以切换到另一个。 </li>
+</ol>
+</li>
+<li><ol>
+<li>可以做负载均衡，可以将请求分摊到其中任何一台上，提高网站吞吐量。  </li>
+</ol>
+</li>
+<li><ol>
+<li>对于异地热备，尤其适合灾备。</li>
+</ol>
+</li>
+<li>…<a id="more"></a>
+</li>
+</ul>
+</blockquote>
+<h1 id="mysql_备份工作原理">mysql 备份工作原理</h1>]]></content>
+    <summary type="html">
+    <![CDATA[<p>Master-Master复制的两台服务器，既是master，又是另一台服务器的slave。这样，任何一方所做的变更，都会通过复制应用到另外一方的数据库中。<br>这样做的好很多，主要是下面几点:</p>
+<blockquote>
+<ul>
+<li><ol>
+<li>可以做灾备，其中一个坏了可以切换到另一个。 </li>
+</ol>
+</li>
+<li><ol>
+<li>可以做负载均衡，可以将请求分摊到其中任何一台上，提高网站吞吐量。  </li>
+</ol>
+</li>
+<li><ol>
+<li>对于异地热备，尤其适合灾备。</li>
+</ol>
+</li>
+<li>…]]>
+    
+    </summary>
+    
+      <category term="mysql" scheme="http://linux48.com/tags/mysql/"/>
+    
+      <category term="mysql高可用" scheme="http://linux48.com/tags/mysql%E9%AB%98%E5%8F%AF%E7%94%A8/"/>
+    
+      <category term="双主" scheme="http://linux48.com/tags/%E5%8F%8C%E4%B8%BB/"/>
+    
+      <category term="热备" scheme="http://linux48.com/tags/%E7%83%AD%E5%A4%87/"/>
+    
+      <category term="database" scheme="http://linux48.com/categories/database/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[CentOS6安装subversion 可视化管理工具iF.SVNAdmin]]></title>
@@ -785,32 +843,6 @@ nohup sslocal &amp;
       <category term="sar" scheme="http://linux48.com/tags/sar/"/>
     
       <category term="command" scheme="http://linux48.com/categories/command/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[ruby on rails 报错解决]]></title>
-    <link href="http://linux48.com//archives/412/"/>
-    <id>http://linux48.com//archives/412/</id>
-    <published>2014-11-23T16:00:00.000Z</published>
-    <updated>2015-05-29T03:23:50.000Z</updated>
-    <content type="html"><![CDATA[<p>ruby on rails 报错解决<br><a id="more"></a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="built_in">local</span>/ruby/lib/ruby/gems/<span class="number">2.1</span>.<span class="number">0</span>/gems/execjs-<span class="number">2.2</span>.<span class="number">2</span>/lib/execjs/runtimes.rb:<span class="number">51</span>:<span class="keyword">in</span> `autodetect<span class="string">': Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable)</span><br><span class="line">        from /usr/local/ruby/lib/ruby/gems/2.1.0/gems/execjs-2.2.2/lib/execjs.rb:5:in `&lt;module:ExecJS&gt;'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/gems/<span class="number">2.1</span>.<span class="number">0</span>/gems/execjs-<span class="number">2.2</span>.<span class="number">2</span>/lib/execjs.rb:<span class="number">4</span>:<span class="keyword">in</span> `&lt;top (required)&gt;<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/<span class="number">2.1</span>.<span class="number">0</span>/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/gems/2.1.0/gems/coffee-script-2.3.0/lib/coffee_script.rb:1:in `&lt;top (required)&gt;'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/<span class="number">2.1</span>.<span class="number">0</span>/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/gems/<span class="number">2.1</span>.<span class="number">0</span>/gems/coffee-script-<span class="number">2.3</span>.<span class="number">0</span>/lib/coffee-script.rb:<span class="number">1</span>:<span class="keyword">in</span> `&lt;top (required)&gt;<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/<span class="number">2.1</span>.<span class="number">0</span>/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/gems/2.1.0/gems/jekyll-coffeescript-1.0.1/lib/jekyll-coffeescript.rb:2:in `&lt;top (required)&gt;'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/<span class="number">2.1</span>.<span class="number">0</span>/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/gems/<span class="number">2.1</span>.<span class="number">0</span>/gems/jekyll-<span class="number">2.5</span>.<span class="number">2</span>/lib/jekyll/deprecator.rb:<span class="number">46</span>:<span class="keyword">in</span> `block <span class="keyword">in</span> gracefully_require<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/gems/2.1.0/gems/jekyll-2.5.2/lib/jekyll/deprecator.rb:44:in `each'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/gems/<span class="number">2.1</span>.<span class="number">0</span>/gems/jekyll-<span class="number">2.5</span>.<span class="number">2</span>/lib/jekyll/deprecator.rb:<span class="number">44</span>:<span class="keyword">in</span> `gracefully_require<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/gems/2.1.0/gems/jekyll-2.5.2/lib/jekyll.rb:166:in `&lt;top (required)&gt;'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/<span class="number">2.1</span>.<span class="number">0</span>/rubygems/core_ext/kernel_require.rb:<span class="number">55</span>:<span class="keyword">in</span> `require<span class="string">'</span><br><span class="line">        from /usr/local/ruby/lib/ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/lib/ruby/gems/<span class="number">2.1</span>.<span class="number">0</span>/gems/jekyll-<span class="number">2.5</span>.<span class="number">2</span>/bin/jekyll:<span class="number">6</span>:<span class="keyword">in</span> `&lt;top (required)&gt;<span class="string">'</span><br><span class="line">        from /usr/local/ruby/bin/jekyll:23:in `load'</span></span><br><span class="line">        from /usr/<span class="built_in">local</span>/ruby/bin/jekyll:<span class="number">23</span>:<span class="keyword">in</span> `&lt;main&gt;<span class="string">'</span></span><br></pre></td></tr></table></figure>
-<p>解决 </p>
-<pre><code>yum -y <span class="keyword">install</span> nodejs
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<p>ruby on rails 报错解决<br>]]>
-    
-    </summary>
-    
-      <category term="nodejs" scheme="http://linux48.com/tags/nodejs/"/>
-    
-      <category term="rails" scheme="http://linux48.com/tags/rails/"/>
-    
-      <category term="ruby" scheme="http://linux48.com/tags/ruby/"/>
-    
-      <category term="dev" scheme="http://linux48.com/categories/dev/"/>
     
   </entry>
   
