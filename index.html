@@ -235,22 +235,10 @@
           <p>Master-Master复制的两台服务器，既是master，又是另一台服务器的slave。这样，任何一方所做的变更，都会通过复制应用到另外一方的数据库中。<br>这样做的好很多，主要是下面几点:</p>
 <blockquote>
 <ul>
-<li><ol>
 <li>可以做灾备，其中一个坏了可以切换到另一个。 </li>
-</ol>
-</li>
-<li><ol>
 <li>可以做负载均衡，可以将请求分摊到其中任何一台上，提高网站吞吐量。  </li>
-</ol>
-</li>
-<li><ol>
 <li>对于异地热备，尤其适合灾备。</li>
-</ol>
-</li>
-<li>…</li>
-</ul>
-</blockquote>
-<p>今天在测试环境部署一套下来，简单总结一下过程以及经验<br>
+<li>…<br>今天在测试环境部署一套下来，简单总结一下过程以及经验
           <div class="post-more-link text-center">
             <a class="btn" href="/archives/432/#more">
               閱讀全文 &raquo;
