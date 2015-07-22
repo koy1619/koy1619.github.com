@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-07-15T17:32:14.000Z</updated>
+  <updated>2015-07-22T09:27:27.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -13,6 +13,122 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[mysql双主主键冲突排查修复]]></title>
+    <link href="http://linux48.com//archives/433/"/>
+    <id>http://linux48.com//archives/433/</id>
+    <published>2015-07-21T16:00:00.000Z</published>
+    <updated>2015-07-22T09:27:27.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="背景">背景</h1><p>线上A和B互为主主，A为业务写库，B为读库</p>
+<p>19号下午收到短信报警A的slave delay，果断VPN上去数据库查看到</p>
+<pre><code>Last_SQL_Error: Error <span class="string">'Duplicate entry '</span><span class="number">4960446</span><span class="string">' for key '</span>transaction_id<span class="string">''</span> <span class="keyword">on</span> query. <span class="keyword">Default</span> database
+</code></pre><p>又是熟悉的主键冲突，但是这个时候不能让业务出现任何问题，就果断在A</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; STOP SLAVE;</span><br><span class="line">mysql&gt; SET GLOBAL sql_slave_skip_counter = <span class="number">1</span>;</span><br><span class="line">mysql&gt; START SLAVE;</span><br></pre></td></tr></table></figure>
+<p>经过2次重复的上述操作，同步OK了，然后根据这两条报错的主键ID在两台数据库查询发现都不一样，<br>此时我清楚的知道已经有2条数据差异了，如果不及时处理早晚有一天被掩盖的问题会再次爆发出来。</p>
+<p>后来经过一些列的排查之后知道问题所在了</p>
+<p>因为7月2号晚上在B<code>alter</code>表的时候，导致B锁表，而A还在写入，并且正好在更新服务，导致数据的差异</p>
+<p>查<code>general log</code>得知7月19号在B上插入了两条<code>transaction_id=&quot;4960446&quot;</code>和<code>transaction_id=&quot;4960426&quot;</code>的记录和A的id冲突，导致A同步挂掉</p>
+<p>因为A为业务写库，所以现在需要把A上这两条正确的数据插入到B，并在B上面删除错误的。</p>
+<p>由于这个是自增的主键，所以还不好操作，下面大概就测试环境详细说明一下复现方案以及解决办法。</p>
+<hr>
+<h1 id="复现方案">复现方案</h1><blockquote>
+<ul>
+<li>192.168.1.52  模拟线上A 负责写入</li>
+<li>192.168.1.42  模拟线上B 负责读取</li>
+</ul>
+</blockquote>
+<h2 id="设置my-cnf，差开自增ID">设置my.cnf，差开自增ID</h2><p>52配置</p>
+<pre><code><span class="keyword">auto</span>-increment-increment=<span class="number">10</span>
+<span class="keyword">auto</span>-increment-offset=<span class="number">8</span>
+</code></pre><p>42配置</p>
+<pre><code><span class="keyword">auto</span>-increment-increment=<span class="number">10</span>
+<span class="keyword">auto</span>-increment-offset=<span class="number">6</span>
+</code></pre><h2 id="创建测试表">创建测试表</h2><p>随便在其中一台的test库中创建测试表，双主自动同步到另一台</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">use <span class="built_in">test</span>;</span><br><span class="line"></span><br><span class="line">CREATE TABLE `<span class="built_in">test</span>` (</span><br><span class="line">  `qrpay_id` int(<span class="number">11</span>) NOT NULL AUTO_INCREMENT COMMENT <span class="string">'主键'</span>,</span><br><span class="line">  `transaction_id` int(<span class="number">11</span>) NOT NULL DEFAULT <span class="string">'0'</span>,</span><br><span class="line">  PRIMARY KEY (`qrpay_id`),</span><br><span class="line">  UNIQUE KEY `transaction_id` (`transaction_id`) USING BTREE</span><br><span class="line">) ENGINE=InnoDB AUTO_INCREMENT=<span class="number">896</span> DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
+<h2 id="插入测试数据">插入测试数据</h2><p>在52插入测试数据，可以发现”qrpay_id”的值是依照 auto-increment-offset 格式的, 同步过去也是如此</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `<span class="built_in">test</span>` VALUES (<span class="string">'null'</span>,<span class="string">'1'</span>);</span><br><span class="line">INSERT INTO `<span class="built_in">test</span>` VALUES (<span class="string">'null'</span>,<span class="string">'2'</span>);</span><br><span class="line">INSERT INTO `<span class="built_in">test</span>` VALUES (<span class="string">'null'</span>,<span class="string">'3'</span>);</span><br></pre></td></tr></table></figure>
+<p>   在42插入测试数据，可以发现”qrpay_id”的值是依照 auto-increment-offset 格式的, 同步过去也是如此</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `<span class="built_in">test</span>` VALUES (<span class="string">'null'</span>,<span class="string">'4'</span>);</span><br><span class="line">INSERT INTO `<span class="built_in">test</span>` VALUES (<span class="string">'null'</span>,<span class="string">'5'</span>);</span><br><span class="line">INSERT INTO `<span class="built_in">test</span>` VALUES (<span class="string">'null'</span>,<span class="string">'6'</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="模拟同步异常">模拟同步异常</h2><p>停掉42的同步</p>
+<pre><code>slave <span class="operator"><span class="keyword">stop</span>;</span>
+</code></pre><p>并在52上插入数据</p>
+<pre><code><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`test`</span> <span class="keyword">VALUES</span> (<span class="string">'null'</span>,<span class="string">'7'</span>);</span>
+</code></pre><p>在42上插入数据</p>
+<pre><code><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`test`</span> <span class="keyword">VALUES</span> (<span class="string">'null'</span>,<span class="string">'7'</span>);</span>
+</code></pre><p>开启42的同步</p>
+<pre><code>slave <span class="operator"><span class="keyword">start</span>;</span>
+</code></pre><p>在两边都show slave status \G; 可以发现都提示</p>
+<pre><code>Error <span class="string">'Duplicate entry '</span><span class="number">7</span><span class="string">' for key '</span>transaction_id<span class="string">''</span> on query. Default <span class="string">database:</span> <span class="string">'test'</span>. <span class="string">Query:</span> <span class="string">'INSERT INTO `test` VALUES ('</span><span class="literal">null</span><span class="string">','</span><span class="number">7</span><span class="string">')'</span>
+</code></pre><p>因为停掉了42的同步，所以插入到52的数据不会同步到42，并且也在42上面插入了相同值的transaction_id，同步到52的时候就导致了主键重复，最后开启42的同步，双方都互相冲突</p>
+<p>这个时候两边主从都是挂掉的，然后两边都跳过这个错误</p>
+<pre><code><span class="operator"><span class="keyword">stop</span> <span class="keyword">slave</span>;</span>
+<span class="operator"><span class="keyword">set</span> <span class="keyword">global</span> sql_slave_skip_counter=<span class="number">1</span>;</span>
+slave <span class="operator"><span class="keyword">start</span>;</span>
+</code></pre><p>再show slave status \G;查看正常</p>
+<h2 id="模拟数据差异1">模拟数据差异1</h2><p>在42上面删掉transaction_id刚才冲突的那条transaction_id=’7’的记录,按照qrpay_id找</p>
+<pre><code><span class="operator"><span class="keyword">delete</span> <span class="keyword">from</span> test <span class="keyword">where</span> qrpay_id=<span class="string">'1166'</span>;</span>
+</code></pre><p>继续在52写入测试数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `<span class="built_in">test</span>` VALUES (<span class="string">'null'</span>,<span class="string">'8'</span>);</span><br><span class="line">INSERT INTO `<span class="built_in">test</span>` VALUES (<span class="string">'null'</span>,<span class="string">'9'</span>);</span><br><span class="line">INSERT INTO `<span class="built_in">test</span>` VALUES (<span class="string">'null'</span>,<span class="string">'10'</span>);</span><br></pre></td></tr></table></figure>
+<p>这个时候52上面比42的多了一条transaction_id=’7’的记录</p>
+<p>以上目地是模拟出真实数据库A比B多数据的场景</p>
+<h2 id="修复同步">修复同步</h2><p>在42上插入数据</p>
+<pre><code><span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`test`</span> <span class="keyword">VALUES</span> (<span class="string">'null'</span>,<span class="string">'7'</span>);</span>
+</code></pre><p>这时因为52上已有transaction_id=’7’的记录的值导致52同步挂掉</p>
+<p>只有52报</p>
+<pre><code>Error <span class="string">'Duplicate entry '</span><span class="number">7</span><span class="string">' for key '</span>transaction_id<span class="string">''</span> on query. Default <span class="string">database:</span> <span class="string">'test'</span>. <span class="string">Query:</span> <span class="string">'INSERT INTO `test` VALUES ('</span><span class="literal">null</span><span class="string">','</span><span class="number">7</span><span class="string">')'</span>
+</code></pre><p>在52上跳过错误</p>
+<pre><code><span class="operator"><span class="keyword">stop</span> <span class="keyword">slave</span>;</span>
+<span class="operator"><span class="keyword">set</span> <span class="keyword">global</span> sql_slave_skip_counter=<span class="number">1</span>;</span>
+slave <span class="operator"><span class="keyword">start</span>;</span>
+</code></pre><p>再show slave status \G;查看正常</p>
+<p>52继续插入数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO `<span class="built_in">test</span>` VALUES (<span class="string">'null'</span>,<span class="string">'11'</span>);</span><br><span class="line">INSERT INTO `<span class="built_in">test</span>` VALUES (<span class="string">'null'</span>,<span class="string">'12'</span>);</span><br><span class="line">INSERT INTO `<span class="built_in">test</span>` VALUES (<span class="string">'null'</span>,<span class="string">'13'</span>);</span><br></pre></td></tr></table></figure>
+<p>发现42也健康的同步过来了</p>
+<h2 id="复现完毕">复现完毕</h2><p> 数据差异为transaction_id=’7’这条记录,需要修复</p>
+<hr>
+<h1 id="线上解决方案">线上解决方案</h1><h2 id="备份线上数据表">备份线上数据表</h2><p>晚上12点过后备份A和B的<code>test</code>表（需要恢复的表，为了隐私这里用test代替）</p>
+<p>还好这张表里只有100多万条数据，很快就备份出来了，要不然备份锁表就不能这样搞了</p>
+<h2 id="导库到测试">导库到测试</h2><p>次日上班处理</p>
+<p>停掉测试环境52，42双方的slave</p>
+<p>线上A备份导入到52的test库，线上B备份导入到42的test库,两个库的input_date框在同一时间,并比对一下条数记录是否一致</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delete from <span class="built_in">test</span> <span class="built_in">where</span> input_date &gt;= <span class="string">'2015-07-22 00:00:00'</span></span><br><span class="line">select count(*) from <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<p>开启双方slave</p>
+<h2 id="修复数据">修复数据</h2><p>因为52和42是双主模式，具体正确数据以线上A导入到52的数据为准</p>
+<p>在52上面执行下面命令，来检测数据的一致性</p>
+<pre><code><span class="comment">pt</span><span class="literal">-</span><span class="comment">table</span><span class="literal">-</span><span class="comment">checksum</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">nocheck</span><span class="literal">-</span><span class="comment">replication</span><span class="literal">-</span><span class="comment">filters</span>  <span class="literal">-</span><span class="literal">-</span><span class="comment">no</span><span class="literal">-</span><span class="comment">check</span><span class="literal">-</span><span class="comment">binlog</span><span class="literal">-</span><span class="comment">format</span>  <span class="literal">-</span><span class="literal">-</span><span class="comment">replicate=test</span><span class="string">.</span><span class="comment">checksums</span>  <span class="literal">-</span><span class="literal">-</span><span class="comment">databases=test</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">tables=test</span>  <span class="literal">-</span><span class="literal">-</span><span class="comment">host=localhost</span>    <span class="literal">-</span><span class="literal">-</span><span class="comment">password=123456</span>
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">tip:</span><br><span class="line">参数解释</span><br><span class="line">--nocheck-replication-filters ：不检查复制过滤器，建议启用。后面可以用--databases来指定需要检查的数据库。</span><br><span class="line">--no-check-binlog-format      : 不检查复制的binlog模式，要是binlog模式是ROW，则会报错。</span><br><span class="line">--replicate-check-only :只显示不同步的信息。</span><br><span class="line">--replicate=   ：把checksum的信息写入到指定表中，建议直接写到被检查的数据库当中。 </span><br><span class="line">--databases=   ：指定需要被检查的数据库，多个则用逗号隔开。</span><br><span class="line">--tables=      ：指定需要被检查的表，多个用逗号隔开</span><br><span class="line">h=<span class="number">127.0</span>.<span class="number">0.1</span>    ：Master的地址</span><br><span class="line">u=root         ：用户名</span><br><span class="line">p=<span class="number">123456</span>       ：密码</span><br><span class="line">P=<span class="number">3306</span>         ：端口</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">输出解释</span><br><span class="line">TS            ：完成检查的时间。</span><br><span class="line">ERRORS        ：检查时候发生错误和警告的数量。</span><br><span class="line">DIFFS         ：差异的条数。当指定--no-replicate-check时，会一直为<span class="number">0</span>，当指定--replicate-check-only会显示不同的信息。</span><br><span class="line">ROWS          ：表的行数。</span><br><span class="line">CHUNKS        ：被划分到表中的块的数目。</span><br><span class="line">SKIPPED       ：由于错误或警告或过大，则跳过块的数目。</span><br><span class="line">TIME          ：执行的时间。</span><br><span class="line">TABLE         ：被检查的表名。</span><br></pre></td></tr></table></figure>
+<p>由于线上A和B已经存在差异，所以肯定DIFFS是一个非0的值</p>
+<p>需要在42创建checksum用户供52使用</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">SELECT</span>, PROCESS, SUPER, REPLICATION <span class="keyword">SLAVE</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="keyword">checksum</span> @<span class="string">'192.168.1.52'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'123456'</span> ;</span>
+<span class="operator"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span>
+</code></pre><p>在52执行下面命令，通过（—print）打印出需要修复数据的sql语句，然后记录下来，然后经过处理，手动的拿去线上B去行执行，让他们数据保持一致性</p>
+<pre><code>pt-<span class="keyword">table</span>-sync --replicate=<span class="keyword">test</span>.checksums <span class="keyword">h</span>=localhost,<span class="keyword">u</span>=root,p=123456 <span class="keyword">h</span>=192.168.1.42,<span class="keyword">u</span>=<span class="keyword">checksum</span>,p=123456 --<span class="keyword">print</span>
+</code></pre><p>tip:为什么要print直接打印出来问题sql，这是因为pt-table-sync会重建数据，所以有一定的风险，最好提前备份好数据。如果仍然不放心，可以使用它提供的「print」选项，它会打印出相应的SQL，你可以审查一下到底执行了那些操作，然后通过手动执行来完成同步。</p>
+<pre><code>也可以通过(<span class="comment">--execute)直接修复，但是建议千万不要这么做。</span>
+</code></pre><h1 id="附：">附：</h1><p>————————-Percona Toolkit INSTALL————————————-</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">yum install perl-ExtUtils-CBuilder perl-ExtUtils-MakeMaker -y</span><br><span class="line">yum perl-DBD-MySQL -y</span><br><span class="line">yum perl-Time-HiRes -y</span><br><span class="line">yum perl-TermReadKey -y</span><br><span class="line">yum perl-DBI</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">wget https://www.percona.com/downloads/percona-toolkit/<span class="number">2.2</span>.<span class="number">14</span>/tarball/percona-toolkit-<span class="number">2.2</span>.<span class="number">14</span>.tar.gz</span><br><span class="line"></span><br><span class="line">tar zxvf percona-toolkit-<span class="number">2.2</span>.<span class="number">14</span>.tar.gz </span><br><span class="line"><span class="built_in">cd</span> percona-toolkit-<span class="number">2.2</span>.<span class="number">14</span></span><br><span class="line">perl Makefile.PL PREFIX=/usr/<span class="built_in">local</span>/percona-toolkit</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"PATH=<span class="variable">$PATH</span>:/usr/local/percona-toolkit"</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"export PATH"</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="背景">背景</h1><p>线上A和B互为主主，A为业务写库，B为读库</p>
+<p>19号下午收到短信报警A的slave delay，果断VPN上去数据库查看到</p>
+<pre><code>Last_SQL_Error: Error <span class="string">'Duplicate entry '</span><span class="number">4960446</span><span class="string">' for key '</span>transaction_id<span class="string">''</span> <span class="keyword">on</span> query. <span class="keyword">Default</span> database
+</code></pre><p>又是熟悉的主键冲突，但是这个时候不能让业务出现任何问题，就果断在A</p>]]>
+    
+    </summary>
+    
+      <category term="mysql" scheme="http://linux48.com/tags/mysql/"/>
+    
+      <category term="主键冲突" scheme="http://linux48.com/tags/%E4%B8%BB%E9%94%AE%E5%86%B2%E7%AA%81/"/>
+    
+      <category term="双主" scheme="http://linux48.com/tags/%E5%8F%8C%E4%B8%BB/"/>
+    
+      <category term="数据恢复" scheme="http://linux48.com/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/"/>
+    
+      <category term="database" scheme="http://linux48.com/categories/database/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[mysql双主互备设计搭建]]></title>
@@ -806,28 +922,6 @@ nohup sslocal &amp;
       <category term="gitlab" scheme="http://linux48.com/tags/gitlab/"/>
     
       <category term="dev" scheme="http://linux48.com/categories/dev/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[linux sar命令]]></title>
-    <link href="http://linux48.com//archives/413/"/>
-    <id>http://linux48.com//archives/413/</id>
-    <published>2014-12-01T16:00:00.000Z</published>
-    <updated>2015-05-29T03:23:50.000Z</updated>
-    <content type="html"><![CDATA[<p>sar（System Activity Reporter系统活动情况报告）是目前 Linux 上最为全面的系统性能分析工具之一，可以从多方面对系统的活动进行报告，包括：文件的读写情况、系统调用的使用情况、磁盘I/O、CPU效率、内存使用状况、进程活动及IPC有关的活动等<a id="more"></a></p>
-<pre><code>yum <span class="keyword">install</span> sysstat
-</code></pre><p>sar命令常用格式</p>
-<pre><code><span class="tag">sar</span> <span class="attr_selector">[options]</span> <span class="attr_selector">[-A]</span> <span class="attr_selector">[-o file]</span> <span class="tag">t</span> <span class="attr_selector">[n]</span>
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<p>sar（System Activity Reporter系统活动情况报告）是目前 Linux 上最为全面的系统性能分析工具之一，可以从多方面对系统的活动进行报告，包括：文件的读写情况、系统调用的使用情况、磁盘I/O、CPU效率、内存使用状况、进程活动及IPC有关的活动等]]>
-    
-    </summary>
-    
-      <category term="sar" scheme="http://linux48.com/tags/sar/"/>
-    
-      <category term="command" scheme="http://linux48.com/categories/command/"/>
     
   </entry>
   

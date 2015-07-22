@@ -3,6 +3,32 @@
 
     
   <url>
+    <loc>http://linux48.com//archives/433/</loc>
+    <lastmod>2015-07-22T09:27:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>mysql双主主键冲突排查修复</title>
+        <pubTime>2015-07-21T16:00:00.000Z</pubTime>
+        
+        <tag>mysql </tag>
+         
+        <tag>主键冲突 </tag>
+         
+        <tag>双主 </tag>
+         
+        <tag>数据恢复 </tag>
+         
+         
+           
+             
+              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://linux48.com//archives/432/</loc>
     <lastmod>2015-07-15T17:32:14.000Z</lastmod>
     <data>

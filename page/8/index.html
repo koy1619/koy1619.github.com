@@ -186,6 +186,119 @@
           
           
             
+              <a class="post-title-link" href="/archives/68/">
+                ORA-01102: cannot mount database in EXCLUSIVE mode
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2012-12-26
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/database/">database</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/68/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/68/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>还是startup的问题，真是连锁反应啊~~</p>
+<pre class="lang:default decode:true">SQL&gt; conn /as sysdba
+Connected to an idle instance.
+SQL&gt; startup
+ORACLE instance started.
+Total System Global Area  591396864 bytes
+Fixed Size                   1220724 bytes
+Variable Size             167776140 bytes
+Database Buffers         415236096  bytes
+Redo Buffers                 7163904 bytes
+ORA-01102: cannot mount database in EXCLUSIVE mode
+SQL&gt; shutdown immediate
+ORA-01507: database not mounted
+
+ORACLE instance shut down.</pre>
+
+<p>&nbsp;</p>
+<p>去CSDN查了一下资料，终于解决了
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/68/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+
+    
+    
+
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/oracle/"> #oracle </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/67/">
                 oracle startup 故障：ORA-00845: MEMORY_TARGET
               </a>
@@ -1084,106 +1197,6 @@ slave IP:<span class="number">192.168.1.87</span>
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/31/">
-                centos下snmp客户端安装
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2012-04-10
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/system/">system</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/31/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/31/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>centos下snmp客户端安装</p>
-<pre><code>yum -y install <span class="keyword">net</span>-snmp
-
-vi /etc/snmp/snmpd.<span class="keyword">conf</span>
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/31/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-    
-    <! -- 添加捐赠图标 -->
-
-    
-    
-
-<! -- 添加捐赠图标 -->
-
-
-      
-        <div class="post-tags">
-          
-            <a href="/tags/snmp/"> #snmp </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1223,7 +1236,7 @@ vi /etc/snmp/snmpd.<span class="keyword">conf</span>
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">82</span>
+              <span class="site-state-item-count">83</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1237,7 +1250,7 @@ vi /etc/snmp/snmpd.<span class="keyword">conf</span>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">87</span>
+              <span class="site-state-item-count">88</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
