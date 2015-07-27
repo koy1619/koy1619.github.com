@@ -301,7 +301,7 @@ slave <span class="operator"><span class="keyword">start</span>;</span>
 <p>停掉测试环境52，42双方的slave</p>
 <p>线上A备份导入到52的test库，线上B备份导入到42的test库,两个库的input_date框在同一时间,并比对一下条数记录是否一致</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delete from <span class="built_in">test</span> <span class="built_in">where</span> input_date &gt;= <span class="string">'2015-07-22 00:00:00'</span></span><br><span class="line">select count(*) from <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-<p>双方重新 <strong><code>show master status</code></strong>  <strong><code>change master</code></strong></p>
+<p>双方重新 记录<strong><code>show master status</code></strong>的值  并<strong><code>change master</code></strong></p>
 <p>开启双方<code>slave</code>,这个时候双方的数据就有差异，而不会双向同步问题数据咯</p>
 <h2 id="修复数据">修复数据</h2><p>因为52和42是双主模式，具体正确数据以线上A导入到52的数据为准</p>
 <p>在52上面执行下面命令，来检测数据的一致性</p>
