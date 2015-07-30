@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-07-30T03:24:54.000Z</updated>
+  <updated>2015-07-30T08:10:55.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -19,9 +19,12 @@
     <link href="http://linux48.com//archives/434/"/>
     <id>http://linux48.com//archives/434/</id>
     <published>2015-07-29T16:00:00.000Z</published>
-    <updated>2015-07-30T03:24:54.000Z</updated>
+    <updated>2015-07-30T08:10:55.000Z</updated>
     <content type="html"><![CDATA[<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--在`menber`表的`name`字段前面按照条件批量加`jc100`这个字符串</span></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">UPDATE</span> </span><br><span class="line">    <span class="string">`usrdb`</span>.<span class="string">`menber`</span></span><br><span class="line">  <span class="keyword">SET</span></span><br><span class="line">    <span class="string">`name`</span> = <span class="keyword">CONCAT</span>(<span class="string">'jc100'</span>, <span class="string">`name`</span>) </span><br><span class="line">  <span class="keyword">WHERE</span> provice = <span class="string">'678'</span> </span><br><span class="line">    <span class="keyword">AND</span> input_time <span class="keyword">BETWEEN</span> <span class="string">'2015-07-30 00:00:00'</span> </span><br><span class="line">    <span class="keyword">AND</span> <span class="string">'2015-07-30 23:59:59'</span></span></span><br></pre></td></tr></table></figure>
 <p>mysql的<strong><code>CONCAT()</code></strong>函数用于将多个字符串连接成一个字符串，是最重要的mysql函数之一。</p>
+<p>如果要在字段后面添加字符串则是这样写</p>
+<p>```sql</p>
+<p>UPDATE<br>    <code>usrdb</code>.<code>menber</code><br>  SET<br>    <code>name</code> = CONCAT(‘name’, <code>jc100</code>)<br>  WHERE provice = ‘678’<br>    AND input_time BETWEEN ‘2015-07-30 00:00:00’<br>    AND ‘2015-07-30 23:59:59’</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="]]>
