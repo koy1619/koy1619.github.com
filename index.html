@@ -186,6 +186,99 @@
           
           
             
+              <a class="post-title-link" href="/archives/434/">
+                MYSQL在一个字段值前面加字符串
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2015-07-29
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/database/">database</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/434/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/434/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--在`menber`表的`name`字段前面按照条件批量加`jc100`这个字符串</span></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">UPDATE</span> </span><br><span class="line">    <span class="string">`usrdb`</span>.<span class="string">`menber`</span></span><br><span class="line">  <span class="keyword">SET</span></span><br><span class="line">    <span class="string">`name`</span> = <span class="keyword">CONCAT</span>(<span class="string">'jc100'</span>, <span class="string">`name`</span>) </span><br><span class="line">  <span class="keyword">WHERE</span> provice = <span class="string">'678'</span> </span><br><span class="line">    <span class="keyword">AND</span> input_time <span class="keyword">BETWEEN</span> <span class="string">'2015-07-30 00:00:00'</span> </span><br><span class="line">    <span class="keyword">AND</span> <span class="string">'2015-07-30 23:59:59'</span></span></span><br></pre></td></tr></table></figure>
+<p>mysql的<strong><code>CONCAT()</code></strong>函数用于将多个字符串连接成一个字符串，是最重要的mysql函数之一。</p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+
+    
+    
+
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sql语句/"> #sql语句 </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/433/">
                 mysql双主主键冲突排查修复
               </a>
@@ -1069,104 +1162,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/424/">
-                awstats日志分析安装
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2015-03-12
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/monitor/">monitor</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/424/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/424/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>Awstats是一个免费非常简洁而且强大有个性的网站日志分析工具。它可以统计您站点的如下信息：<br>一：访问量，访问次数，页面浏览量，点击数，数据流量等<br>二：精确到每月、每日、每小时的数据<br>三：访问者国家<br>四：访问者IP<br>五：Robots/Spiders的统计<br>六：访客持续时间<br>七：对不同Files type 的统计信息<br>八：Pages-URL的统计<br>九：访客操作系统浏览器等信息<br>十：其它信息（搜索关键字等等）<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/424/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-    
-    <! -- 添加捐赠图标 -->
-
-    
-    
-
-<! -- 添加捐赠图标 -->
-
-
-      
-        <div class="post-tags">
-          
-            <a href="/tags/awstats/"> #awstats </a>
-          
-            <a href="/tags/log/"> #log </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1206,7 +1201,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">83</span>
+              <span class="site-state-item-count">84</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1220,7 +1215,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">88</span>
+              <span class="site-state-item-count">89</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

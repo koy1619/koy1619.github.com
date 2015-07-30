@@ -186,6 +186,104 @@
           
           
             
+              <a class="post-title-link" href="/archives/390/">
+                Git 常用命令整理
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2014-10-18
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/Git/">Git</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/390/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/390/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="初始化配置">初始化配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#配置使用git仓库的人员姓名  </span></span><br><span class="line">git config --global user.name <span class="string">"Your Name Comes Here"</span>  </span><br><span class="line">  </span><br><span class="line"><span class="comment">#配置使用git仓库的人员email  </span></span><br><span class="line">git config --global user.email you@yourdomain.example.com  </span><br><span class="line">  </span><br><span class="line"><span class="comment">#配置到缓存 默认15分钟  </span></span><br><span class="line">git config --global credential.helper cache   </span><br><span class="line">  </span><br><span class="line"><span class="comment">#修改缓存时间  </span></span><br><span class="line">git config --global credential.helper <span class="string">'cache --timeout=3600'</span>    </span><br><span class="line">  </span><br><span class="line">git config --global color.ui <span class="literal">true</span>  </span><br><span class="line">git config --global alias.co checkout  </span><br><span class="line">git config --global alias.ci commit  </span><br><span class="line">git config --global alias.st status  </span><br><span class="line">git config --global alias.br branch  </span><br><span class="line">git config --global core.editor <span class="string">"mate -w"</span>    <span class="comment"># 设置Editor使用textmate  </span></span><br><span class="line">git config -<span class="number">1</span> <span class="comment">#列举所有配置  </span></span><br><span class="line">  </span><br><span class="line"><span class="comment">#用户的git配置文件~/.gitconfig</span></span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/390/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+
+    
+    
+
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/"> #Git </a>
+          
+            <a href="/tags/版本控制/"> #版本控制 </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/391/">
                 Windows平台配置Jekyll环境并与GitHub连接
               </a>
@@ -1098,105 +1196,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/397/">
-                git删除错误提交的commit
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2014-07-27
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/opdevs/">opdevs</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/397/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/397/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>有时候<code>push</code>了错误的信息，为了防止<code>patch</code>的时候错误的<code>log</code>，所以需要清除错误的<code>commit</code></p>
-<pre><code>git <span class="keyword">log</span> --oneline  <span class="comment">#查看提交历史commit</span>
-
-git <span class="keyword">reset</span> --hard &lt;commit_id&gt;  <span class="comment">##彻底回退到某个版本，本地的源码也会变为上一个版本的内容</span>
-
-git <span class="keyword">push</span> origin HEAD --force  <span class="comment">##强制push</span>
-</code></pre>
-        
-      
-    </div>
-
-    <div class="post-footer">
-    
-    <! -- 添加捐赠图标 -->
-
-    
-    
-
-<! -- 添加捐赠图标 -->
-
-
-      
-        <div class="post-tags">
-          
-            <a href="/tags/commit/"> #commit </a>
-          
-            <a href="/tags/git/"> #git </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1236,7 +1235,7 @@ git <span class="keyword">push</span> origin HEAD --force  <span class="comment"
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">83</span>
+              <span class="site-state-item-count">84</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1250,7 +1249,7 @@ git <span class="keyword">push</span> origin HEAD --force  <span class="comment"
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">88</span>
+              <span class="site-state-item-count">89</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
