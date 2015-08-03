@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-08-03T07:39:02.000Z</updated>
+  <updated>2015-08-03T08:29:20.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://linux48.com//archives/435/"/>
     <id>http://linux48.com//archives/435/</id>
     <published>2015-08-02T16:00:00.000Z</published>
-    <updated>2015-08-03T07:39:02.000Z</updated>
+    <updated>2015-08-03T08:29:20.000Z</updated>
     <content type="html"><![CDATA[<p>由于此问题是windows10刚发布，但是cisco单方面并没有及时修复，并且就目前看来是全球的工程师都碰到的一个很紧急棘手的问题</p>
 <p>在查找修复方案的时候;得到好多歪果仁的帮助，特地写了一片洋文，希望可以帮到更多的人，蹩脚的E文如有问题请留言或者邮件我及时勘误，不甚感激！</p>
 <p>Microsoft released last week by the windows10, after the upgrade <code>vpnclient-winx64-msi-5.0.07.0440-k9.exe</code> found this installation as wrong.</p>
@@ -55,9 +55,11 @@
 <p>Value of 64 system to <code>@oem16.inf,%CVirtA_Desc%;Cisco Systems VPN Adapter for 64-bit Windows</code> change <code>Cisco Systems VPN Adapter for 64-bit Windows</code></p>
 <p>And then landed on the dial, success!!<br>Now the problem of the egg pain is completely solved!!!</p>
 <hr>
-<p>bove software download address<br><a href="ftp://files.citrix.com/winfix.exe" target="_blank" rel="external">ftp://files.citrix.com/winfix.exe</a><br><a href="ftp://files.citrix.com/dneupdate64.msi" target="_blank" rel="external">ftp://files.citrix.com/dneupdate64.msi</a><br><a href="http://www.gleescape.com/wp-content/uploads/2014/09/sonic64.zip" target="_blank" rel="external">http://www.gleescape.com/wp-content/uploads/2014/09/sonic64.zip</a></p>
+<p>bove software download address</p>
+<p>for 64bit<br><a href="ftp://files.citrix.com/winfix.exe" target="_blank" rel="external">ftp://files.citrix.com/winfix.exe</a><br><a href="ftp://files.citrix.com/dneupdate64.msi" target="_blank" rel="external">ftp://files.citrix.com/dneupdate64.msi</a><br><a href="http://www.gleescape.com/wp-content/uploads/2014/09/sonic64.zip" target="_blank" rel="external">http://www.gleescape.com/wp-content/uploads/2014/09/sonic64.zip</a></p>
+<p>for 32bit<br><a href="ftp://files.citrix.com/winfix.exe" target="_blank" rel="external">ftp://files.citrix.com/winfix.exe</a><br><a href="ftp://ftpsupport.citrix.com/dneupdate.msi" target="_blank" rel="external">ftp://ftpsupport.citrix.com/dneupdate.msi</a><br><a href="http://www.gleescape.com/wp-content/uploads/2014/09/sonic32.zip" target="_blank" rel="external">http://www.gleescape.com/wp-content/uploads/2014/09/sonic32.zip</a></p>
 <p>Chinese users may download speed will be very slow, I deliberately uploaded to Baidu cloud</p>
-<p><a href="http://pan.baidu.com/s/1ufub0" target="_blank" rel="external">http://pan.baidu.com/s/1ufub0</a></p>
+<p><a href="http://pan.baidu.com/s/1o6vcMz4" target="_blank" rel="external">http://pan.baidu.com/s/1o6vcMz4</a></p>
 <p>Reference website:<br><a href="http://www.itsystemadmin.com/error-27850-unable-to-manage-networking-component/" target="_blank" rel="external">http://www.itsystemadmin.com/error-27850-unable-to-manage-networking-component/</a><br><a href="http://www.gleescape.com/posts/2917" target="_blank" rel="external">http://www.gleescape.com/posts/2917</a><br><a href="http://blog.itpub.net/9697/viewspace-1437036/" target="_blank" rel="external">http://blog.itpub.net/9697/viewspace-1437036/</a></p>
 <p>Thanks them very much!!!</p>
 ]]></content>
