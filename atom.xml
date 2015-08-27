@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-08-27T03:44:14.000Z</updated>
+  <updated>2015-08-27T03:47:51.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <link href="http://linux48.com//archives/436/"/>
     <id>http://linux48.com//archives/436/</id>
     <published>2015-08-26T16:00:00.000Z</published>
-    <updated>2015-08-27T03:44:14.000Z</updated>
-    <content type="html"><![CDATA[<blockquote class="blockquote-center">Write Through和Write Back是阵列卡Cache的两种使用方式，也称为透写和回写。当选用write through方式时，系统的写磁盘操作并不利用阵列卡的Cache，而是直接与磁盘进行数据的交互。而write Back方式则利用阵列Cache作为系统与磁盘间的二传手，系统先将数据交给Cache，然后再由Cache将数据传给磁盘。 在配置阵列的时候，如果不是很清楚的话，默认就可以了，系统会根据磁盘类型进行默认设置。</blockquote>
+    <updated>2015-08-27T03:47:51.000Z</updated>
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">Write Through和Write Back是阵列卡Cache的两种使用方式，也称为透写和回写。当选用write through方式时，系统的写磁盘操作并不利用阵列卡的Cache，而是直接与磁盘进行数据的交互。而write Back方式则利用阵列Cache作为系统与磁盘间的二传手，系统先将数据交给Cache，然后再由Cache将数据传给磁盘。</blockquote>
 
 <a id="more"></a>
 <p>最近在部署马来西亚DBServer的时候发现DB1的硬盘写入速度比DB2要慢好多</p>
@@ -79,7 +79,7 @@
 <p>减少延迟 当关闭内存“Write-Back”功能时就进入了“Write-Through”的模式，这时候主机数据是不会写入内存而直接写入硬盘的。在“Write-Through”模式下，所有的硬盘将与其相关的主机以适当的方式存取数据块，而大多数的时候硬盘处于接受写命令的状态。此时盘阵只要从主机接收到写入的命令，硬盘的读写头就会去寻找读写的位置，并等待硬盘处于可写入的状态，这个等待的现象就是所谓的延迟（Latency Time)，而硬盘经常处于等待写入的状态，增加了延迟的时间，不但缩短硬盘的使用寿命，并且系统也比较耗电。当打开内存的“Write-Back”功能时，从主机写入硬盘的数据先被写在内存里，在内存写满数据时盘阵控制器会将存在于内存的数据大量地写入硬盘。这个内存“Write-Back”的模式将主机写入的命令以写入内存来取代，可以大幅减少硬盘延迟的时间，并且相较于“Write-Through”模式，在大多数的时候提供更佳的写入政策。</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<blockquote class="blockquote-center">Write Through和Write Back是阵列卡Cache的两种使用方式，也称为透写和回写。当选用write through方式时，系统的写磁盘操作并不利用阵列卡的Cache，而是直接与磁盘进行数据的交互。而write Back方式则利用阵列Cache作为系统与磁盘间的二传手，系统先将数据交给Cache，然后再由Cache将数据传给磁盘。 在配置阵列的时候，如果不是很清楚的话，默认就可以了，系统会根据磁盘类型进行默认设置。</blockquote>]]>
+    <![CDATA[<blockquote class="blockquote-center">Write Through和Write Back是阵列卡Cache的两种使用方式，也称为透写和回写。当选用write through方式时，系统的写磁盘操作并不利用阵列卡的Cache，而是直接与磁盘进行数据的交互。而write Back方式则利用阵列Cache作为系统与磁盘间的二传手，系统先将数据交给Cache，然后再由Cache将数据传给磁盘。</blockquote>]]>
     
     </summary>
     
