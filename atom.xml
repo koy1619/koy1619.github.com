@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-08-07T07:39:16.000Z</updated>
+  <updated>2015-08-27T03:44:14.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -13,6 +13,85 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[阵列Cache写机制：Write-through与Write-back]]></title>
+    <link href="http://linux48.com//archives/436/"/>
+    <id>http://linux48.com//archives/436/</id>
+    <published>2015-08-26T16:00:00.000Z</published>
+    <updated>2015-08-27T03:44:14.000Z</updated>
+    <content type="html"><![CDATA[<blockquote class="blockquote-center">Write Through和Write Back是阵列卡Cache的两种使用方式，也称为透写和回写。当选用write through方式时，系统的写磁盘操作并不利用阵列卡的Cache，而是直接与磁盘进行数据的交互。而write Back方式则利用阵列Cache作为系统与磁盘间的二传手，系统先将数据交给Cache，然后再由Cache将数据传给磁盘。 在配置阵列的时候，如果不是很清楚的话，默认就可以了，系统会根据磁盘类型进行默认设置。</blockquote>
+
+<a id="more"></a>
+<p>最近在部署马来西亚DBServer的时候发现DB1的硬盘写入速度比DB2要慢好多</p>
+<p><img src="http://r.loli.io/VnUZ7n.png" alt=""></p>
+<p><img src="http://r.loli.io/Yj6Zbm.png" alt=""></p>
+<p>两台服务器在导入数据的过程中对硬盘测速结果如下</p>
+<p><img src="http://r.loli.io/vYj2ye.png" alt=""></p>
+<p><img src="http://r.loli.io/BniYFf.png" alt=""></p>
+<p>机房给出的解释也是一切正常</p>
+<p>后来老大帮忙推荐MegaCli工具去排查问题所在</p>
+<p>发现DB1的Cache写机制为Write-through而DB2为Write-back</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@DBServer1 MegaCli]<span class="comment"># ./MegaCli64 -Ldinfo -lall -aall</span></span><br><span class="line">                                     </span><br><span class="line"></span><br><span class="line">Adapter <span class="number">0</span> -- Virtual Drive Information:</span><br><span class="line">Virtual Drive: <span class="number">0</span> (Target Id: <span class="number">0</span>)</span><br><span class="line">Name                :</span><br><span class="line">RAID Level          : Primary-<span class="number">5</span>, Secondary-<span class="number">0</span>, RAID Level Qualifier-<span class="number">3</span></span><br><span class="line">Size                : <span class="number">557.75</span> GB</span><br><span class="line">Sector Size         : <span class="number">512</span></span><br><span class="line">Parity Size         : <span class="number">278.875</span> GB</span><br><span class="line">State               : Optimal</span><br><span class="line">Strip Size          : <span class="number">64</span> KB</span><br><span class="line">Number Of Drives    : <span class="number">3</span></span><br><span class="line">Span Depth          : <span class="number">1</span></span><br><span class="line">Default Cache Policy: WriteThrough, ReadAheadNone, Direct, No Write Cache <span class="keyword">if</span> Bad BBU</span><br><span class="line">Current Cache Policy: WriteThrough, ReadAheadNone, Direct, No Write Cache <span class="keyword">if</span> Bad BBU</span><br><span class="line">Default Access Policy: Read/Write</span><br><span class="line">Current Access Policy: Read/Write</span><br><span class="line">Disk Cache Policy   : Disk<span class="string">'s Default</span><br><span class="line">Encryption Type     : None</span><br><span class="line">Is VD Cached: No</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Exit Code: 0x00</span><br><span class="line">[root@DBServer1 MegaCli]#</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@DBServer2 MegaCli]<span class="comment"># ./MegaCli64 -Ldinfo -lall -aall</span></span><br><span class="line">                                     </span><br><span class="line"></span><br><span class="line">Adapter <span class="number">0</span> -- Virtual Drive Information:</span><br><span class="line">Virtual Drive: <span class="number">0</span> (Target Id: <span class="number">0</span>)</span><br><span class="line">Name                :</span><br><span class="line">RAID Level          : Primary-<span class="number">5</span>, Secondary-<span class="number">0</span>, RAID Level Qualifier-<span class="number">3</span></span><br><span class="line">Size                : <span class="number">557.75</span> GB</span><br><span class="line">Sector Size         : <span class="number">512</span></span><br><span class="line">Parity Size         : <span class="number">278.875</span> GB</span><br><span class="line">State               : Optimal</span><br><span class="line">Strip Size          : <span class="number">64</span> KB</span><br><span class="line">Number Of Drives    : <span class="number">3</span></span><br><span class="line">Span Depth          : <span class="number">1</span></span><br><span class="line">Default Cache Policy: WriteBack, ReadAheadNone, Direct, No Write Cache <span class="keyword">if</span> Bad BBU</span><br><span class="line">Current Cache Policy: WriteBack, ReadAheadNone, Direct, No Write Cache <span class="keyword">if</span> Bad BBU</span><br><span class="line">Default Access Policy: Read/Write</span><br><span class="line">Current Access Policy: Read/Write</span><br><span class="line">Disk Cache Policy   : Disk<span class="string">'s Default</span><br><span class="line">Encryption Type     : None</span><br><span class="line">Is VD Cached: No</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Exit Code: 0x00</span><br><span class="line">[root@DBServer2 MegaCli]#</span></span><br></pre></td></tr></table></figure>
+<p><strong>以下为搜到的科普内容</strong></p>
+<p>Cache写机制</p>
+<p>参考 <a href="http://en.wikipedia.org/wiki/Cache#Writing_Policies" target="_blank" rel="external">http://en.wikipedia.org/wiki/Cache#Writing_Policies</a> 上的说明，<strong>Cache</strong>写机制分为<strong>write through</strong>和<strong>write back</strong>两种。</p>
+<blockquote>
+<ul>
+<li><strong>Write-through</strong> Write is done synchronously both to the cache and to the backing store.</li>
+<li><strong>Write-back</strong> (or Write-behind) – Writing is done only to the cache. A modified cache block is written back to the store, just before it is replaced.</li>
+</ul>
+</blockquote>
+<p><strong>Write-through</strong>（直写模式）在数据更新时，同时写入缓存Cache和后端存储。此模式的优点是操作简单；缺点是因为数据修改需要同时写入存储，数据写入速度较慢。</p>
+<p><strong>Write-back</strong>（回写模式）在数据更新时只写入缓存Cache。只在数据被替换出缓存时，被修改的缓存数据才会被写到后端存储。此模式的优点是数据写入速度快，因为不需要写存储；缺点是一旦更新后的数据未被写入存储时出现系统掉电的情况，数据将无法找回。</p>
+<p><strong>Write-misses写缺失的处理方式</strong></p>
+<p>对于写操作，存在写入缓存缺失数据的情况，这时有两种处理方式：</p>
+<blockquote>
+<ul>
+<li><strong>Write allocate</strong> (aka Fetch on write) – Datum at the missed-write location is loaded to cache, followed by a write-hit operation. In this approach, write misses are similar to read-misses.</li>
+<li><strong>No-write allocate</strong> (aka Write-no-allocate, Write around) – Datum at the missed-write location is not loaded to cache, and is written directly to the backing store. In this approach, actually only system reads are being cached.</li>
+</ul>
+</blockquote>
+<p><strong>Write allocate</strong>方式将写入位置读入缓存，然后采用write-hit（缓存命中写入）操作。写缺失操作与读缺失操作类似。</p>
+<p><strong>No-write allocate</strong>方式并不将写入位置读入缓存，而是直接将数据写入存储。这种方式下，只有读操作会被缓存。</p>
+<p>无论是Write-through还是Write-back都可以使用写缺失的两种方式之一。只是通常Write-back采用Write allocate方式，而Write-through采用No-write allocate方式；因为多次写入同一缓存时，Write allocate配合Write-back可以提升性能；而对于Write-through则没有帮助。</p>
+<p><strong>处理流程图</strong></p>
+<p>Write-through模式处理流程：</p>
+<p><img src="http://r.loli.io/y67vYf.png" alt=""></p>
+<p>Write-back模式处理流程：</p>
+<p><img src="http://r.loli.io/2mU3Yb.png" alt=""></p>
+<p>在创建raid阵列可选择Write Policy的策略</p>
+<p><img src="http://r.loli.io/BZRNRf.jpg" alt=""></p>
+<p>在了解了原理之后可以通过<strong>MegaCli</strong>来设置DB1的<strong>Write Policy</strong>为<strong>WriteBack</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@DBServer1 MegaCli]<span class="comment"># ./MegaCli64 -LDSetProp WB -LAll -aAll</span></span><br><span class="line">                                     </span><br><span class="line">Set Write Policy to WriteBack on Adapter <span class="number">0</span>, VD <span class="number">0</span> (target id: <span class="number">0</span>) success</span><br><span class="line"></span><br><span class="line">Exit Code: <span class="number">0</span>x00</span><br><span class="line">[root@DBServer1 MegaCli]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>此时在查看DB1的<strong>Write Policy</strong>已经成功设置为<strong>WriteBack</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@DBServer1 MegaCli]<span class="comment"># ./MegaCli64 -Ldinfo -lall -aall</span></span><br><span class="line">                                     </span><br><span class="line"></span><br><span class="line">Adapter <span class="number">0</span> -- Virtual Drive Information:</span><br><span class="line">Virtual Drive: <span class="number">0</span> (Target Id: <span class="number">0</span>)</span><br><span class="line">Name                :</span><br><span class="line">RAID Level          : Primary-<span class="number">5</span>, Secondary-<span class="number">0</span>, RAID Level Qualifier-<span class="number">3</span></span><br><span class="line">Size                : <span class="number">557.75</span> GB</span><br><span class="line">Sector Size         : <span class="number">512</span></span><br><span class="line">Parity Size         : <span class="number">278.875</span> GB</span><br><span class="line">State               : Optimal</span><br><span class="line">Strip Size          : <span class="number">64</span> KB</span><br><span class="line">Number Of Drives    : <span class="number">3</span></span><br><span class="line">Span Depth          : <span class="number">1</span></span><br><span class="line">Default Cache Policy: WriteBack, ReadAheadNone, Direct, No Write Cache <span class="keyword">if</span> Bad BBU</span><br><span class="line">Current Cache Policy: WriteBack, ReadAheadNone, Direct, No Write Cache <span class="keyword">if</span> Bad BBU</span><br><span class="line">Default Access Policy: Read/Write</span><br><span class="line">Current Access Policy: Read/Write</span><br><span class="line">Disk Cache Policy   : Disk<span class="string">'s Default</span><br><span class="line">Encryption Type     : None</span><br><span class="line">Is VD Cached: No</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Exit Code: 0x00</span><br><span class="line">[root@DBServer1 MegaCli]#</span></span><br></pre></td></tr></table></figure>
+<p>然后在测试DB1的写入速度，看以看到正常了<br><img src="http://r.loli.io/2uYfMf.png" alt=""></p>
+<p>下一篇文章会着重记录一下<strong>MegaCli</strong>工具的安装与使用</p>
+<hr>
+<p>继续科普记录一下</p>
+<p>Write Through和Write Back是阵列卡Cache的两种使用方式，也称为透写和回写。当选用write through方式时，系统的写磁盘操作并不利用阵列卡的Cache，而是直接与磁盘进行数据的交互。而write Back方式则利用阵列Cache作为系统与磁盘间的二传手，系统先将数据交给Cache，然后再由Cache将数据传给磁盘。 在配置阵列的时候，如果不是很清楚的话，默认就可以了，系统会根据磁盘类型进行默认设置。</p>
+<p>生产环境中的配置要根据具体的业务类型及环境进行配置，比如：如果有外置UPS电源，选Write Back，如果没有外置电源，并且对数据安全性要求很高，不要求太高性能，就选Write Through。Write caching 或 write-through write-through意思是写操作根本不使用缓存。数据总是直接写入磁盘。关闭写缓存，可释放缓存用于读操作。（缓存被读写操作共用） Write caching可以提高写操作的性能。数据不是直接被写入磁盘；而是写入缓存。从应用程序的角度看，比等待完成磁盘写入操作要快的多。因此，可以提高写性能。由控制器将缓存内未写入磁盘的数据写入磁盘。表面上看，Write cache方式比write-through方式的读、写性能都要好，但是也要看磁盘访问方式和磁盘负荷了。 write-back（write cache）方式通常在磁盘负荷较轻时速度更快。负荷重时，每当数据被写入缓存后，就要马上再写入磁盘以释放缓存来保存将要写入的新数据，这时如果数据直接写入磁盘，控制器会以更快的速度运行。因此，负荷重时，将数据先写入缓存反而会降低吞吐量。 Starting and stopping cache flushing levels 这两个设置影响控制器如何处理未写入磁盘的缓存内数据，并且只在write-back cache方式下生效。缓存内数据写入磁盘称为flushing.你可以配置Starting and stopping cache flushing levels值，这个值表示占用整个缓存大小的百分比。当缓存内未写入磁盘的数据达到starting flushing value时，控制器开始flushing（由缓存写入磁盘）。当缓存内未写入磁盘数据量低于stop flush value时，flushing过程停止。控制器总是先flush旧的缓存数据。缓存内未写入数据停留超过20秒钟后被自动flushing. 典型的start flushing level是80%。通常情况下，stop flushing level也设置为80%。也就是说，控制器不允许超过80%的缓存用于write-back cache,但还是尽可能保持这一比例。如果你使用此设置，可以在缓存内存更多的未写入数据。这有利于提高写操作的性能，但是要牺牲数据保护。如果要得到数据保护，你可以使用较低的start and stop values。通过对这两个参数的设置，你可以调整缓存的读、写性能。经测试表明，使用接近的start and stop flushing levels时性能较好。如果stop level value远远低于start value，在flushing时会导致磁盘拥塞。 Cache block size 这个值指缓存分配单元大小，可以是4K或16K。选择合适的值，可以明显的改善缓存使用性能。 如果应用程序更多时候访问小于8K的数据，而将cache block size设置为16K，每次访问仅使用一部分cache block。在16K的cache block里总是存储8K或更小的数据，意味着只有50%的缓存容量被有效使用，使性能下降。对于随机I/O和小数据块的传送，4K比较合适。另一方面，如果是连续I/O 并使用大的segment size，最好选择16K。大的cache block size意味着cache block数量少并可缩短缓存消耗延时。另外，对于同样大小的数据，cache block size大一些，需要的缓存数据传送量更小。</p>
+<p>其他相关说明：</p>
+<p>保护内存里的数据</p>
+<p>备援电池的功能是确保万一当主电源故障或突然断电时内存里的数据不流失，因此如何确保备援电池的正常运行就显得格外重要。备援电池在2种情况下，系统视为无法正常运行以保护内存里的数据。一是坏掉的时候，背板的LED灯将亮起红灯。一是电池充电的时候，背板的LED灯将亮起黄灯。备援电池的使用寿命是根据充电的次数及电力释放的周期而变化的，这取决于用户本身对盘阵的使用情况，一般而言我们建议最好在盘阵使用了12个月之后更换备援电池模块（BBU）。备援电池在正常情况下充满电的时候是3.5V，当其电力降至2.7V的时候将自动进入充电状态，此时系统因为保护内存数据不流失的电力消失，自动地将数据的写入切换成“Write-Through”模式；当充完电后，又自动切换回“Write-Back”模式。这个动作是在事件启动装置（Event Trigger）功能来执行的，在安装管理软件的时候，事件启动装置对备援电池的管理初始值是打开的（Enable）。如果你没有更改过初始设置，那么上述的动作就会正常的运行。如果备援电池已经坏掉，不能正常保护内存里的数据时，而事件启动装置对备援电池的管理是设定在关闭的状态下，我们建议你手动将数据写入模式更改为“Write-Through”模式，以免数据写入没有电力保护的内存中而主电源故障或突然断电时，这些正在写入的数据就遗失了。</p>
+<p>减少延迟 当关闭内存“Write-Back”功能时就进入了“Write-Through”的模式，这时候主机数据是不会写入内存而直接写入硬盘的。在“Write-Through”模式下，所有的硬盘将与其相关的主机以适当的方式存取数据块，而大多数的时候硬盘处于接受写命令的状态。此时盘阵只要从主机接收到写入的命令，硬盘的读写头就会去寻找读写的位置，并等待硬盘处于可写入的状态，这个等待的现象就是所谓的延迟（Latency Time)，而硬盘经常处于等待写入的状态，增加了延迟的时间，不但缩短硬盘的使用寿命，并且系统也比较耗电。当打开内存的“Write-Back”功能时，从主机写入硬盘的数据先被写在内存里，在内存写满数据时盘阵控制器会将存在于内存的数据大量地写入硬盘。这个内存“Write-Back”的模式将主机写入的命令以写入内存来取代，可以大幅减少硬盘延迟的时间，并且相较于“Write-Through”模式，在大多数的时候提供更佳的写入政策。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote class="blockquote-center">Write Through和Write Back是阵列卡Cache的两种使用方式，也称为透写和回写。当选用write through方式时，系统的写磁盘操作并不利用阵列卡的Cache，而是直接与磁盘进行数据的交互。而write Back方式则利用阵列Cache作为系统与磁盘间的二传手，系统先将数据交给Cache，然后再由Cache将数据传给磁盘。 在配置阵列的时候，如果不是很清楚的话，默认就可以了，系统会根据磁盘类型进行默认设置。</blockquote>]]>
+    
+    </summary>
+    
+      <category term="RAID" scheme="http://linux48.com/tags/RAID/"/>
+    
+      <category term="cache" scheme="http://linux48.com/tags/cache/"/>
+    
+      <category term="阵列卡" scheme="http://linux48.com/tags/%E9%98%B5%E5%88%97%E5%8D%A1/"/>
+    
+      <category term="windows" scheme="http://linux48.com/categories/windows/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Repair Cisco vpnclient on windows10]]></title>
@@ -938,42 +1017,6 @@ nohup sslocal &amp;
       <category term="mysql" scheme="http://linux48.com/tags/mysql/"/>
     
       <category term="database" scheme="http://linux48.com/categories/database/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[利用SVNListParentPath增加http浏览仓库根目录的功能]]></title>
-    <link href="http://linux48.com//archives/416/"/>
-    <id>http://linux48.com//archives/416/</id>
-    <published>2014-12-16T16:00:00.000Z</published>
-    <updated>2015-05-29T03:23:50.000Z</updated>
-    <content type="html"><![CDATA[<p>使用SVNParentPath的时候，直接访问根目录的时候，总是得到以下错误提示：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">403</span> Forbidden</span><br><span class="line"></span><br><span class="line">Forbidden</span><br><span class="line">You don<span class="string">'t have permission to access / on this server.</span></span><br></pre></td></tr></table></figure>
-<p>下面的办法可以搞定它：<a id="more"></a></p>
-<p>一、首先，Subversion1.3及以后版本支持SVNListParentPath ON，之前的版本只能使用PHP自己做。</p>
-<p>二、Location 设置中最后要加上<strong>/</strong>，应该是<code>&lt;Location /svn/&gt;</code>而不是<code>&lt;Location /svn&gt;</code>否则可能不能访问。</p>
-<p>三、通过“<a href="http://localhost/svn/”" target="_blank" rel="external">http://localhost/svn/”</a> 来访问仓库列表，如果想让“<a href="http://localhost/svn”也起作用的话，需要在" target="_blank" rel="external">http://localhost/svn”也起作用的话，需要在</a>的后面增加重定向的设置：RedirectMatch ^(/svn)$ $1/  ，当然也可以采用RewriteEngine之类的办法。</p>
-<p>四、修改后的httpd.conf的对应部分如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;Location /svn/&gt;</span><br><span class="line">            DAV svn</span><br><span class="line">            SVNListParentPath on</span><br><span class="line">            SVNParentPath /code/svndata</span><br><span class="line">            AuthType Basic</span><br><span class="line">            AuthName <span class="string">"Subversion repository"</span></span><br><span class="line">            AuthUserFile /code/svndata/passwd</span><br><span class="line">            AuthzSVNAccessFile /code/svndata/authz</span><br><span class="line">            Require valid-user</span><br><span class="line">&lt;/Location&gt;</span><br></pre></td></tr></table></figure>
-<p><strong>TIP: SVNPath 与 SVNParentPath区别</strong></p>
-<p>dav_svn.conf 的配置中有 SVNPath 与 SVNParentPath 两个选项.<br>SVNPath用于只有一个项目的情况,此时如果在主目录下面再建新项目,则不能访问.提示没有权限.<br>如果有多个项目的话，此时应该使用SVNParentPath来设置父目录来设置项目的父目录,这样子目录里面可以有多个项目了。然后auth文件里面可以定义子目录的权限，apache的/etc/httpd/conf.d/subversion.conf 配置文件里面设置一个location就可以了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;Location /svn&gt;</span><br><span class="line">DAV svn</span><br><span class="line">SVNParentPath /tmp/svntest/</span><br><span class="line">AuthType Basic</span><br><span class="line">AuthName <span class="string">"Subversion"</span></span><br><span class="line">AuthUserFile /tmp/svntest/passwd</span><br><span class="line">AuthzSVNAccessFile /tmp/svntest/authz</span><br><span class="line">Require valid-user</span><br><span class="line">&lt;/Location&gt;</span><br></pre></td></tr></table></figure>
-<p>以后多个子项目都是用同样的认证文件，访问方式就为 <a href="http://ip/svn/pro1" target="_blank" rel="external">http://ip/svn/pro1</a>    <a href="http://ip/svn/pro2" target="_blank" rel="external">http://ip/svn/pro2</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@svn svntest]<span class="comment"># ls</span></span><br><span class="line">authz  passwd  pro1  pro2</span><br><span class="line">[root@svn svntest]<span class="comment"># pwd</span></span><br><span class="line">/tmp/svntest</span><br></pre></td></tr></table></figure>
-<p>认证文件给子项目赋权。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@svn svntest]<span class="comment"># cat authz </span></span><br><span class="line">[pro1:/]</span><br><span class="line">user1 = rw</span><br><span class="line">[pro2:/]</span><br><span class="line">user1 = rw</span><br></pre></td></tr></table></figure>
-<p>参考<br><a href="http://blog.csdn.net/islq/article/details/666911" target="_blank" rel="external">http://blog.csdn.net/islq/article/details/666911</a><br><a href="http://54im.com/svn/svnpath-svnparentpath.html" target="_blank" rel="external">http://54im.com/svn/svnpath-svnparentpath.html</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>使用SVNParentPath的时候，直接访问根目录的时候，总是得到以下错误提示：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">403</span> Forbidden</span><br><span class="line"></span><br><span class="line">Forbidden</span><br><span class="line">You don<span class="string">'t have permission to access / on this server.</span></span><br></pre></td></tr></table></figure>
-<p>下面的办法可以搞定它：]]>
-    
-    </summary>
-    
-      <category term="svn" scheme="http://linux48.com/tags/svn/"/>
-    
-      <category term="dev" scheme="http://linux48.com/categories/dev/"/>
     
   </entry>
   
