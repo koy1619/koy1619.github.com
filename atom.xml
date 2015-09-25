@@ -193,7 +193,7 @@
     <link href="http://linux48.com//archives/433/"/>
     <id>http://linux48.com//archives/433/</id>
     <published>2015-07-21T16:00:00.000Z</published>
-    <updated>2015-07-30T09:08:27.000Z</updated>
+    <updated>2015-09-25T07:21:59.000Z</updated>
     <content type="html"><![CDATA[<h1 id="背景">背景</h1><p>线上A和B互为主主，A为业务写库，B为读库</p>
 <p>19号下午收到短信报警A的slave delay，果断VPN上去数据库查看到</p>
 <pre><code>Last_SQL_Error: Error <span class="string">'Duplicate entry '</span><span class="number">4960446</span><span class="string">' for key '</span>transaction_id<span class="string">''</span> <span class="keyword">on</span> query. <span class="keyword">Default</span> database
@@ -203,7 +203,7 @@
 <p>经过2次重复的上述操作，同步OK了，然后根据这两条报错的主键ID在两台数据库查询发现都不一样，<br>此时我清楚的知道已经有2条数据差异了，如果不及时处理早晚有一天被掩盖的问题会再次爆发出来。</p>
 <p>后来经过一些列的排查之后知道问题所在了</p>
 <p>因为7月2号晚上在B<code>alter</code>表的时候，导致B锁表，而A还在写入，并且正好在更新服务，导致数据的差异</p>
-<p>查<code>general log</code>得知7月19号在B上插入了两条<code>transaction_id=&quot;4960446&quot;</code>和<code>transaction_id=&quot;4960426&quot;</code>的记录和A的id冲突，导致A同步挂掉</p>
+<p>查<code>general log</code>得知7月19号人为的在B上插入了两条<code>transaction_id=&quot;4960446&quot;</code>和<code>transaction_id=&quot;4960426&quot;</code>的记录和A的id冲突，导致A同步挂掉</p>
 <p>因为A为业务写库，所以现在需要把A上这两条正确的数据插入到B，并在B上面删除错误的。</p>
 <p>由于这个是自增的主键，所以还不好操作，下面大概就测试环境详细说明一下复现方案以及解决办法。</p>
 <hr>
