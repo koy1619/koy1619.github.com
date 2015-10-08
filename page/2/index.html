@@ -186,6 +186,105 @@
           
           
             
+              <a class="post-title-link" href="/archives/427/">
+                MySQL的Grant赋权命令详解
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2015-06-05
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/database/">database</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/427/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/427/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>本文实例，运行于 MySQL 5.0 及以上版本。</p>
+<p>MySQL 赋予用户权限命令的简单格式可概括为：</p>
+<pre><code>grant 权限 <span class="function_start"><span class="keyword">on</span></span> 数据库对象 <span class="keyword">to</span> 用户
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/427/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+
+    
+    
+
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/"> #mysql </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/426/">
                 bitnami版gitlab修改端口
               </a>
@@ -1051,107 +1150,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/417/">
-                如何搭master-slave-slave
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2015-01-05
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/database/">database</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/417/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/417/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>假设现有M, Sa, Sb，Sa是M的slave, 要将Sb做为Sa的slave，M和Sa的binlog保证都是打开的</p>
-<p>在Sa的/etc/my.cnf中[mysqld]组中加入log_slave_updates=1（以保证Sa从M上同步的更新能被记录到binlog中）</p>
-<p>将Sa上的mysqld停掉，并清掉Sa上的binlog(注1）</p>
-<p>将Sa上的数据Copy到Sb上
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/417/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-    
-    <! -- 添加捐赠图标 -->
-
-    
-    
-
-<! -- 添加捐赠图标 -->
-
-
-      
-        <div class="post-tags">
-          
-            <a href="/tags/insert/"> #insert </a>
-          
-            <a href="/tags/mysql/"> #mysql </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1191,7 +1189,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">86</span>
+              <span class="site-state-item-count">87</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>

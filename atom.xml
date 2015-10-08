@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-08-27T03:47:51.000Z</updated>
+  <updated>2015-10-08T08:54:36.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -13,6 +13,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[mysql You cant specify target table]]></title>
+    <link href="http://linux48.com//archives/437/"/>
+    <id>http://linux48.com//archives/437/</id>
+    <published>2015-10-07T16:00:00.000Z</published>
+    <updated>2015-10-08T08:54:36.000Z</updated>
+    <content type="html"><![CDATA[<p>今天在写 mysql 遇到一个比较特殊的问题。<br>mysql 语句如下:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; UPDATE </span><br><span class="line">    -&gt;   pms_project_product </span><br><span class="line">    -&gt; SET</span><br><span class="line">    -&gt;   area_list = </span><br><span class="line">    -&gt;   (SELECT </span><br><span class="line">    -&gt;     area_list </span><br><span class="line">    -&gt;   FROM</span><br><span class="line">    -&gt;     pms_project_product </span><br><span class="line">    -&gt;   WHERE activity_product_id = 48468),</span><br><span class="line">    -&gt;   area_list_name = </span><br><span class="line">    -&gt;   (SELECT </span><br><span class="line">    -&gt;     area_list_name </span><br><span class="line">    -&gt;   FROM</span><br><span class="line">    -&gt;     pms_project_product </span><br><span class="line">    -&gt;   WHERE activity_product_id = 48468) </span><br><span class="line">    -&gt; WHERE activity_product_id = 47098;</span><br><span class="line">ERROR 1093 (HY000): You can't specify target table 'pms_project_product' for update in FROM clause</span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>运行时提出如下提示： <strong> You can’t specify target table ‘pms_project_product’ for update in FROM clause </strong></p>
+<p>运行 set 里面的 select 语句:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span></span><br><span class="line">         area_list</span><br><span class="line">       <span class="keyword">FROM</span></span><br><span class="line">         pms_project_product</span><br><span class="line">       <span class="keyword">WHERE</span> activity_product_id = <span class="number">48468</span></span></span><br></pre></td></tr></table></figure>
+<p>可以正确 select 正确结果。再把结果直接写到 <strong> SET area_list = </strong>里面，改后语句如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">UPDATE</span> </span><br><span class="line">  pms_project_product </span><br><span class="line"><span class="keyword">SET</span></span><br><span class="line">  area_list = (***),</span><br><span class="line">  area_list_name = (***) </span><br><span class="line"><span class="keyword">WHERE</span> activity_product_id = <span class="number">47098</span></span></span><br></pre></td></tr></table></figure>
+<p>再运行可以正确执行更新。</p>
+<p>原因是：mysql中不能这么用。 （等待mysql升级吧）。那串英文错误提示就是说，不能先select出同一表中的某些值，</p>
+<p>再update这个表(在同一语句中)。 于是我打算改用临时表的方案。</p>
+<p>改写后的 sql 如下所示，大家仔细区别一下。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">UPDATE</span> </span><br><span class="line">  pms_project_product </span><br><span class="line"><span class="keyword">SET</span></span><br><span class="line">  area_list = </span><br><span class="line">  (<span class="keyword">SELECT</span> </span><br><span class="line">    tmp1.area_list </span><br><span class="line">  <span class="keyword">FROM</span></span><br><span class="line">    (<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> pms_project_product) tmp1</span><br><span class="line">  <span class="keyword">WHERE</span> tmp1.activity_product_id = <span class="number">48468</span>),</span><br><span class="line">  area_list_name = </span><br><span class="line">  (<span class="keyword">SELECT</span> </span><br><span class="line">    tmp2.area_list_name </span><br><span class="line">  <span class="keyword">FROM</span></span><br><span class="line">    (<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> pms_project_product) tmp2 </span><br><span class="line">  <span class="keyword">WHERE</span> tmp2.activity_product_id = <span class="number">48468</span>) </span><br><span class="line"><span class="keyword">WHERE</span> activity_product_id = <span class="number">47098</span></span></span><br></pre></td></tr></table></figure>
+<p>也就是说将select出的结果再通过临时表在select一遍，这样就规避了错误。注意，这个问题只出现于mysql，mssql和oracle不会出现此问题。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>今天在写 mysql 遇到一个比较特殊的问题。<br>mysql 语句如下:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; UPDATE </span><br><span class="line">    -&gt;   pms_project_product </span><br><span class="line">    -&gt; SET</span><br><span class="line">    -&gt;   area_list = </span><br><span class="line">    -&gt;   (SELECT </span><br><span class="line">    -&gt;     area_list </span><br><span class="line">    -&gt;   FROM</span><br><span class="line">    -&gt;     pms_project_product </span><br><span class="line">    -&gt;   WHERE activity_product_id = 48468),</span><br><span class="line">    -&gt;   area_list_name = </span><br><span class="line">    -&gt;   (SELECT </span><br><span class="line">    -&gt;     area_list_name </span><br><span class="line">    -&gt;   FROM</span><br><span class="line">    -&gt;     pms_project_product </span><br><span class="line">    -&gt;   WHERE activity_product_id = 48468) </span><br><span class="line">    -&gt; WHERE activity_product_id = 47098;</span><br><span class="line">ERROR 1093 (HY000): You can't specify target table 'pms_project_product' for update in FROM clause</span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>]]>
+    
+    </summary>
+    
+      <category term="mysql" scheme="http://linux48.com/tags/mysql/"/>
+    
+      <category term="database" scheme="http://linux48.com/categories/database/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[阵列Cache写机制：Write-through与Write-back]]></title>
@@ -986,37 +1019,6 @@ nohup sslocal &amp;
       <category term="ruby" scheme="http://linux48.com/tags/ruby/"/>
     
       <category term="dev" scheme="http://linux48.com/categories/dev/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[如何搭master-slave-slave]]></title>
-    <link href="http://linux48.com//archives/417/"/>
-    <id>http://linux48.com//archives/417/</id>
-    <published>2015-01-05T16:00:00.000Z</published>
-    <updated>2015-05-29T03:23:50.000Z</updated>
-    <content type="html"><![CDATA[<p>假设现有M, Sa, Sb，Sa是M的slave, 要将Sb做为Sa的slave，M和Sa的binlog保证都是打开的</p>
-<p>在Sa的/etc/my.cnf中[mysqld]组中加入log_slave_updates=1（以保证Sa从M上同步的更新能被记录到binlog中）</p>
-<p>将Sa上的mysqld停掉，并清掉Sa上的binlog(注1）</p>
-<p>将Sa上的数据Copy到Sb上<a id="more"></a></p>
-<p>启动Sa</p>
-<p>启动Sb, change master to master_host=”Sa的ip”;</p>
-<p>在Sa和Sb上start slave</p>
-<p>注1：如果Sa上没有清掉binlog，第6步须: change master to master_host=”Sa的ip”, master_log_file=”Sa上最新的binlog”</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>假设现有M, Sa, Sb，Sa是M的slave, 要将Sb做为Sa的slave，M和Sa的binlog保证都是打开的</p>
-<p>在Sa的/etc/my.cnf中[mysqld]组中加入log_slave_updates=1（以保证Sa从M上同步的更新能被记录到binlog中）</p>
-<p>将Sa上的mysqld停掉，并清掉Sa上的binlog(注1）</p>
-<p>将Sa上的数据Copy到Sb上]]>
-    
-    </summary>
-    
-      <category term="insert" scheme="http://linux48.com/tags/insert/"/>
-    
-      <category term="mysql" scheme="http://linux48.com/tags/mysql/"/>
-    
-      <category term="database" scheme="http://linux48.com/categories/database/"/>
     
   </entry>
   
