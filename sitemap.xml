@@ -2,6 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     
+    
+    
+    
+    
+    
+    
+    
+    
   <url>
     <loc>http://linux48.com//archives/437/</loc>
     <lastmod>2015-10-08T08:57:42.000Z</lastmod>
@@ -1158,13 +1166,17 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/418/</loc>
+    <loc>http://linux48.com//archives/412/</loc>
     <lastmod>2015-05-29T03:23:50.000Z</lastmod>
     <data>
         <display>
-        <title>ruby环境sass编译中文出现 Invalid GBK character</title>
-        <pubTime>2015-01-06T16:00:00.000Z</pubTime>
+        <title>ruby on rails 报错解决</title>
+        <pubTime>2014-11-23T16:00:00.000Z</pubTime>
         
+        <tag>nodejs </tag>
+         
+        <tag>rails </tag>
+         
         <tag>ruby </tag>
          
          
@@ -1200,19 +1212,21 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/400/</loc>
+    <loc>http://linux48.com//archives/424/</loc>
     <lastmod>2015-05-29T03:23:50.000Z</lastmod>
     <data>
         <display>
-        <title>Windows下MySQL无法区分大小写解决方案</title>
-        <pubTime>2014-07-30T16:00:00.000Z</pubTime>
+        <title>awstats日志分析安装</title>
+        <pubTime>2015-03-12T16:00:00.000Z</pubTime>
         
-        <tag>mysql </tag>
+        <tag>awstats </tag>
+         
+        <tag>log </tag>
          
          
            
              
-              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
+              <breadCrumb title="monitor" url="http://linux48.com/categories/monitor/"/>
           
         </display>
     </data>
@@ -1220,23 +1234,21 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/410/</loc>
+    <loc>http://linux48.com//archives/391/</loc>
     <lastmod>2015-05-29T03:23:50.000Z</lastmod>
     <data>
         <display>
-        <title>Crontab导致Linux的线程数枯竭</title>
-        <pubTime>2014-11-11T16:00:00.000Z</pubTime>
+        <title>Windows平台配置Jekyll环境并与GitHub连接</title>
+        <pubTime>2014-10-17T16:00:00.000Z</pubTime>
         
-        <tag>crontab </tag>
+        <tag>GitHub </tag>
          
-        <tag>pstree </tag>
-         
-        <tag>sendmail </tag>
+        <tag>Jekyll </tag>
          
          
            
              
-              <breadCrumb title="os" url="http://linux48.com/categories/os/"/>
+              <breadCrumb title="Jekyll" url="http://linux48.com/categories/Jekyll/"/>
           
         </display>
     </data>
@@ -1244,80 +1256,16 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/411/</loc>
+    <loc>http://linux48.com//archives/403/</loc>
     <lastmod>2015-05-29T03:23:50.000Z</lastmod>
     <data>
         <display>
-        <title>AWK统计随笔记录</title>
-        <pubTime>2014-11-17T16:00:00.000Z</pubTime>
+        <title>Sublime Text 3设置python编译支持环境设置</title>
+        <pubTime>2014-08-12T16:00:00.000Z</pubTime>
         
-        <tag>awk </tag>
+        <tag>Sublime </tag>
          
-         
-           
-             
-              <breadCrumb title="system" url="http://linux48.com/categories/system/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/412/</loc>
-    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
-    <data>
-        <display>
-        <title>ruby on rails 报错解决</title>
-        <pubTime>2014-11-23T16:00:00.000Z</pubTime>
-        
-        <tag>nodejs </tag>
-         
-        <tag>rails </tag>
-         
-        <tag>ruby </tag>
-         
-         
-           
-             
-              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/413/</loc>
-    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
-    <data>
-        <display>
-        <title>linux sar命令</title>
-        <pubTime>2014-12-01T16:00:00.000Z</pubTime>
-        
-        <tag>sar </tag>
-         
-         
-           
-             
-              <breadCrumb title="command" url="http://linux48.com/categories/command/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/415/</loc>
-    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
-    <data>
-        <display>
-        <title>Chrome 浏览器加载 css Failed to load resource</title>
-        <pubTime>2014-12-14T16:00:00.000Z</pubTime>
-        
-        <tag>chrome </tag>
-         
-        <tag>css </tag>
+        <tag>python </tag>
          
          
            
@@ -1352,19 +1300,19 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/416/</loc>
+    <loc>http://linux48.com//archives/413/</loc>
     <lastmod>2015-05-29T03:23:50.000Z</lastmod>
     <data>
         <display>
-        <title>利用SVNListParentPath增加http浏览仓库根目录的功能</title>
-        <pubTime>2014-12-16T16:00:00.000Z</pubTime>
+        <title>linux sar命令</title>
+        <pubTime>2014-12-01T16:00:00.000Z</pubTime>
         
-        <tag>svn </tag>
+        <tag>sar </tag>
          
          
            
              
-              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
+              <breadCrumb title="command" url="http://linux48.com/categories/command/"/>
           
         </display>
     </data>
@@ -1372,18 +1320,124 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/419/</loc>
+    <loc>http://linux48.com//archives/389/</loc>
     <lastmod>2015-05-29T03:23:50.000Z</lastmod>
     <data>
         <display>
-        <title>linux下删除乱码文件</title>
-        <pubTime>2015-01-08T16:00:00.000Z</pubTime>
+        <title>Jekyll目录结构与变量</title>
+        <pubTime>2014-10-18T16:00:00.000Z</pubTime>
         
-        <tag>os </tag>
+        <tag>Jekyll </tag>
          
-        <tag>rm </tag>
          
-        <tag>乱码 </tag>
+           
+             
+              <breadCrumb title="Jekyll" url="http://linux48.com/categories/Jekyll/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com//archives/390/</loc>
+    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>Git 常用命令整理</title>
+        <pubTime>2014-10-18T16:00:00.000Z</pubTime>
+        
+        <tag>Git </tag>
+         
+        <tag>版本控制 </tag>
+         
+         
+           
+             
+              <breadCrumb title="Git" url="http://linux48.com/categories/Git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com//archives/406/</loc>
+    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>redis 写磁盘出错Cannot allocate memory</title>
+        <pubTime>2014-11-09T16:00:00.000Z</pubTime>
+        
+        <tag>nosql </tag>
+         
+        <tag>redis </tag>
+         
+         
+           
+             
+              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com//archives/411/</loc>
+    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>AWK统计随笔记录</title>
+        <pubTime>2014-11-17T16:00:00.000Z</pubTime>
+        
+        <tag>awk </tag>
+         
+         
+           
+             
+              <breadCrumb title="system" url="http://linux48.com/categories/system/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com//archives/407/</loc>
+    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>用二句Shell命令实现FTP批量上传文件夹</title>
+        <pubTime>2014-11-10T16:00:00.000Z</pubTime>
+        
+        <tag>ftp </tag>
+         
+        <tag>shell </tag>
+         
+         
+           
+             
+              <breadCrumb title="system" url="http://linux48.com/categories/system/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com//archives/410/</loc>
+    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>Crontab导致Linux的线程数枯竭</title>
+        <pubTime>2014-11-11T16:00:00.000Z</pubTime>
+        
+        <tag>crontab </tag>
+         
+        <tag>pstree </tag>
+         
+        <tag>sendmail </tag>
          
          
            
@@ -1418,166 +1472,12 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/420/</loc>
+    <loc>http://linux48.com//archives/400/</loc>
     <lastmod>2015-05-29T03:23:50.000Z</lastmod>
     <data>
         <display>
-        <title>shadowsocks的python和nodejs版搭建</title>
-        <pubTime>2015-01-20T16:00:00.000Z</pubTime>
-        
-        <tag>nodejs </tag>
-         
-        <tag>python </tag>
-         
-        <tag>shadowsocks </tag>
-         
-         
-           
-             
-              <breadCrumb title="shadowsocks" url="http://linux48.com/categories/shadowsocks/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/407/</loc>
-    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
-    <data>
-        <display>
-        <title>用二句Shell命令实现FTP批量上传文件夹</title>
-        <pubTime>2014-11-10T16:00:00.000Z</pubTime>
-        
-        <tag>ftp </tag>
-         
-        <tag>shell </tag>
-         
-         
-           
-             
-              <breadCrumb title="system" url="http://linux48.com/categories/system/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/422/</loc>
-    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
-    <data>
-        <display>
-        <title>redis简易安装</title>
-        <pubTime>2015-03-04T16:00:00.000Z</pubTime>
-        
-        <tag>nosql </tag>
-         
-        <tag>redis </tag>
-         
-         
-           
-             
-              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/417/</loc>
-    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
-    <data>
-        <display>
-        <title>如何搭master-slave-slave</title>
-        <pubTime>2015-01-05T16:00:00.000Z</pubTime>
-        
-        <tag>insert </tag>
-         
-        <tag>mysql </tag>
-         
-         
-           
-             
-              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/406/</loc>
-    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
-    <data>
-        <display>
-        <title>redis 写磁盘出错Cannot allocate memory</title>
-        <pubTime>2014-11-09T16:00:00.000Z</pubTime>
-        
-        <tag>nosql </tag>
-         
-        <tag>redis </tag>
-         
-         
-           
-             
-              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/390/</loc>
-    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
-    <data>
-        <display>
-        <title>Git 常用命令整理</title>
-        <pubTime>2014-10-18T16:00:00.000Z</pubTime>
-        
-        <tag>Git </tag>
-         
-        <tag>版本控制 </tag>
-         
-         
-           
-             
-              <breadCrumb title="Git" url="http://linux48.com/categories/Git/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/389/</loc>
-    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
-    <data>
-        <display>
-        <title>Jekyll目录结构与变量</title>
-        <pubTime>2014-10-18T16:00:00.000Z</pubTime>
-        
-        <tag>Jekyll </tag>
-         
-         
-           
-             
-              <breadCrumb title="Jekyll" url="http://linux48.com/categories/Jekyll/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/24/</loc>
-    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
-    <data>
-        <display>
-        <title>Mysql主从服务设置</title>
-        <pubTime>2012-04-15T16:00:00.000Z</pubTime>
+        <title>Windows下MySQL无法区分大小写解决方案</title>
+        <pubTime>2014-07-30T16:00:00.000Z</pubTime>
         
         <tag>mysql </tag>
          
@@ -1585,70 +1485,6 @@
            
              
               <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/391/</loc>
-    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
-    <data>
-        <display>
-        <title>Windows平台配置Jekyll环境并与GitHub连接</title>
-        <pubTime>2014-10-17T16:00:00.000Z</pubTime>
-        
-        <tag>GitHub </tag>
-         
-        <tag>Jekyll </tag>
-         
-         
-           
-             
-              <breadCrumb title="Jekyll" url="http://linux48.com/categories/Jekyll/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/424/</loc>
-    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
-    <data>
-        <display>
-        <title>awstats日志分析安装</title>
-        <pubTime>2015-03-12T16:00:00.000Z</pubTime>
-        
-        <tag>awstats </tag>
-         
-        <tag>log </tag>
-         
-         
-           
-             
-              <breadCrumb title="monitor" url="http://linux48.com/categories/monitor/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/404/</loc>
-    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
-    <data>
-        <display>
-        <title>将sublime text添加到右键菜单中</title>
-        <pubTime>2014-08-17T16:00:00.000Z</pubTime>
-        
-        <tag>sublime </tag>
-         
-         
-           
-             
-              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
           
         </display>
     </data>
@@ -1766,16 +1602,14 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/403/</loc>
+    <loc>http://linux48.com//archives/404/</loc>
     <lastmod>2015-05-29T03:23:50.000Z</lastmod>
     <data>
         <display>
-        <title>Sublime Text 3设置python编译支持环境设置</title>
-        <pubTime>2014-08-12T16:00:00.000Z</pubTime>
+        <title>将sublime text添加到右键菜单中</title>
+        <pubTime>2014-08-17T16:00:00.000Z</pubTime>
         
-        <tag>Sublime </tag>
-         
-        <tag>python </tag>
+        <tag>sublime </tag>
          
          
            
@@ -1810,6 +1644,28 @@
 
     
   <url>
+    <loc>http://linux48.com//archives/415/</loc>
+    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>Chrome 浏览器加载 css Failed to load resource</title>
+        <pubTime>2014-12-14T16:00:00.000Z</pubTime>
+        
+        <tag>chrome </tag>
+         
+        <tag>css </tag>
+         
+         
+           
+             
+              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://linux48.com//archives/423/</loc>
     <lastmod>2015-05-29T03:23:50.000Z</lastmod>
     <data>
@@ -1825,6 +1681,158 @@
            
              
               <breadCrumb title="路由交换" url="http://linux48.com/categories/%E8%B7%AF%E7%94%B1%E4%BA%A4%E6%8D%A2/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com//archives/416/</loc>
+    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>利用SVNListParentPath增加http浏览仓库根目录的功能</title>
+        <pubTime>2014-12-16T16:00:00.000Z</pubTime>
+        
+        <tag>svn </tag>
+         
+         
+           
+             
+              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com//archives/422/</loc>
+    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>redis简易安装</title>
+        <pubTime>2015-03-04T16:00:00.000Z</pubTime>
+        
+        <tag>nosql </tag>
+         
+        <tag>redis </tag>
+         
+         
+           
+             
+              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com//archives/419/</loc>
+    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>linux下删除乱码文件</title>
+        <pubTime>2015-01-08T16:00:00.000Z</pubTime>
+        
+        <tag>os </tag>
+         
+        <tag>rm </tag>
+         
+        <tag>乱码 </tag>
+         
+         
+           
+             
+              <breadCrumb title="os" url="http://linux48.com/categories/os/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com//archives/417/</loc>
+    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>如何搭master-slave-slave</title>
+        <pubTime>2015-01-05T16:00:00.000Z</pubTime>
+        
+        <tag>insert </tag>
+         
+        <tag>mysql </tag>
+         
+         
+           
+             
+              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com//archives/24/</loc>
+    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>Mysql主从服务设置</title>
+        <pubTime>2012-04-15T16:00:00.000Z</pubTime>
+        
+        <tag>mysql </tag>
+         
+         
+           
+             
+              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com//archives/418/</loc>
+    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>ruby环境sass编译中文出现 Invalid GBK character</title>
+        <pubTime>2015-01-06T16:00:00.000Z</pubTime>
+        
+        <tag>ruby </tag>
+         
+         
+           
+             
+              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com//archives/420/</loc>
+    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>shadowsocks的python和nodejs版搭建</title>
+        <pubTime>2015-01-20T16:00:00.000Z</pubTime>
+        
+        <tag>nodejs </tag>
+         
+        <tag>python </tag>
+         
+        <tag>shadowsocks </tag>
+         
+         
+           
+             
+              <breadCrumb title="shadowsocks" url="http://linux48.com/categories/shadowsocks/"/>
           
         </display>
     </data>
