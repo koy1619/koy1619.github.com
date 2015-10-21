@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-10-08T08:57:42.000Z</updated>
+  <updated>2015-10-21T09:15:45.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -13,6 +13,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[mysql取每隔一小时数据]]></title>
+    <link href="http://linux48.com//archives/438/"/>
+    <id>http://linux48.com//archives/438/</id>
+    <published>2015-10-20T16:00:00.000Z</published>
+    <updated>2015-10-21T09:15:45.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> </span><br><span class="line">    <span class="keyword">HOUR</span>(<span class="string">`input_time`</span>) <span class="keyword">AS</span> <span class="keyword">HOUR</span>,</span><br><span class="line">    <span class="keyword">COUNT</span>(<span class="number">1</span>) <span class="keyword">AS</span> <span class="keyword">COUNT</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    <span class="string">`ebuyecoupon_third_code`</span> </span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">DATE_FORMAT</span>(<span class="string">`input_time`</span>, <span class="string">'%Y-%m-%d'</span>) = <span class="string">'2015-10-21'</span> </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">HOUR</span>(<span class="string">`input_time`</span>) ;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="]]>
+    </summary>
+    
+      <category term="mysql" scheme="http://linux48.com/tags/mysql/"/>
+    
+      <category term="database" scheme="http://linux48.com/categories/database/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[mysql You cant specify target table]]></title>
@@ -983,42 +1001,6 @@ nohup sslocal &amp;
       <category term="乱码" scheme="http://linux48.com/tags/%E4%B9%B1%E7%A0%81/"/>
     
       <category term="os" scheme="http://linux48.com/categories/os/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[ruby环境sass编译中文出现 Invalid GBK character]]></title>
-    <link href="http://linux48.com//archives/418/"/>
-    <id>http://linux48.com//archives/418/</id>
-    <published>2015-01-06T16:00:00.000Z</published>
-    <updated>2015-05-29T03:23:50.000Z</updated>
-    <content type="html"><![CDATA[<p>sass文件编译时候使用ruby环境，无论是界面化的koala工具还是命令行模式的都无法通过，真是令人烦恼。</p>
-<p>容易出现中文注释时候无法编译通过，或者出现乱码，找了几天的解决方法终于解决了。</p>
-<p>这个问题的奇葩之处在于在xp环境中没有任何问题，只是在windows7环境中才出现的这个。</p>
-<p>sass编译时候出现如下错误的解决方法：</p>
-<pre><code>Syntax <span class="keyword">error</span>: Invalid GBK <span class="property">character</span> <span class="string">"\xE5"</span>
-</code></pre><p>解决办法：</p>
-<p>找到ruby的安装目录，里面也有sass模块，<a id="more"></a>如这个路径：</p>
-<pre><code>C:<span class="command">\Ruby</span>21-x64<span class="command">\lib</span><span class="command">\ruby</span><span class="command">\gems</span>\2.1.0<span class="command">\gems</span><span class="command">\sass</span>-3.4.8<span class="command">\lib</span><span class="command">\sass</span>.rb
-</code></pre><p>在这个文件里面engine.rb，添加一行代码（同方法1）</p>
-<pre><code>Encoding<span class="class">.default_external</span> = Encoding.<span class="function"><span class="title">find</span><span class="params">(<span class="string">'utf-8'</span>)</span></span>
-</code></pre><p>放在所有的require XXXX 之后即可。</p>
-<p>参考： <a href="https://github.com/imathis/octopress/issues/232" target="_blank" rel="external">https://github.com/imathis/octopress/issues/232</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>sass文件编译时候使用ruby环境，无论是界面化的koala工具还是命令行模式的都无法通过，真是令人烦恼。</p>
-<p>容易出现中文注释时候无法编译通过，或者出现乱码，找了几天的解决方法终于解决了。</p>
-<p>这个问题的奇葩之处在于在xp环境中没有任何问题，只是在windows7环境中才出现的这个。</p>
-<p>sass编译时候出现如下错误的解决方法：</p>
-<pre><code>Syntax <span class="keyword">error</span>: Invalid GBK <span class="property">character</span> <span class="string">"\xE5"</span>
-</code></pre><p>解决办法：</p>
-<p>找到ruby的安装目录，里面也有sass模块，]]>
-    
-    </summary>
-    
-      <category term="ruby" scheme="http://linux48.com/tags/ruby/"/>
-    
-      <category term="dev" scheme="http://linux48.com/categories/dev/"/>
     
   </entry>
   
