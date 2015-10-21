@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-10-21T09:15:45.000Z</updated>
+  <updated>2015-10-21T09:17:05.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <link href="http://linux48.com//archives/438/"/>
     <id>http://linux48.com//archives/438/</id>
     <published>2015-10-20T16:00:00.000Z</published>
-    <updated>2015-10-21T09:15:45.000Z</updated>
-    <content type="html"><![CDATA[<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> </span><br><span class="line">    <span class="keyword">HOUR</span>(<span class="string">`input_time`</span>) <span class="keyword">AS</span> <span class="keyword">HOUR</span>,</span><br><span class="line">    <span class="keyword">COUNT</span>(<span class="number">1</span>) <span class="keyword">AS</span> <span class="keyword">COUNT</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    <span class="string">`ebuyecoupon_third_code`</span> </span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">DATE_FORMAT</span>(<span class="string">`input_time`</span>, <span class="string">'%Y-%m-%d'</span>) = <span class="string">'2015-10-21'</span> </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">HOUR</span>(<span class="string">`input_time`</span>) ;</span></span><br></pre></td></tr></table></figure>
+    <updated>2015-10-21T09:17:05.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> </span><br><span class="line">    <span class="keyword">HOUR</span>(<span class="string">`input_time`</span>) <span class="keyword">AS</span> <span class="keyword">HOUR</span>,</span><br><span class="line">    <span class="keyword">COUNT</span>(<span class="number">1</span>) <span class="keyword">AS</span> <span class="keyword">COUNT</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    <span class="string">`table_name`</span> </span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">DATE_FORMAT</span>(<span class="string">`input_time`</span>, <span class="string">'%Y-%m-%d'</span>) = <span class="string">'2015-10-21'</span> </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">HOUR</span>(<span class="string">`input_time`</span>) ;</span></span><br></pre></td></tr></table></figure>
 ]]></content>
     <summary type="html">
     <![CDATA[<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="]]>
