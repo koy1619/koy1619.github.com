@@ -3,12 +3,12 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/439/</loc>
-    <lastmod>2015-10-27T07:29:30.000Z</lastmod>
+    <loc>http://linux48.com//archives/438/</loc>
+    <lastmod>2015-10-27T07:32:20.000Z</lastmod>
     <data>
         <display>
-        <title>mysql求平均值、最小和总值</title>
-        <pubTime>2015-10-26T16:00:00.000Z</pubTime>
+        <title>mysql取每隔一小时数据</title>
+        <pubTime>2015-10-20T16:00:00.000Z</pubTime>
         
         <tag>mysql </tag>
          
@@ -23,12 +23,12 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/438/</loc>
-    <lastmod>2015-10-21T09:17:05.000Z</lastmod>
+    <loc>http://linux48.com//archives/439/</loc>
+    <lastmod>2015-10-27T07:29:30.000Z</lastmod>
     <data>
         <display>
-        <title>mysql取每隔一小时数据</title>
-        <pubTime>2015-10-20T16:00:00.000Z</pubTime>
+        <title>mysql求平均值、最小和总值</title>
+        <pubTime>2015-10-26T16:00:00.000Z</pubTime>
         
         <tag>mysql </tag>
          
