@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-10-21T09:17:05.000Z</updated>
+  <updated>2015-10-27T07:27:42.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -13,6 +13,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[mysql求平均值、最小和总值]]></title>
+    <link href="http://linux48.com//archives/439/"/>
+    <id>http://linux48.com//archives/439/</id>
+    <published>2015-10-26T16:00:00.000Z</published>
+    <updated>2015-10-27T07:27:42.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE sales_rep(</span><br><span class="line">    -&gt;   employee_number INT,</span><br><span class="line">    -&gt;   surname VARCHAR(40),</span><br><span class="line">    -&gt;   first_name VARCHAR(30),</span><br><span class="line">    -&gt;   commission TINYINT</span><br><span class="line">    -&gt; );</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; INSERT INTO sales_rep values(4,'Rive','Mongane',10);</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; INSERT INTO sales_rep values(5,'Smith','Mike',12);</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT AVG(commission) FROM sales_rep;</span><br><span class="line">+-----------------+</span><br><span class="line">| AVG(commission) |</span><br><span class="line">+-----------------+</span><br><span class="line">|         11.0000 |</span><br><span class="line">+-----------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line">--//以上是AVG()函数的用法，可以换成MIN()、SUM()函数，用来求最小值，求和。</span><br><span class="line"></span><br><span class="line">mysql&gt; drop table sales_rep;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line]]>
+    </summary>
+    
+      <category term="mysql" scheme="http://linux48.com/tags/mysql/"/>
+    
+      <category term="database" scheme="http://linux48.com/categories/database/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[mysql取每隔一小时数据]]></title>
@@ -961,46 +979,6 @@ nohup sslocal &amp;
       <category term="shadowsocks" scheme="http://linux48.com/tags/shadowsocks/"/>
     
       <category term="shadowsocks" scheme="http://linux48.com/categories/shadowsocks/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[linux下删除乱码文件]]></title>
-    <link href="http://linux48.com//archives/419/"/>
-    <id>http://linux48.com//archives/419/</id>
-    <published>2015-01-08T16:00:00.000Z</published>
-    <updated>2015-05-29T03:23:50.000Z</updated>
-    <content type="html"><![CDATA[<p>根据inode 来修改或删除linux 下乱码的文件<a id="more"></a></p>
-<ol>
-<li><p>创建测试文件：<br> touch 1?.txt</p>
-</li>
-<li><p>查询inode ：</p>
-</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[oracle@<span class="built_in">test</span>]$ ll -i</span><br><span class="line">total <span class="number">14694452</span></span><br><span class="line"><span class="number">17956913</span> -rw-r--r-- <span class="number">1</span> oracle oinstall          <span class="number">0</span> Jan <span class="number">18</span> <span class="number">20</span>:<span class="number">24</span> <span class="number">1</span>?.txt</span><br></pre></td></tr></table></figure>
-<ol>
-<li>修改测试文件名：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -inum <span class="number">17956913</span> -exec mv &#123;&#125; file.txt \;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>检查修改结果</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[oracle@<span class="built_in">test</span>]$ ll</span><br><span class="line">total <span class="number">14694452</span></span><br><span class="line">....</span><br><span class="line">-rw-r--r-- <span class="number">1</span> oracle oinstall          <span class="number">0</span> Jan <span class="number">18</span> <span class="number">20</span>:<span class="number">24</span> file.txt</span><br></pre></td></tr></table></figure>
-<p>记录：删除乱码的文件可使用</p>
-<pre><code>find . -inum <span class="number">17956913</span> -exec rm {} \<span class="comment">;</span>
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<p>根据inode 来修改或删除linux 下乱码的文件]]>
-    
-    </summary>
-    
-      <category term="os" scheme="http://linux48.com/tags/os/"/>
-    
-      <category term="rm" scheme="http://linux48.com/tags/rm/"/>
-    
-      <category term="乱码" scheme="http://linux48.com/tags/%E4%B9%B1%E7%A0%81/"/>
-    
-      <category term="os" scheme="http://linux48.com/categories/os/"/>
     
   </entry>
   
