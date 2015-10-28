@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-10-27T07:29:30.000Z</updated>
+  <updated>2015-10-28T03:01:01.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -13,6 +13,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[zabbix的agent端安装配置]]></title>
+    <link href="http://linux48.com//archives/440/"/>
+    <id>http://linux48.com//archives/440/</id>
+    <published>2015-10-27T16:00:00.000Z</published>
+    <updated>2015-10-28T03:01:01.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="下载zabbix">下载zabbix</h2><h2 id="安装zabbix所需的组件">安装zabbix所需的组件</h2><p><code>yum -y install curl curl-devel net-snmp net-snmp-devel perl-DBI</code></p>
+<h2 id="创建用户账号">创建用户账号</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">groupadd zabbix</span><br><span class="line">useradd -g zabbix zabbix</span><br><span class="line">usermod <span class="operator">-s</span> /sbin/nologin zabbix</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="编译安装(agent)">编译安装(agent)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf zabbix-<span class="number">2.4</span>.<span class="number">5</span>.tar.gz </span><br><span class="line"><span class="built_in">cd</span> zabbix-<span class="number">2.4</span>.<span class="number">5</span></span><br><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/zabbix-agent --enable-agent  --enable-ipv6 --with-net-snmp --with-libcurl</span><br></pre></td></tr></table></figure>
+<h2 id="编辑agent端配置文件">编辑agent端配置文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@Server2 ~]<span class="comment"># cat /usr/local/zabbix-agent/etc/zabbix_agentd.conf |grep -v "#"</span></span><br><span class="line">LogFile=/tmp/zabbix_agentd.log</span><br><span class="line">Server=<span class="number">10.10</span>.<span class="number">3.225</span></span><br><span class="line">ServerActive=<span class="number">10.10</span>.<span class="number">3.225</span>:<span class="number">10051</span></span><br><span class="line">Hostname=<span class="number">10.128</span>.<span class="number">0.81</span></span><br></pre></td></tr></table></figure>
+<h2 id="启动守护进程agent">启动守护进程agent</h2><p><code>/usr/local/zabbix-agent/sbin/zabbix_agentd</code></p>
+<p>server启动端口为10051</p>
+<p>iptables放行zabbix-server的10051端口</p>
+<p><code>iptables -A INPUT -p tcp  --dport 10051 -j ACCEPT</code></p>
+<p>注：重启服务可直接kill掉zabbix进程再重新按照以上方法启动</p>
+<p>或配置开机启动脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> zabbix-<span class="number">2.4</span>.<span class="number">5</span></span><br><span class="line">cp misc/init.d/tru64/zabbix_agentd   /etc/init.d/zabbix_agentd</span><br><span class="line">chmod <span class="number">755</span> /etc/init.d/zabbix_agentd</span><br><span class="line">vi /etc/init.d/zabbix_agentd</span><br><span class="line">在文件头部的<span class="comment">#!/bin/sh行下分别添加如下两行：</span></span><br><span class="line">--------------</span><br><span class="line"><span class="comment">#chkconfig: 35 95 95</span></span><br><span class="line"><span class="comment">#description:zabbix server</span></span><br><span class="line">--------------</span><br><span class="line">将DAEMON后面的参数改成你自定义的路径</span><br><span class="line">DAEMON=/usr/<span class="built_in">local</span>/zabbix-agent/sbin/zabbix_agentd</span><br></pre></td></tr></table></figure>
+<p>加入开机启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --add zabbix_agentd  </span><br><span class="line">chkconfig zabbix_agentd on</span><br></pre></td></tr></table></figure>
+<p>重启服务：</p>
+<p><code>service zabbix_agentd restart</code></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="下载zabbix">下载zabbix</h2><h2 id="安装zabbix所需的组件">安装zabbix所需的组件</h2><p><code>yum -y install curl curl-devel net-snmp net-snmp-devel perl-DBI</code></p>
+<h2 id="创建用户账号">创建用户账号</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">groupadd zabbix</span><br><span class="line">useradd -g zabbix zabbix</span><br><span class="line">usermod <span class="operator">-s</span> /sbin/nologin zabbix</span><br></pre></td></tr></table></figure>]]>
+    
+    </summary>
+    
+      <category term="zabbix" scheme="http://linux48.com/tags/zabbix/"/>
+    
+      <category term="监控" scheme="http://linux48.com/categories/%E7%9B%91%E6%8E%A7/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[mysql求平均值、最小和总值]]></title>
@@ -899,88 +934,6 @@ root     <span class="number">44108</span> <span class="number">42716</span>  <s
       <category term="php" scheme="http://linux48.com/tags/php/"/>
     
       <category term="php" scheme="http://linux48.com/categories/php/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[shadowsocks的python和nodejs版搭建]]></title>
-    <link href="http://linux48.com//archives/420/"/>
-    <id>http://linux48.com//archives/420/</id>
-    <published>2015-01-20T16:00:00.000Z</published>
-    <updated>2015-05-29T03:23:50.000Z</updated>
-    <content type="html"><![CDATA[<p>shadowsocks的nodejs版的不是很稳定，今天又搞了一台香港的机器，果断换成python试试，果然给力<a id="more"></a></p>
-<h2 id="nodejs版搭建">nodejs版搭建</h2><p>nodejs环境搭建参见 <a href="https://gist.github.com/koy1619/3479170a3a763ffd8869" target="_blank" rel="external">https://gist.github.com/koy1619/3479170a3a763ffd8869</a></p>
-<pre><code>git <span class="built_in">clone</span> https://github.com/shadowsocks/shadowsocks-nodejs.git
-
-<span class="built_in">cd</span> shadowsocks-nodejs
-
-vim config.json
-
-{
-<span class="string">"server"</span>:<span class="string">".0.0.0.0"</span>,
-<span class="string">"server_port"</span>:<span class="number">8388</span>,
-<span class="string">"local_address"</span>:<span class="string">"0.0.0.0"</span>,
-<span class="string">"local_port"</span>:<span class="number">1080</span>,
-<span class="string">"password"</span>:<span class="string">"barfoo!"</span>,
-<span class="string">"timeout"</span>:<span class="number">600</span>,
-<span class="string">"method"</span>:<span class="string">"aes-256-cfb"</span>
-}
-</code></pre><p>启动服务</p>
-<pre><code><span class="label">nohup</span> /<span class="preprocessor">opt</span>/shadowsocks-nodejs/<span class="keyword">bin/ssserver </span>&amp;
-<span class="label">nohup</span> /<span class="preprocessor">opt</span>/shadowsocks-nodejs/<span class="keyword">bin/sslocal </span>&amp;
-</code></pre><p>查看进程</p>
-<pre><code><span class="attr_selector">[root@test ~]</span># <span class="tag">ps</span> <span class="tag">-ef</span> |<span class="tag">grep</span>  <span class="tag">node</span>
-<span class="tag">root</span>     <span class="tag">12969</span>     <span class="tag">1</span>  <span class="tag">0</span> <span class="tag">Jan16</span> ?        <span class="tag">00</span><span class="pseudo">:02</span><span class="pseudo">:07</span> <span class="tag">node</span> /<span class="tag">opt</span>/<span class="tag">shadowsocks-nodejs</span>/<span class="tag">bin</span>/<span class="tag">ssserver</span>
-<span class="tag">root</span>     <span class="tag">12971</span>     <span class="tag">1</span>  <span class="tag">0</span> <span class="tag">Jan16</span> ?        <span class="tag">00</span><span class="pseudo">:02</span><span class="pseudo">:05</span> <span class="tag">node</span> /<span class="tag">opt</span>/<span class="tag">shadowsocks-nodejs</span>/<span class="tag">bin</span>/<span class="tag">sslocal</span>
-<span class="tag">root</span>     <span class="tag">15118</span> <span class="tag">15104</span>  <span class="tag">0</span> <span class="tag">15</span><span class="pseudo">:48</span> <span class="tag">pts</span>/<span class="tag">0</span>    <span class="tag">00</span><span class="pseudo">:00</span><span class="pseudo">:00</span> <span class="tag">grep</span> <span class="tag">node</span>
-</code></pre><p>nodejs版的不是很稳定，今天又搞了一台香港的机器，果断换成python试试，果然给力</p>
-<h2 id="python版搭建">python版搭建</h2><pre><code>yum -y <span class="keyword">install</span> python-setuptools &amp;&amp; easy_install pip
-yum -y <span class="keyword">install</span> python-pip libevent python-devel git m2crypto
-pip <span class="keyword">install</span> shadowsocks
-pip <span class="keyword">install</span> gevent
-pip <span class="keyword">install</span> M2Crypto
-pip <span class="keyword">install</span> shadowsocks
-mkdir -p /etc/shadowsocks
-
-vim /etc/shadowsocks/config.json
-
-{
-<span class="string">"server"</span>:<span class="string">"0.0.0.0"</span>,
-<span class="string">"server_port"</span>:<span class="number">8388</span>,
-<span class="string">"local_address"</span>:<span class="string">"0.0.0.0"</span>,
-<span class="string">"local_port"</span>:<span class="number">1080</span>,
-<span class="string">"password"</span>:<span class="string">"barfoo!"</span>,
-<span class="string">"timeout"</span>:<span class="number">600</span>,
-<span class="string">"method"</span>:<span class="string">"table"</span>
-}
-</code></pre><p>启动服务</p>
-<pre><code><span class="built_in">cd</span> /etc/shadowsocks
-nohup ssserver &amp;
-nohup sslocal &amp;
-</code></pre><p>查看进程</p>
-<pre><code><span class="attr_selector">[root@10-8-1-5 ~]</span># <span class="tag">ps</span> <span class="tag">-ef</span> |<span class="tag">grep</span> <span class="tag">python</span>  
-<span class="tag">root</span>     <span class="tag">22599</span>     <span class="tag">1</span>  <span class="tag">0</span> <span class="tag">12</span><span class="pseudo">:36</span> ?        <span class="tag">00</span><span class="pseudo">:00</span><span class="pseudo">:07</span> /<span class="tag">usr</span>/<span class="tag">bin</span>/<span class="tag">python</span> /<span class="tag">usr</span>/<span class="tag">bin</span>/<span class="tag">ssserver</span>
-<span class="tag">root</span>     <span class="tag">22604</span>     <span class="tag">1</span>  <span class="tag">0</span> <span class="tag">12</span><span class="pseudo">:36</span> ?        <span class="tag">00</span><span class="pseudo">:00</span><span class="pseudo">:07</span> /<span class="tag">usr</span>/<span class="tag">bin</span>/<span class="tag">python</span> /<span class="tag">usr</span>/<span class="tag">bin</span>/<span class="tag">sslocal</span>
-<span class="tag">root</span>     <span class="tag">22797</span> <span class="tag">22772</span>  <span class="tag">0</span> <span class="tag">15</span><span class="pseudo">:54</span> <span class="tag">pts</span>/<span class="tag">1</span>    <span class="tag">00</span><span class="pseudo">:00</span><span class="pseudo">:00</span> <span class="tag">grep</span> <span class="tag">python</span>
-<span class="attr_selector">[root@10-8-1-5 ~]</span># 
-</code></pre><p>需要注意防火墙开放<strong>local_port</strong>的端口号</p>
-<p>Google Chrome浏览器安装SwitchyOmega插件导入下面的备份修改server地址即可使用。</p>
-<ul>
-<li><a href="http://pan.baidu.com/s/1pJ8zfv1" title="备份点我" target="_blank" rel="external">备份点我</a></li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>shadowsocks的nodejs版的不是很稳定，今天又搞了一台香港的机器，果断换成python试试，果然给力]]>
-    
-    </summary>
-    
-      <category term="nodejs" scheme="http://linux48.com/tags/nodejs/"/>
-    
-      <category term="python" scheme="http://linux48.com/tags/python/"/>
-    
-      <category term="shadowsocks" scheme="http://linux48.com/tags/shadowsocks/"/>
-    
-      <category term="shadowsocks" scheme="http://linux48.com/categories/shadowsocks/"/>
     
   </entry>
   
