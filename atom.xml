@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-10-28T03:27:00.000Z</updated>
+  <updated>2015-10-28T03:29:00.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://linux48.com//archives/441/"/>
     <id>http://linux48.com//archives/441/</id>
     <published>2015-10-28T16:00:00.000Z</published>
-    <updated>2015-10-28T03:27:00.000Z</updated>
+    <updated>2015-10-28T03:29:00.000Z</updated>
     <content type="html"><![CDATA[<p>zabbix proxy可以代替zabbix server检索客户端的数据，然后把数据汇报给zabbix server，并且在一定程度上分担了zabbix server的压力。zabbix proxy可以非常简便的实现了集中式、分布式监控。</p>
 <p>zabbix proxy使用场景:</p>
 <blockquote>
@@ -27,10 +27,10 @@
 <li>监控远程区域设备</li>
 <li>监控本地网络不稳定区域</li>
 <li>当zabbix监控上千设备时，使用它来减轻server的压力</li>
-<li>简化zabbix的维护<a id="more"></a>
-</li>
+<li>简化zabbix的维护</li>
 </ul>
 </blockquote>
+<a id="more"></a>
 <p>简易top如下</p>
 <p><img src="http://r.loli.io/emamqy.png" alt=""></p>
 <p>zabbix proxy仅仅需要一条tcp连接到zabbix server,所以防火墙上仅仅需要加上一条规则即可，zabbix proxy数据库必须和server分开，否则数据会被破坏，毕竟这两个数据库的表大部分都相同。总之记住，数据库分开即可。<br>proxy收集到数据之后，首先将数据缓存在本地，然后在一定得时间之后传递给zabbix server，这个时间由proxy配置文件中参数ProxyLocalBuffer and ProxyOfflineBuffer决定.<br>zabbix proxy是一个数据收集器，它不计算触发器、不处理事件、不发送报警。</p>
@@ -62,7 +62,8 @@
 <p>重启服务：</p>
 <p><code>service zabbix_proxy restart</code></p>
 <h2 id="添加zabbix_proxy节点">添加zabbix proxy节点</h2><p><img src="http://r.loli.io/Uf2qau.png" alt=""></p>
-<h2 id="添加被监控的主机">添加被监控的主机</h2><p><img src="http://r6.loli.io/iiENna.png" alt=""></p>
+<h2 id="添加被监控的主机">添加被监控的主机</h2><p>添加被监控的主机勾选<strong>由系统代理程式监控</strong></p>
+<p><img src="http://r6.loli.io/iiENna.png" alt=""></p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>zabbix proxy可以代替zabbix server检索客户端的数据，然后把数据汇报给zabbix server，并且在一定程度上分担了zabbix server的压力。zabbix proxy可以非常简便的实现了集中式、分布式监控。</p>
@@ -72,7 +73,9 @@
 <li>监控远程区域设备</li>
 <li>监控本地网络不稳定区域</li>
 <li>当zabbix监控上千设备时，使用它来减轻server的压力</li>
-<li>简化zabbix的维护]]>
+<li>简化zabbix的维护</li>
+</ul>
+</blockquote>]]>
     
     </summary>
     
