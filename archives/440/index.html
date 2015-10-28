@@ -230,7 +230,7 @@
         <h2 id="下载zabbix">下载zabbix</h2><h2 id="安装zabbix所需的组件">安装zabbix所需的组件</h2><p><code>yum -y install curl curl-devel net-snmp net-snmp-devel perl-DBI</code></p>
 <h2 id="创建用户账号">创建用户账号</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">groupadd zabbix</span><br><span class="line">useradd -g zabbix zabbix</span><br><span class="line">usermod <span class="operator">-s</span> /sbin/nologin zabbix</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h2 id="编译安装(agent)">编译安装(agent)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf zabbix-<span class="number">2.4</span>.<span class="number">5</span>.tar.gz </span><br><span class="line"><span class="built_in">cd</span> zabbix-<span class="number">2.4</span>.<span class="number">5</span></span><br><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/zabbix-agent --enable-agent  --enable-ipv6 --with-net-snmp --with-libcurl</span><br></pre></td></tr></table></figure>
+<h2 id="编译安装(agent)">编译安装(agent)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf zabbix-<span class="number">2.4</span>.<span class="number">5</span>.tar.gz </span><br><span class="line"><span class="built_in">cd</span> zabbix-<span class="number">2.4</span>.<span class="number">5</span></span><br><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/zabbix-agent --enable-agent  --enable-ipv6 --with-net-snmp --with-libcurl</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
 <h2 id="编辑agent端配置文件">编辑agent端配置文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@Server2 ~]<span class="comment"># cat /usr/local/zabbix-agent/etc/zabbix_agentd.conf |grep -v "#"</span></span><br><span class="line">LogFile=/tmp/zabbix_agentd.log</span><br><span class="line">Server=<span class="number">10.10</span>.<span class="number">3.225</span></span><br><span class="line">ServerActive=<span class="number">10.10</span>.<span class="number">3.225</span>:<span class="number">10051</span></span><br><span class="line">Hostname=<span class="number">10.128</span>.<span class="number">0.81</span></span><br></pre></td></tr></table></figure>
 <h2 id="启动守护进程agent">启动守护进程agent</h2><p><code>/usr/local/zabbix-agent/sbin/zabbix_agentd</code></p>
 <p>server启动端口为10051</p>
@@ -305,6 +305,8 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/archives/441/">zabbix的proxy端安装配置</a>
+            
           </div>
 
           <div class="post-nav-next post-nav-item">
@@ -378,7 +380,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">90</span>
+              <span class="site-state-item-count">91</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
