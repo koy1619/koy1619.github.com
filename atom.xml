@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-10-28T03:01:01.000Z</updated>
+  <updated>2015-10-28T03:03:08.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://linux48.com//archives/440/"/>
     <id>http://linux48.com//archives/440/</id>
     <published>2015-10-27T16:00:00.000Z</published>
-    <updated>2015-10-28T03:01:01.000Z</updated>
+    <updated>2015-10-28T03:03:08.000Z</updated>
     <content type="html"><![CDATA[<h2 id="下载zabbix">下载zabbix</h2><h2 id="安装zabbix所需的组件">安装zabbix所需的组件</h2><p><code>yum -y install curl curl-devel net-snmp net-snmp-devel perl-DBI</code></p>
 <h2 id="创建用户账号">创建用户账号</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">groupadd zabbix</span><br><span class="line">useradd -g zabbix zabbix</span><br><span class="line">usermod <span class="operator">-s</span> /sbin/nologin zabbix</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -27,11 +27,11 @@
 <h2 id="编辑agent端配置文件">编辑agent端配置文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@Server2 ~]<span class="comment"># cat /usr/local/zabbix-agent/etc/zabbix_agentd.conf |grep -v "#"</span></span><br><span class="line">LogFile=/tmp/zabbix_agentd.log</span><br><span class="line">Server=<span class="number">10.10</span>.<span class="number">3.225</span></span><br><span class="line">ServerActive=<span class="number">10.10</span>.<span class="number">3.225</span>:<span class="number">10051</span></span><br><span class="line">Hostname=<span class="number">10.128</span>.<span class="number">0.81</span></span><br></pre></td></tr></table></figure>
 <h2 id="启动守护进程agent">启动守护进程agent</h2><p><code>/usr/local/zabbix-agent/sbin/zabbix_agentd</code></p>
 <p>server启动端口为10051</p>
-<p>iptables放行zabbix-server的10051端口</p>
+<p>iptables放行zabbix-agent的10051端口</p>
 <p><code>iptables -A INPUT -p tcp  --dport 10051 -j ACCEPT</code></p>
 <p>注：重启服务可直接kill掉zabbix进程再重新按照以上方法启动</p>
 <p>或配置开机启动脚本：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> zabbix-<span class="number">2.4</span>.<span class="number">5</span></span><br><span class="line">cp misc/init.d/tru64/zabbix_agentd   /etc/init.d/zabbix_agentd</span><br><span class="line">chmod <span class="number">755</span> /etc/init.d/zabbix_agentd</span><br><span class="line">vi /etc/init.d/zabbix_agentd</span><br><span class="line">在文件头部的<span class="comment">#!/bin/sh行下分别添加如下两行：</span></span><br><span class="line">--------------</span><br><span class="line"><span class="comment">#chkconfig: 35 95 95</span></span><br><span class="line"><span class="comment">#description:zabbix server</span></span><br><span class="line">--------------</span><br><span class="line">将DAEMON后面的参数改成你自定义的路径</span><br><span class="line">DAEMON=/usr/<span class="built_in">local</span>/zabbix-agent/sbin/zabbix_agentd</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> zabbix-<span class="number">2.4</span>.<span class="number">5</span></span><br><span class="line">cp misc/init.d/tru64/zabbix_agentd   /etc/init.d/zabbix_agentd</span><br><span class="line">chmod <span class="number">755</span> /etc/init.d/zabbix_agentd</span><br><span class="line">vi /etc/init.d/zabbix_agentd</span><br><span class="line">在文件头部的<span class="comment">#!/bin/sh行下分别添加如下两行：</span></span><br><span class="line">--------------</span><br><span class="line"><span class="comment">#chkconfig: 35 95 95</span></span><br><span class="line"><span class="comment">#description:zabbix agent</span></span><br><span class="line">--------------</span><br><span class="line">将DAEMON后面的参数改成你自定义的路径</span><br><span class="line">DAEMON=/usr/<span class="built_in">local</span>/zabbix-agent/sbin/zabbix_agentd</span><br></pre></td></tr></table></figure>
 <p>加入开机启动</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --add zabbix_agentd  </span><br><span class="line">chkconfig zabbix_agentd on</span><br></pre></td></tr></table></figure>
 <p>重启服务：</p>
