@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2015-10-28T03:25:38.000Z</updated>
+  <updated>2015-10-28T03:27:00.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://linux48.com//archives/441/"/>
     <id>http://linux48.com//archives/441/</id>
     <published>2015-10-28T16:00:00.000Z</published>
-    <updated>2015-10-28T03:25:38.000Z</updated>
+    <updated>2015-10-28T03:27:00.000Z</updated>
     <content type="html"><![CDATA[<p>zabbix proxy可以代替zabbix server检索客户端的数据，然后把数据汇报给zabbix server，并且在一定程度上分担了zabbix server的压力。zabbix proxy可以非常简便的实现了集中式、分布式监控。</p>
 <p>zabbix proxy使用场景:</p>
 <blockquote>
@@ -34,7 +34,7 @@
 <p>简易top如下</p>
 <p><img src="http://r.loli.io/emamqy.png" alt=""></p>
 <p>zabbix proxy仅仅需要一条tcp连接到zabbix server,所以防火墙上仅仅需要加上一条规则即可，zabbix proxy数据库必须和server分开，否则数据会被破坏，毕竟这两个数据库的表大部分都相同。总之记住，数据库分开即可。<br>proxy收集到数据之后，首先将数据缓存在本地，然后在一定得时间之后传递给zabbix server，这个时间由proxy配置文件中参数ProxyLocalBuffer and ProxyOfflineBuffer决定.<br>zabbix proxy是一个数据收集器，它不计算触发器、不处理事件、不发送报警。</p>
-<h2 id="安装搭建zabbix_proxy">安装搭建zabbix proxy</h2><p>安装mysql</p>
+<h2 id="安装搭建zabbix_proxy">安装搭建zabbix proxy</h2><p>安装mysql此处省略</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum -y install curl curl-devel net-snmp net-snmp-devel perl-DBI</span><br><span class="line">tar zxvf zabbix-<span class="number">2.4</span>.<span class="number">5</span>.tar.gz </span><br><span class="line"><span class="built_in">cd</span> zabbix-<span class="number">2.4</span>.<span class="number">5</span></span><br><span class="line">./configure --prefix=/usr/<span class="built_in">local</span>/zabbix_proxy --enable-proxy --enable-agent --with-mysql=/usr/<span class="built_in">local</span>/mysql/bin/mysql_config --with-net-snmp --with-libcurl</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
 <h2 id="建立数据库并授权">建立数据库并授权</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">database</span> zabbix <span class="built_in">character</span> <span class="keyword">set</span> utf8;</span></span><br><span class="line"><span class="operator"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">on</span> zabbix.* <span class="keyword">to</span> zabbix@localhost <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'zabbix'</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span></span><br></pre></td></tr></table></figure>
 <p>导入数据结构：</p>
