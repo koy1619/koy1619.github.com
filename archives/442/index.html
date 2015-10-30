@@ -24,7 +24,7 @@
 
 
 
-  <meta name="keywords" content="nginx," />
+  <meta name="keywords" content="mysql," />
 
 
 
@@ -59,7 +59,7 @@
   </script>
 
 
-  <title> 记录一次nginx 502 // linux48 </title>
+  <title> mysql中查看数据库中所有表的记录数 // linux48 </title>
 </head>
 
 <body>
@@ -184,7 +184,7 @@
           
           
             
-              记录一次nginx 502
+              mysql中查看数据库中所有表的记录数
             
           
         </h1>
@@ -192,14 +192,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          發表於 2013-06-02
+          發表於 2015-10-29
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分類於
             
-              <a href="/categories/web/">web</a>
+              <a href="/categories/database/">database</a>
 
               
               
@@ -212,8 +212,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/archives/95/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/95/"></span>
+            <a href="/archives/442/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/442/"></span>
             </a>
           </span>
           
@@ -227,11 +227,22 @@
       
 
       
-        <p>早上发现一台测试服务器项目502badgetway了，但是有一个项目是好的，以下是排查过程</p>
-<p>一.查看配置文件<br>查看php.ini php-fpm.conf nginx.conf 都是已经调优过的<br>二.重启nginx php-fpm<br>三.重启服务器<br>四.查看iptables和dns  <a id="more"></a><br>以上都是OK的，但是还是依旧502，就只有一个项目是OK的<br>最后php -v发现居然是5.4，我记得之前我安装的是5.2的php，询问同事原来被他升级过php他升级完就改了一个项目的虚拟主机配置文件，就是那个好的项目的~~本当に<br>果断查看虚拟主机的配置文件，如下图更改之</p>
-<p><img class="alignnone" alt="" src="http://ww2.sinaimg.cn/mw690/45d8cb2djw1e5avxry53yj20ia03qaar.jpg" width="658" height="134"></p>
-<p>service nginx restart</p>
-<p>OK！</p>
+        <p>如果想知道MySQL数据库中每个表占用的空间、表记录的行数的话，可以打开MySQL的 information_schema 数据库。在该库中有一个 TABLES 表，这个表主要字段分别是：</p>
+<blockquote>
+<ul>
+<li>TABLE_SCHEMA : 数据库名</li>
+<li>TABLE_NAME：表名</li>
+<li>ENGINE：所使用的存储引擎</li>
+<li>TABLES_ROWS：记录数</li>
+<li>DATA_LENGTH：数据大小</li>
+<li>INDEX_LENGTH：索引大小</li>
+</ul>
+</blockquote>
+<p>其他字段请参考MySQL的手册，一下是利用这几个字段查询详情演示，可以根据具体业务来自定义sql监控mysql的磁盘使用状态和数据库各个表的具体条数。</p>
+<a id="more"></a>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">select table_schema,table_name,table_rows from tables where TABLE_SCHEMA='ebuydb' order by table_rows desc ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--查询所有数据的大小</span><br><span class="line">use information_schema;</span><br><span class="line">select concat(round(sum(DATA_LENGTH/1024/1024), 2),'MB') as data from TABLES;</span><br><span class="line"></span><br><span class="line">--查询单个库占用空间</span><br><span class="line">select concat(round(sum(DATA_LENGTH/1024/1024), 2),'MB') as data from TABLES where TABLE_SCHEMA='ebuydb';</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--数据库总所占空间</span><br><span class="line"></span><br><span class="line">SELECT CONCAT(TRUNCATE(SUM(data_length)/1024/1024,2),'MB') AS data_size,</span><br><span class="line">CONCAT(TRUNCATE(SUM(max_data_length)/1024/1024,2),'MB') AS max_data_size,</span><br><span class="line">CONCAT(TRUNCATE(SUM(data_free)/1024/1024,2),'MB') AS data_free,</span><br><span class="line">CONCAT(TRUNCATE(SUM(index_length)/1024/1024,2),'MB') AS index_size，</span><br><span class="line">FROM information_schema.tables WHERE TABLE_SCHEMA = '数据库名';</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--数据库表占用空间明细</span><br><span class="line">SELECT TABLE_NAME, table_rows,</span><br><span class="line">CONCAT(TRUNCATE(SUM(data_length)/1024/1024,2),'MB') AS data_size,</span><br><span class="line">CONCAT(TRUNCATE(SUM(max_data_length)/1024/1024,2),'MB') AS max_data_size,</span><br><span class="line">CONCAT(TRUNCATE(SUM(data_free)/1024/1024,2),'MB') AS data_free,</span><br><span class="line">CONCAT(TRUNCATE(SUM(index_length)/1024/1024,2),'MB') AS index_size，</span><br><span class="line">FROM information_schema.tables WHERE TABLE_SCHEMA = '数据库名'</span><br><span class="line">group by TABLE_NAME   order by data_length desc;</span><br><span class="line"></span><br><span class="line">--表所占空间</span><br><span class="line"></span><br><span class="line">SELECT CONCAT(TRUNCATE(SUM(data_length)/1024/1024,2),'MB') AS data_size,</span><br><span class="line">CONCAT(TRUNCATE(SUM(max_data_length)/1024/1024,2),'MB') AS max_data_size,</span><br><span class="line">CONCAT(TRUNCATE(SUM(data_free)/1024/1024,2),'MB') AS data_free,</span><br><span class="line">CONCAT(TRUNCATE(SUM(index_length)/1024/1024,2),'MB') AS index_size</span><br><span class="line">FROM information_schema.tables WHERE TABLE_NAME = '表名';</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--查看指定数据库的表的大小，比如说数据库 forexpert 中的 member 表 </span><br><span class="line"></span><br><span class="line">select concat(round(sum(DATA_LENGTH/1024/1024),2),'MB')as data</span><br><span class="line">from TABLES where table_schema='test'</span><br><span class="line">and table_name='1023';</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mysql&gt; select TABLE_NAME, concat(truncate(data_length/1024/1024,2),' MB') as data_size,   concat(truncate(index_length/1024/1024,2),' MB') as index_size   from information_schema.tables where TABLE_SCHEMA = 'test'   group by TABLE_NAME   order by data_length desc;         </span><br><span class="line">+-------------------------+-----------+------------+</span><br><span class="line">| TABLE_NAME              | data_size | index_size |</span><br><span class="line">+-------------------------+-----------+------------+</span><br><span class="line">| 1023                    | 152.68 MB | 0.00 MB    |</span><br><span class="line">| gc1_3                   | 18.54 MB  | 9.54 MB    |</span><br><span class="line">| gc6_8                   | 14.51 MB  | 7.51 MB    |</span><br><span class="line">| gc4_5                   | 12.51 MB  | 6.51 MB    |</span><br><span class="line">| tongyi1_3               | 11.51 MB  | 5.51 MB    |</span><br><span class="line">| tongyi6_8               | 9.51 MB   | 4.51 MB    |</span><br><span class="line">| tongyi4_5               | 8.51 MB   | 4.51 MB    |</span><br><span class="line">| 1023_2                  | 1.51 MB   | 0.00 MB    |</span><br><span class="line">| code                    | 0.14 MB   | 0.09 MB    |</span><br><span class="line">| 1023_3                  | 0.06 MB   | 0.00 MB    |</span><br><span class="line">+-------------------------+-----------+------------+</span><br><span class="line">10 rows in set (0.01 sec)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mysql&gt; select TABLE_SCHEMA, concat(truncate(sum(data_length)/1024/1024,2),' MB') as data_size,   concat(truncate(sum(index_length)/1024/1024,2),'MB') as index_size   from information_schema.tables  group by TABLE_SCHEMA  order by data_length desc;  </span><br><span class="line"></span><br><span class="line">+-------------------------+--------------+------------+</span><br><span class="line">| TABLE_SCHEMA            | data_size    | index_size |</span><br><span class="line">+-------------------------+--------------+------------+</span><br><span class="line">| test                    | 234.68 MB    | 39.42MB    |</span><br><span class="line">| zabbix                  | 1.78 MB      | 2.70MB     |</span><br><span class="line">| information_schema      | 0.00 MB      | 0.00MB     |</span><br><span class="line">| performance_schema      | 0.00 MB      | 0.00MB     |</span><br><span class="line">| mysql                   | 0.58 MB      | 0.10MB     |</span><br><span class="line">+-------------------------+--------------+------------+</span><br><span class="line">5 rows in set (0.54 sec)</span><br><span class="line"></span><br><span class="line">--查看更加明细</span><br><span class="line">mysql&gt; USE information_schema;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; SELECT TABLE_NAME, table_rows,</span><br><span class="line">    -&gt; CONCAT(TRUNCATE(SUM(data_length)/1024/1024,2),'MB') AS data_size,</span><br><span class="line">    -&gt; CONCAT(TRUNCATE(SUM(max_data_length)/1024/1024,2),'MB') AS max_data_size,</span><br><span class="line">    -&gt; CONCAT(TRUNCATE(SUM(data_free)/1024/1024,2),'MB') AS data_free,</span><br><span class="line">    -&gt; CONCAT(TRUNCATE(SUM(index_length)/1024/1024,2),'MB') AS index_size</span><br><span class="line">    -&gt; FROM information_schema.tables  WHERE TABLE_NAME NOT LIKE "%history"</span><br><span class="line">    -&gt; AND TABLE_SCHEMA = 'test'</span><br><span class="line">    -&gt; GROUP BY TABLE_NAME   ORDER BY data_length DESC;</span><br><span class="line">+-------------------------+------------+-----------+---------------+-----------+------------+</span><br><span class="line">| TABLE_NAME              | table_rows | data_size | max_data_size | data_free | index_size |</span><br><span class="line">+-------------------------+------------+-----------+---------------+-----------+------------+</span><br><span class="line">| 1023                    |    3351704 | 152.68MB  | 0.00MB        | 7.00MB    | 0.00MB     |</span><br><span class="line">| gc1_3                   |     323649 | 18.54MB   | 0.00MB        | 4.00MB    | 9.54MB     |</span><br><span class="line">| gc6_8                   |     256131 | 14.51MB   | 0.00MB        | 4.00MB    | 7.51MB     |</span><br><span class="line">| gc4_5                   |     219582 | 12.51MB   | 0.00MB        | 4.00MB    | 6.51MB     |</span><br><span class="line">| tongyi1_3               |     184609 | 11.51MB   | 0.00MB        | 4.00MB    | 5.51MB     |</span><br><span class="line">| tongyi6_8               |     150028 | 9.51MB    | 0.00MB        | 4.00MB    | 4.51MB     |</span><br><span class="line">| tongyi4_5               |     132087 | 8.51MB    | 0.00MB        | 4.00MB    | 4.51MB     |</span><br><span class="line">| 1023_2                  |      14619 | 1.51MB    | 0.00MB        | 4.00MB    | 0.00MB     |</span><br><span class="line">| code                    |       2241 | 0.14MB    | 0.00MB        | 0.00MB    | 0.09MB     |</span><br><span class="line">| 1023_3                  |        833 | 0.06MB    | 0.00MB        | 0.00MB    | 0.00MB     |</span><br><span class="line">+-------------------------+------------+-----------+---------------+-----------+------------+</span><br><span class="line">10 rows in set (0.01 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<p>BYTE(B):字节<br>1KB ，2 的 10 次方 ： 1024 BYTE.<br>1MB ，2 的 20 次方 ： 1024 KB.<br>1GB ，2 的 30 次方 ： 1024 MB.<br>1TB ，2 的 40 次方 ： 1024 GB.<br>1PB ，2 的 50 次方 ： 1024 TB.<br>1EB ，2 的 60 次方 ： 1024 PB.<br>1ZB ，2 的 70 次方 ： 1024 EB.<br>1YB ，2 的 80 次方 ： 1024 ZB.</p>
 
       
     </div>
@@ -285,7 +296,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/nginx/"> #nginx </a>
+            <a href="/tags/mysql/"> #mysql </a>
           
         </div>
       
@@ -294,13 +305,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/archives/96/">记录一次服务器数据恢复</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/archives/83/">linux命令后台运行详解</a>
+              <a href="/archives/441/">zabbix的proxy端安装配置</a>
             
           </div>
         </div>
@@ -316,8 +325,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="/archives/95/"
-               data-title="记录一次nginx 502" data-url="http://linux48.com//archives/95/">
+          <div class="ds-thread" data-thread-key="/archives/442/"
+               data-title="mysql中查看数据库中所有表的记录数" data-url="http://linux48.com//archives/442/">
           </div>
         
       </div>
