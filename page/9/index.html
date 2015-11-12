@@ -186,6 +186,106 @@
           
           
             
+              <a class="post-title-link" href="/archives/66/">
+                oracle startup failure
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2012-12-26
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/database/">database</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/66/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/66/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>SQL&gt; startup<br>ORA-01078: failure in processing system parameters<br>LRM-00109: could not open parameter file &#8216;/data/oracle/product/11.2.0/db_1/dbs/initORA10G.ora&#8217;</p>
+<p>查找文件，不存在，估计是非法关机造成的。</p>
+<p>&nbsp;</p>
+<p><strong>解决方法：</strong></p>
+<p>将$ORACLE_BASE/admin/数据库名称/pfile目录下的init.ora.012009233838形式的文件copy到$ORACLE_HOME/dbs目录下initoracle.ora即可。（注：initoracle.ora中的oracle为你的实例名 即我的为 initora10g.ora）</p>
+<p>&nbsp;</p>
+<p>[root@localhost dbs]# cp init.ora.721200911530 $ORACLE_HOME/dbs/initora10g.ora</p>
+<p>&nbsp;</p>
+<p>然后继续切换到oracle 帐号,连接到 sqlplus,运行 startup</p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+
+    
+    
+
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/oracle/"> #oracle </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/67/">
                 oracle startup 故障：ORA-00845: MEMORY_TARGET
               </a>
@@ -1085,106 +1185,6 @@ slave IP:<span class="number">192.168.1.87</span>
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/31/">
-                centos下snmp客户端安装
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2012-04-10
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/system/">system</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/31/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/31/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>centos下snmp客户端安装</p>
-<pre><code>yum -y install <span class="keyword">net</span>-snmp
-
-vi /etc/snmp/snmpd.<span class="keyword">conf</span>
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/31/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-    
-    <! -- 添加捐赠图标 -->
-
-    
-    
-
-<! -- 添加捐赠图标 -->
-
-
-      
-        <div class="post-tags">
-          
-            <a href="/tags/snmp/"> #snmp </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1224,7 +1224,7 @@ vi /etc/snmp/snmpd.<span class="keyword">conf</span>
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">92</span>
+              <span class="site-state-item-count">93</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1238,7 +1238,7 @@ vi /etc/snmp/snmpd.<span class="keyword">conf</span>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">94</span>
+              <span class="site-state-item-count">95</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
