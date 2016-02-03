@@ -186,6 +186,107 @@
           
           
             
+              <a class="post-title-link" href="/archives/444/">
+                CentOS下Nginx配置Perl运行Bugzilla
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2016-02-02
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/devops/">devops</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/444/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/444/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="安装LNMP">安装LNMP</h1><p>此处省略。。。</p>
+<h1 id="安装perl-fcgi模块">安装perl-fcgi模块</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum -y install perl-FCGI</span><br><span class="line"></span><br><span class="line"><span class="comment">#或者源码编译安装</span></span><br><span class="line"></span><br><span class="line">wget http://search.cpan.org/CPAN/authors/id/F/FL/FLORA/FCGI-<span class="number">0.74</span>.tar.gz</span><br><span class="line">tar zxvf FCGI-<span class="number">0.74</span>.tar.gz </span><br><span class="line"><span class="built_in">cd</span> FCGI-<span class="number">0.74</span></span><br><span class="line">perl Makefile.PL</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/444/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+
+    
+    
+
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/bugzilla/"> #bugzilla </a>
+          
+            <a href="/tags/cgi/"> #cgi </a>
+          
+            <a href="/tags/perl/"> #perl </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/443/">
                 CentOS上搭建私有maven仓库
               </a>
@@ -1068,103 +1169,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/434/">
-                MYSQL在一个字段值前面加字符串
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2015-07-29
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/database/">database</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/434/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/434/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--在`menber`表的`name`字段前面按照条件批量加`jc100`这个字符串</span></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">UPDATE</span> </span><br><span class="line">    <span class="string">`usrdb`</span>.<span class="string">`menber`</span></span><br><span class="line">  <span class="keyword">SET</span></span><br><span class="line">    <span class="string">`name`</span> = <span class="keyword">CONCAT</span>(<span class="string">'jc100'</span>, <span class="string">`name`</span>) </span><br><span class="line">  <span class="keyword">WHERE</span> provice = <span class="string">'678'</span> </span><br><span class="line">    <span class="keyword">AND</span> input_time <span class="keyword">BETWEEN</span> <span class="string">'2015-07-30 00:00:00'</span> </span><br><span class="line">    <span class="keyword">AND</span> <span class="string">'2015-07-30 23:59:59'</span></span></span><br></pre></td></tr></table></figure>
-<p>mysql的<strong><code>CONCAT()</code></strong>函数用于将多个字符串连接成一个字符串，是最重要的mysql函数之一。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/434/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-    
-    <! -- 添加捐赠图标 -->
-
-    
-    
-
-<! -- 添加捐赠图标 -->
-
-
-      
-        <div class="post-tags">
-          
-            <a href="/tags/sql语句/"> #sql语句 </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1204,7 +1208,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-count">94</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1218,7 +1222,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">95</span>
+              <span class="site-state-item-count">98</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

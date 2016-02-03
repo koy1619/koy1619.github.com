@@ -186,6 +186,119 @@
           
           
             
+              <a class="post-title-link" href="/archives/68/">
+                ORA-01102: cannot mount database in EXCLUSIVE mode
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2012-12-26
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/database/">database</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/68/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/68/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>还是startup的问题，真是连锁反应啊~~</p>
+<pre class="lang:default decode:true">SQL&gt; conn /as sysdba
+Connected to an idle instance.
+SQL&gt; startup
+ORACLE instance started.
+Total System Global Area  591396864 bytes
+Fixed Size                   1220724 bytes
+Variable Size             167776140 bytes
+Database Buffers         415236096  bytes
+Redo Buffers                 7163904 bytes
+ORA-01102: cannot mount database in EXCLUSIVE mode
+SQL&gt; shutdown immediate
+ORA-01507: database not mounted
+
+ORACLE instance shut down.</pre>
+
+<p>&nbsp;</p>
+<p>去CSDN查了一下资料，终于解决了
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/68/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+
+    
+    
+
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/oracle/"> #oracle </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/66/">
                 oracle startup failure
               </a>
@@ -1084,107 +1197,6 @@ Allow <span class="keyword">from</span> <span class="literal">all</span><span cl
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/24/">
-                Mysql主从服务设置
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2012-04-15
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/database/">database</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/24/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/24/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>Mysql主从服务设置</p>
-<pre><code><span class="title">master</span> IP:<span class="number">192.168.1.84</span>
-
-slave IP:<span class="number">192.168.1.87</span>
-</code></pre><p>1.</p>
-<p>编辑master的/etc/my.cnf 在[mysqld]选项中加入下列两行：
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/24/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-    
-    <! -- 添加捐赠图标 -->
-
-    
-    
-
-<! -- 添加捐赠图标 -->
-
-
-      
-        <div class="post-tags">
-          
-            <a href="/tags/mysql/"> #mysql </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1224,7 +1236,7 @@ slave IP:<span class="number">192.168.1.87</span>
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-count">94</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1238,7 +1250,7 @@ slave IP:<span class="number">192.168.1.87</span>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">95</span>
+              <span class="site-state-item-count">98</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

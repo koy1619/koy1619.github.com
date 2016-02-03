@@ -3,6 +3,30 @@
 
     
   <url>
+    <loc>http://linux48.com//archives/444/</loc>
+    <lastmod>2016-02-03T02:59:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS下Nginx配置Perl运行Bugzilla</title>
+        <pubTime>2016-02-02T16:00:00.000Z</pubTime>
+        
+        <tag>bugzilla </tag>
+         
+        <tag>cgi </tag>
+         
+        <tag>perl </tag>
+         
+         
+           
+             
+              <breadCrumb title="devops" url="http://linux48.com/categories/devops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://linux48.com//archives/443/</loc>
     <lastmod>2015-11-12T08:51:49.000Z</lastmod>
     <data>
@@ -1300,23 +1324,19 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/412/</loc>
+    <loc>http://linux48.com//archives/411/</loc>
     <lastmod>2015-05-29T03:23:50.000Z</lastmod>
     <data>
         <display>
-        <title>ruby on rails 报错解决</title>
-        <pubTime>2014-11-23T16:00:00.000Z</pubTime>
+        <title>AWK统计随笔记录</title>
+        <pubTime>2014-11-17T16:00:00.000Z</pubTime>
         
-        <tag>nodejs </tag>
-         
-        <tag>rails </tag>
-         
-        <tag>ruby </tag>
+        <tag>awk </tag>
          
          
            
              
-              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
+              <breadCrumb title="system" url="http://linux48.com/categories/system/"/>
           
         </display>
     </data>
@@ -1324,21 +1344,19 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/408/</loc>
+    <loc>http://linux48.com//archives/413/</loc>
     <lastmod>2015-05-29T03:23:50.000Z</lastmod>
     <data>
         <display>
-        <title>SVN强制提交commit</title>
-        <pubTime>2014-11-11T16:00:00.000Z</pubTime>
+        <title>linux sar命令</title>
+        <pubTime>2014-12-01T16:00:00.000Z</pubTime>
         
-        <tag>commit </tag>
-         
-        <tag>svn </tag>
+        <tag>sar </tag>
          
          
            
              
-              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
+              <breadCrumb title="command" url="http://linux48.com/categories/command/"/>
           
         </display>
     </data>
@@ -1379,26 +1397,6 @@
            
              
               <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/413/</loc>
-    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
-    <data>
-        <display>
-        <title>linux sar命令</title>
-        <pubTime>2014-12-01T16:00:00.000Z</pubTime>
-        
-        <tag>sar </tag>
-         
-         
-           
-             
-              <breadCrumb title="command" url="http://linux48.com/categories/command/"/>
           
         </display>
     </data>
@@ -1472,6 +1470,30 @@
 
     
   <url>
+    <loc>http://linux48.com//archives/412/</loc>
+    <lastmod>2015-05-29T03:23:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>ruby on rails 报错解决</title>
+        <pubTime>2014-11-23T16:00:00.000Z</pubTime>
+        
+        <tag>nodejs </tag>
+         
+        <tag>rails </tag>
+         
+        <tag>ruby </tag>
+         
+         
+           
+             
+              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://linux48.com//archives/395/</loc>
     <lastmod>2015-05-29T03:23:50.000Z</lastmod>
     <data>
@@ -1494,19 +1516,21 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/411/</loc>
+    <loc>http://linux48.com//archives/408/</loc>
     <lastmod>2015-05-29T03:23:50.000Z</lastmod>
     <data>
         <display>
-        <title>AWK统计随笔记录</title>
-        <pubTime>2014-11-17T16:00:00.000Z</pubTime>
+        <title>SVN强制提交commit</title>
+        <pubTime>2014-11-11T16:00:00.000Z</pubTime>
         
-        <tag>awk </tag>
+        <tag>commit </tag>
+         
+        <tag>svn </tag>
          
          
            
              
-              <breadCrumb title="system" url="http://linux48.com/categories/system/"/>
+              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
           
         </display>
     </data>
