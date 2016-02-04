@@ -82,107 +82,79 @@
 
 
   <ul id="menu" class="menu">
-    <div class="c-search-form-div" style="display:none;">
-      
-      <form class="menu-item" >
-        <input type="text" id="ts-search-input" class="menu-search-input st-default-search-input"  />
-      </form>
-      
-        <script type="text/javascript">
-         (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-        (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-        e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-         })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-        _st('install','1hHhbYfnkeRSBbzVGQYE','2.0.0');
-        </script>  
-      
-      
-    </div>
+     
+    <!--增加swiftype搜索功能-->
+    <form class="menu-item menu-item-search">
+      <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+    </form>
+    
     <script type="text/javascript">
-      if(isDesktop() || isTablet()){        
-        $('.c-search-form-div').css("display","inline");
-      }    
-    </script>
+      (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+      })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
 
+      _st('install','1hHhbYfnkeRSBbzVGQYE','2.0.0');
+    </script>
+    <!--增加swiftype搜索功能end-->
+    
     
       
-      
-        <li class="menu-item menu-item-home">
+      <li class="menu-item menu-item-home">
         <a href="/">
           <i class="menu-item-icon icon-home"></i> <br />
           首頁
         </a>
       </li>
-      
     
       
-      
-        <li class="menu-item menu-item-categories">
+      <li class="menu-item menu-item-categories">
         <a href="/categories">
           <i class="menu-item-icon icon-categories"></i> <br />
           分類
         </a>
       </li>
-      
     
       
-      
-        <li class="menu-item menu-item-archives">
+      <li class="menu-item menu-item-archives">
         <a href="/archives">
           <i class="menu-item-icon icon-archives"></i> <br />
           歸檔
         </a>
       </li>
-      
     
       
-      
-        <li class="menu-item menu-item-tags">
+      <li class="menu-item menu-item-tags">
         <a href="/tags">
           <i class="menu-item-icon icon-tags"></i> <br />
           標籤
         </a>
       </li>
-      
     
       
-      
-        <li class="menu-item menu-item-links">
+      <li class="menu-item menu-item-links">
         <a href="/links">
           <i class="menu-item-icon icon-links"></i> <br />
           友情链接
         </a>
       </li>
-      
     
       
-      
-        <li class="menu-item menu-item-commonweal" style="display:none;">
+      <li class="menu-item menu-item-commonweal">
         <a href="/404.html">
           <i class="menu-item-icon icon-commonweal"></i> <br />
           公益404
         </a>
       </li>
-      
     
       
-      
-        <li class="menu-item menu-item-about">
+      <li class="menu-item menu-item-about">
         <a href="/about">
           <i class="menu-item-icon icon-about"></i> <br />
           關於
         </a>
       </li>
-      
     
-
-    <script type="text/javascript">
-      if(!isMobile()){
-         $('.menu-item-commonweal').css("display","");
-      }
-    </script>
-
   </ul>
 
 
