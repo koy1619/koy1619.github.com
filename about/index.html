@@ -6,9 +6,30 @@
 <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv=”Cache-Control” content=”no-transform” />
+<meta http-equiv=”Cache-Control” content=”no-siteapp” />
+
+
+  <meta name="keywords" content="My Opensource Life & Notepad " />
+
+
+
+    <meta name="description" content="about, My Opensource Life & Notepad" />
+
 
 
   <meta name="google-site-verification" content="VvyjvVXcJQa0QklHipu6pwm2PJGnnchIqX7s5JbbT_0" />
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -20,43 +41,12 @@
 <link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
 
 
-    <meta name="description" content="My Opensource Life & Notepad" />
-
-
-
-  <meta name="keywords" content="My Opensource Life & Notepad" />
-
-
 
   <link rel="alternate" href="/atom.xml" title="linux48" type="application/atom+xml" />
 
 
 
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
-
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var CONFIG = {
-    scheme: 'Mist',
-    analytics: {
-      baidu: 'd3d6790e839a0e8654347925181b01e9',
-      google: ''
-    },
-    sidebar: ''
-  };
-</script>
-
-
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?d3d6790e839a0e8654347925181b01e9";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
   <title>
@@ -74,6 +64,41 @@
     <div class="headband"></div>
 
     <div id="header" class="header">
+
+    <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|micromessenger|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|UCBrowser|MQQBrowser|Blazer|PSP|IEMobile|Symbian|Mobile|samsung|htc/g;
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+
+
       <div class="header-inner">
         <h1 class="site-meta">
   <span class="logo-line-before"><i></i></span>
@@ -88,79 +113,107 @@
 
 
   <ul id="menu" class="menu">
-     
-    <!--增加swiftype搜索功能-->
-    <form class="menu-item menu-item-search">
-      <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-    </form>
-    
-    <script type="text/javascript">
-      (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-      })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+    <div class="c-search-form-div" style="display:none;">
+      
+      <form class="menu-item" >
+        <input type="text" id="ts-search-input" class="menu-search-input st-default-search-input"  />
+      </form>
+      
+        <script type="text/javascript">
+         (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+        (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+        e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+         })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
 
-      _st('install','1hHhbYfnkeRSBbzVGQYE','2.0.0');
+        _st('install','1hHhbYfnkeRSBbzVGQYE','2.0.0');
+        </script>  
+      
+      
+    </div>
+    <script type="text/javascript">
+      if(isDesktop() || isTablet()){        
+        $('.c-search-form-div').css("display","inline");
+      }    
     </script>
-    <!--增加swiftype搜索功能end-->
-    
+
     
       
-      <li class="menu-item menu-item-home">
+      
+        <li class="menu-item menu-item-home">
         <a href="/">
           <i class="menu-item-icon icon-home"></i> <br />
           首頁
         </a>
       </li>
+      
     
       
-      <li class="menu-item menu-item-categories">
+      
+        <li class="menu-item menu-item-categories">
         <a href="/categories">
           <i class="menu-item-icon icon-categories"></i> <br />
           分類
         </a>
       </li>
+      
     
       
-      <li class="menu-item menu-item-archives">
+      
+        <li class="menu-item menu-item-archives">
         <a href="/archives">
           <i class="menu-item-icon icon-archives"></i> <br />
           歸檔
         </a>
       </li>
+      
     
       
-      <li class="menu-item menu-item-tags">
+      
+        <li class="menu-item menu-item-tags">
         <a href="/tags">
           <i class="menu-item-icon icon-tags"></i> <br />
           標籤
         </a>
       </li>
+      
     
       
-      <li class="menu-item menu-item-links">
+      
+        <li class="menu-item menu-item-links">
         <a href="/links">
           <i class="menu-item-icon icon-links"></i> <br />
           友情链接
         </a>
       </li>
+      
     
       
-      <li class="menu-item menu-item-commonweal">
+      
+        <li class="menu-item menu-item-commonweal" style="display:none;">
         <a href="/404.html">
           <i class="menu-item-icon icon-commonweal"></i> <br />
           公益404
         </a>
       </li>
+      
     
       
-      <li class="menu-item menu-item-about">
+      
+        <li class="menu-item menu-item-about">
         <a href="/about">
           <i class="menu-item-icon icon-about"></i> <br />
           關於
         </a>
       </li>
+      
     
+
+    <script type="text/javascript">
+      if(!isMobile()){
+         $('.menu-item-commonweal').css("display","");
+      }
+    </script>
+
   </ul>
 
 
@@ -186,16 +239,13 @@
   </div>
 
 
-         
-        </div>
 
-        
-        <!-- 多说热评文章-->
-        <p>热评文章</p>
-        <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
-        
+          
+
+          
+        </div>
       </div>
-               
+
 
       
   
@@ -214,7 +264,7 @@
 
       <div class="site-overview">
         <div class="site-author motion-element">
-          <img class="site-author-image" src="/images/default_avatar.jpg" alt="koy" />
+          <img class="site-author-image" src="/koy.jpg" alt="koy" />
           <p class="site-author-name">koy</p>
         </div>
         <p class="site-description motion-element">My Opensource Life & Notepad</p>
@@ -239,7 +289,6 @@
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
-
         </div>
 
         
@@ -251,8 +300,8 @@
           </div>
         
 
-        <div class="links-of-author motion-element">
-          
+        
+          <div class="links-of-author motion-element">
             
               <span class="links-of-author-item">
               <a href="https://github.com/koy1619" target="_blank">GitHub</a>
@@ -273,24 +322,27 @@
               <span class="links-of-author-item">
               <a href="http://www.zhihu.com/people/koy1619" target="_blank">ZhiHu</a>
             </span>
-            
-          
-        </div>
+                      
+           </div>
+        
 
         
         
           <div class="cc-license motion-element">
-            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank" rel="external nofollow"> 
               <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
             </a>
           </div>
         
 
+     
+        
+        
       </div>
 
       
-
     </div>
+
   </div>
 
 
@@ -328,14 +380,13 @@
 
 
 
-
       </div>
     </div>
 
     <div class="back-to-top"></div>
   </div>
 
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+  <!-- <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script> -->
 
   
   
@@ -364,12 +415,11 @@
   </script>
 
 
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
   function hasMobileUA () {
     var nav = window.navigator;
     var ua = nav.userAgent;
-    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
-
+    var pa = /iPad|micromessenger|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|UCBrowser|MQQBrowser|Blazer|PSP|IEMobile|Symbian|Mobile|samsung|htc/g;
     return pa.test(ua);
   }
 
@@ -388,8 +438,15 @@
   function escapeSelector (selector) {
     return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
   }
-</script>
 
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+ -->
   
 
   <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
@@ -398,6 +455,7 @@
   <script type="text/javascript" id="motion.global">
   $(document).ready(function () {
     var body = $('body');
+
     var isSidebarVisible = false;
     var sidebarToggle = $('.sidebar-toggle');
     var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
@@ -423,10 +481,9 @@
     var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
 
     LogoAndMenuMotion();
-    sidebatToggleMotion();
+    sidebarToggleMotion();
     postsListMotion();
-    backToTopMotion();
-
+    backToTopMotion();    
 
     $(document)
       .on('sidebar.isShowing', function () {
@@ -437,6 +494,18 @@
         sidebarContentMotion();
       })
       .on('sidebar.isHiding', function () {});
+
+//search animate
+$(function(){
+   $('#ts-search-input').focus(function() {  //设置获得焦点时的方法，让文本框变长
+    $(this).animate({width: "150"}, 300 );  
+    $(this).val(''); //用于清空内容，可选操作
+   });
+ 
+   $('#ts-search-input').blur(function() {  //设置失去焦点时的方法，让文本框变短
+    $(this).animate({width: "70"}, 300 );
+   });
+});
 
     function LogoAndMenuMotion() {
       $.Velocity.RunSequence([
@@ -500,7 +569,7 @@
       $('.post').velocity('transition.slideDownIn', postMotionOptions);
     }
 
-    function sidebatToggleMotion () {
+    function sidebarToggleMotion () {
       sidebarToggle.on('click', function () {
         isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
         isSidebarVisible = !isSidebarVisible;
@@ -527,6 +596,15 @@
 
 
   
+
+   <script type="text/javascript">
+    var HEXO_SIDEBAR_CONFIGURATION = 'hide';
+    $(document).ready(function () {
+      if (HEXO_SIDEBAR_CONFIGURATION === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
 
   
 <script type="text/x-mathjax-config">
@@ -589,9 +667,9 @@
   </script>
 
   
-
+  
+  
 <a href="https://github.com/koy1619"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6625ac1f3ee0a12250227cf83ce904423abf351/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png"></a>
-
 
 </body>
 </html>
