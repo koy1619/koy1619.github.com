@@ -3,6 +3,28 @@
 
     
   <url>
+    <loc>http://linux48.com//archives/414/</loc>
+    <lastmod>2016-03-11T03:56:26.000Z</lastmod>
+    <data>
+        <display>
+        <title>centos gitlab一键安装备份恢复和迁移</title>
+        <pubTime>2014-12-03T16:00:00.000Z</pubTime>
+        
+        <tag>git </tag>
+         
+        <tag>gitlab </tag>
+         
+         
+           
+             
+              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://linux48.com//archives/398/</loc>
     <lastmod>2016-02-05T07:13:23.000Z</lastmod>
     <data>
@@ -18,24 +40,6 @@
            
              
               <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/425/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Hello World</title>
-        <pubTime>2015-05-27T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Hello World" url="http://linux48.com/categories/Hello-World/"/>
           
         </display>
     </data>
@@ -649,21 +653,17 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/414/</loc>
+    <loc>http://linux48.com//archives/425/</loc>
     <lastmod>2016-02-05T07:13:23.000Z</lastmod>
     <data>
         <display>
-        <title>centos gitlab一键安装</title>
-        <pubTime>2014-12-03T16:00:00.000Z</pubTime>
+        <title>Hello World</title>
+        <pubTime>2015-05-27T16:00:00.000Z</pubTime>
         
-        <tag>git </tag>
-         
-        <tag>gitlab </tag>
-         
          
            
              
-              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
+              <breadCrumb title="Hello World" url="http://linux48.com/categories/Hello-World/"/>
           
         </display>
     </data>

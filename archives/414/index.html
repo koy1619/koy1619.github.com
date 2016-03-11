@@ -14,7 +14,7 @@
 
 
 
-    <meta name="description" content="centos gitlab一键安装, My Opensource Life & Notepad" />
+    <meta name="description" content="centos gitlab一键安装备份恢复和迁移, My Opensource Life & Notepad" />
 
 
 
@@ -49,7 +49,7 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
 
 
-  <title> centos gitlab一键安装 - linux48 </title>
+  <title> centos gitlab一键安装备份恢复和迁移 - linux48 </title>
 </head>
 
 <body>
@@ -221,7 +221,7 @@
           
           
             
-              centos gitlab一键安装
+              centos gitlab一键安装备份恢复和迁移
             
           
         </h1>
@@ -264,8 +264,34 @@
       
 
       
-        <p><a href="https://downloads.bitnami.com/files/stacks/gitlab/7.4.3-0/bitnami-gitlab-7.4.3-0-linux-x64-installer.run" target="_blank" rel="external">centos gitlab一键安装脚本</a></p>
-<p>参见：<a href="http://www.tuicool.com/articles/iIR77v" target="_blank" rel="external">http://www.tuicool.com/articles/iIR77v</a><br>官网: <a href="https://bitnami.com/stack/gitlab/installer" target="_blank" rel="external">https://bitnami.com/stack/gitlab/installer</a></p>
+        <h2 id="安装">安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://downloads.bitnami.com/files/stacks/gitlab/<span class="number">7.4</span>.<span class="number">3</span>-<span class="number">0</span>/bitnami-gitlab-<span class="number">7.4</span>.<span class="number">3</span>-<span class="number">0</span>-linux-x64-installer.run</span><br><span class="line">chmod +x bitnami-gitlab-<span class="number">7.4</span>.<span class="number">3</span>-<span class="number">0</span>-linux-x64-installer.run</span><br><span class="line">./bitnami-gitlab-<span class="number">7.4</span>.<span class="number">3</span>-<span class="number">0</span>-linux-x64-installer.run</span><br></pre></td></tr></table></figure>
+<h2 id="备份和恢复">备份和恢复</h2><p><strong>备份以及恢复的操作，以下操作使用root用户执行</strong></p>
+<p>1、指定备份路径</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /opt/gitlab-<span class="number">7.4</span>.<span class="number">3</span>-<span class="number">0</span>/apps/gitlab/htdocs/config/gitlab.yml，找到如下所示修改</span><br><span class="line">           </span><br><span class="line"><span class="comment">## Backup settings</span></span><br><span class="line">backup:</span><br><span class="line">path: <span class="string">"/tmp/backups"</span> <span class="comment"># Relative paths are relative to Rails.root (default: tmp/backups/)</span></span><br></pre></td></tr></table></figure>
+<p>2、执行备份</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt/gitlab-<span class="number">7.4</span>.<span class="number">3</span>-<span class="number">0</span>/</span><br><span class="line">./use_gitlab</span><br><span class="line"><span class="built_in">cd</span> /opt/gitlab-<span class="number">7.4</span>.<span class="number">3</span>-<span class="number">0</span>/apps/gitlab/htdocs</span><br><span class="line">bundle <span class="built_in">exec</span> bin/rake gitlab:backup:create RAILS_ENV=production</span><br></pre></td></tr></table></figure>
+<p>操作执行完毕，会在/tmp/backups/目录下生产一个备份文件，类似1438917368_gitlab_backup.tar</p>
+<p>3、恢复备份的数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt/gitlab-<span class="number">7.4</span>.<span class="number">3</span>-<span class="number">0</span>/</span><br><span class="line">./use_gitlab</span><br><span class="line"><span class="built_in">cd</span> /opt/gitlab-<span class="number">7.4</span>.<span class="number">3</span>-<span class="number">0</span>/apps/gitlab/htdocs</span><br><span class="line">bundle <span class="built_in">exec</span> bin/rake gitlab:backup:restore RAILS_ENV=production </span><br><span class="line">chown git:git -R /opt/gitlab-<span class="number">7.4</span>.<span class="number">3</span>-<span class="number">0</span>/apps/gitlab/repositories</span><br></pre></td></tr></table></figure>
+<p>如果备份的目录下不止一个备份文件，则RAILS_ENV=production后面需要指定备份文件 BACKUP=xxx。<br>至此备份恢复完毕。</p>
+<p>ps：经过我自己的研究发现可以直接拷贝repositories目录到新机器也是OK的;也成功测试通过。至于正式迁移还是要按照官方文档！</p>
+<h2 id="迁移">迁移</h2><p>以上备份可以整理成备份脚本，定期备份，也可以用于gitlab服务器迁移（迁移必须使用相同gitlab版本方可兼容）</p>
+<p>迁移过程：</p>
+<p>1、安装版本一致的bitnami-gitlab</p>
+<p>2、设置gitlab服务器hosts和git客户端hosts指向新server</p>
+<p>3、启动postfix用来发邮件</p>
+<p>4、拷贝备份数据到新server，并导入</p>
+<p>5、客户端进行测试</p>
+<p>6、测试成功方可正式迁移</p>
+<h2 id="迁移过程中碰到的问题">迁移过程中碰到的问题</h2><p>客户端git pull 提示 gitlab-shell.log Permission denied</p>
+<p><code>chown -R git.git /dbdata/gitlab-7.13.1-0/apps/gitlab/gitlab-shell/gitlab-shell.log</code></p>
+<p>客户端提示指纹对不上</p>
+<p><code>rm -rf /root/.ssh/known_hosts</code></p>
+<p>gitlab首页不显示commit更新事件</p>
+<p>那是因为备份出来的repositories里的hook的软链接还指向的是老server的hook路径</p>
+<p>需要依次重新设置每个git仓库的hook，如果新server的gitlab安装路径和老server一样，请忽略</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /dbdata/gitlab-<span class="number">7.13</span>.<span class="number">1</span>-<span class="number">0</span>/apps/gitlab/repositories/ops/opslegend.git</span><br><span class="line">rm -rf hooks</span><br><span class="line">ln <span class="operator">-s</span> /dbdata/gitlab-<span class="number">7.13</span>.<span class="number">1</span>-<span class="number">0</span>/apps/gitlab/gitlab-shell/hooks hooks</span><br></pre></td></tr></table></figure>
+<p>bitnami-gitlab官网: <a href="https://bitnami.com/stack/gitlab/installer" target="_blank" rel="external">https://bitnami.com/stack/gitlab/installer</a></p>
 
       
     </div>
@@ -351,7 +377,7 @@
       <div class="comments" id="comments">
         
 
-<div class="ds-share" data-thread-key="/archives/414/" data-title="centos gitlab一键安装" data-images="http://linux48.com//archives/414/" data-content="http://linux48.com//archives/414/" data-url="http://linux48.com//archives/414/">
+<div class="ds-share" data-thread-key="/archives/414/" data-title="centos gitlab一键安装备份恢复和迁移" data-images="http://linux48.com//archives/414/" data-content="http://linux48.com//archives/414/" data-url="http://linux48.com//archives/414/">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
@@ -366,7 +392,7 @@
 
           <!-- 评论框 -->
           <div class="ds-thread" data-thread-key="/archives/414/"
-               data-title="centos gitlab一键安装" data-url="http://linux48.com//archives/414/">
+               data-title="centos gitlab一键安装备份恢复和迁移" data-url="http://linux48.com//archives/414/">
           </div>
         
       </div>
@@ -494,7 +520,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目錄</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备份和恢复"><span class="nav-number">2.</span> <span class="nav-text">备份和恢复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迁移"><span class="nav-number">3.</span> <span class="nav-text">迁移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迁移过程中碰到的问题"><span class="nav-number">4.</span> <span class="nav-text">迁移过程中碰到的问题</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
