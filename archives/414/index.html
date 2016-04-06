@@ -284,14 +284,15 @@
 <p>4、拷贝备份数据到新server，并导入</p>
 <p>5、客户端进行测试</p>
 <p>6、测试成功方可正式迁移</p>
-<h2 id="迁移过程中碰到的问题">迁移过程中碰到的问题</h2><p>客户端git pull 提示 gitlab-shell.log Permission denied</p>
-<p><code>chown -R git.git /dbdata/gitlab-7.13.1-0/apps/gitlab/gitlab-shell/gitlab-shell.log</code></p>
-<p>客户端提示指纹对不上</p>
-<p><code>rm -rf /root/.ssh/known_hosts</code></p>
-<p>gitlab首页不显示commit更新事件</p>
-<p>那是因为备份出来的repositories里的hook的软链接还指向的是老server的hook路径</p>
+<h2 id="迁移过程中碰到的问题">迁移过程中碰到的问题</h2><h3 id="客户端git_pull_提示_gitlab-shell-log_Permission_denied">客户端git pull 提示 gitlab-shell.log Permission denied</h3><p><code>chown -R git.git /dbdata/gitlab-7.13.1-0/apps/gitlab/gitlab-shell/gitlab-shell.log</code></p>
+<h3 id="客户端提示指纹对不上">客户端提示指纹对不上</h3><p><code>rm -rf /root/.ssh/known_hosts</code></p>
+<h3 id="gitlab首页不显示commit更新事件">gitlab首页不显示commit更新事件</h3><p>那是因为备份出来的repositories里的hook的软链接还指向的是老server的hook路径</p>
 <p>需要依次重新设置每个git仓库的hook，如果新server的gitlab安装路径和老server一样，请忽略</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /dbdata/gitlab-<span class="number">7.13</span>.<span class="number">1</span>-<span class="number">0</span>/apps/gitlab/repositories/ops/opslegend.git</span><br><span class="line">rm -rf hooks</span><br><span class="line">ln <span class="operator">-s</span> /dbdata/gitlab-<span class="number">7.13</span>.<span class="number">1</span>-<span class="number">0</span>/apps/gitlab/gitlab-shell/hooks hooks</span><br></pre></td></tr></table></figure>
+<h3 id="gitlab上传头像报500错误">gitlab上传头像报500错误</h3><p>查看apache的log显示权限不足</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tail -f /dbdata/gitlab-7.13.1-0/apps/gitlab/htdocs/log/production.log </span></span><br><span class="line"></span><br><span class="line">Errno::EACCES (Permission denied - /dbdata/gitlab-<span class="number">7.13</span>.<span class="number">1</span>-<span class="number">0</span>/apps/gitlab/htdocs/public/uploads/tmp/<span class="number">1459914127</span>-<span class="number">98234</span>-<span class="number">4213</span>):</span><br><span class="line">  app/controllers/profiles_controller.rb:<span class="number">21</span>:<span class="keyword">in</span> `update`</span><br></pre></td></tr></table></figure>
+<p>解决</p>
+<p><code>chown -R git.git /dbdata/gitlab-7.13.1-0/apps/gitlab/htdocs/public/uploads</code></p>
 <p>bitnami-gitlab官网: <a href="https://bitnami.com/stack/gitlab/installer" target="_blank" rel="external">https://bitnami.com/stack/gitlab/installer</a></p>
 
       
@@ -521,7 +522,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备份和恢复"><span class="nav-number">2.</span> <span class="nav-text">备份和恢复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迁移"><span class="nav-number">3.</span> <span class="nav-text">迁移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迁移过程中碰到的问题"><span class="nav-number">4.</span> <span class="nav-text">迁移过程中碰到的问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备份和恢复"><span class="nav-number">2.</span> <span class="nav-text">备份和恢复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迁移"><span class="nav-number">3.</span> <span class="nav-text">迁移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迁移过程中碰到的问题"><span class="nav-number">4.</span> <span class="nav-text">迁移过程中碰到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端git_pull_提示_gitlab-shell-log_Permission_denied"><span class="nav-number">4.1.</span> <span class="nav-text">客户端git pull 提示 gitlab-shell.log Permission denied</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端提示指纹对不上"><span class="nav-number">4.2.</span> <span class="nav-text">客户端提示指纹对不上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitlab首页不显示commit更新事件"><span class="nav-number">4.3.</span> <span class="nav-text">gitlab首页不显示commit更新事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitlab上传头像报500错误"><span class="nav-number">4.4.</span> <span class="nav-text">gitlab上传头像报500错误</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
