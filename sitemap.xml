@@ -3,31 +3,8 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/414/</loc>
-    <lastmod>2016-04-06T03:47:16.000Z</lastmod>
-    <data>
-        <display>
-        <title>centos gitlab一键安装备份恢复和迁移</title>
-        <pubTime>2014-12-03T16:00:00.000Z</pubTime>
-        
-        <tag>git </tag>
-         
-        <tag>gitlab </tag>
-         
-         
-           
-             
-              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-    
-  <url>
     <loc>http://linux48.com//archives/398/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Mysqldump参数大全</title>
@@ -48,8 +25,46 @@
 
     
   <url>
+    <loc>http://linux48.com//archives/425/</loc>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2015-05-27T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Hello World" url="http://linux48.com/categories/Hello-World/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com//archives/443/</loc>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS上搭建私有maven仓库</title>
+        <pubTime>2015-11-11T16:00:00.000Z</pubTime>
+        
+        <tag>maven </tag>
+         
+         
+           
+             
+              <breadCrumb title="devops" url="http://linux48.com/categories/devops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://linux48.com//archives/437/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>mysql You cant specify target table</title>
@@ -69,7 +84,7 @@
     
   <url>
     <loc>http://linux48.com//archives/442/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>mysql中查看数据库中所有表的记录数</title>
@@ -89,7 +104,7 @@
     
   <url>
     <loc>http://linux48.com//archives/441/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>zabbix的proxy端安装配置</title>
@@ -109,7 +124,7 @@
     
   <url>
     <loc>http://linux48.com//archives/440/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>zabbix的agent端安装配置</title>
@@ -129,7 +144,7 @@
     
   <url>
     <loc>http://linux48.com//archives/439/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>mysql求平均值、最小和总值</title>
@@ -149,7 +164,7 @@
     
   <url>
     <loc>http://linux48.com//archives/438/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>mysql取每隔一小时数据</title>
@@ -169,7 +184,7 @@
     
   <url>
     <loc>http://linux48.com//archives/436/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>阵列Cache写机制：Write-through与Write-back</title>
@@ -193,7 +208,7 @@
     
   <url>
     <loc>http://linux48.com//archives/435/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Repair Cisco vpnclient on windows10</title>
@@ -217,7 +232,7 @@
     
   <url>
     <loc>http://linux48.com//archives/434/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>MYSQL在一个字段值前面加字符串</title>
@@ -237,7 +252,7 @@
     
   <url>
     <loc>http://linux48.com//archives/433/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>mysql双主主键冲突排查修复</title>
@@ -263,7 +278,7 @@
     
   <url>
     <loc>http://linux48.com//archives/432/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>mysql双主互备设计搭建</title>
@@ -289,7 +304,7 @@
     
   <url>
     <loc>http://linux48.com//archives/431/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>CentOS6安装subversion 可视化管理工具iF.SVNAdmin</title>
@@ -311,7 +326,7 @@
     
   <url>
     <loc>http://linux48.com//archives/430/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Red Hat Enterprise Linux Server YUM配置</title>
@@ -333,7 +348,7 @@
     
   <url>
     <loc>http://linux48.com//archives/429/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>mysql全局日志开启</title>
@@ -355,7 +370,7 @@
     
   <url>
     <loc>http://linux48.com//archives/428/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>关于PHP-FPM的backlog</title>
@@ -375,7 +390,7 @@
     
   <url>
     <loc>http://linux48.com//archives/427/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>MySQL的Grant赋权命令详解</title>
@@ -395,7 +410,7 @@
     
   <url>
     <loc>http://linux48.com//archives/426/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>bitnami版gitlab修改端口</title>
@@ -417,7 +432,7 @@
     
   <url>
     <loc>http://linux48.com//archives/424/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>awstats日志分析安装</title>
@@ -439,7 +454,7 @@
     
   <url>
     <loc>http://linux48.com//archives/423/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>H3C划分VLAN命令</title>
@@ -461,7 +476,7 @@
     
   <url>
     <loc>http://linux48.com//archives/422/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>redis简易安装</title>
@@ -483,7 +498,7 @@
     
   <url>
     <loc>http://linux48.com//archives/420/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>shadowsocks的python和nodejs版搭建</title>
@@ -507,7 +522,7 @@
     
   <url>
     <loc>http://linux48.com//archives/418/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>ruby环境sass编译中文出现 Invalid GBK character</title>
@@ -527,7 +542,7 @@
     
   <url>
     <loc>http://linux48.com//archives/24/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Mysql主从服务设置</title>
@@ -547,7 +562,7 @@
     
   <url>
     <loc>http://linux48.com//archives/417/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>如何搭master-slave-slave</title>
@@ -569,7 +584,7 @@
     
   <url>
     <loc>http://linux48.com//archives/419/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>linux下删除乱码文件</title>
@@ -593,7 +608,7 @@
     
   <url>
     <loc>http://linux48.com//archives/416/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>利用SVNListParentPath增加http浏览仓库根目录的功能</title>
@@ -613,7 +628,7 @@
     
   <url>
     <loc>http://linux48.com//archives/415/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Chrome 浏览器加载 css Failed to load resource</title>
@@ -634,17 +649,21 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/425/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <loc>http://linux48.com//archives/414/</loc>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
-        <title>Hello World</title>
-        <pubTime>2015-05-27T16:00:00.000Z</pubTime>
+        <title>centos gitlab一键安装备份恢复和迁移</title>
+        <pubTime>2014-12-03T16:00:00.000Z</pubTime>
         
+        <tag>git </tag>
+         
+        <tag>gitlab </tag>
+         
          
            
              
-              <breadCrumb title="Hello World" url="http://linux48.com/categories/Hello-World/"/>
+              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
           
         </display>
     </data>
@@ -653,7 +672,7 @@
     
   <url>
     <loc>http://linux48.com//archives/413/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>linux sar命令</title>
@@ -673,7 +692,7 @@
     
   <url>
     <loc>http://linux48.com//archives/412/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>ruby on rails 报错解决</title>
@@ -697,7 +716,7 @@
     
   <url>
     <loc>http://linux48.com//archives/411/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>AWK统计随笔记录</title>
@@ -717,7 +736,7 @@
     
   <url>
     <loc>http://linux48.com//archives/408/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>SVN强制提交commit</title>
@@ -739,7 +758,7 @@
     
   <url>
     <loc>http://linux48.com//archives/409/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>rm Argument list too long的解决办法</title>
@@ -761,7 +780,7 @@
     
   <url>
     <loc>http://linux48.com//archives/410/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Crontab导致Linux的线程数枯竭</title>
@@ -785,7 +804,7 @@
     
   <url>
     <loc>http://linux48.com//archives/407/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>用二句Shell命令实现FTP批量上传文件夹</title>
@@ -807,7 +826,7 @@
     
   <url>
     <loc>http://linux48.com//archives/406/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>redis 写磁盘出错Cannot allocate memory</title>
@@ -829,7 +848,7 @@
     
   <url>
     <loc>http://linux48.com//archives/390/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Git 常用命令整理</title>
@@ -851,7 +870,7 @@
     
   <url>
     <loc>http://linux48.com//archives/389/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Jekyll目录结构与变量</title>
@@ -871,7 +890,7 @@
     
   <url>
     <loc>http://linux48.com//archives/391/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Windows平台配置Jekyll环境并与GitHub连接</title>
@@ -893,7 +912,7 @@
     
   <url>
     <loc>http://linux48.com//archives/405/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Redhat/CentOS系统KVM虚拟机安装过程详解</title>
@@ -917,7 +936,7 @@
     
   <url>
     <loc>http://linux48.com//archives/404/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>将sublime text添加到右键菜单中</title>
@@ -937,7 +956,7 @@
     
   <url>
     <loc>http://linux48.com//archives/403/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Sublime Text 3设置python编译支持环境设置</title>
@@ -959,7 +978,7 @@
     
   <url>
     <loc>http://linux48.com//archives/402/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>SHELL syntax error:unexpected end of file 提示错误</title>
@@ -981,7 +1000,7 @@
     
   <url>
     <loc>http://linux48.com//archives/400/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Windows下MySQL无法区分大小写解决方案</title>
@@ -1001,7 +1020,7 @@
     
   <url>
     <loc>http://linux48.com//archives/401/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>CentOS NFS的安装配置、启动及mount挂载方法</title>
@@ -1023,7 +1042,7 @@
     
   <url>
     <loc>http://linux48.com//archives/399/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>腾讯云的YUM repo</title>
@@ -1045,7 +1064,7 @@
     
   <url>
     <loc>http://linux48.com//archives/444/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>CentOS下Nginx配置Perl运行Bugzilla</title>
@@ -1069,7 +1088,7 @@
     
   <url>
     <loc>http://linux48.com//archives/397/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>git删除错误提交的commit</title>
@@ -1091,7 +1110,7 @@
     
   <url>
     <loc>http://linux48.com//archives/395/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>MySql中把一个表的数据插入到另一个表中的实现</title>
@@ -1113,7 +1132,7 @@
     
   <url>
     <loc>http://linux48.com//archives/396/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>centos安装ossec</title>
@@ -1135,7 +1154,7 @@
     
   <url>
     <loc>http://linux48.com//archives/388/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>访问phpmyadmin错误</title>
@@ -1155,7 +1174,7 @@
     
   <url>
     <loc>http://linux48.com//archives/381/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>厚黑苹果售后</title>
@@ -1177,7 +1196,7 @@
     
   <url>
     <loc>http://linux48.com//archives/376/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>wordpress引用google开放css加载不到解决方法</title>
@@ -1199,7 +1218,7 @@
     
   <url>
     <loc>http://linux48.com//archives/365/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>centos下nginx的https配置</title>
@@ -1223,7 +1242,7 @@
     
   <url>
     <loc>http://linux48.com//archives/322/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>rsync同步部署</title>
@@ -1243,7 +1262,7 @@
     
   <url>
     <loc>http://linux48.com//archives/307/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>使用saltstack批量管理服务器 （一）</title>
@@ -1263,7 +1282,7 @@
     
   <url>
     <loc>http://linux48.com//archives/274/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>msmtp+mutt 服务器批量发送邮件</title>
@@ -1285,7 +1304,7 @@
     
   <url>
     <loc>http://linux48.com//archives/246/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>zabbix的server端安装配置</title>
@@ -1307,7 +1326,7 @@
     
   <url>
     <loc>http://linux48.com//archives/102/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>wordpress后台主题只有一个解决方法</title>
@@ -1327,7 +1346,7 @@
     
   <url>
     <loc>http://linux48.com//archives/421/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>多版本php共存搭建</title>
@@ -1349,7 +1368,7 @@
     
   <url>
     <loc>http://linux48.com//archives/100/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>linux查看内存相关命令</title>
@@ -1369,7 +1388,7 @@
     
   <url>
     <loc>http://linux48.com//archives/99/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>github安装使用</title>
@@ -1389,7 +1408,7 @@
     
   <url>
     <loc>http://linux48.com//archives/98/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>localhost 与 127.0.0.1 的区别</title>
@@ -1407,7 +1426,7 @@
     
   <url>
     <loc>http://linux48.com//archives/97/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>使用rsync删除海量文件</title>
@@ -1427,7 +1446,7 @@
     
   <url>
     <loc>http://linux48.com//archives/96/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>记录一次服务器数据恢复</title>
@@ -1447,7 +1466,7 @@
     
   <url>
     <loc>http://linux48.com//archives/95/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>记录一次nginx 502</title>
@@ -1467,7 +1486,7 @@
     
   <url>
     <loc>http://linux48.com//archives/83/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>linux命令后台运行详解</title>
@@ -1487,7 +1506,7 @@
     
   <url>
     <loc>http://linux48.com//archives/82/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>深入理解磁盘inode</title>
@@ -1507,7 +1526,7 @@
     
   <url>
     <loc>http://linux48.com//archives/77/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>MySQL错误ERROR 1064 (type=myisam出错)</title>
@@ -1527,7 +1546,7 @@
     
   <url>
     <loc>http://linux48.com//archives/69/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>centos6.2下php支持oracle</title>
@@ -1549,7 +1568,7 @@
     
   <url>
     <loc>http://linux48.com//archives/67/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>oracle startup 故障：ORA-00845: MEMORY_TARGET</title>
@@ -1569,7 +1588,7 @@
     
   <url>
     <loc>http://linux48.com//archives/66/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>oracle startup failure</title>
@@ -1589,7 +1608,7 @@
     
   <url>
     <loc>http://linux48.com//archives/68/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>ORA-01102: cannot mount database in EXCLUSIVE mode</title>
@@ -1609,7 +1628,7 @@
     
   <url>
     <loc>http://linux48.com//archives/65/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>centos install oracle 11g</title>
@@ -1631,7 +1650,7 @@
     
   <url>
     <loc>http://linux48.com//archives/74/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Mysql慢查询设置</title>
@@ -1651,7 +1670,7 @@
     
   <url>
     <loc>http://linux48.com//archives/72/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>MYSQL主从同步故障事件</title>
@@ -1673,7 +1692,7 @@
     
   <url>
     <loc>http://linux48.com//archives/60/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>CentOS下python-mysqldb安装事件</title>
@@ -1695,7 +1714,7 @@
     
   <url>
     <loc>http://linux48.com//archives/59/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>sqlite3源码升级事件</title>
@@ -1715,7 +1734,7 @@
     
   <url>
     <loc>http://linux48.com//archives/58/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>centos6.2升级python后处理sqlite3库事件</title>
@@ -1737,7 +1756,7 @@
     
   <url>
     <loc>http://linux48.com//archives/57/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>mysql5.5版本主从搭建</title>
@@ -1759,7 +1778,7 @@
     
   <url>
     <loc>http://linux48.com//archives/52/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>误卸载python导致yum无法使用修复事件</title>
@@ -1781,7 +1800,7 @@
     
   <url>
     <loc>http://linux48.com//archives/53/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Centos平滑升级python事件</title>
@@ -1801,7 +1820,7 @@
     
   <url>
     <loc>http://linux48.com//archives/50/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Nginx出现“413 Request Entity Too Large”错误解决方法</title>
@@ -1821,7 +1840,7 @@
     
   <url>
     <loc>http://linux48.com//archives/49/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>Nginx、Apache目录浏览功能</title>
@@ -1843,7 +1862,7 @@
     
   <url>
     <loc>http://linux48.com//archives/46/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>CentOS yum安装配置LAMP+tomcat</title>
@@ -1871,7 +1890,7 @@
     
   <url>
     <loc>http://linux48.com//archives/44/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>ios5.0.1降级4.3.3事件</title>
@@ -1893,7 +1912,7 @@
     
   <url>
     <loc>http://linux48.com//archives/40/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>OCR之Tesseract的linux下安装</title>
@@ -1913,7 +1932,7 @@
     
   <url>
     <loc>http://linux48.com//archives/35/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>memcached简易安装</title>
@@ -1933,7 +1952,7 @@
     
   <url>
     <loc>http://linux48.com//archives/31/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>centos下snmp客户端安装</title>
@@ -1953,7 +1972,7 @@
     
   <url>
     <loc>http://linux48.com//archives/14/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>一篇很不错的iptables的shell</title>
@@ -1975,7 +1994,7 @@
     
   <url>
     <loc>http://linux48.com//archives/9/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
+    <lastmod>2016-04-09T08:30:48.000Z</lastmod>
     <data>
         <display>
         <title>思科静态浮动路由配置</title>
@@ -1997,25 +2016,6 @@
     
     
     
-  <url>
-    <loc>http://linux48.com//archives/443/</loc>
-    <lastmod>2016-02-05T07:13:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>CentOS上搭建私有maven仓库</title>
-        <pubTime>2015-11-11T16:00:00.000Z</pubTime>
-        
-        <tag>maven </tag>
-         
-         
-           
-             
-              <breadCrumb title="devops" url="http://linux48.com/categories/devops/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
     
 </urlset>

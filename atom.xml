@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2016-02-05T07:13:23.000Z</updated>
+  <updated>2016-04-09T08:30:48.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://linux48.com//archives/444/"/>
     <id>http://linux48.com//archives/444/</id>
     <published>2016-02-02T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<h1 id="安装LNMP">安装LNMP</h1><p>此处省略。。。</p>
 <h1 id="安装perl-fcgi模块">安装perl-fcgi模块</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum -y install perl-FCGI</span><br><span class="line"></span><br><span class="line"><span class="comment">#或者源码编译安装</span></span><br><span class="line"></span><br><span class="line">wget http://search.cpan.org/CPAN/authors/id/F/FL/FLORA/FCGI-<span class="number">0.74</span>.tar.gz</span><br><span class="line">tar zxvf FCGI-<span class="number">0.74</span>.tar.gz </span><br><span class="line"><span class="built_in">cd</span> FCGI-<span class="number">0.74</span></span><br><span class="line">perl Makefile.PL</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -54,7 +54,7 @@
     <link href="http://linux48.com//archives/443/"/>
     <id>http://linux48.com//archives/443/</id>
     <published>2015-11-11T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<h1 id="安装JDK">安装JDK</h1><p>此处省略。。。</p>
 <h1 id="安装Sonatype_Nexus">安装Sonatype Nexus</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.sonatype.com/nexus/oss/nexus-<span class="number">2.11</span>.<span class="number">1</span>-<span class="number">01</span>-bundle.tar.gz</span><br><span class="line">tar zxvf nexus-<span class="number">2.11</span>.<span class="number">1</span>-<span class="number">01</span>-bundle.tar.gz </span><br><span class="line">mv nexus-<span class="number">2.11</span>.<span class="number">1</span>-<span class="number">01</span> /usr/<span class="built_in">local</span>/nexus</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -80,7 +80,7 @@
     <link href="http://linux48.com//archives/442/"/>
     <id>http://linux48.com//archives/442/</id>
     <published>2015-10-29T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<p>如果想知道MySQL数据库中每个表占用的空间、表记录的行数的话，可以打开MySQL的 information_schema 数据库。在该库中有一个 TABLES 表，这个表主要字段分别是：</p>
 <blockquote>
 <ul>
@@ -125,7 +125,7 @@
     <link href="http://linux48.com//archives/441/"/>
     <id>http://linux48.com//archives/441/</id>
     <published>2015-10-28T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<p>zabbix proxy可以代替zabbix server检索客户端的数据，然后把数据汇报给zabbix server，并且在一定程度上分担了zabbix server的压力。zabbix proxy可以非常简便的实现了集中式、分布式监控。</p>
 <p>zabbix proxy使用场景:</p>
 <blockquote>
@@ -196,7 +196,7 @@
     <link href="http://linux48.com//archives/440/"/>
     <id>http://linux48.com//archives/440/</id>
     <published>2015-10-27T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<h2 id="下载zabbix">下载zabbix</h2><h2 id="安装zabbix所需的组件">安装zabbix所需的组件</h2><p><code>yum -y install curl curl-devel net-snmp net-snmp-devel perl-DBI</code></p>
 <h2 id="创建用户账号">创建用户账号</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">groupadd zabbix</span><br><span class="line">useradd -g zabbix zabbix</span><br><span class="line">usermod <span class="operator">-s</span> /sbin/nologin zabbix</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -231,7 +231,7 @@
     <link href="http://linux48.com//archives/439/"/>
     <id>http://linux48.com//archives/439/</id>
     <published>2015-10-26T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE sales_rep(</span><br><span class="line">    -&gt;   employee_number INT,</span><br><span class="line">    -&gt;   surname VARCHAR(<span class="number">40</span>),</span><br><span class="line">    -&gt;   first_name VARCHAR(<span class="number">30</span>),</span><br><span class="line">    -&gt;   commission TINYINT</span><br><span class="line">    -&gt; );</span><br><span class="line">Query OK, <span class="number">0</span> rows affected (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; INSERT INTO sales_rep values(<span class="number">4</span>,<span class="string">'Rive'</span>,<span class="string">'Mongane'</span>,<span class="number">10</span>);</span><br><span class="line">Query OK, <span class="number">1</span> row affected (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; INSERT INTO sales_rep values(<span class="number">5</span>,<span class="string">'Smith'</span>,<span class="string">'Mike'</span>,<span class="number">12</span>);</span><br><span class="line">Query OK, <span class="number">1</span> row affected (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT AVG(commission) FROM sales_rep;</span><br><span class="line">+-----------------+</span><br><span class="line">| AVG(commission) |</span><br><span class="line">+-----------------+</span><br><span class="line">|         <span class="number">11.0000</span> |</span><br><span class="line">+-----------------+</span><br><span class="line"><span class="number">1</span> row <span class="keyword">in</span> <span class="built_in">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line">--//以上是AVG()函数的用法，可以换成MIN()、SUM()函数，用来求最小值，求和。</span><br></pre></td></tr></table></figure>
 ]]></content>
     <summary type="html">
@@ -249,7 +249,7 @@
     <link href="http://linux48.com//archives/438/"/>
     <id>http://linux48.com//archives/438/</id>
     <published>2015-10-20T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> </span><br><span class="line">    <span class="keyword">HOUR</span>(<span class="string">`input_date`</span>) <span class="keyword">AS</span> <span class="keyword">HOUR</span>,</span><br><span class="line">    <span class="keyword">COUNT</span>(<span class="number">1</span>) <span class="keyword">AS</span> 交易笔数,</span><br><span class="line">    brand_name_cn <span class="keyword">AS</span> 品牌,</span><br><span class="line">    <span class="keyword">DATE_FORMAT</span>(<span class="string">`input_date`</span>, <span class="string">'%m%d'</span>) <span class="keyword">AS</span> 交易日期 </span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    test.<span class="string">`1023`</span> </span><br><span class="line"><span class="keyword">WHERE</span> input_date &gt;= <span class="number">20150930000000</span> </span><br><span class="line">    <span class="keyword">AND</span> input_date &lt;= <span class="number">20150930235959</span> </span><br><span class="line">    <span class="keyword">AND</span> brand_name_cn = <span class="string">'统一星巴克'</span> </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">HOUR</span> ;</span></span><br></pre></td></tr></table></figure>
 <p>格式化日期</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> </span><br><span class="line">    <span class="keyword">HOUR</span>(<span class="string">`input_time`</span>) <span class="keyword">AS</span> <span class="keyword">HOUR</span>,</span><br><span class="line">    <span class="keyword">COUNT</span>(<span class="number">1</span>) <span class="keyword">AS</span> <span class="keyword">COUNT</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    <span class="string">`table_name`</span> </span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">DATE_FORMAT</span>(<span class="string">`input_time`</span>, <span class="string">'%Y-%m-%d'</span>) = <span class="string">'2015-10-21'</span> </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">HOUR</span>(<span class="string">`input_time`</span>) ;</span></span><br></pre></td></tr></table></figure>
@@ -269,7 +269,7 @@
     <link href="http://linux48.com//archives/437/"/>
     <id>http://linux48.com//archives/437/</id>
     <published>2015-10-07T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<p>今天在写SQL语句的时候遇到一个比较特殊的问题。<br>mysql 语句如下:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">UPDATE</span> </span><br><span class="line">  pms_project_product </span><br><span class="line"><span class="keyword">SET</span></span><br><span class="line">  area_list = </span><br><span class="line">  (<span class="keyword">SELECT</span> </span><br><span class="line">    area_list </span><br><span class="line">  <span class="keyword">FROM</span></span><br><span class="line">    pms_project_product </span><br><span class="line">  <span class="keyword">WHERE</span> activity_product_id = <span class="number">48468</span>),</span><br><span class="line">  area_list_name = </span><br><span class="line">  (<span class="keyword">SELECT</span> </span><br><span class="line">    area_list_name </span><br><span class="line">  <span class="keyword">FROM</span></span><br><span class="line">    pms_project_product </span><br><span class="line">  <span class="keyword">WHERE</span> activity_product_id = <span class="number">48468</span>) </span><br><span class="line"><span class="keyword">WHERE</span> activity_product_id = <span class="number">47098</span> ;</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -302,7 +302,7 @@
     <link href="http://linux48.com//archives/436/"/>
     <id>http://linux48.com//archives/436/</id>
     <published>2015-08-26T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<blockquote class="blockquote-center">Write Through和Write Back是阵列卡Cache的两种使用方式，也称为透写和回写。当选用write through方式时，系统的写磁盘操作并不利用阵列卡的Cache，而是直接与磁盘进行数据的交互。而write Back方式则利用阵列Cache作为系统与磁盘间的二传手，系统先将数据交给Cache，然后再由Cache将数据传给磁盘。</blockquote>
 
 <a id="more"></a>
@@ -381,7 +381,7 @@
     <link href="http://linux48.com//archives/435/"/>
     <id>http://linux48.com//archives/435/</id>
     <published>2015-08-02T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<p>由于此问题是windows10刚发布，但是cisco单方面并没有及时修复，并且就目前看来是全球的工程师都碰到的一个很紧急棘手的问题</p>
 <p>在查找修复方案的时候;得到好多歪果仁的帮助，特地写了一片洋文，希望可以帮到更多的人，蹩脚的E文如有问题请留言或者邮件我及时勘误，不甚感激！</p>
 <p>Microsoft released last week by the windows10, after the upgrade <code>vpnclient-winx64-msi-5.0.07.0440-k9.exe</code> found this installation as wrong.</p>
@@ -452,7 +452,7 @@
     <link href="http://linux48.com//archives/434/"/>
     <id>http://linux48.com//archives/434/</id>
     <published>2015-07-29T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--在`menber`表的`name`字段前面按照条件批量加`jc100`这个字符串</span></span><br><span class="line"></span><br><span class="line"><span class="operator"><span class="keyword">UPDATE</span> </span><br><span class="line">    <span class="string">`usrdb`</span>.<span class="string">`menber`</span></span><br><span class="line">  <span class="keyword">SET</span></span><br><span class="line">    <span class="string">`name`</span> = <span class="keyword">CONCAT</span>(<span class="string">'jc100'</span>, <span class="string">`name`</span>) </span><br><span class="line">  <span class="keyword">WHERE</span> provice = <span class="string">'678'</span> </span><br><span class="line">    <span class="keyword">AND</span> input_time <span class="keyword">BETWEEN</span> <span class="string">'2015-07-30 00:00:00'</span> </span><br><span class="line">    <span class="keyword">AND</span> <span class="string">'2015-07-30 23:59:59'</span></span></span><br></pre></td></tr></table></figure>
 <p>mysql的<strong><code>CONCAT()</code></strong>函数用于将多个字符串连接成一个字符串，是最重要的mysql函数之一。</p>
 <a id="more"></a>
@@ -476,7 +476,7 @@
     <link href="http://linux48.com//archives/433/"/>
     <id>http://linux48.com//archives/433/</id>
     <published>2015-07-21T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<h1 id="背景">背景</h1><p>线上A和B互为主主，A为业务写库，B为读库</p>
 <p>19号下午收到短信报警A的slave delay，果断VPN上去数据库查看到</p>
 <pre><code>Last_SQL_Error: Error <span class="string">'Duplicate entry '</span><span class="number">4960446</span><span class="string">' for key '</span>transaction_id<span class="string">''</span> <span class="keyword">on</span> query. <span class="keyword">Default</span> database
@@ -593,7 +593,7 @@ slave <span class="operator"><span class="keyword">start</span>;</span>
     <link href="http://linux48.com//archives/432/"/>
     <id>http://linux48.com//archives/432/</id>
     <published>2015-07-14T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<p>Master-Master复制的两台服务器，既是master，又是另一台服务器的slave。这样，任何一方所做的变更，都会通过复制应用到另外一方的数据库中。<br>这样做的好很多，主要是下面几点:</p>
 <blockquote>
 <ul>
@@ -636,7 +636,7 @@ slave <span class="operator"><span class="keyword">start</span>;</span>
     <link href="http://linux48.com//archives/431/"/>
     <id>http://linux48.com//archives/431/</id>
     <published>2015-07-06T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<p>windows下的TortoiseSVN服务端是相当好用的，界面管理方便，增删改查用户和库都比较好用，但是linux下的svn就比较折腾人。<br><a id="more"></a></p>
 <p>之前安装过apache整合svn，虽然有web界面可以看，但是也不是那么好管理，昨天晚上受朋友所托，需要通过可视化工具来增删改查用户和库。</p>
 <p>试了一圈以后最后找到了这个svnadmin。是使用php写的。他吸引我的主要是安装和配置都非常简单和人性化。而且也有强大的功能。</p>
@@ -689,7 +689,7 @@ chmod <span class="number">777</span> -R <span class="regexp">/home/</span>wwwro
     <link href="http://linux48.com//archives/430/"/>
     <id>http://linux48.com//archives/430/</id>
     <published>2015-07-05T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<p>由于 redhat的yum在线更新是收费的，如果没有注册的话不能使用，如果要使用，需将redhat的yum卸载后，重启安装，再配置其他源.<br><a id="more"></a></p>
 <h1 id="删除redhat原有的yum">删除redhat原有的yum</h1><pre><code>rpm -a<span class="string">q|grep yum|</span>xargs rpm -e --nodeps 
 </code></pre><h1 id="下载yum安装文件">下载yum安装文件</h1><p>注意，由于官方不断更新版本，如果下载时找不到文件，就到：<a href="http://mirrors.163.com/centos/6/os/x86_64/Packages" target="_blank" rel="external">http://mirrors.163.com/centos/6/os/x86_64/Packages</a> 上查找相应的头文件。然后再下载。</p>
@@ -723,7 +723,7 @@ wget <span class="symbol">http:</span>/<span class="regexp">/mirrors.163.com/cen
     <link href="http://linux48.com//archives/429/"/>
     <id>http://linux48.com//archives/429/</id>
     <published>2015-06-25T06:30:42.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<p>之前有写过<a href="http://linux48.com/archives/74/">Mysql慢查询设置</a>，现在需要对Mysql进行深入的分析，发现mysql性能瓶颈和寻找优化策略，这就要对全部的sql执行语句进行查询，慢查询是满足不了的，binlog也只是记录了update语句，这个时候就需要设置mysql的全局log了。</p>
 <a id="more"></a>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@<span class="built_in">test</span> mysql5.<span class="number">5</span>]<span class="comment"># cat /etc/my.cnf |grep -v "#" |grep "log"</span></span><br><span class="line"><span class="built_in">log</span>=/tmp/row.log</span><br><span class="line">slow-query-log = on</span><br><span class="line">slow_query_<span class="built_in">log</span>_file = /data/mysql/binlog/slowquery_3.log</span><br><span class="line"><span class="built_in">log</span>-queries-not-using-indexes = <span class="literal">true</span></span><br><span class="line"><span class="built_in">log</span>-bin=mysql-bin</span><br><span class="line">binlog_format=mixed</span><br><span class="line">innodb_<span class="built_in">log</span>_group_home_dir = /data/mysql/data</span><br></pre></td></tr></table></figure>
@@ -766,7 +766,7 @@ wget <span class="symbol">http:</span>/<span class="regexp">/mirrors.163.com/cen
     <link href="http://linux48.com//archives/428/"/>
     <id>http://linux48.com//archives/428/</id>
     <published>2015-06-08T06:30:42.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<p>php-fpm 必须注意<strong>backlog</strong>的设置，否则上压力就容易 无法连接、网关超时！</p>
 <a id="more"></a>
 <pre><code><span class="comment">;listen.backlog = -1</span>
@@ -814,7 +814,7 @@ net.ipv4.<span class="variable">tcp_max_syn_backlog =</span> <span class="number
     <link href="http://linux48.com//archives/427/"/>
     <id>http://linux48.com//archives/427/</id>
     <published>2015-06-05T08:30:42.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<p>本文实例，运行于 MySQL 5.0 及以上版本。</p>
 <p>MySQL 赋予用户权限命令的简单格式可概括为：</p>
 <pre><code>grant 权限 <span class="function_start"><span class="keyword">on</span></span> 数据库对象 <span class="keyword">to</span> 用户
@@ -904,7 +904,7 @@ grant<span class="instruction"> execute </span>on function testdb.fn_add to 'dba
     <link href="http://linux48.com//archives/426/"/>
     <id>http://linux48.com//archives/426/</id>
     <published>2015-06-03T08:40:42.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<p>bitnami版gitlab默认安装好web端口为80</p>
 <p>为了便于开放到外部访问，需要把端口改为其他的，比如8080<br><a id="more"></a></p>
 <h1 id="修改apache主配置文件">修改apache主配置文件</h1><pre><code>[root@iZ23m1d4vwiZ ~]# <span class="keyword">vim</span> /<span class="keyword">opt</span>/gitlab-<span class="number">6.8</span>.<span class="number">1</span>-<span class="number">0</span>/apache2/<span class="keyword">conf</span>/httpd.<span class="keyword">conf</span>
@@ -979,7 +979,7 @@ production: &amp;base
     <link href="http://linux48.com//archives/425/"/>
     <id>http://linux48.com//archives/425/</id>
     <published>2015-05-27T16:00:00.000Z</published>
-    <updated>2016-02-05T07:13:23.000Z</updated>
+    <updated>2016-04-09T08:30:48.000Z</updated>
     <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <a id="more"></a>
 <h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
