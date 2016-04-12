@@ -14,7 +14,7 @@
 
 
 
-    <meta name="description" content="redis简易安装, My Opensource Life & Notepad" />
+    <meta name="description" content="Redis安装及主从配置, My Opensource Life & Notepad" />
 
 
 
@@ -49,7 +49,7 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
 
 
-  <title> redis简易安装 - linux48 </title>
+  <title> Redis安装及主从配置 - linux48 </title>
 </head>
 
 <body>
@@ -221,7 +221,7 @@
           
           
             
-              redis简易安装
+              Redis安装及主从配置
             
           
         </h1>
@@ -264,7 +264,22 @@
       
 
       
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">yum -y install make gcc gcc-c++ tcl</span><br><span class="line">wget http://download.redis.io/releases/redis-<span class="number">2.8</span>.<span class="number">19</span>.tar.gz</span><br><span class="line">tar zxvf redis-<span class="number">2.8</span>.<span class="number">19</span>.tar.gz</span><br><span class="line"><span class="built_in">cd</span> redis-<span class="number">2.8</span>.<span class="number">19</span></span><br><span class="line">chmod <span class="number">777</span> -R *</span><br><span class="line">make PREFIX=/usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>  MALLOC=libc install</span><br><span class="line">cp ./redis.conf /usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>/</span><br><span class="line">mkdir -p  /data/redisdb</span><br><span class="line">vim /usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>/redis.conf</span><br><span class="line">nohup /usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>/bin/redis-server /usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>/redis.conf &amp;</span><br><span class="line">/usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>/bin/redis-cli</span><br></pre></td></tr></table></figure>
+        <h1 id="Redis简洁">Redis简洁</h1><p>redis是一个key-value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)和zset(有序集合)。这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。在此基础上，redis支持各种不同方式的排序。与memcached一样，为了保证效率，数据都是缓存在内存中。区别的是redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，并且在此基础上实现了master-slave(主从)同步。Redis 是一个高性能的key-value数据库。 redis的出现，很大程度补偿了memcached这类keyvalue存储的不足，在部分场合可以对关系数据库起到很好的补充作用。</p>
+<h1 id="编译安装">编译安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">yum -y install make gcc gcc-c++ tcl</span><br><span class="line"></span><br><span class="line">wget http://download.redis.io/releases/redis-<span class="number">2.8</span>.<span class="number">19</span>.tar.gz</span><br><span class="line"></span><br><span class="line">tar zxvf redis-<span class="number">2.8</span>.<span class="number">19</span>.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> redis-<span class="number">2.8</span>.<span class="number">19</span></span><br><span class="line"></span><br><span class="line">chmod <span class="number">777</span> -R *</span><br><span class="line"></span><br><span class="line">make PREFIX=/usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>  MALLOC=libc install</span><br><span class="line"></span><br><span class="line">cp ./redis.conf /usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>/</span><br><span class="line"></span><br><span class="line">mkdir -p  /data/redisdb</span><br><span class="line"></span><br><span class="line">vim /usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>/redis.conf</span><br><span class="line"></span><br><span class="line">nohup /usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>/bin/redis-server /usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>/redis.conf &amp;</span><br><span class="line"></span><br><span class="line">/usr/<span class="built_in">local</span>/redis-<span class="number">2.8</span>.<span class="number">19</span>/bin/redis-cli</span><br></pre></td></tr></table></figure>
+<h1 id="启动脚本">启动脚本</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat redis-<span class="number">2.8</span>.<span class="number">19</span>/start.sh</span><br><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line">dir=$(<span class="built_in">pwd</span>)</span><br><span class="line">nohup <span class="variable">$dir</span>/bin/redis-server redis.conf  &gt;&gt; redis.log &amp;</span><br></pre></td></tr></table></figure>
+<h1 id="Redis主从配置">Redis主从配置</h1><p>Redis的主从复制功能非常强大，一个master可以拥有多个slave，而一个slave又可以拥有多个slave，如此下去，形成了强大的多级服务器集群架构。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cp -R redis-<span class="number">2.8</span>.<span class="number">19</span>   redis-<span class="number">2.8</span>.<span class="number">19</span>-slave</span><br><span class="line"></span><br><span class="line">cat redis.conf  |grep port</span><br><span class="line">port <span class="number">6380</span></span><br><span class="line"></span><br><span class="line">cat redis.conf  |grep slaveof </span><br><span class="line">slaveof <span class="number">127.0</span>.<span class="number">0.1</span> <span class="number">6379</span>   <span class="comment"># (映射到主服务器上)</span></span><br></pre></td></tr></table></figure>
+<p>如果master设置了验证密码，还需配置masterauth。</p>
+<p>配置完之后启动slave的Redis服务，主从配置完成。</p>
+<h2 id="主从测试">主从测试</h2><p>在master和slave分别执行info命令，查看结果如下(这里只贴主从相关打印)：</p>
+<p><strong>master</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># redis-2.8.19/redis-cli </span></span><br><span class="line"><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">6379</span>&gt; info</span><br><span class="line"></span><br><span class="line"><span class="comment"># Replication</span></span><br><span class="line">role:master</span><br><span class="line">connected_slaves:<span class="number">1</span></span><br><span class="line">slave0:ip=<span class="number">127.0</span>.<span class="number">0.1</span>,port=<span class="number">6380</span>,state=online,offset=<span class="number">2063394</span>,lag=<span class="number">0</span></span><br><span class="line">master_repl_offset:<span class="number">2063394</span></span><br><span class="line">repl_backlog_active:<span class="number">1</span></span><br><span class="line">repl_backlog_size:<span class="number">1048576</span></span><br><span class="line">repl_backlog_first_byte_offset:<span class="number">1014819</span></span><br><span class="line">repl_backlog_histlen:<span class="number">1048576</span></span><br></pre></td></tr></table></figure>
+<p><strong>slave</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># redis-2.8.19-slave/redis-cli -p 6380</span></span><br><span class="line"><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">6380</span>&gt; info</span><br><span class="line"></span><br><span class="line"><span class="comment"># Replication</span></span><br><span class="line">role:slave</span><br><span class="line">master_host:<span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line">master_port:<span class="number">6379</span></span><br><span class="line">master_link_status:up</span><br><span class="line">master_last_io_seconds_ago:<span class="number">2</span></span><br><span class="line">master_sync_<span class="keyword">in</span>_progress:<span class="number">0</span></span><br><span class="line">slave_repl_offset:<span class="number">2080164</span></span><br><span class="line">slave_priority:<span class="number">100</span></span><br><span class="line">slave_<span class="built_in">read</span>_only:<span class="number">1</span></span><br><span class="line">connected_slaves:<span class="number">0</span></span><br><span class="line">master_repl_offset:<span class="number">0</span></span><br><span class="line">repl_backlog_active:<span class="number">0</span></span><br><span class="line">repl_backlog_size:<span class="number">1048576</span></span><br><span class="line">repl_backlog_first_byte_offset:<span class="number">0</span></span><br><span class="line">repl_backlog_histlen:<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>然后在master执行 <code>set name linux48</code></p>
+<p>在slave执行<code>get name</code>，看是否能得到linux48，如果能够得到值则说明配置成功。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># redis-2.8.19/redis-cli</span></span><br><span class="line"><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">6379</span>&gt; <span class="built_in">set</span> name linux48</span><br><span class="line">OK</span><br><span class="line"><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">6379</span>&gt; get name</span><br><span class="line"><span class="string">"linux48"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># redis-2.8.19-slave/redis-cli -p 6380</span></span><br><span class="line"><span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">6380</span>&gt; get name</span><br><span class="line"><span class="string">"linux48"</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -349,7 +364,7 @@
       <div class="comments" id="comments">
         
 
-<div class="ds-share" data-thread-key="/archives/422/" data-title="redis简易安装" data-images="http://linux48.com//archives/422/" data-content="http://linux48.com//archives/422/" data-url="http://linux48.com//archives/422/">
+<div class="ds-share" data-thread-key="/archives/422/" data-title="Redis安装及主从配置" data-images="http://linux48.com//archives/422/" data-content="http://linux48.com//archives/422/" data-url="http://linux48.com//archives/422/">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
@@ -364,7 +379,7 @@
 
           <!-- 评论框 -->
           <div class="ds-thread" data-thread-key="/archives/422/"
-               data-title="redis简易安装" data-url="http://linux48.com//archives/422/">
+               data-title="Redis安装及主从配置" data-url="http://linux48.com//archives/422/">
           </div>
         
       </div>
@@ -492,7 +507,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目錄</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis简洁"><span class="nav-number">1.</span> <span class="nav-text">Redis简洁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译安装"><span class="nav-number">2.</span> <span class="nav-text">编译安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动脚本"><span class="nav-number">3.</span> <span class="nav-text">启动脚本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis主从配置"><span class="nav-number">4.</span> <span class="nav-text">Redis主从配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主从测试"><span class="nav-number">4.1.</span> <span class="nav-text">主从测试</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

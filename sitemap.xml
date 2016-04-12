@@ -3,6 +3,28 @@
 
     
   <url>
+    <loc>http://linux48.com//archives/422/</loc>
+    <lastmod>2016-04-12T07:04:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>Redis安装及主从配置</title>
+        <pubTime>2015-03-04T16:00:00.000Z</pubTime>
+        
+        <tag>nosql </tag>
+         
+        <tag>redis </tag>
+         
+         
+           
+             
+              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://linux48.com//archives/445/</loc>
     <lastmod>2016-04-09T09:39:04.000Z</lastmod>
     <data>
@@ -42,30 +64,6 @@
            
              
               <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/444/</loc>
-    <lastmod>2016-04-09T09:12:49.000Z</lastmod>
-    <data>
-        <display>
-        <title>CentOS下Nginx配置Perl运行Bugzilla</title>
-        <pubTime>2016-02-02T16:00:00.000Z</pubTime>
-        
-        <tag>bugzilla </tag>
-         
-        <tag>cgi </tag>
-         
-        <tag>perl </tag>
-         
-         
-           
-             
-              <breadCrumb title="devops" url="http://linux48.com/categories/devops/"/>
           
         </display>
     </data>
@@ -505,21 +503,17 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/422/</loc>
+    <loc>http://linux48.com//archives/425/</loc>
     <lastmod>2016-04-09T09:12:49.000Z</lastmod>
     <data>
         <display>
-        <title>redis简易安装</title>
-        <pubTime>2015-03-04T16:00:00.000Z</pubTime>
+        <title>Hello World</title>
+        <pubTime>2015-05-27T16:00:00.000Z</pubTime>
         
-        <tag>nosql </tag>
-         
-        <tag>redis </tag>
-         
          
            
              
-              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
+              <breadCrumb title="Hello World" url="http://linux48.com/categories/Hello-World/"/>
           
         </display>
     </data>
@@ -1093,17 +1087,23 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/425/</loc>
+    <loc>http://linux48.com//archives/444/</loc>
     <lastmod>2016-04-09T09:12:49.000Z</lastmod>
     <data>
         <display>
-        <title>Hello World</title>
-        <pubTime>2015-05-27T16:00:00.000Z</pubTime>
+        <title>CentOS下Nginx配置Perl运行Bugzilla</title>
+        <pubTime>2016-02-02T16:00:00.000Z</pubTime>
         
+        <tag>bugzilla </tag>
+         
+        <tag>cgi </tag>
+         
+        <tag>perl </tag>
+         
          
            
              
-              <breadCrumb title="Hello World" url="http://linux48.com/categories/Hello-World/"/>
+              <breadCrumb title="devops" url="http://linux48.com/categories/devops/"/>
           
         </display>
     </data>
