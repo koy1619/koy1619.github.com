@@ -3,6 +3,30 @@
 
     
   <url>
+    <loc>http://linux48.com//archives/446/</loc>
+    <lastmod>2016-04-14T07:03:11.000Z</lastmod>
+    <data>
+        <display>
+        <title>CISCO ASA5520 HA 配置</title>
+        <pubTime>2016-04-13T16:00:00.000Z</pubTime>
+        
+        <tag>cisco </tag>
+         
+        <tag>ha </tag>
+         
+        <tag>路由 </tag>
+         
+         
+           
+             
+              <breadCrumb title="网络交换" url="http://linux48.com/categories/%E7%BD%91%E7%BB%9C%E4%BA%A4%E6%8D%A2/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://linux48.com//archives/425/</loc>
     <lastmod>2016-04-14T02:13:27.000Z</lastmod>
     <data>
@@ -499,21 +523,21 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/398/</loc>
+    <loc>http://linux48.com//archives/399/</loc>
     <lastmod>2016-04-09T09:12:49.000Z</lastmod>
     <data>
         <display>
-        <title>Mysqldump参数大全</title>
-        <pubTime>2014-07-28T16:00:00.000Z</pubTime>
+        <title>腾讯云的YUM repo</title>
+        <pubTime>2014-07-29T16:00:00.000Z</pubTime>
         
-        <tag>dump </tag>
+        <tag>repo </tag>
          
-        <tag>mysql </tag>
+        <tag>腾讯云 </tag>
          
          
            
              
-              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
+              <breadCrumb title="云计算" url="http://linux48.com/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
           
         </display>
     </data>
@@ -1065,28 +1089,6 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/399/</loc>
-    <lastmod>2016-04-09T09:12:49.000Z</lastmod>
-    <data>
-        <display>
-        <title>腾讯云的YUM repo</title>
-        <pubTime>2014-07-29T16:00:00.000Z</pubTime>
-        
-        <tag>repo </tag>
-         
-        <tag>腾讯云 </tag>
-         
-         
-           
-             
-              <breadCrumb title="云计算" url="http://linux48.com/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://linux48.com//archives/444/</loc>
     <lastmod>2016-04-09T09:12:49.000Z</lastmod>
     <data>
@@ -1104,6 +1106,28 @@
            
              
               <breadCrumb title="devops" url="http://linux48.com/categories/devops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com//archives/398/</loc>
+    <lastmod>2016-04-09T09:12:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>Mysqldump参数大全</title>
+        <pubTime>2014-07-28T16:00:00.000Z</pubTime>
+        
+        <tag>dump </tag>
+         
+        <tag>mysql </tag>
+         
+         
+           
+             
+              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
           
         </display>
     </data>

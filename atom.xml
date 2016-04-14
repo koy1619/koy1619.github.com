@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2016-04-09T09:39:04.000Z</updated>
+  <updated>2016-04-14T07:03:11.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -13,6 +13,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[CISCO ASA5520 HA 配置]]></title>
+    <link href="http://linux48.com//archives/446/"/>
+    <id>http://linux48.com//archives/446/</id>
+    <published>2016-04-13T16:00:00.000Z</published>
+    <updated>2016-04-14T07:03:11.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="主防火墙配置">主防火墙配置</h1><h3 id="接口配置">接口配置</h3><figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">GigabitEthernet0</span>/0</span></span><br><span class="line"> nameif outside</span><br><span class="line"> security-level <span class="number">0</span></span><br><span class="line"> ip address <span class="number">192.168</span>.<span class="number">2.226</span> <span class="number">255.255</span>.<span class="number">255.0</span> standby <span class="number">192.168</span>.<span class="number">2.241</span> </span><br><span class="line">!</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">GigabitEthernet0</span>/1</span></span><br><span class="line"> nameif inside</span><br><span class="line"> security-level <span class="number">100</span></span><br><span class="line"> ip address <span class="number">192.168</span>.<span class="number">100.1</span> <span class="number">255.255</span>.<span class="number">255.0</span> standby <span class="number">192.168</span>.<span class="number">100.4</span> </span><br><span class="line">!             </span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">GigabitEthernet0</span>/2</span></span><br><span class="line"> description STATE Failover <span class="class"><span class="keyword">Interface</span></span></span><br><span class="line">!</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">GigabitEthernet0</span>/3</span></span><br><span class="line"> description LAN Failover <span class="class"><span class="keyword">Interface</span></span><span class="preprocessor"></span><br><span class="line"></span><br><span class="line">###HA配置</span></span><br><span class="line">failover lan unit primary</span><br><span class="line"></span><br><span class="line">failover lan <span class="class"><span class="keyword">interface</span> <span class="title">HA</span> <span class="title">GigabitEthernet0</span>/3</span></span><br><span class="line">failover <span class="class"><span class="keyword">interface</span> <span class="title">ip</span> <span class="title">HA</span> 10.10.10.1 255.255.255.0 <span class="title">standby</span> 10.10.10.2</span></span><br><span class="line"></span><br><span class="line">failover link stateful GigabitEthernet0/<span class="number">2</span></span><br><span class="line">failover <span class="class"><span class="keyword">interface</span> <span class="title">ip</span> <span class="title">stateful</span> 10.10.11.1 255.255.255.252 <span class="title">standby</span> 10.10.11.2</span></span><br><span class="line"></span><br><span class="line">failover</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="备防火墙配置">备防火墙配置</h2><h3 id="HA配置">HA配置</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">failover</span> lan unit secondary</span><br><span class="line"></span><br><span class="line">failover lan interface HA GigabitEthernet0/<span class="number">3</span></span><br><span class="line">failover interface ip HA <span class="number">10.10.10.1</span> <span class="number">255.255.255.0</span> standby <span class="number">10.10.10.2</span></span><br><span class="line"></span><br><span class="line">failover link stateful GigabitEthernet0/<span class="number">2</span></span><br><span class="line">failover interface ip stateful <span class="number">10.10.11.1</span> <span class="number">255.255.255.252</span> standby <span class="number">10.10.11.2</span></span><br><span class="line"></span><br><span class="line">failover</span><br></pre></td></tr></table></figure>
+<h1 id="结果检查">结果检查</h1><p><code>show failover</code></p>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">Failover On </span><br><span class="line">Failover unit Primary</span><br><span class="line">Failover LAN Interface: HA GigabitEthernet0/<span class="number">3</span> <span class="params">(up)</span></span><br><span class="line">Unit Poll frequency <span class="number">1</span> seconds, holdtime <span class="number">15</span> seconds</span><br><span class="line">Interface Poll frequency <span class="number">5</span> seconds, holdtime <span class="number">25</span> seconds</span><br><span class="line">Interface Policy <span class="number">1</span></span><br><span class="line">Monitored Interfaces <span class="number">3</span> of <span class="number">250</span> maximum</span><br><span class="line">Version: Ours <span class="number">8.2</span><span class="params">(<span class="number">1</span>)</span>, Mate <span class="number">8.2</span><span class="params">(<span class="number">1</span>)</span></span><br><span class="line">Last Failover at: <span class="number">03</span>:<span class="number">45</span>:<span class="number">17</span> HKST Dec <span class="number">7</span> <span class="number">2015</span></span><br><span class="line">        This host: Primary - Active </span><br><span class="line">                Active time: <span class="number">98922458</span> <span class="params">(sec)</span></span><br><span class="line">                slot <span class="number">0</span>: ASA5520 hw/sw rev <span class="params">(<span class="number">2.0</span>/<span class="number">8.2</span><span class="params">(<span class="number">1</span>)</span>)</span> status <span class="params">(Up Sys)</span></span><br><span class="line">                  Interface outside <span class="params">(<span class="number">192.168</span>.<span class="number">2.226</span>)</span>: Normal <span class="params">(Waiting)</span></span><br><span class="line">                  Interface inside <span class="params">(<span class="number">192.168</span>.<span class="number">100.1</span>)</span>: Normal <span class="params">(Waiting)</span></span><br><span class="line">                  Interface management <span class="params">(<span class="number">0.0</span>.<span class="number">0.0</span>)</span>: Link Down <span class="params">(Waiting)</span></span><br><span class="line">                slot <span class="number">1</span>: empty</span><br><span class="line">        Other host: Secondary - Standby Ready </span><br><span class="line">                Active time: <span class="number">539</span> <span class="params">(sec)</span></span><br><span class="line">                slot <span class="number">0</span>: ASA5520 hw/sw rev <span class="params">(<span class="number">2.0</span>/<span class="number">8.2</span><span class="params">(<span class="number">1</span>)</span>)</span> status <span class="params">(Up Sys)</span></span><br><span class="line">                  Interface outside <span class="params">(<span class="number">192.168</span>.<span class="number">2.241</span>)</span>: Normal <span class="params">(Waiting)</span></span><br><span class="line">                  Interface inside <span class="params">(<span class="number">192.168</span>.<span class="number">100.4</span>)</span>: Normal <span class="params">(Waiting)</span></span><br><span class="line">                  Interface management <span class="params">(<span class="number">0.0</span>.<span class="number">0.0</span>)</span>: Link Down <span class="params">(Waiting)</span></span><br><span class="line">                slot <span class="number">1</span>: empty</span><br><span class="line"></span><br><span class="line">Stateful Failover Logical Update Statistics</span><br><span class="line">        Link : stateful GigabitEthernet0/<span class="number">2</span> <span class="params">(up)</span></span><br><span class="line">        Stateful Obj    xmit       xerr       rcv        rerr      </span><br><span class="line">        General         <span class="number">19566</span>      <span class="number">0</span>          <span class="number">19</span>         <span class="number">0</span>         </span><br><span class="line">        sys cmd         <span class="number">19</span>         <span class="number">0</span>          <span class="number">19</span>         <span class="number">0</span>         </span><br><span class="line">        up time         <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>         </span><br><span class="line">        RPC services    <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>         </span><br><span class="line">        TCP conn        <span class="number">18563</span>      <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>         </span><br><span class="line">        UDP conn        <span class="number">699</span>        <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>         </span><br><span class="line">        ARP tbl         <span class="number">279</span>        <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>         </span><br><span class="line">        Xlate_Timeout   <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>         </span><br><span class="line">        VPN IKE upd     <span class="number">2</span>          <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>         </span><br><span class="line">        VPN IPSEC upd   <span class="number">4</span>          <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>         </span><br><span class="line">        VPN CTCP upd    <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>         </span><br><span class="line">        VPN SDI upd     <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>         </span><br><span class="line">        VPN DHCP upd    <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>         </span><br><span class="line">        SIP Session     <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>          <span class="number">0</span>         </span><br><span class="line"></span><br><span class="line">        Logical Update Queue Information</span><br><span class="line">                        Cur     Max     Total</span><br><span class="line">        Recv Q:         <span class="number">0</span>       <span class="number">18</span>      <span class="number">154</span></span><br><span class="line">        Xmit Q:         <span class="number">0</span>       <span class="number">1024</span>    <span class="number">22916</span></span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="主防火墙配置">主防火墙配置</h1><h3 id="接口配置">接口配置</h3><figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">GigabitEthernet0</span>/0</span></span><br><span class="line"> nameif outside</span><br><span class="line"> security-level <span class="number">0</span></span><br><span class="line"> ip address <span class="number">192.168</span>.<span class="number">2.226</span> <span class="number">255.255</span>.<span class="number">255.0</span> standby <span class="number">192.168</span>.<span class="number">2.241</span> </span><br><span class="line">!</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">GigabitEthernet0</span>/1</span></span><br><span class="line"> nameif inside</span><br><span class="line"> security-level <span class="number">100</span></span><br><span class="line"> ip address <span class="number">192.168</span>.<span class="number">100.1</span> <span class="number">255.255</span>.<span class="number">255.0</span> standby <span class="number">192.168</span>.<span class="number">100.4</span> </span><br><span class="line">!             </span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">GigabitEthernet0</span>/2</span></span><br><span class="line"> description STATE Failover <span class="class"><span class="keyword">Interface</span></span></span><br><span class="line">!</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">GigabitEthernet0</span>/3</span></span><br><span class="line"> description LAN Failover <span class="class"><span class="keyword">Interface</span></span><span class="preprocessor"></span><br><span class="line"></span><br><span class="line">###HA配置</span></span><br><span class="line">failover lan unit primary</span><br><span class="line"></span><br><span class="line">failover lan <span class="class"><span class="keyword">interface</span> <span class="title">HA</span> <span class="title">GigabitEthernet0</span>/3</span></span><br><span class="line">failover <span class="class"><span class="keyword">interface</span> <span class="title">ip</span> <span class="title">HA</span> 10.10.10.1 255.255.255.0 <span class="title">standby</span> 10.10.10.2</span></span><br><span class="line"></span><br><span class="line">failover link stateful GigabitEthernet0/<span class="number">2</span></span><br><span class="line">failover <span class="class"><span class="keyword">interface</span> <span class="title">ip</span> <span class="title">stateful</span> 10.10.11.1 255.255.255.252 <span class="title">standby</span> 10.10.11.2</span></span><br><span class="line"></span><br><span class="line">failover</span><br></pre></td></tr></table></figure>]]>
+    
+    </summary>
+    
+      <category term="cisco" scheme="http://linux48.com/tags/cisco/"/>
+    
+      <category term="ha" scheme="http://linux48.com/tags/ha/"/>
+    
+      <category term="路由" scheme="http://linux48.com/tags/%E8%B7%AF%E7%94%B1/"/>
+    
+      <category term="网络交换" scheme="http://linux48.com/categories/%E7%BD%91%E7%BB%9C%E4%BA%A4%E6%8D%A2/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[centos7配置bond和bond跨网段改IP]]></title>
@@ -957,81 +984,6 @@ grant<span class="instruction"> execute </span>on function testdb.fn_add to 'dba
       <category term="mysql" scheme="http://linux48.com/tags/mysql/"/>
     
       <category term="database" scheme="http://linux48.com/categories/database/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[bitnami版gitlab修改端口]]></title>
-    <link href="http://linux48.com//archives/426/"/>
-    <id>http://linux48.com//archives/426/</id>
-    <published>2015-06-03T08:40:42.000Z</published>
-    <updated>2016-04-09T09:12:49.000Z</updated>
-    <content type="html"><![CDATA[<p>bitnami版gitlab默认安装好web端口为80</p>
-<p>为了便于开放到外部访问，需要把端口改为其他的，比如8080<br><a id="more"></a></p>
-<h1 id="修改apache主配置文件">修改apache主配置文件</h1><pre><code>[root@iZ23m1d4vwiZ ~]# <span class="keyword">vim</span> /<span class="keyword">opt</span>/gitlab-<span class="number">6.8</span>.<span class="number">1</span>-<span class="number">0</span>/apache2/<span class="keyword">conf</span>/httpd.<span class="keyword">conf</span>
-
-Listen <span class="number">8080</span>
-</code></pre><h1 id="修改apache的bitnami的配置文件">修改apache的bitnami的配置文件</h1><pre><code>[root@iZ23m1d4vwiZ ~]<span class="comment"># vim /opt/gitlab-6.8.1-0/apache2/conf/bitnami/bitnami.conf</span>
-<span class="comment"># Default Virtual Host configuration.</span>
-
-<span class="variable">&lt;IfVersion &lt; 2.3 &gt;</span>
-  NameVirtualHost *:<span class="number">8080</span>
-  NameVirtualHost *:<span class="number">443</span>
-<span class="variable">&lt;/IfVersion&gt;</span>
-
-<span class="variable">&lt;VirtualHost _default_:8080&gt;</span>
-  DocumentRoot <span class="string">"/opt/gitlab-6.8.1-0/apache2/htdocs"</span>
-  <span class="variable">&lt;Directory "/opt/gitlab-6.8.1-0/apache2/htdocs"&gt;</span>
-    Options Indexes FollowSymLinks
-    AllowOverride All
-    <span class="variable">&lt;IfVersion &lt; 2.3 &gt;</span>
-      Order allow,deny
-      Allow <span class="keyword">from</span> <span class="literal">all</span>
-    <span class="variable">&lt;/IfVersion&gt;</span>
-    <span class="variable">&lt;IfVersion &gt;</span>= <span class="number">2.3</span> &gt;
-      Require <span class="literal">all</span> granted
-    <span class="variable">&lt;/IfVersion&gt;</span>
-  <span class="variable">&lt;/Directory&gt;</span>
-</code></pre><h1 id="修改gitlab-shell的配置文件">修改gitlab-shell的配置文件</h1><pre><code>[root<span class="annotation">@iZ</span>23m1d4vwiZ ~]# vim <span class="regexp">/opt/</span>gitlab-<span class="number">6.8</span>.1-<span class="number">0</span><span class="regexp">/apps/</span>gitlab<span class="regexp">/gitlab-shell/</span>config.yml
-# GitLab user. git by <span class="keyword">default</span>
-<span class="string">user:</span> git
-
-# Url to gitlab instance. Used <span class="keyword">for</span> api calls. Should end with a slash.
-<span class="string">gitlab_url:</span> <span class="string">"http://120.26.103.123:8080/"</span>
-</code></pre><h1 id="修改gitlab的apache主目录配置文件">修改gitlab的apache主目录配置文件</h1><pre><code>[root@iZ23m1d4vwiZ ~]<span class="array"># vim </span>/opt/gitlab-<span class="number">6.8</span>.1-<span class="number">0</span>/apps/gitlab/htdocs/config/gitlab.yml
-<span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span>#
-<span class="array"># GitLab application config file  </span>#
-<span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span><span class="array"># </span>#
-#
-<span class="array"># How to use</span>:
-<span class="array"># </span><span class="number">1.</span> copy file as gitlab.yml
-<span class="array"># </span><span class="number">2.</span> Replace gitlab -&gt; host with your domain
-<span class="array"># </span><span class="number">3.</span> Replace gitlab -&gt; email_from
-
-production: &amp;base
-  #
-  <span class="array"># </span><span class="number">1.</span> GitLab app settings
-  <span class="array"># </span>==========================
-
-  #<span class="array"># GitLab settings</span>
-  gitlab:
-    #<span class="array"># Web server settings </span>(note: host is the FQDN, do not include http:<span class="comment">//)</span>
-    host: <span class="number">120.26</span>.103.123
-    port: <span class="number">8080</span>
-    https: false
-</code></pre><h1 id="重启服务">重启服务</h1><pre><code>[root@iZ23m1d4vwiZ ~]# <span class="keyword">sh</span> /<span class="keyword">opt</span>/gitlab-<span class="number">6.8</span>.<span class="number">1</span>-<span class="number">0</span>/ctlscript.<span class="keyword">sh</span>  restart
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<p>bitnami版gitlab默认安装好web端口为80</p>
-<p>为了便于开放到外部访问，需要把端口改为其他的，比如8080<br>]]>
-    
-    </summary>
-    
-      <category term="git" scheme="http://linux48.com/tags/git/"/>
-    
-      <category term="gitlab" scheme="http://linux48.com/tags/gitlab/"/>
-    
-      <category term="devops" scheme="http://linux48.com/categories/devops/"/>
     
   </entry>
   
