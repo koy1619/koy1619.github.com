@@ -3,6 +3,32 @@
 
     
   <url>
+    <loc>http://linux48.com//archives/432/</loc>
+    <lastmod>2016-04-15T04:20:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>mysql双主互备设计搭建</title>
+        <pubTime>2015-07-14T16:00:00.000Z</pubTime>
+        
+        <tag>mysql </tag>
+         
+        <tag>mysql高可用 </tag>
+         
+        <tag>双主 </tag>
+         
+        <tag>热备 </tag>
+         
+         
+           
+             
+              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://linux48.com//archives/446/</loc>
     <lastmod>2016-04-14T07:10:37.000Z</lastmod>
     <data>
@@ -84,26 +110,6 @@
            
              
               <breadCrumb title="网络" url="http://linux48.com/categories/%E7%BD%91%E7%BB%9C/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/443/</loc>
-    <lastmod>2016-04-09T09:12:49.000Z</lastmod>
-    <data>
-        <display>
-        <title>CentOS上搭建私有maven仓库</title>
-        <pubTime>2015-11-11T16:00:00.000Z</pubTime>
-        
-        <tag>maven </tag>
-         
-         
-           
-             
-              <breadCrumb title="devops" url="http://linux48.com/categories/devops/"/>
           
         </display>
     </data>
@@ -325,25 +331,21 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/432/</loc>
+    <loc>http://linux48.com//archives/399/</loc>
     <lastmod>2016-04-09T09:12:49.000Z</lastmod>
     <data>
         <display>
-        <title>mysql双主互备设计搭建</title>
-        <pubTime>2015-07-14T16:00:00.000Z</pubTime>
+        <title>腾讯云的YUM repo</title>
+        <pubTime>2014-07-29T16:00:00.000Z</pubTime>
         
-        <tag>mysql </tag>
+        <tag>repo </tag>
          
-        <tag>mysql高可用 </tag>
-         
-        <tag>双主 </tag>
-         
-        <tag>热备 </tag>
+        <tag>腾讯云 </tag>
          
          
            
              
-              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
+              <breadCrumb title="云计算" url="http://linux48.com/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
           
         </display>
     </data>
@@ -523,21 +525,23 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/399/</loc>
+    <loc>http://linux48.com//archives/444/</loc>
     <lastmod>2016-04-09T09:12:49.000Z</lastmod>
     <data>
         <display>
-        <title>腾讯云的YUM repo</title>
-        <pubTime>2014-07-29T16:00:00.000Z</pubTime>
+        <title>CentOS下Nginx配置Perl运行Bugzilla</title>
+        <pubTime>2016-02-02T16:00:00.000Z</pubTime>
         
-        <tag>repo </tag>
+        <tag>bugzilla </tag>
          
-        <tag>腾讯云 </tag>
+        <tag>cgi </tag>
+         
+        <tag>perl </tag>
          
          
            
              
-              <breadCrumb title="云计算" url="http://linux48.com/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
+              <breadCrumb title="devops" url="http://linux48.com/categories/devops/"/>
           
         </display>
     </data>
@@ -1089,18 +1093,14 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/444/</loc>
+    <loc>http://linux48.com//archives/443/</loc>
     <lastmod>2016-04-09T09:12:49.000Z</lastmod>
     <data>
         <display>
-        <title>CentOS下Nginx配置Perl运行Bugzilla</title>
-        <pubTime>2016-02-02T16:00:00.000Z</pubTime>
+        <title>CentOS上搭建私有maven仓库</title>
+        <pubTime>2015-11-11T16:00:00.000Z</pubTime>
         
-        <tag>bugzilla </tag>
-         
-        <tag>cgi </tag>
-         
-        <tag>perl </tag>
+        <tag>maven </tag>
          
          
            
