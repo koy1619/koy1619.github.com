@@ -223,6 +223,105 @@
           
           
             
+              <a class="post-title-link" href="/archives/417/">
+                如何搭master-slave-slave
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2015-01-05
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/database/">database</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/417/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/417/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>假设现有M, Sa, Sb，Sa是M的slave, 要将Sb做为Sa的slave，M和Sa的binlog保证都是打开的</p>
+<p>在Sa的/etc/my.cnf中[mysqld]组中加入log_slave_updates=1（以保证Sa从M上同步的更新能被记录到binlog中）</p>
+<p>将Sa上的mysqld停掉，并清掉Sa上的binlog(注1）</p>
+<p>将Sa上的数据Copy到Sb上
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/417/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+
+<! -- 添加捐赠图标 -->
+    
+    
+    
+
+<! -- end 添加捐赠图标 -->
+      
+        <div class="post-tags">
+          
+            <a href="/tags/insert/"> #insert </a>
+          
+            <a href="/tags/mysql/"> #mysql </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/416/">
                 利用SVNListParentPath增加http浏览仓库根目录的功能
               </a>
@@ -823,6 +922,104 @@
           
           
             
+              <a class="post-title-link" href="/archives/408/">
+                SVN强制提交commit
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2014-11-11
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/dev/">dev</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/408/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/408/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>不少开发员提交修改的时候都不写注释，导致查看历史时很费劲，也不太符合规范。这时候就需要强制开发人员提交的时候填上注释，否则无法提交！</p>
+<p>利用svn的pre-commit钩子可简单实现此要求。</p>
+<p>进入仓库project1/hooks目录，找到pre-commit.tmpl文件，重命名，去掉后缀.tmpl</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/408/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+
+<! -- 添加捐赠图标 -->
+    
+    
+    
+
+<! -- end 添加捐赠图标 -->
+      
+        <div class="post-tags">
+          
+            <a href="/tags/commit/"> #commit </a>
+          
+            <a href="/tags/svn/"> #svn </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/409/">
                 rm Argument list too long的解决办法
               </a>
@@ -896,104 +1093,6 @@
             <a href="/tags/bash/"> #bash </a>
           
             <a href="/tags/rm/"> #rm </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/408/">
-                SVN强制提交commit
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2014-11-11
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/dev/">dev</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/408/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/408/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>不少开发员提交修改的时候都不写注释，导致查看历史时很费劲，也不太符合规范。这时候就需要强制开发人员提交的时候填上注释，否则无法提交！</p>
-<p>利用svn的pre-commit钩子可简单实现此要求。</p>
-<p>进入仓库project1/hooks目录，找到pre-commit.tmpl文件，重命名，去掉后缀.tmpl</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/408/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-
-<! -- 添加捐赠图标 -->
-    
-    
-    
-
-<! -- end 添加捐赠图标 -->
-      
-        <div class="post-tags">
-          
-            <a href="/tags/commit/"> #commit </a>
-          
-            <a href="/tags/svn/"> #svn </a>
           
         </div>
       
@@ -1109,104 +1208,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/407/">
-                用二句Shell命令实现FTP批量上传文件夹
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2014-11-10
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/system/">system</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/407/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/407/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>实现代码如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash </span></span><br><span class="line">updir=/root/tmp   <span class="comment">#要上传的文件夹</span></span><br><span class="line">todir=tmp          <span class="comment">#目标文件夹</span></span><br><span class="line">ip=<span class="number">127.0</span>.<span class="number">0.1</span>      <span class="comment">#服务器</span></span><br><span class="line">user=username  <span class="comment">#ftp用户名</span></span><br><span class="line">password=passwd        <span class="comment">#ftp密码</span></span><br><span class="line">sss=`find <span class="variable">$updir</span> -type d -printf <span class="variable">$todir</span>/<span class="string">'%P\n'</span>| awk <span class="string">'&#123;if ($0 == "")next;print "mkdir " $0&#125;'</span>` </span><br><span class="line">aaa=`find <span class="variable">$updir</span> -type f -printf <span class="string">'put %p %P \n'</span>` </span><br><span class="line">ftp -nv <span class="variable">$ip</span> &lt;&lt;EOF </span><br><span class="line">user <span class="variable">$user</span> <span class="variable">$password</span></span><br><span class="line"><span class="built_in">type</span> binary </span><br><span class="line">prompt </span><br><span class="line"><span class="variable">$sss</span> </span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$todir</span> </span><br><span class="line"><span class="variable">$aaa</span> </span><br><span class="line">quit </span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-<p>简要说明:<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/407/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-
-<! -- 添加捐赠图标 -->
-    
-    
-    
-
-<! -- end 添加捐赠图标 -->
-      
-        <div class="post-tags">
-          
-            <a href="/tags/ftp/"> #ftp </a>
-          
-            <a href="/tags/shell/"> #shell </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1247,21 +1248,21 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">96</span>
+              <span class="site-state-item-count">97</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">29</span>
               <span class="site-state-item-name">分類</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">102</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

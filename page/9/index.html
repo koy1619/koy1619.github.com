@@ -223,6 +223,104 @@
           
           
             
+              <a class="post-title-link" href="/archives/40/">
+                OCR之Tesseract的linux下安装
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2013-05-16
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/system/">system</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/40/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/40/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>今天应公司要求需要转换扫描出来的电子书jpg格式到文本格式需要，找了很多转换工具大都不进入人意，后来同事给我介绍tesseract。</p>
+<p>后来了解了一下此软件</p>
+<p>光学字符识别(OCR,Optical Character Recognition)是指对文本资料进行扫描，然后对图像文件进行分析处理，获取文字及版面信息的过程。OCR技术非常专业，一般多是印刷、打印行业的从业人员使用，可以快速的将纸质资料转换为电子资料。项目源码可从<a href="http://code.google.com/p/tesseract-ocr/downloads/list获得">http://code.google.com/p/tesseract-ocr/downloads/list获得</a></p>
+<p>关于windows下的安装网上有很多教程如此篇<a href="http://www.cnblogs.com/brooks-dotnet/archive/2010/10/05/1844203.html">http://www.cnblogs.com/brooks-dotnet/archive/2010/10/05/1844203.html</a></p>
+<p>下面我写一下linux下的安装教程以供参考！
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/40/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+
+<! -- 添加捐赠图标 -->
+    
+    
+    
+
+<! -- end 添加捐赠图标 -->
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Tesseract/"> #Tesseract </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/77/">
                 MySQL错误ERROR 1064 (type=myisam出错)
               </a>
@@ -1113,110 +1211,6 @@ Allow <span class="keyword">from</span> <span class="literal">all</span><span cl
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/46/">
-                CentOS yum安装配置LAMP+tomcat
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2012-06-26
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/web/">web</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/46/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/46/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>yum安装LAMP+tomcat</p>
-<h2 id="一、准备篇：">一、准备篇：</h2><p>1.配置防火墙，开启80端口、8080端口、3306端口  </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#vi /etc/sysconfig/iptables  </span></span><br><span class="line">-A INPUT -m state &amp;<span class="comment">#8211;state NEW -m tcp -p tcp &amp;#8211;dport 80 -j ACCEPT（允许apache的80端口通过防火墙）  </span></span><br><span class="line">-A INPUT -m state &amp;<span class="comment">#8211;state NEW -m tcp -p tcp &amp;#8211;dport 80 -j ACCEPT（允许tomcat的8080端口通过防火墙）  </span></span><br><span class="line">-A INPUT -m state &amp;<span class="comment">#8211;state NEW -m tcp -p tcp &amp;#8211;dport 3306 -j ACCEPT（允许mysql的3306端口通过防火墙 ）  </span></span><br><span class="line">重启防火墙使配置生效  </span><br><span class="line"><span class="comment">#/etc/init.d/iptables restart  </span></span><br><span class="line"><span class="comment">#service iptables restart</span></span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/46/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-
-<! -- 添加捐赠图标 -->
-    
-    
-    
-
-<! -- end 添加捐赠图标 -->
-      
-        <div class="post-tags">
-          
-            <a href="/tags/apache/"> #apache </a>
-          
-            <a href="/tags/mysql/"> #mysql </a>
-          
-            <a href="/tags/php/"> #php </a>
-          
-            <a href="/tags/tomcat/"> #tomcat </a>
-          
-            <a href="/tags/yum/"> #yum </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1257,21 +1251,21 @@ Allow <span class="keyword">from</span> <span class="literal">all</span><span cl
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">96</span>
+              <span class="site-state-item-count">97</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">29</span>
               <span class="site-state-item-name">分類</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">102</span>
+              <span class="site-state-item-count">105</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
