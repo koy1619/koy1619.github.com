@@ -283,7 +283,6 @@
 </ul>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">'1d'</span> /home/mysql/<span class="number">0418</span>.txt    <span class="comment">#删除第一行</span></span><br><span class="line"></span><br><span class="line">sed -i <span class="string">"s/原字符串/新字符串/g"</span></span><br><span class="line"></span><br><span class="line">sed -i <span class="string">"s/,/\t/g"</span> /home/mysql/<span class="number">0418</span>.txt   <span class="comment">#批量替换文本内的“逗号”(,)为“制表符“(Tab)</span></span><br><span class="line"></span><br><span class="line">chown -R mysql.mysql /home/mysql/<span class="number">0418</span>.txt</span><br><span class="line"></span><br><span class="line">LOAD DATA INFILE <span class="string">'/home/mysql/0418.txt'</span> INTO TABLE auth_<span class="built_in">limit</span>_customer(<span class="built_in">limit</span>_cardbin,<span class="built_in">limit</span>_card,<span class="built_in">limit</span>_customer);  <span class="comment">#按照字段顺序导入数据库</span></span><br></pre></td></tr></table></figure>
-<a id="more"></a>
 
       
     </div>
