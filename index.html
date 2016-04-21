@@ -223,6 +223,98 @@
           
           
             
+              <a class="post-title-link" href="/archives/448/">
+                MySQL查询按IN的顺序输出结果
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2016-04-19
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/database/">database</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/448/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/448/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>在用 SELECT 查询的时候，如果用到了 IN ，那么查询结果中的顺序并不是按照 IN 后面所给的顺序返回，而是按照默认的升序排列。</p>
+<p>而如果想要让查询结果按照 IN 里面给的顺序的话，有最简单方法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> </span><br><span class="line">    * </span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    a </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">FIELD</span>(</span><br><span class="line">        id,</span><br><span class="line">        <span class="string">'16556004'</span>,</span><br><span class="line">        <span class="string">'16552005'</span>,</span><br><span class="line">        <span class="string">'16558009'</span>,</span><br><span class="line">        <span class="string">'16551033'</span></span><br><span class="line">    )</span></span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+
+<! -- 添加捐赠图标 -->
+    
+    
+    
+
+<! -- end 添加捐赠图标 -->
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sql语句/"> #sql语句 </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/446/">
                 CISCO ASA5520 HA 配置
               </a>
@@ -1093,101 +1185,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/437/">
-                mysql You cant specify target table
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2015-10-07
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/database/">database</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/437/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/437/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>今天在写SQL语句的时候遇到一个比较特殊的问题。<br>mysql 语句如下:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">UPDATE</span> </span><br><span class="line">  pms_project_product </span><br><span class="line"><span class="keyword">SET</span></span><br><span class="line">  area_list = </span><br><span class="line">  (<span class="keyword">SELECT</span> </span><br><span class="line">    area_list </span><br><span class="line">  <span class="keyword">FROM</span></span><br><span class="line">    pms_project_product </span><br><span class="line">  <span class="keyword">WHERE</span> activity_product_id = <span class="number">48468</span>),</span><br><span class="line">  area_list_name = </span><br><span class="line">  (<span class="keyword">SELECT</span> </span><br><span class="line">    area_list_name </span><br><span class="line">  <span class="keyword">FROM</span></span><br><span class="line">    pms_project_product </span><br><span class="line">  <span class="keyword">WHERE</span> activity_product_id = <span class="number">48468</span>) </span><br><span class="line"><span class="keyword">WHERE</span> activity_product_id = <span class="number">47098</span> ;</span></span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/437/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-
-<! -- 添加捐赠图标 -->
-    
-    
-    
-
-<! -- end 添加捐赠图标 -->
-      
-        <div class="post-tags">
-          
-            <a href="/tags/mysql/"> #mysql </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1228,7 +1225,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">97</span>
+              <span class="site-state-item-count">98</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
