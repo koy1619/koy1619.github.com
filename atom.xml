@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://linux48.com/"/>
-  <updated>2016-05-16T07:17:49.000Z</updated>
+  <updated>2016-05-16T07:29:27.000Z</updated>
   <id>http://linux48.com/</id>
   
   <author>
@@ -16,10 +16,10 @@
   
   <entry>
     <title><![CDATA[flume+hdfs构建大数据]]></title>
-    <link href="http://linux48.com//archives/448/"/>
-    <id>http://linux48.com//archives/448/</id>
+    <link href="http://linux48.com//archives/449/"/>
+    <id>http://linux48.com//archives/449/</id>
     <published>2016-05-15T16:00:00.000Z</published>
-    <updated>2016-05-16T07:17:49.000Z</updated>
+    <updated>2016-05-16T07:29:27.000Z</updated>
     <content type="html"><![CDATA[<h1 id="hadoop">hadoop</h1><p><a href="http://hadoop.apache.org/docs/r1.0.4/cn/" target="_blank" rel="external">http://hadoop.apache.org/docs/r1.0.4/cn/</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -mkdir /ebuyposp</span><br><span class="line">hdfs dfs -mkdir /ebuyposp2</span><br><span class="line">hdfs dfs -ls /</span><br><span class="line"></span><br><span class="line">hdfs dfs -cat /ebuyposp1/k1_.<span class="number">1462357028642</span></span><br><span class="line">hdfs dfs -rm -r <span class="operator">-f</span> -skipTrash /ebuyposp/*</span><br><span class="line">hdfs dfs -rm -r <span class="operator">-f</span> -skipTrash /ebuyposp2/*</span><br><span class="line">hdfs dfs -rm -r <span class="operator">-f</span> -skipTrash /ebuyposp2</span><br><span class="line">hdfs dfs -rm -r <span class="operator">-f</span> -skipTrash /<span class="built_in">test</span>20160428</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -51,10 +51,10 @@
   
   <entry>
     <title><![CDATA[数据库维护文本编辑技巧记录]]></title>
-    <link href="http://linux48.com//archives/447/"/>
-    <id>http://linux48.com//archives/447/</id>
+    <link href="http://linux48.com//archives/448/"/>
+    <id>http://linux48.com//archives/448/</id>
     <published>2016-04-20T16:00:00.000Z</published>
-    <updated>2016-04-21T09:27:30.000Z</updated>
+    <updated>2016-05-16T07:29:27.000Z</updated>
     <content type="html"><![CDATA[<p>作为一个非专业数据库维护人员，日常需要处理格式化大量文本来导入数据库，所以本文用以记录平时遇到的每一个记录！</p>
 <h1 id="行首行尾加字符或者符号">行首行尾加字符或者符号</h1><blockquote>
 <ul>
@@ -103,10 +103,10 @@
   
   <entry>
     <title><![CDATA[MySQL查询按IN的顺序输出结果]]></title>
-    <link href="http://linux48.com//archives/448/"/>
-    <id>http://linux48.com//archives/448/</id>
+    <link href="http://linux48.com//archives/447/"/>
+    <id>http://linux48.com//archives/447/</id>
     <published>2016-04-19T16:00:00.000Z</published>
-    <updated>2016-04-21T09:20:46.000Z</updated>
+    <updated>2016-05-16T07:29:27.000Z</updated>
     <content type="html"><![CDATA[<p>在用 SELECT 查询的时候，如果用到了 IN ，那么查询结果中的顺序并不是按照 IN 后面所给的顺序返回，而是按照默认的升序排列。</p>
 <p>而如果想要让查询结果按照 IN 里面给的顺序的话，有最简单方法：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> </span><br><span class="line">    * </span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    a </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">FIELD</span>(</span><br><span class="line">        id,</span><br><span class="line">        <span class="string">'16556004'</span>,</span><br><span class="line">        <span class="string">'16552005'</span>,</span><br><span class="line">        <span class="string">'16558009'</span>,</span><br><span class="line">        <span class="string">'16551033'</span></span><br><span class="line">    )</span></span><br></pre></td></tr></table></figure>

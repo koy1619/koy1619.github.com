@@ -10,11 +10,11 @@
 <meta http-equiv=”Cache-Control” content=”no-siteapp” />
 
 
-  <meta name="keywords" content=" ,Sublime,awk,cat,notepad,sed, " />
+  <meta name="keywords" content=" ,sql语句, " />
 
 
 
-    <meta name="description" content="数据库维护文本编辑技巧记录, My Opensource Life & Notepad" />
+    <meta name="description" content="MySQL查询按IN的顺序输出结果, My Opensource Life & Notepad" />
 
 
 
@@ -49,7 +49,7 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
 
 
-  <title> 数据库维护文本编辑技巧记录 - linux48 </title>
+  <title> MySQL查询按IN的顺序输出结果 - linux48 </title>
 </head>
 
 <body>
@@ -221,7 +221,7 @@
           
           
             
-              数据库维护文本编辑技巧记录
+              MySQL查询按IN的顺序输出结果
             
           
         </h1>
@@ -229,14 +229,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          發表於 2016-04-20
+          發表於 2016-04-19
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分類於
             
-              <a href="/categories/note/">note</a>
+              <a href="/categories/database/">database</a>
 
               
               
@@ -264,26 +264,9 @@
       
 
       
-        <p>作为一个非专业数据库维护人员，日常需要处理格式化大量文本来导入数据库，所以本文用以记录平时遇到的每一个记录！</p>
-<h1 id="行首行尾加字符或者符号">行首行尾加字符或者符号</h1><blockquote>
-<ul>
-<li>工具notepad++</li>
-</ul>
-</blockquote>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ctrl+<span class="literal">F</span> 选择替换，并勾选正则表达式</span><br><span class="line"></span><br><span class="line">行首  查找目标<span class="string">"^"</span>  替换为<span class="string">"目的字符串"</span></span><br><span class="line">行尾  查找目标<span class="string">"$"</span>  替换为<span class="string">"目的字符串"</span></span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h1 id="删除大量空白行">删除大量空白行</h1><blockquote>
-<ul>
-<li>工具notepad++</li>
-</ul>
-</blockquote>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">方法一（插件处理）：</span><br><span class="line"></span><br><span class="line">先下载安装插件 TextFX，下载后重新启动下，然后在菜单栏找到 TextFX -&gt; TextFX Edit -&gt; Delete blank lines，即可。</span><br><span class="line"></span><br><span class="line">方法二（正则处理）：</span><br><span class="line"></span><br><span class="line">选择替换，把查找模式设置为正则表达式，在查找框中输入 "^<span class="command">\s</span>+"  ,替换框留空，点“全部替换”，即可(先全选)。</span><br><span class="line"></span><br><span class="line">方法三、"<span class="command">\r</span><span class="command">\n</span>"转义符替换（不包括有空格类符号的空行）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">按ctrl+h，跳出搜索替换框，把查找模式定义为扩展（<span class="command">\n</span>，<span class="command">\r</span>…） </span><br><span class="line"></span><br><span class="line">查找目标："<span class="command">\r</span><span class="command">\n</span><span class="command">\r</span><span class="command">\n</span>"  替换为："<span class="command">\r</span><span class="command">\n</span>"</span><br></pre></td></tr></table></figure>
-<h1 id="批量替换文本内容导入数据库">批量替换文本内容导入数据库</h1><blockquote>
-<ul>
-<li>工具linux sed</li>
-</ul>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">'1d'</span> /home/mysql/<span class="number">0418</span>.txt    <span class="comment">#删除第一行</span></span><br><span class="line"></span><br><span class="line">sed -i <span class="string">"s/原字符串/新字符串/g"</span></span><br><span class="line"></span><br><span class="line">sed -i <span class="string">"s/,/\t/g"</span> /home/mysql/<span class="number">0418</span>.txt   <span class="comment">#批量替换文本内的“逗号”(,)为“制表符“(Tab)</span></span><br><span class="line"></span><br><span class="line">chown -R mysql.mysql /home/mysql/<span class="number">0418</span>.txt</span><br><span class="line"></span><br><span class="line">LOAD DATA INFILE <span class="string">'/home/mysql/0418.txt'</span> INTO TABLE auth_<span class="built_in">limit</span>_customer(<span class="built_in">limit</span>_cardbin,<span class="built_in">limit</span>_card,<span class="built_in">limit</span>_customer);  <span class="comment">#按照字段顺序导入数据库</span></span><br></pre></td></tr></table></figure>
+        <p>在用 SELECT 查询的时候，如果用到了 IN ，那么查询结果中的顺序并不是按照 IN 后面所给的顺序返回，而是按照默认的升序排列。</p>
+<p>而如果想要让查询结果按照 IN 里面给的顺序的话，有最简单方法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span> </span><br><span class="line">    * </span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    a </span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">FIELD</span>(</span><br><span class="line">        id,</span><br><span class="line">        <span class="string">'16556004'</span>,</span><br><span class="line">        <span class="string">'16552005'</span>,</span><br><span class="line">        <span class="string">'16558009'</span>,</span><br><span class="line">        <span class="string">'16551033'</span></span><br><span class="line">    )</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -335,15 +318,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Sublime/"> #Sublime </a>
-          
-            <a href="/tags/awk/"> #awk </a>
-          
-            <a href="/tags/cat/"> #cat </a>
-          
-            <a href="/tags/notepad/"> #notepad </a>
-          
-            <a href="/tags/sed/"> #sed </a>
+            <a href="/tags/sql语句/"> #sql语句 </a>
           
         </div>
       
@@ -352,13 +327,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/archives/448/">flume+hdfs构建大数据</a>
+              <a href="/archives/448/">数据库维护文本编辑技巧记录</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/archives/448/">MySQL查询按IN的顺序输出结果</a>
+              <a href="/archives/446/">CISCO ASA5520 HA 配置</a>
             
           </div>
         </div>
@@ -375,7 +350,7 @@
       <div class="comments" id="comments">
         
 
-<div class="ds-share" data-thread-key="/archives/447/" data-title="数据库维护文本编辑技巧记录" data-images="http://linux48.com//archives/447/" data-content="http://linux48.com//archives/447/" data-url="http://linux48.com//archives/447/">
+<div class="ds-share" data-thread-key="/archives/447/" data-title="MySQL查询按IN的顺序输出结果" data-images="http://linux48.com//archives/447/" data-content="http://linux48.com//archives/447/" data-url="http://linux48.com//archives/447/">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
@@ -390,7 +365,7 @@
 
           <!-- 评论框 -->
           <div class="ds-thread" data-thread-key="/archives/447/"
-               data-title="数据库维护文本编辑技巧记录" data-url="http://linux48.com//archives/447/">
+               data-title="MySQL查询按IN的顺序输出结果" data-url="http://linux48.com//archives/447/">
           </div>
         
       </div>
@@ -518,7 +493,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#行首行尾加字符或者符号"><span class="nav-number">1.</span> <span class="nav-text">行首行尾加字符或者符号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除大量空白行"><span class="nav-number">2.</span> <span class="nav-text">删除大量空白行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#批量替换文本内容导入数据库"><span class="nav-number">3.</span> <span class="nav-text">批量替换文本内容导入数据库</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目錄</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
