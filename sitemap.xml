@@ -3,6 +3,34 @@
 
     
   <url>
+    <loc>http://linux48.com//archives/448/</loc>
+    <lastmod>2016-05-16T07:15:43.000Z</lastmod>
+    <data>
+        <display>
+        <title>flume+hdfs构建大数据</title>
+        <pubTime>2016-05-15T16:00:00.000Z</pubTime>
+        
+        <tag>flume </tag>
+         
+        <tag>hadoop </tag>
+         
+        <tag>hdfs </tag>
+         
+        <tag>log4j </tag>
+         
+        <tag>大数据 </tag>
+         
+         
+           
+             
+              <breadCrumb title="大数据" url="http://linux48.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://linux48.com//archives/422/</loc>
     <lastmod>2016-05-16T07:09:46.000Z</lastmod>
     <data>
@@ -19,21 +47,6 @@
              
               <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com/flume/</loc>
-    <lastmod>2016-05-16T07:09:46.000Z</lastmod>
-    <data>
-        <display>
-        <title></title>
-        <pubTime>2016-05-16T07:09:46.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
