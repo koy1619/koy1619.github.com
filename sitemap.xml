@@ -3,6 +3,43 @@
 
     
   <url>
+    <loc>http://linux48.com//archives/422/</loc>
+    <lastmod>2016-05-16T07:09:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>Redis安装及主从配置</title>
+        <pubTime>2015-03-04T16:00:00.000Z</pubTime>
+        
+        <tag>nosql </tag>
+         
+        <tag>redis </tag>
+         
+         
+           
+             
+              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com/flume/</loc>
+    <lastmod>2016-05-16T07:09:46.000Z</lastmod>
+    <data>
+        <display>
+        <title></title>
+        <pubTime>2016-05-16T07:09:46.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://linux48.com//archives/447/</loc>
     <lastmod>2016-04-21T09:27:30.000Z</lastmod>
     <data>
@@ -112,28 +149,6 @@
            
              
               <breadCrumb title="Hello World" url="http://linux48.com/categories/Hello-World/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://linux48.com//archives/422/</loc>
-    <lastmod>2016-04-12T08:17:33.000Z</lastmod>
-    <data>
-        <display>
-        <title>Redis安装及主从配置</title>
-        <pubTime>2015-03-04T16:00:00.000Z</pubTime>
-        
-        <tag>nosql </tag>
-         
-        <tag>redis </tag>
-         
-         
-           
-             
-              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
           
         </display>
     </data>

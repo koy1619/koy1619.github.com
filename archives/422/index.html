@@ -272,7 +272,7 @@
 <p>流程如下图</p>
 <p><img src="http://ww3.sinaimg.cn/mw690/c54c0af5gw1f2ty4psfy4j20kh0fsmxt.jpg" alt=""></p>
 <p>安装过程如下；<br>此处为了演示，复制了一份副本，修改端口号和主从配置即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cp -R redis-<span class="number">2.8</span>.<span class="number">19</span>   redis-<span class="number">2.8</span>.<span class="number">19</span>-slave</span><br><span class="line"></span><br><span class="line">cat redis.conf  |grep port</span><br><span class="line">port <span class="number">6380</span></span><br><span class="line"></span><br><span class="line">cat redis.conf  |grep slaveof </span><br><span class="line">slaveof <span class="number">127.0</span>.<span class="number">0.1</span> <span class="number">6379</span>   <span class="comment"># (映射到主服务器上)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cp -R redis-<span class="number">2.8</span>.<span class="number">19</span>   redis-<span class="number">2.8</span>.<span class="number">19</span>-slave</span><br><span class="line"></span><br><span class="line">cat redis-<span class="number">2.8</span>.<span class="number">19</span>-slave/redis.conf  |grep port</span><br><span class="line">port <span class="number">6380</span></span><br><span class="line"></span><br><span class="line">cat redis.conf  |grep slaveof </span><br><span class="line">slaveof <span class="number">127.0</span>.<span class="number">0.1</span> <span class="number">6379</span>   <span class="comment"># (映射到主服务器上)</span></span><br></pre></td></tr></table></figure>
 <p>如果master设置了验证密码，还需配置masterauth。</p>
 <p>配置完之后启动slave的Redis服务，主从配置完成。</p>
 <h2 id="主从测试">主从测试</h2><p>在master和slave分别执行info命令，查看结果如下(这里只贴主从相关打印)：</p>
@@ -436,7 +436,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">98</span>
+              <span class="site-state-item-count">99</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
