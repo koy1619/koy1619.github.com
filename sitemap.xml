@@ -3,6 +3,32 @@
 
     
   <url>
+    <loc>http://linux48.com//archives/452/</loc>
+    <lastmod>2016-06-30T08:54:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>hive整合hadoop通过flume+hue收集日志</title>
+        <pubTime>2016-06-29T16:00:00.000Z</pubTime>
+        
+        <tag>hadoop </tag>
+         
+         
+           
+             
+              <breadCrumb title="大数据" url="http://linux48.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+          
+             
+              <breadCrumb title="hadoop" url="http://linux48.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/"/>
+          
+             
+              <breadCrumb title="hive" url="http://linux48.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hive/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://linux48.com//archives/451/</loc>
     <lastmod>2016-05-27T08:18:18.000Z</lastmod>
     <data>
@@ -361,19 +387,21 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/400/</loc>
+    <loc>http://linux48.com//archives/402/</loc>
     <lastmod>2016-04-09T09:12:49.000Z</lastmod>
     <data>
         <display>
-        <title>Windows下MySQL无法区分大小写解决方案</title>
-        <pubTime>2014-07-30T16:00:00.000Z</pubTime>
+        <title>SHELL syntax error:unexpected end of file 提示错误</title>
+        <pubTime>2014-08-10T16:00:00.000Z</pubTime>
         
-        <tag>mysql </tag>
+        <tag>shell </tag>
+         
+        <tag>syntax </tag>
          
          
            
              
-              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
+              <breadCrumb title="os" url="http://linux48.com/categories/os/"/>
           
         </display>
     </data>
@@ -1147,21 +1175,19 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/402/</loc>
+    <loc>http://linux48.com//archives/437/</loc>
     <lastmod>2016-04-09T09:12:49.000Z</lastmod>
     <data>
         <display>
-        <title>SHELL syntax error:unexpected end of file 提示错误</title>
-        <pubTime>2014-08-10T16:00:00.000Z</pubTime>
+        <title>mysql You cant specify target table</title>
+        <pubTime>2015-10-07T16:00:00.000Z</pubTime>
         
-        <tag>shell </tag>
-         
-        <tag>syntax </tag>
+        <tag>mysql </tag>
          
          
            
              
-              <breadCrumb title="os" url="http://linux48.com/categories/os/"/>
+              <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
           
         </display>
     </data>
@@ -1169,12 +1195,12 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/437/</loc>
+    <loc>http://linux48.com//archives/400/</loc>
     <lastmod>2016-04-09T09:12:49.000Z</lastmod>
     <data>
         <display>
-        <title>mysql You cant specify target table</title>
-        <pubTime>2015-10-07T16:00:00.000Z</pubTime>
+        <title>Windows下MySQL无法区分大小写解决方案</title>
+        <pubTime>2014-07-30T16:00:00.000Z</pubTime>
         
         <tag>mysql </tag>
          

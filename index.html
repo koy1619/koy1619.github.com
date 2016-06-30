@@ -223,6 +223,119 @@
           
           
             
+              <a class="post-title-link" href="/archives/452/">
+                hive整合hadoop通过flume+hue收集日志
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2016-06-29
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/大数据/">大数据</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/大数据/hadoop/">hadoop</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/大数据/hadoop/hive/">hive</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/452/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/452/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>hive作为hadoop集群架构之上的一个架构，通过一种类SQL的解析引擎来将作业转换成map/reduce执行的任务。</p>
+<p>本文主要是分享基本的安装与使用经验。hive的实质是将表对应到HDFS中的目录。</p>
+<h1 id="准备工作">准备工作</h1><h2 id="添加环境变量">添加环境变量</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=<span class="string">"/usr/local/jdk1.7.0_09"</span></span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$CLASSPATH</span>:<span class="variable">$JAVA_HOME</span>/lib:<span class="variable">$JAVA_HOME</span>/jre/lib</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> HADOOP_HOME=<span class="string">"/home/hadoop/hadoop-2.6.4"</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_CONF_DIR=<span class="variable">$HADOOP_HOME</span>/etc/hadoop/</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$CLASSPATH</span>:<span class="variable">$HADOOP_HOME</span>/lib</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HADOOP_HOME</span>/bin:<span class="variable">$HADOOP_HOME</span>/sbin</span><br><span class="line"><span class="built_in">export</span> HADOOP_USER_CLASSPATH_FIRST=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> HIVE_HOME=<span class="string">"/home/hadoop/apache-hive-2.1.0-bin"</span></span><br><span class="line"><span class="built_in">export</span> CLASSPATH=<span class="variable">$CLASSPATH</span>:<span class="variable">$HIVE_HOME</span>/lib</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HIVE_HOME</span>/bin:<span class="variable">$HIVE_HOME</span>/conf</span><br></pre></td></tr></table></figure>
+<h2 id="设置公钥本机免登陆密码">设置公钥本机免登陆密码</h2><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br><span class="line">cp <span class="regexp">/root/</span>.ssh<span class="regexp">/id_rsa.pub  /</span>root<span class="regexp">/.ssh/</span>authorized_keys</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/452/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+
+<! -- 添加捐赠图标 -->
+    
+    
+    
+
+<! -- end 添加捐赠图标 -->
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hadoop/"> #hadoop </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/451/">
                 MySQL查询表内重复记录
               </a>
@@ -1108,111 +1221,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/442/">
-                mysql中查看数据库中所有表的记录数
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2015-10-29
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/database/">database</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/442/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/442/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>如果想知道MySQL数据库中每个表占用的空间、表记录的行数的话，可以打开MySQL的 information_schema 数据库。在该库中有一个 TABLES 表，这个表主要字段分别是：</p>
-<blockquote>
-<ul>
-<li>TABLE_SCHEMA : 数据库名</li>
-<li>TABLE_NAME：表名</li>
-<li>ENGINE：所使用的存储引擎</li>
-<li>TABLES_ROWS：记录数</li>
-<li>DATA_LENGTH：数据大小</li>
-<li>INDEX_LENGTH：索引大小</li>
-</ul>
-</blockquote>
-<p>其他字段请参考MySQL的手册，一下是利用这几个字段查询详情演示，可以根据具体业务来自定义sql监控mysql的磁盘使用状态和数据库各个表的具体条数。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/442/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-
-<! -- 添加捐赠图标 -->
-    
-    
-    
-
-<! -- end 添加捐赠图标 -->
-      
-        <div class="post-tags">
-          
-            <a href="/tags/mysql/"> #mysql </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1253,14 +1261,14 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">101</span>
+              <span class="site-state-item-count">102</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">分類</span>
               </a>
           </div>
