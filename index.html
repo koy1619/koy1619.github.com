@@ -223,6 +223,109 @@
           
           
             
+              <a class="post-title-link" href="/archives/453/">
+                zabbix 3.0邮件报警
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2016-07-05
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/zabbix/">zabbix</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/453/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/453/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>安装zabbix 3.0之后，写的脚本一直发信不成功,手动执行时可以的。<br>那是因为zabbix3.0之后，可以自定义参数了。所以不写参数，它是不会传参数的。<br>在2.x版本不存在这个问题，默认会传3个参数。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat alert_mail.log</span></span><br><span class="line">sendEmail[<span class="number">9271</span>]: ERROR =&gt; You must specify at least one recipient via -t, -cc, or -bcc</span><br><span class="line"><span class="comment"># cat alert_sms.log</span></span><br><span class="line">手机机号码不能为空</span><br></pre></td></tr></table></figure>
+<p>进入zabbix管理页面<br>点击管理-&gt;报警媒介类型 点击最右边的创建媒体类型</p>
+<p>输入脚本名称，类型选择脚本<br>添加以下3个参数，分别对应sendEmail.sh脚本需要的3个参数：收件人地址、主题、详细内容</p>
+<blockquote>
+<ul>
+<li>{ALERT.SENDTO}</li>
+<li>{ALERT.SUBJECT}</li>
+<li>{ALERT.MESSAGE}</li>
+</ul>
+</blockquote>
+<p><img src="http://r5.loli.io/ruEVne.png" alt=""></p>
+<p>邮件发送脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/sh</span></span><br><span class="line"><span class="comment">#$1, $2, $3 mean Recipient, Subject and Message</span></span><br><span class="line"></span><br><span class="line">to=<span class="variable">$1</span></span><br><span class="line">subject=<span class="variable">$2</span></span><br><span class="line">body=<span class="variable">$3</span></span><br><span class="line"></span><br><span class="line">DATE=`date <span class="string">"+%Y%m%d %H:%M:%S"</span>`</span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/zabbix-server/share/zabbix/alertscripts</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$DATE</span> &gt;&gt;alert_mail.log</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MAIL=<span class="string">'/usr/local/zabbix-server/share/zabbix/alertscripts/sendEmail'</span></span><br><span class="line"><span class="variable">$MAIL</span> <span class="operator">-s</span> smtp.e-buychina.com.cn <span class="operator">-f</span> zabbix@e-buychina.com.cn -t <span class="string">"<span class="variable">$to</span>"</span> -xu zabbix@e-buychina.com.cn -xp <span class="string">'E-buy2015E-buy2015'</span> -u <span class="string">"<span class="variable">$subject</span>"</span> -m <span class="string">"<span class="variable">$body</span>"</span> -o &gt;&gt; alert_mail.log</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$1</span> &gt;&gt; alert_mail.log</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$2</span> &gt;&gt; alert_mail.log</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$3</span> &gt;&gt; alert_mail.log</span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+
+<! -- 添加捐赠图标 -->
+    
+    
+    
+
+<! -- end 添加捐赠图标 -->
+      
+        <div class="post-tags">
+          
+            <a href="/tags/监控/"> #监控 </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/452/">
                 hive整合hadoop通过flume+hue收集日志
               </a>
@@ -1126,101 +1229,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/443/">
-                CentOS上搭建私有maven仓库
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2015-11-11
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/devops/">devops</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/443/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/443/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h1 id="安装JDK">安装JDK</h1><p>此处省略。。。</p>
-<h1 id="安装Sonatype_Nexus">安装Sonatype Nexus</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.sonatype.com/nexus/oss/nexus-<span class="number">2.11</span>.<span class="number">1</span>-<span class="number">01</span>-bundle.tar.gz</span><br><span class="line">tar zxvf nexus-<span class="number">2.11</span>.<span class="number">1</span>-<span class="number">01</span>-bundle.tar.gz </span><br><span class="line">mv nexus-<span class="number">2.11</span>.<span class="number">1</span>-<span class="number">01</span> /usr/<span class="built_in">local</span>/nexus</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/443/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-
-<! -- 添加捐赠图标 -->
-    
-    
-    
-
-<! -- end 添加捐赠图标 -->
-      
-        <div class="post-tags">
-          
-            <a href="/tags/maven/"> #maven </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1261,14 +1269,14 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">102</span>
+              <span class="site-state-item-count">103</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">分類</span>
               </a>
           </div>

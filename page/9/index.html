@@ -223,6 +223,94 @@
           
           
             
+              <a class="post-title-link" href="/archives/98/">
+                localhost 与 127.0.0.1 的区别
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2013-06-29
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/tcp-ip/">tcp/ip</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/98/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/98/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>localhost与127.0.0.1的区别是什么？相信有人会说是本地ip，曾有人说，用127.0.0.1比localhost好，可以减少一次解析。看来这个入门问题还有人不清楚，其实这两者是有区别的。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/98/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+
+<! -- 添加捐赠图标 -->
+    
+    
+    
+
+<! -- end 添加捐赠图标 -->
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/97/">
                 使用rsync删除海量文件
               </a>
@@ -994,8 +1082,8 @@
           
           
             
-              <a class="post-title-link" href="/archives/68/">
-                ORA-01102: cannot mount database in EXCLUSIVE mode
+              <a class="post-title-link" href="/archives/67/">
+                oracle startup 故障：ORA-00845: MEMORY_TARGET
               </a>
             
           
@@ -1024,8 +1112,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/archives/68/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/68/"></span>
+            <a href="/archives/67/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/67/"></span>
             </a>
           </span>
           
@@ -1040,127 +1128,16 @@
 
       
         
-          <p>还是startup的问题，真是连锁反应啊~~</p>
-<pre class="lang:default decode:true">SQL&gt; conn /as sysdba
-Connected to an idle instance.
-SQL&gt; startup
-ORACLE instance started.
-Total System Global Area  591396864 bytes
-Fixed Size                   1220724 bytes
-Variable Size             167776140 bytes
-Database Buffers         415236096  bytes
-Redo Buffers                 7163904 bytes
-ORA-01102: cannot mount database in EXCLUSIVE mode
-SQL&gt; shutdown immediate
-ORA-01507: database not mounted
-
-ORACLE instance shut down.</pre>
-
-<p>&nbsp;</p>
-<p>去CSDN查了一下资料，终于解决了
+          <p>书接上文，oracle startup上文报错解决之后又出现此问题</p>
+<p>Oracle 11g的Linux版本在修改了MEMORY_TARGET或者SGA_TARGET后启动可能会报错：</p>
+<p>SQL&gt; shutdown immediate<br>Database closed.<br>Database dismounted.<br>ORACLE instance shut down.<br>SQL&gt; startup<br>ORA-00845: MEMORY_TARGET not supported on this system</p>
+<p>这个问题是由于设置SGA的大小超过了操作系统/dev/shm的大小：</p>
+<p>解决这个问题只有两个方法，一种是修改初始化参数，使得初始化参数中SGA的设置小于/dev/shm的大小，另一种方法就是调整/dev/shm的大小。
           <div class="post-more-link text-center">
-            <a class="btn" href="/archives/68/#more">
+            <a class="btn" href="/archives/67/#more">
               閱讀全文 &raquo;
             </a>
           </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-
-<! -- 添加捐赠图标 -->
-    
-    
-    
-
-<! -- end 添加捐赠图标 -->
-      
-        <div class="post-tags">
-          
-            <a href="/tags/oracle/"> #oracle </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/66/">
-                oracle startup failure
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2012-12-26
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/database/">database</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/66/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/66/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>SQL&gt; startup<br>ORA-01078: failure in processing system parameters<br>LRM-00109: could not open parameter file &#8216;/data/oracle/product/11.2.0/db_1/dbs/initORA10G.ora&#8217;</p>
-<p>查找文件，不存在，估计是非法关机造成的。</p>
-<p>&nbsp;</p>
-<p><strong>解决方法：</strong></p>
-<p>将$ORACLE_BASE/admin/数据库名称/pfile目录下的init.ora.012009233838形式的文件copy到$ORACLE_HOME/dbs目录下initoracle.ora即可。（注：initoracle.ora中的oracle为你的实例名 即我的为 initora10g.ora）</p>
-<p>&nbsp;</p>
-<p>[root@localhost dbs]# cp init.ora.721200911530 $ORACLE_HOME/dbs/initora10g.ora</p>
-<p>&nbsp;</p>
-<p>然后继续切换到oracle 帐号,连接到 sqlplus,运行 startup</p>
-
         
       
     </div>
@@ -1232,14 +1209,14 @@ ORACLE instance shut down.</pre>
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">102</span>
+              <span class="site-state-item-count">103</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">分類</span>
               </a>
           </div>

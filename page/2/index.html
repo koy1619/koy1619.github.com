@@ -223,6 +223,101 @@
           
           
             
+              <a class="post-title-link" href="/archives/443/">
+                CentOS上搭建私有maven仓库
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於 2015-11-11
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分類於
+            
+              <a href="/categories/devops/">devops</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/archives/443/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/443/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="安装JDK">安装JDK</h1><p>此处省略。。。</p>
+<h1 id="安装Sonatype_Nexus">安装Sonatype Nexus</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.sonatype.com/nexus/oss/nexus-<span class="number">2.11</span>.<span class="number">1</span>-<span class="number">01</span>-bundle.tar.gz</span><br><span class="line">tar zxvf nexus-<span class="number">2.11</span>.<span class="number">1</span>-<span class="number">01</span>-bundle.tar.gz </span><br><span class="line">mv nexus-<span class="number">2.11</span>.<span class="number">1</span>-<span class="number">01</span> /usr/<span class="built_in">local</span>/nexus</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/archives/443/#more">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+
+<! -- 添加捐赠图标 -->
+    
+    
+    
+
+<! -- end 添加捐赠图标 -->
+      
+        <div class="post-tags">
+          
+            <a href="/tags/maven/"> #maven </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/archives/442/">
                 mysql中查看数据库中所有表的记录数
               </a>
@@ -1087,109 +1182,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/archives/433/">
-                mysql双主主键冲突排查修复
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於 2015-07-21
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分類於
-            
-              <a href="/categories/database/">database</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/archives/433/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="/archives/433/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h1 id="背景">背景</h1><p>线上A和B互为主主，A为业务写库，B为读库</p>
-<p>19号下午收到短信报警A的slave delay，果断VPN上去数据库查看到</p>
-<pre><code>Last_SQL_Error: Error <span class="string">'Duplicate entry '</span><span class="number">4960446</span><span class="string">' for key '</span>transaction_id<span class="string">''</span> <span class="keyword">on</span> query. <span class="keyword">Default</span> database
-</code></pre><p>又是熟悉的主键冲突，但是这个时候不能让业务出现任何问题，就果断在A</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/433/#more">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-
-<! -- 添加捐赠图标 -->
-    
-    
-    
-
-<! -- end 添加捐赠图标 -->
-      
-        <div class="post-tags">
-          
-            <a href="/tags/mysql/"> #mysql </a>
-          
-            <a href="/tags/主键冲突/"> #主键冲突 </a>
-          
-            <a href="/tags/双主/"> #双主 </a>
-          
-            <a href="/tags/数据恢复/"> #数据恢复 </a>
-          
-        </div>
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -1230,14 +1222,14 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">102</span>
+              <span class="site-state-item-count">103</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">分類</span>
               </a>
           </div>
