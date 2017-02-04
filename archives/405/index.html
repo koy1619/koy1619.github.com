@@ -1,0 +1,1000 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="VvyjvVXcJQa0QklHipu6pwm2PJGnnchIqX7s5JbbT_0" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="kvm,云计算,虚拟化," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="linux48" type="application/atom+xml" />
+
+
+
+
+
+
+
+
+
+<meta name="description" content="什么是 KVM ?KVM 是指基于 Linux 内核的虚拟机（Kernel-based Virtual Machine）。 2006 年 10 月，由以色列的Qumranet 组织开发的一种新的“虚拟机”实现方案。 2007 年 2 月发布的 Linux 2.6.20 内核第一次包含了 KVM 。增加 KVM 到 Linux 内核是 Linux 发展的一个重要里程碑，这也是第一个整合到 Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redhat/CentOS系统KVM虚拟机安装过程详解">
+<meta property="og:url" content="http://linux48.com/archives/405/index.html">
+<meta property="og:site_name" content="linux48">
+<meta property="og:description" content="什么是 KVM ?KVM 是指基于 Linux 内核的虚拟机（Kernel-based Virtual Machine）。 2006 年 10 月，由以色列的Qumranet 组织开发的一种新的“虚拟机”实现方案。 2007 年 2 月发布的 Linux 2.6.20 内核第一次包含了 KVM 。增加 KVM 到 Linux 内核是 Linux 发展的一个重要里程碑，这也是第一个整合到 Linux">
+<meta property="og:image" content="http://segmentfault.com/img/bVcRHo">
+<meta property="og:image" content="http://segmentfault.com/img/bVcRIf">
+<meta property="og:updated_time" content="2016-04-09T09:12:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redhat/CentOS系统KVM虚拟机安装过程详解">
+<meta name="twitter:description" content="什么是 KVM ?KVM 是指基于 Linux 内核的虚拟机（Kernel-based Virtual Machine）。 2006 年 10 月，由以色列的Qumranet 组织开发的一种新的“虚拟机”实现方案。 2007 年 2 月发布的 Linux 2.6.20 内核第一次包含了 KVM 。增加 KVM 到 Linux 内核是 Linux 发展的一个重要里程碑，这也是第一个整合到 Linux">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'xirong'
+    }
+  };
+</script>
+
+  <title> Redhat/CentOS系统KVM虚拟机安装过程详解 | linux48 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?d3d6790e839a0e8654347925181b01e9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">linux48</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '1hHhbYfnkeRSBbzVGQYE','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Redhat/CentOS系统KVM虚拟机安装过程详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2014-08-21T00:00:00+08:00" content="2014-08-21">
+              2014-08-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/虚拟化/" itemprop="url" rel="index">
+                    <span itemprop="name">虚拟化</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/archives/405/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/archives/405/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/archives/405/" class="leancloud_visitors" data-flag-title="Redhat/CentOS系统KVM虚拟机安装过程详解">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">閱讀次數 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="什么是_KVM_?">什么是 KVM ?</h2><p>KVM 是指基于 Linux 内核的虚拟机（Kernel-based Virtual Machine）。 2006 年 10 月，由以色列的Qumranet 组织开发的一种新的“虚拟机”实现方案。 2007 年 2 月发布的 Linux 2.6.20 内核第一次包含了 KVM 。增加 KVM 到 Linux 内核是 Linux 发展的一个重要里程碑，这也是第一个整合到 Linux 主线内核的虚拟化技术。<a id="more"></a></p>
+<p>KVM 在标准的 Linux 内核中增加了虚拟技术，从而我们可以通过优化的内核来使用虚拟技术。在 KVM 模型中，每一个虚拟机都是一个由 Linux 调度程序管理的标准进程，你可以在用户空间启动客户机操作系统。一个普通的 Linux 进程有两种运行模式：内核和用户。 KVM 增加了第三种模式：客户模式（有自己的内核和用户模式）。</p>
+<p>一个典型的 KVM 安装包括以下部件：</p>
+<blockquote>
+<ul>
+<li>一个管理虚拟硬件的设备驱动，这个驱动通过一个字符设备 /dev/kvm 导出它的功能。通过 /dev/kvm每一个客户机拥有其自身的地址空间，这个地址空间与内核的地址空间相分离或与任何一个正运行着的客户机相分离。</li>
+<li>一个模拟硬件的用户空间部件，它是一个稍微改动过的 QEMU 进程。从客户机操作系统执行 I/O 会拥有QEMU 。 QEMU 是一个平台虚拟化方案，它允许整个 PC 环境（包括磁盘、显示卡（图形卡）、网络设备）的虚拟化。任何客户机操作系统所发出的 I/O 请求都被拦截，并被路由到用户模式用以被 QEMU 过程模拟仿真。</li>
+</ul>
+</blockquote>
+<h2 id="CentOS上安装KVM功能模块步骤">CentOS上安装KVM功能模块步骤</h2><p><strong>1.KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持。</strong></p>
+<blockquote>
+<ul>
+<li>　　基于 Intel 处理器的系统，运行<code>grep vmx /proc/cpuinfo</code>查找 CPU flags 是否包括 vmx 关键词</li>
+<li>　　基于 AMD 处理器的系统，运行<code>grep svm /proc/cpuinfo</code>查找 CPU flags 是否包括 svm 关键词</li>
+<li>　　检查BIOS，确保BIOS里开启VT选项:</li>
+</ul>
+</blockquote>
+<p>注 : 一些厂商禁止了机器 BIOS 中的 VT 选项 , 这种方式下 VT 不能被重新打开。**</p>
+<p>注意：/proc/cpuinfo 仅从 Linux 2.6.15(Intel) 和 Linux 2.6.16(AMD) 开始显示虚拟化方面的信息。请使用 uname -r 命令查询您的内核版本。如有疑问，请联系硬件厂商。</p>
+<p><strong>2.iptables设置</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost qemu]<span class="comment"># cat /bin/iptables.sh </span></span><br><span class="line">modprobe ip_conntrack_ftp</span><br><span class="line">iptables -F</span><br><span class="line">iptables -A INPUT -i lo -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -o em1  -j ACCEPT</span><br><span class="line">iptables -A INPUT <span class="operator">-s</span> <span class="number">127.0</span>.<span class="number">0.1</span> <span class="operator">-d</span> <span class="number">127.0</span>.<span class="number">0.1</span> -j ACCEPT</span><br><span class="line">/sbin/iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="comment">#for ping:</span></span><br><span class="line">iptables -A INPUT -p icmp --icmp-type <span class="built_in">echo</span>-reply -j ACCEPT</span><br><span class="line">iptables -A INPUT -p icmp --icmp-type <span class="built_in">echo</span>-request -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="comment">#for kvm</span></span><br><span class="line">iptables -I FORWARD -m physdev --physdev-is-bridged -j ACCEPT</span><br><span class="line"></span><br><span class="line">iptables -A INPUT -p tcp -j REJECT --reject-with tcp-reset</span><br><span class="line">iptables -A INPUT -j DROP</span><br><span class="line">iptables -A FORWARD -j DROP</span><br><span class="line">[root@localhost qemu]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p><strong>3.安装与启动</strong></p>
+<pre><code>yum <span class="operator"><span class="keyword">install</span> kvm libvirt python-virtinst qemu-kvm virt-viewer bridge-utils
+
+/etc/init.d/libvirtd <span class="keyword">start</span></span>
+</code></pre><p><strong>4.建立虚拟机</strong></p>
+<p>划分硬盘</p>
+<pre><code>qemu-<span class="tag">img</span> create -f qcow2 -o preallocation=metadata /home/kvm/centos65-x64-mysql<span class="class">.qcow2</span> <span class="number">200</span>G
+</code></pre><p>安装KVM，下面是两种常见的网络连接方式，默认是default，适用于不同需求的网络环境，后面配置KVM中会详细说明。</p>
+<p>bridge网络模式</p>
+<pre><code><span class="comment">virt</span><span class="literal">-</span><span class="comment">install</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">name=gatewat</span><span class="literal">-</span><span class="comment">4</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">ram</span> <span class="comment">4096</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">vcpus=4</span> <span class="literal">-</span><span class="comment">f</span> <span class="comment">/home/kvm/gateway</span><span class="literal">-</span><span class="comment">4</span><span class="string">.</span><span class="comment">qcow2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">cdrom</span> <span class="comment">/home/iso/CentOS</span><span class="literal">-</span><span class="comment">6</span><span class="string">.</span><span class="comment">5</span><span class="literal">-</span><span class="comment">x86_64</span><span class="literal">-</span><span class="comment">bin</span><span class="literal">-</span><span class="comment">DVD1</span><span class="string">.</span><span class="comment">iso</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">graphics</span> <span class="comment">vnc</span><span class="string">,</span><span class="comment">listen=0</span><span class="string">.</span><span class="comment">0</span><span class="string">.</span><span class="comment">0</span><span class="string">.</span><span class="comment">0</span><span class="string">,</span><span class="comment">port=5920</span><span class="string">,</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">network</span> <span class="comment">bridge=br0</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">force</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">autostart</span>
+</code></pre><p>NAT网络模式</p>
+<pre><code><span class="comment">virt</span><span class="literal">-</span><span class="comment">install</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">name=test</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">ram</span> <span class="comment">512</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">vcpus=1</span> <span class="literal">-</span><span class="comment">f</span> <span class="comment">/home/kvm/test</span><span class="string">.</span><span class="comment">qcow2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">cdrom</span> <span class="comment">/opt/CentOS</span><span class="literal">-</span><span class="comment">6</span><span class="string">.</span><span class="comment">5</span><span class="literal">-</span><span class="comment">x86_64</span><span class="literal">-</span><span class="comment">bin</span><span class="literal">-</span><span class="comment">DVD1</span><span class="string">.</span><span class="comment">iso</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">graphics</span> <span class="comment">vnc</span><span class="string">,</span><span class="comment">listen=0</span><span class="string">.</span><span class="comment">0</span><span class="string">.</span><span class="comment">0</span><span class="string">.</span><span class="comment">0</span><span class="string">,</span><span class="comment">port=5988</span><span class="string">,</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">network</span> <span class="comment">network=default</span><span class="string">,</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">force</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">autostart</span>
+</code></pre><p><strong>5.启动</strong></p>
+<p>使用<code>virsh list --all</code>查看已安装的kvm</p>
+<p>使用<code>virsh start test</code>启动虚拟机</p>
+<p>使用VNC工具连接KVM来进行初始化配置</p>
+<h2 id="配置KVM">配置KVM</h2><p>使用<code>virsh-install</code>安装完KVM之后，会自动生成相应配置</p>
+<p>KVM的配置文件存储在<code>/etc/libvirt/qemu/</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># cd /etc/libvirt/qemu/</span></span><br><span class="line">[root@localhost qemu]<span class="comment"># ll</span></span><br><span class="line">total <span class="number">24</span></span><br><span class="line">drwxr-xr-x. <span class="number">2</span> root root <span class="number">4096</span> Jul <span class="number">24</span> <span class="number">17</span>:<span class="number">30</span> autostart</span><br><span class="line">drwx------. <span class="number">3</span> root root <span class="number">4096</span> Jun <span class="number">20</span> <span class="number">19</span>:<span class="number">21</span> networks</span><br><span class="line">-rw-------. <span class="number">1</span> root root <span class="number">2566</span> Aug <span class="number">20</span> <span class="number">18</span>:<span class="number">28</span> vm_1.xml</span><br><span class="line">-rw-------. <span class="number">1</span> root root <span class="number">2560</span> Jul  <span class="number">4</span> <span class="number">02</span>:<span class="number">02</span> vm_2.xml</span><br><span class="line">-rw-------. <span class="number">1</span> root root <span class="number">2566</span> Aug <span class="number">20</span> <span class="number">18</span>:<span class="number">28</span> vm_3.xml</span><br></pre></td></tr></table></figure>
+<p>长的大概是这个样子</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost qemu]<span class="comment"># cat vm_1.xml </span></span><br><span class="line">&lt;!--</span><br><span class="line">WARNING: THIS IS AN AUTO-GENERATED FILE. CHANGES TO IT ARE LIKELY TO BE </span><br><span class="line">OVERWRITTEN AND LOST. Changes to this xml configuration should be made using:</span><br><span class="line">  virsh edit vm_1</span><br><span class="line">or other application using the libvirt API.</span><br><span class="line">--&gt;</span><br><span class="line"></span><br><span class="line">&lt;domain <span class="built_in">type</span>=<span class="string">'kvm'</span>&gt;</span><br><span class="line">  &lt;name&gt;vm_1&lt;/name&gt;  //此处为hostname</span><br><span class="line">  &lt;uuid&gt;<span class="number">2</span>f952159-b231-<span class="number">80</span>a4-<span class="number">8086</span><span class="operator">-d</span>49978513fb4&lt;/uuid&gt;  //此处为uuid标识</span><br><span class="line">  &lt;memory unit=<span class="string">'KiB'</span>&gt;<span class="number">8388608</span>&lt;/memory&gt;  //此处为内存</span><br><span class="line">  &lt;currentMemory unit=<span class="string">'KiB'</span>&gt;<span class="number">8388608</span>&lt;/currentMemory&gt;</span><br><span class="line">  &lt;vcpu placement=<span class="string">'static'</span>&gt;<span class="number">6</span>&lt;/vcpu&gt;  //此处为cpu核数</span><br><span class="line">  &lt;os&gt;</span><br><span class="line">    &lt;<span class="built_in">type</span> arch=<span class="string">'x86_64'</span> machine=<span class="string">'rhel6.5.0'</span>&gt;hvm&lt;/<span class="built_in">type</span>&gt;</span><br><span class="line">    &lt;boot dev=<span class="string">'hd'</span>/&gt;  //此处为启动项目，若想从光盘启动可设置为&lt;boot dev=<span class="string">'cdrom'</span>/&gt;</span><br><span class="line">  &lt;/os&gt;</span><br><span class="line">  &lt;features&gt;</span><br><span class="line">    &lt;acpi/&gt;</span><br><span class="line">    &lt;apic/&gt;</span><br><span class="line">    &lt;pae/&gt;</span><br><span class="line">  &lt;/features&gt;</span><br><span class="line">  &lt;clock offset=<span class="string">'utc'</span>/&gt;</span><br><span class="line">  &lt;on_poweroff&gt;destroy&lt;/on_poweroff&gt;  //此处为关机命令 使用 virsh destroy vm_1 关闭</span><br><span class="line">  &lt;on_reboot&gt;restart&lt;/on_reboot&gt;</span><br><span class="line">  &lt;on_crash&gt;restart&lt;/on_crash&gt;</span><br><span class="line">  &lt;devices&gt;</span><br><span class="line">    &lt;emulator&gt;/usr/libexec/qemu-kvm&lt;/emulator&gt;</span><br><span class="line">    &lt;disk <span class="built_in">type</span>=<span class="string">'file'</span> device=<span class="string">'disk'</span>&gt;  //此处为硬盘信息</span><br><span class="line">      &lt;driver name=<span class="string">'qemu'</span> <span class="built_in">type</span>=<span class="string">'raw'</span> cache=<span class="string">'none'</span>/&gt;</span><br><span class="line">      &lt;<span class="built_in">source</span> file=<span class="string">'/home/kvm/vm_1.qcow2'</span>/&gt;</span><br><span class="line">      &lt;target dev=<span class="string">'hda'</span> bus=<span class="string">'ide'</span>/&gt;</span><br><span class="line">      &lt;address <span class="built_in">type</span>=<span class="string">'drive'</span> controller=<span class="string">'0'</span> bus=<span class="string">'0'</span> target=<span class="string">'0'</span> unit=<span class="string">'0'</span>/&gt;</span><br><span class="line">    &lt;/disk&gt;</span><br><span class="line">    &lt;disk <span class="built_in">type</span>=<span class="string">'block'</span> device=<span class="string">'cdrom'</span>&gt;  //此处为cdrom信息，可修改为iso的路径</span><br><span class="line">      &lt;driver name=<span class="string">'qemu'</span> <span class="built_in">type</span>=<span class="string">'raw'</span>/&gt;</span><br><span class="line">      &lt;target dev=<span class="string">'hdc'</span> bus=<span class="string">'ide'</span>/&gt;</span><br><span class="line">      &lt;<span class="built_in">readonly</span>/&gt;</span><br><span class="line">      &lt;address <span class="built_in">type</span>=<span class="string">'drive'</span> controller=<span class="string">'0'</span> bus=<span class="string">'1'</span> target=<span class="string">'0'</span> unit=<span class="string">'0'</span>/&gt;</span><br><span class="line">    &lt;/disk&gt;</span><br><span class="line">    &lt;controller <span class="built_in">type</span>=<span class="string">'usb'</span> index=<span class="string">'0'</span>&gt;  //此处为usb接口信息</span><br><span class="line">      &lt;address <span class="built_in">type</span>=<span class="string">'pci'</span> domain=<span class="string">'0x0000'</span> bus=<span class="string">'0x00'</span> slot=<span class="string">'0x01'</span> <span class="keyword">function</span>=<span class="string">'0x2'</span>/&gt;</span><br><span class="line">    &lt;/controller&gt;</span><br><span class="line">    &lt;controller <span class="built_in">type</span>=<span class="string">'ide'</span> index=<span class="string">'0'</span>&gt;</span><br><span class="line">      &lt;address <span class="built_in">type</span>=<span class="string">'pci'</span> domain=<span class="string">'0x0000'</span> bus=<span class="string">'0x00'</span> slot=<span class="string">'0x01'</span> <span class="keyword">function</span>=<span class="string">'0x1'</span>/&gt;</span><br><span class="line">    &lt;/controller&gt;</span><br><span class="line">    &lt;interface <span class="built_in">type</span>=<span class="string">'network'</span>&gt;  //此处为网卡<span class="number">1</span>信息，使用network也就是nat模式连接virbr0联网</span><br><span class="line">      &lt;mac address=<span class="string">'52:54:00:9a:d7:82'</span>/&gt;</span><br><span class="line">      &lt;<span class="built_in">source</span> network=<span class="string">'default'</span>/&gt;</span><br><span class="line">      &lt;address <span class="built_in">type</span>=<span class="string">'pci'</span> domain=<span class="string">'0x0000'</span> bus=<span class="string">'0x00'</span> slot=<span class="string">'0x03'</span> <span class="keyword">function</span>=<span class="string">'0x0'</span>/&gt;</span><br><span class="line">    &lt;/interface&gt;</span><br><span class="line">    &lt;interface <span class="built_in">type</span>=<span class="string">'bridge'</span>&gt;  //此处为网卡<span class="number">2</span>信息，使用bridge桥接方式到br1</span><br><span class="line">      &lt;mac address=<span class="string">'52:54:11:fd:39:23'</span>/&gt;</span><br><span class="line">      &lt;<span class="built_in">source</span> bridge=<span class="string">'br1'</span>/&gt;</span><br><span class="line">      &lt;address <span class="built_in">type</span>=<span class="string">'pci'</span> domain=<span class="string">'0x0000'</span> bus=<span class="string">'0x00'</span> slot=<span class="string">'0x05'</span> <span class="keyword">function</span>=<span class="string">'0x0'</span>/&gt;</span><br><span class="line">    &lt;/interface&gt;</span><br><span class="line">//若要添加网卡可新加配置，注意修改mac地址</span><br><span class="line">    &lt;interface <span class="built_in">type</span>=<span class="string">'bridge'</span>&gt;</span><br><span class="line">      &lt;mac address=<span class="string">'52:54:21:fd:39:23'</span>/&gt;</span><br><span class="line">      &lt;<span class="built_in">source</span> bridge=<span class="string">'br0'</span>/&gt;</span><br><span class="line">      &lt;address <span class="built_in">type</span>=<span class="string">'pci'</span> domain=<span class="string">'0x0000'</span> bus=<span class="string">'0x00'</span> slot=<span class="string">'0x08'</span> <span class="keyword">function</span>=<span class="string">'0x0'</span>/&gt;</span><br><span class="line">    &lt;/interface&gt;</span><br><span class="line"></span><br><span class="line">    &lt;serial <span class="built_in">type</span>=<span class="string">'pty'</span>&gt;</span><br><span class="line">      &lt;target port=<span class="string">'0'</span>/&gt;</span><br><span class="line">    &lt;/serial&gt;</span><br><span class="line">    &lt;console <span class="built_in">type</span>=<span class="string">'pty'</span>&gt;</span><br><span class="line">      &lt;target <span class="built_in">type</span>=<span class="string">'serial'</span> port=<span class="string">'0'</span>/&gt;</span><br><span class="line">    &lt;/console&gt;</span><br><span class="line">    &lt;input <span class="built_in">type</span>=<span class="string">'mouse'</span> bus=<span class="string">'ps2'</span>/&gt;</span><br><span class="line">    &lt;graphics <span class="built_in">type</span>=<span class="string">'vnc'</span> port=<span class="string">'5920'</span> autoport=<span class="string">'no'</span> listen=<span class="string">'0.0.0.0'</span>&gt;  //此处为VNC连接端口</span><br><span class="line">      &lt;listen <span class="built_in">type</span>=<span class="string">'address'</span> address=<span class="string">'0.0.0.0'</span>/&gt;</span><br><span class="line">    &lt;/graphics&gt;</span><br><span class="line">    &lt;video&gt;</span><br><span class="line">      &lt;model <span class="built_in">type</span>=<span class="string">'cirrus'</span> vram=<span class="string">'9216'</span> heads=<span class="string">'1'</span>/&gt;</span><br><span class="line">      &lt;address <span class="built_in">type</span>=<span class="string">'pci'</span> domain=<span class="string">'0x0000'</span> bus=<span class="string">'0x00'</span> slot=<span class="string">'0x02'</span> <span class="keyword">function</span>=<span class="string">'0x0'</span>/&gt;</span><br><span class="line">    &lt;/video&gt;</span><br><span class="line">    &lt;memballoon model=<span class="string">'virtio'</span>&gt;</span><br><span class="line">      &lt;address <span class="built_in">type</span>=<span class="string">'pci'</span> domain=<span class="string">'0x0000'</span> bus=<span class="string">'0x00'</span> slot=<span class="string">'0x04'</span> <span class="keyword">function</span>=<span class="string">'0x0'</span>/&gt;</span><br><span class="line">    &lt;/memballoon&gt;</span><br><span class="line">  &lt;/devices&gt;</span><br><span class="line">&lt;/domain&gt;</span><br><span class="line">[root@localhost qemu]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>后期可能会因为需求对KVM重新配置，这个时候我们只需要修改对应的<code>xml</code>文件即可</p>
+<p>修改配置的时候需要关闭KVM <code>virsh destroy vm_1</code></p>
+<p>使用<code>virsh define vm_1.xml</code>使配置生效</p>
+<p>使用<code>virsh start vm_1</code>启动虚拟机</p>
+<h2 id="配置网路环境">配置网路环境</h2><p><strong>1.nat模式配置</strong></p>
+<p>KVM默认采用nat模式，用户网络（User Networking）：让虚拟机访问主机、互联网或本地网络上的资源的简单方法，但是不能从网络或其他的客户机访问客户机。在公网IP不够使用KVM还需要上网的时候可以使用，大大节省了公网IP！同时这种模式也使得KVM不用暴露在公网之中，也增加了安全性。</p>
+<p>下图是虚拟机管理模块产生的接口关系：</p>
+<p><img src="http://segmentfault.com/img/bVcRHo" alt="请输入图片描述"></p>
+<p>其中virbr0是由宿主机虚拟机支持模块安装时产生的虚拟网络接口，也是一个switch和bridge，负责把内容分发到各虚拟机。</p>
+<p>从图上可以看出，虚拟接口和物理接口之间没有连接关系，所以虚拟机只能在通过虚拟的网络访问外部世界，无法从网络上定位和访问虚拟主机。</p>
+<p>下面是nat的default配置，可以自定义地址池</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost qemu]<span class="comment"># cat /etc/libvirt/qemu/networks/default.xml </span></span><br><span class="line">&lt;network&gt;</span><br><span class="line">  &lt;name&gt;default&lt;/name&gt;</span><br><span class="line">  &lt;uuid&gt;a8e0859c-<span class="number">4761</span>-<span class="number">4</span>d78-bcd6-eaeeceace429&lt;/uuid&gt;</span><br><span class="line">  &lt;bridge name=<span class="string">"virbr0"</span> /&gt;</span><br><span class="line">  &lt;mac address=<span class="string">'52:54:00:C9:D5:1E'</span>/&gt;</span><br><span class="line">  &lt;forward/&gt;</span><br><span class="line">  &lt;ip address=<span class="string">"192.168.122.1"</span> netmask=<span class="string">"255.255.255.0"</span>&gt;</span><br><span class="line">    &lt;dhcp&gt;</span><br><span class="line">      &lt;range start=<span class="string">"192.168.122.2"</span> end=<span class="string">"192.168.122.254"</span> /&gt;</span><br><span class="line">    &lt;/dhcp&gt;</span><br><span class="line">  &lt;/ip&gt;</span><br><span class="line">&lt;/network&gt;</span><br><span class="line">[root@localhost qemu]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>创建方法：</p>
+<p>使用<code>virsh net-start default</code>来启动nat网络，同时，虚拟机支持模块会修改iptables规则，通过命令可以查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># iptables -t nat -L -nv</span></span><br><span class="line">Chain PREROUTING (policy ACCEPT <span class="number">16924</span> packets, <span class="number">2759</span>K bytes)</span><br><span class="line">pkts bytes target     prot opt <span class="keyword">in</span>     out     <span class="built_in">source</span>               destination</span><br><span class="line">Chain POSTROUTING (policy ACCEPT <span class="number">2009</span> packets, <span class="number">125</span>K bytes)</span><br><span class="line">pkts bytes target     prot opt <span class="keyword">in</span>     out     <span class="built_in">source</span>               destination        </span><br><span class="line"> <span class="number">421</span> <span class="number">31847</span> MASQUERADE  all  --  *      *       <span class="number">192.168</span>.<span class="number">122.0</span>/<span class="number">24</span>    !<span class="number">192.168</span>.<span class="number">122.0</span>/<span class="number">24</span>   -----------&gt;这条是关键，它配置了NAT功能。</span><br><span class="line">Chain OUTPUT (policy ACCEPT <span class="number">2011</span> packets, <span class="number">125</span>K bytes)</span><br><span class="line">pkts bytes target     prot opt <span class="keyword">in</span>     out     <span class="built_in">source</span>               destination</span><br></pre></td></tr></table></figure>
+<p>如果你由于不小心将IPTABLE清空或者STOP导致IPTABLE配置丢失，可以通过如下操作来恢复：</p>
+<pre><code><span class="title">virsh</span> net-destroy <span class="default"><span class="keyword">default</span></span>
+
+<span class="title">virsh</span> net-start <span class="default"><span class="keyword">default</span></span>
+</code></pre><p>确认路由转发开启</p>
+<pre><code>[root<span class="annotation">@localhost</span> qemu]# more <span class="regexp">/proc/</span>sys<span class="regexp">/net/</span>ipv4/ip_forward 
+<span class="number">1</span>
+</code></pre><p>下面是一个KVM的nat模式的范例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@vm_1 data]<span class="comment"># cat /etc/sysconfig/network-scripts/ifcfg-eth0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用dhcp</span></span><br><span class="line"><span class="comment">#DEVICE=eth0</span></span><br><span class="line"><span class="comment">#ONBOOT=yes</span></span><br><span class="line"><span class="comment">#TYPE=Ethernet</span></span><br><span class="line"><span class="comment">#BOOTPROTO=dhcp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#手动IP</span></span><br><span class="line">DEVICE=eth0</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=<span class="number">192.168</span>.<span class="number">122.3</span></span><br><span class="line">NETMASK=<span class="number">255.255</span>.<span class="number">255.0</span></span><br><span class="line">GATEWAY=<span class="number">192.168</span>.<span class="number">122.1</span></span><br><span class="line">DNS1=<span class="number">192.168</span>.<span class="number">122.1</span></span><br><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">IPV6INIT=no</span><br><span class="line">USERCTL=no</span><br><span class="line">[root@vm_web_1_1 data]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p><strong>2.Bridge方式</strong></p>
+<p>虚拟网桥（Virtual Bridge）：设置好后客户机与互联网，客户机与主机之间都可以通信，试用于需要多个公网IP的环境。</p>
+<p>Bridge方式即虚拟网桥的网络连接方式，是客户机和子网里面的机器能够互相通信。可以使虚拟机成为网络中具有独立IP的主机。</p>
+<p>桥接网络（也叫物理设备共享）被用作把一个物理设备复制到一台虚拟机。网桥多用作高级设置，特别是主机多个网络接口的情况。</p>
+<p><img src="http://segmentfault.com/img/bVcRIf" alt="请输入图片描述"></p>
+<p>如上图，网桥的基本原理就是创建一个桥接接口br0，在物理网卡和虚拟网络接口之间传递数据。</p>
+<p>创建方法：</p>
+<p>不用过多命令，只需要修改好网卡的桥接方式，配好IP即可，下面是范例，不用注释仔细读一遍就能看懂了！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">========kvm_server==========</span><br><span class="line"></span><br><span class="line">[root@localhost network-scripts]<span class="comment"># cat ifcfg-br0 </span></span><br><span class="line">DEVICE=br0</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">TYPE=Bridge</span><br><span class="line">IPADDR=<span class="number">114.137</span>.<span class="number">122.233</span></span><br><span class="line">NETMASK=<span class="number">255.255</span>.<span class="number">255.128</span></span><br><span class="line">GATEWAY=<span class="number">114.137</span>.<span class="number">102.139</span></span><br><span class="line">DNS1=<span class="number">202.96</span>.<span class="number">122.83</span></span><br><span class="line">IPV6INIT=no</span><br><span class="line">NM_CONTROLLED=yes</span><br><span class="line">ONBOOT=yes</span><br><span class="line">USERCTL=no</span><br><span class="line"></span><br><span class="line">[root@localhost network-scripts]<span class="comment"># cat ifcfg-br1</span></span><br><span class="line">DEVICE=br1</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">TYPE=Bridge</span><br><span class="line">IPADDR=<span class="number">192.168</span>.<span class="number">1.12</span></span><br><span class="line">NETMASK=<span class="number">255.255</span>.<span class="number">255.0</span></span><br><span class="line">IPV6INIT=no</span><br><span class="line">ONBOOT=yes</span><br><span class="line">USERCTL=no</span><br><span class="line"></span><br><span class="line">[root@localhost network-scripts]<span class="comment"># cat ifcfg-em1 </span></span><br><span class="line">DEVICE=em1</span><br><span class="line">ONBOOT=yes</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">BRIDGE=br0</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">IPV6INIT=no</span><br><span class="line">USERCTL=no</span><br><span class="line"></span><br><span class="line">[root@localhost network-scripts]<span class="comment"># cat ifcfg-em2</span></span><br><span class="line">DEVICE=em2</span><br><span class="line">ONBOOT=yes</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">BRIDGE=br1</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">IPV6INIT=no</span><br><span class="line">USERCTL=no</span><br><span class="line"></span><br><span class="line">========kvm==========</span><br><span class="line"></span><br><span class="line">[root@gateway-<span class="number">2</span> network-scripts]<span class="comment"># cat ifcfg-eth0</span></span><br><span class="line">DEVICE=eth0</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">ONBOOT=yes</span><br><span class="line">NM_CONTROLLED=yes</span><br><span class="line">IPADDR=<span class="number">114.137</span>.<span class="number">122.222</span></span><br><span class="line">NETMASK=<span class="number">255.255</span>.<span class="number">255.128</span></span><br><span class="line">GATEWAY=<span class="number">114.137</span>.<span class="number">102.139</span></span><br><span class="line">DNS1=<span class="number">202.96</span>.<span class="number">122.83</span></span><br><span class="line"></span><br><span class="line">[root@gateway-<span class="number">2</span> network-scripts]<span class="comment"># cat ifcfg-eth0:1</span></span><br><span class="line">DEVICE=eth0:<span class="number">1</span></span><br><span class="line">TYPE=Ethernet</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=<span class="number">114.137</span>.<span class="number">122.123</span></span><br><span class="line">NETMASK=<span class="number">255.255</span>.<span class="number">255.128</span></span><br><span class="line">NM_CONTROLLED=yes</span><br><span class="line">BOOTPROTO=static</span><br><span class="line"></span><br><span class="line">[root@gateway-<span class="number">2</span> network-scripts]<span class="comment"># cat ifcfg-eth1</span></span><br><span class="line">DEVICE=eth1</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=<span class="number">192.168</span>.<span class="number">1.25</span></span><br><span class="line">NETMASK=<span class="number">255.255</span>.<span class="number">255.0</span></span><br><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">IPV6INIT=no</span><br><span class="line">USERCTL=no</span><br></pre></td></tr></table></figure>
+<p><strong>注意：网络配置可以同时存在nat和Bridge，看最上面的vm_1.xml</strong></p>
+<h1 id="—-2014-10-29更新—-">—-2014.10.29更新—-</h1><p>由于按照上文的NAT方式配置的机器，过了几个月宿主机重启之后死活连接不上外网ping不通<code>virbr0</code>(192.168.122.1)，<code>virsh net-destroy default</code>和 <code>virsh net-start default</code>之后也是不行，尝试了各种方案，最后<code>/etc/init.d/libvirtd restart</code>之后会偶尔联上外网ping通192.168.122.1，但是<code>virsh net-destroy default</code>和 <code>virsh net-start default</code>之后又连不上外网，今天又在测试环境测试都是OK的也没发现问题<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#30495;&#23454;&#21290;&#22839;&#25152;&#24605;</span><br></pre></td></tr></table></figure></p>
+<p>最后抱着尝试一下的心态按照<a href="http://www.linuxidc.com/Linux/2012-05/61445.htm这篇文章配置了，果断就OK了！再此记录一下！" target="_blank" rel="external">http://www.linuxidc.com/Linux/2012-05/61445.htm这篇文章配置了，果断就OK了！再此记录一下！</a></p>
+<p><strong>宿主机配置</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@web8 qemu]<span class="comment"># cp /etc/libvirt/qemu/networks/default.xml /etc/libvirt/qemu/networks/default.xml.bk </span></span><br><span class="line"></span><br><span class="line">[root@web8 qemu]<span class="comment"># cat /etc/libvirt/qemu/networks/default.xml</span></span><br><span class="line"></span><br><span class="line">&lt;network&gt;</span><br><span class="line">  &lt;name&gt;default&lt;/name&gt;</span><br><span class="line">  &lt;uuid&gt;ea07af3d-fd95-<span class="number">444</span>d<span class="operator">-a</span>1d2<span class="operator">-a</span>0ae5fce43de&lt;/uuid&gt;</span><br><span class="line">  &lt;forward mode=<span class="string">'nat'</span>/&gt;   //此处增加mode参数为nat</span><br><span class="line">  &lt;bridge name=<span class="string">'virbr0'</span> stp=<span class="string">'on'</span> delay=<span class="string">'0'</span> /&gt;</span><br><span class="line">  &lt;mac address=<span class="string">'52:54:00:89:DD:12'</span>/&gt;</span><br><span class="line">  &lt;ip address=<span class="string">'192.168.122.1'</span> netmask=<span class="string">'255.255.255.0'</span>&gt;</span><br><span class="line">    &lt;dhcp&gt;</span><br><span class="line">      &lt;range start=<span class="string">'192.168.122.2'</span> end=<span class="string">'192.168.122.254'</span> /&gt;</span><br><span class="line">    &lt;/dhcp&gt;</span><br><span class="line">  &lt;/ip&gt;</span><br><span class="line">&lt;/network&gt;</span><br><span class="line"></span><br><span class="line">[root@web8 qemu]<span class="comment"># virsh net-define /etc/libvirt/qemu/networks/default.xml</span></span><br><span class="line">[root@web8 qemu]<span class="comment"># virsh net-destroy default</span></span><br><span class="line">[root@web8 qemu]<span class="comment"># virsh net-start default</span></span><br><span class="line"></span><br><span class="line">[root@web8 qemu]<span class="comment"># cat  vm.xml</span></span><br><span class="line"></span><br><span class="line">······</span><br><span class="line">    &lt;interface <span class="built_in">type</span>=<span class="string">'network'</span>&gt;</span><br><span class="line">      &lt;mac address=<span class="string">'52:54:00:66:6e:49'</span>/&gt;</span><br><span class="line">      &lt;<span class="built_in">source</span> network=<span class="string">'default'</span>/&gt;</span><br><span class="line">      &lt;model <span class="built_in">type</span>=<span class="string">'virtio'</span>/&gt;  //此处为新增参数mode</span><br><span class="line">      &lt;address <span class="built_in">type</span>=<span class="string">'pci'</span> domain=<span class="string">'0x0000'</span> bus=<span class="string">'0x00'</span> slot=<span class="string">'0x03'</span> <span class="keyword">function</span>=<span class="string">'0x0'</span>/&gt;</span><br><span class="line">    &lt;/interface&gt;</span><br><span class="line">······</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block； padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/GeekNotes.jpg" alt="koy wechat" style="width: 200px; max-width: 100%;"/>
+    <div>我在公众号与你分享更多内容</div>
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://r.loli.io/UNn2An.png" alt="koy WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://r.loli.io/BVjiMz.jpg" alt="koy Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/kvm/" rel="tag">#kvm</a>
+          
+            <a href="/tags/云计算/" rel="tag">#云计算</a>
+          
+            <a href="/tags/虚拟化/" rel="tag">#虚拟化</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/404/" rel="next" title="将sublime text添加到右键菜单中">
+                <i class="fa fa-chevron-left"></i> 将sublime text添加到右键菜单中
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/archives/391/" rel="prev" title="Windows平台配置Jekyll环境并与GitHub连接">
+                Windows平台配置Jekyll环境并与GitHub连接 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="/archives/405/"
+           data-title="Redhat/CentOS系统KVM虚拟机安装过程详解" data-url="http://linux48.com//archives/405/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/koy.jpg"
+               alt="koy" />
+          <p class="site-author-name" itemprop="name">koy</p>
+          <p class="site-description motion-element" itemprop="description">My Opensource Life & Notepad</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">分類</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">111</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/koy1619" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/koy1619" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/koy007" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.douban.com/people/71189491/" target="_blank" title="DouBan">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  DouBan
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/koy1619" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是_KVM_?"><span class="nav-number">1.</span> <span class="nav-text">什么是 KVM ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CentOS上安装KVM功能模块步骤"><span class="nav-number">2.</span> <span class="nav-text">CentOS上安装KVM功能模块步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置KVM"><span class="nav-number">3.</span> <span class="nav-text">配置KVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置网路环境"><span class="nav-number">4.</span> <span class="nav-text">配置网路环境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#—-2014-10-29更新—-"><span class="nav-number"></span> <span class="nav-text">—-2014.10.29更新—-</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2011 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">koy</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="powered-by">
+   鲁ICP备15013969号
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next/">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"linux48"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("HfEUHBkxIxPKFFWsM8E29K81-gzGzoHsz", "j8gTHCF5cxmeGRbV0QIujeUw");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

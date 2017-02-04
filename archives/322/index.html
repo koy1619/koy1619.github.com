@@ -1,0 +1,1141 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="VvyjvVXcJQa0QklHipu6pwm2PJGnnchIqX7s5JbbT_0" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="rsync," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="linux48" type="application/atom+xml" />
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据镜像备份工具 —— remote sync 实时同步部署
+部署服务器ip
+Client 172.16.0.10 
+Server 172.16.0.20
+一. Client 配置
+卸载系统自带安装的rsync。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rsync同步部署">
+<meta property="og:url" content="http://linux48.com/archives/322/index.html">
+<meta property="og:site_name" content="linux48">
+<meta property="og:description" content="数据镜像备份工具 —— remote sync 实时同步部署
+部署服务器ip
+Client 172.16.0.10 
+Server 172.16.0.20
+一. Client 配置
+卸载系统自带安装的rsync。">
+<meta property="og:updated_time" content="2016-04-09T09:12:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="rsync同步部署">
+<meta name="twitter:description" content="数据镜像备份工具 —— remote sync 实时同步部署
+部署服务器ip
+Client 172.16.0.10 
+Server 172.16.0.20
+一. Client 配置
+卸载系统自带安装的rsync。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'xirong'
+    }
+  };
+</script>
+
+  <title> rsync同步部署 | linux48 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?d3d6790e839a0e8654347925181b01e9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">linux48</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '1hHhbYfnkeRSBbzVGQYE','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                rsync同步部署
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2014-05-30T00:00:00+08:00" content="2014-05-30">
+              2014-05-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/system/" itemprop="url" rel="index">
+                    <span itemprop="name">system</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/archives/322/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/archives/322/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/archives/322/" class="leancloud_visitors" data-flag-title="rsync同步部署">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">閱讀次數 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>数据镜像备份工具 —— remote sync 实时同步部署</p>
+<p>部署服务器ip</p>
+<pre><code><span class="tag">Client</span> 172<span class="class">.16</span><span class="class">.0</span><span class="class">.10</span> 
+<span class="tag">Server</span> 172<span class="class">.16</span><span class="class">.0</span><span class="class">.20</span>
+</code></pre><p><strong>一. Client 配置</strong></p>
+<p>卸载系统自带安装的rsync。<a id="more"></a></p>
+<pre><code>rpm -<span class="keyword">qa</span> |<span class="keyword">grep</span> rsync
+rpm -<span class="keyword">e</span> rsync-<span class="number">2.6</span>.<span class="number">8</span>-<span class="number">3.1</span>
+</code></pre><p>安装3.0版的rsync</p>
+<pre><code>tar zxvf rsync-<span class="number">3.0</span>.<span class="number">9</span><span class="class">.tar</span><span class="class">.gz</span>
+cd rsync-<span class="number">3.0</span>.<span class="number">9</span>
+./configure --prefix=/usr/local 
+make
+make install
+</code></pre><p>添加环境变量和重启脚本</p>
+<pre><code>cp <span class="regexp">/usr/</span>local<span class="regexp">/bin/</span>rsync <span class="regexp">/usr/</span>bin
+cp rsyncd <span class="regexp">/etc/</span>init.d/
+chkconfig —add rsyncd 
+chkconfig rsyncd on
+</code></pre><p>以下是重启脚本rsyncd代码：</p>
+<pre><code><span class="shebang">#!/bin/bash</span>
+<span class="comment">#chkconfig: - 85 15</span>
+<span class="comment">#this script for start|stop rsync daemon service  </span>
+
+status=$(netstat -lnp | grep -w <span class="number">873</span> | grep -v <span class="string">'grep'</span>) 
+pidfile=<span class="string">"/var/run/rsyncd.pid"</span> 
+start_rsync=<span class="string">"rsync --daemon"</span>
+pid=$(ps -ef | egrep <span class="string">"rsync --daemon"</span>  | grep -v <span class="string">'grep'</span> | gawk -F<span class="string">' '</span>  <span class="string">'{print $2}'</span>)
+
+<span class="keyword">function</span> <span class="function"><span class="title">rsyncstart</span></span>() { 
+
+    <span class="keyword">if</span> [ <span class="string">"<span class="variable">${status}</span>X"</span> == <span class="string">"X"</span> ];<span class="keyword">then</span> 
+
+       <span class="variable">${start_rsync}</span>   
+
+        status=$(netstat -lnp | grep -w <span class="number">873</span> | grep -v <span class="string">'grep'</span>) 
+
+        <span class="keyword">if</span> [  <span class="string">"<span class="variable">${status}</span>X"</span> != <span class="string">"X"</span>  ];<span class="keyword">then</span> 
+
+            <span class="built_in">echo</span> <span class="string">"rsync service start.......OK"</span> 
+
+        <span class="keyword">fi</span> 
+
+    <span class="keyword">else</span> 
+
+        <span class="built_in">echo</span> <span class="string">"rsync service is running !"</span>    
+
+    <span class="keyword">fi</span> 
+} 
+
+<span class="keyword">function</span> <span class="function"><span class="title">rsyncstop</span></span>() { 
+
+    <span class="keyword">if</span> [ <span class="string">"<span class="variable">${status}</span>X"</span> != <span class="string">"X"</span> ];<span class="keyword">then</span> 
+
+        <span class="built_in">kill</span> -<span class="number">9</span> <span class="variable">${pid}</span>
+        rm <span class="operator">-f</span> <span class="variable">$pidfile</span>     
+
+        status=$(netstat -lnp | grep -w <span class="number">873</span> | grep -v <span class="string">'grep'</span>) 
+
+        <span class="keyword">if</span> [ <span class="string">"<span class="variable">${status}</span>X"</span> == <span class="string">"X"</span> ];<span class="keyword">then</span> 
+
+            <span class="built_in">echo</span> <span class="string">"rsync service stop.......OK"</span> 
+        <span class="keyword">fi</span> 
+    <span class="keyword">else</span> 
+
+        <span class="built_in">echo</span> <span class="string">"rsync service is not running !"</span>    
+
+    <span class="keyword">fi</span> 
+} 
+
+<span class="keyword">function</span> <span class="function"><span class="title">rsyncstatus</span></span>() { 
+
+    <span class="keyword">if</span> [ <span class="string">"<span class="variable">${status}</span>X"</span> != <span class="string">"X"</span> ];<span class="keyword">then</span> 
+
+        <span class="built_in">echo</span> <span class="string">"rsync service is running !"</span>   
+
+    <span class="keyword">else</span> 
+
+         <span class="built_in">echo</span> <span class="string">"rsync service is not running !"</span>  
+
+    <span class="keyword">fi</span> 
+
+} 
+
+<span class="keyword">function</span> <span class="function"><span class="title">rsyncrestart</span></span>() { 
+
+    <span class="keyword">if</span> [ <span class="string">"<span class="variable">${status}</span>X"</span> == <span class="string">"X"</span> ];<span class="keyword">then</span> 
+
+               <span class="built_in">echo</span> <span class="string">"rsync service is not running..."</span> 
+
+               rsyncstart 
+        <span class="keyword">else</span> 
+
+               rsyncstop 
+
+               rsyncstart    
+
+        <span class="keyword">fi</span>       
+}  
+
+<span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span> 
+
+        <span class="string">"start"</span>) 
+               rsyncstart 
+                ;; 
+
+        <span class="string">"stop"</span>) 
+               rsyncstop 
+                ;; 
+
+        <span class="string">"status"</span>) 
+               rsyncstatus 
+               ;; 
+
+        <span class="string">"restart"</span>) 
+               rsyncrestart 
+               ;; 
+
+        *) 
+          <span class="built_in">echo</span> 
+                <span class="built_in">echo</span>  <span class="string">"Usage: <span class="variable">$0</span> start|stop|restart|status"</span> 
+          <span class="built_in">echo</span> 
+<span class="keyword">esac</span> 
+</code></pre><p>添加rsync配置文件</p>
+<pre><code>vi /etc/rsyncd<span class="class">.conf</span> 
+</code></pre><p>添加下面的代码到rsyncd.conf中</p>
+<pre><code>uid = nobody 
+gid = nobody 
+<span class="operator"><span class="keyword">use</span> chroot = <span class="keyword">no</span> strict 
+modes = yes 
+<span class="keyword">max</span> connections = <span class="number">200</span> 
+pid file = /<span class="keyword">var</span>/run/rsyncd.pid 
+<span class="keyword">lock</span> file = /<span class="keyword">var</span>/run/rsync.<span class="keyword">lock</span> 
+<span class="keyword">log</span> file = /<span class="keyword">var</span>/<span class="keyword">log</span>/rsyncd.<span class="keyword">log</span>
+
+＃同步配置test
+[test]  ＃必须和<span class="keyword">server</span>端name一样
+path = /home/client
+comment = test
+<span class="keyword">read</span> <span class="keyword">only</span> = <span class="keyword">no</span>
+<span class="keyword">write</span> <span class="keyword">only</span> = <span class="keyword">no</span>
+<span class="keyword">ignore</span> <span class="keyword">errors</span> = yes
+list = yes
+uid = root
+gid = root
+<span class="keyword">hosts</span> allow =  <span class="number">172.16</span>.0.20  ＃<span class="keyword">server</span>端ip
+<span class="keyword">hosts</span> deny = *</span>
+</code></pre><p>注：如果要添加多个同步server端，可以增加［test］这块配置。</p>
+<p>启动rsync服务</p>
+<pre><code><span class="keyword">service</span> rsyncd <span class="literal">start</span>
+</code></pre><p>iptables设置,开放rsync端口</p>
+<pre><code>-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">873</span> -j ACCEPT
+</code></pre><p><strong>二. server 配置</strong></p>
+<p>配置rsync服务端程序sersync2</p>
+<pre><code>tar zxvf sersync2.<span class="number">5.4</span>_64bit_binary_stable_final<span class="class">.tar</span><span class="class">.gz</span>
+cd GNU-Linux-x86
+mkdir /etc/sersync2
+cp confxml<span class="class">.xml</span> /etc/sersync2
+cp sersync2 /usr/bin
+</code></pre><hr>
+<p>配置sersync启动文件</p>
+<p>vi /etc/sersync2/confxml.xml</p>
+<p>修改以下<sersync>部分</sersync></p>
+<pre><code><span class="tag">&lt;<span class="title">sersync</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">localpath</span> <span class="attribute">watch</span>=<span class="value">"/home/server"</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">remote</span> <span class="attribute">ip</span>=<span class="value">"172.16.0.20"</span> <span class="attribute">name</span>=<span class="value">"test"</span>/&gt;</span>
+            <span class="comment">&lt;!--&lt;remote ip="192.168.8.40" name="tongbu"/&gt;--&gt;</span>
+        <span class="tag">&lt;/<span class="title">localpath</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">rsync</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">commonParams</span> <span class="attribute">params</span>=<span class="value">"-artuz"</span>/&gt;</span>
+            <span class="tag">&lt;<span class="title">auth</span> <span class="attribute">start</span>=<span class="value">"false"</span> <span class="attribute">users</span>=<span class="value">"root"</span> <span class="attribute">passwordfile</span>=<span class="value">"/etc/rsync.pas"</span>/&gt;</span>
+            <span class="tag">&lt;<span class="title">userDefinedPort</span> <span class="attribute">start</span>=<span class="value">"false"</span> <span class="attribute">port</span>=<span class="value">"874"</span>/&gt;</span><span class="comment">&lt;!-- port=874 --&gt;</span>
+            <span class="tag">&lt;<span class="title">timeout</span> <span class="attribute">start</span>=<span class="value">"false"</span> <span class="attribute">time</span>=<span class="value">"100"</span>/&gt;</span><span class="comment">&lt;!-- timeout=100 --&gt;</span>
+            <span class="tag">&lt;<span class="title">ssh</span> <span class="attribute">start</span>=<span class="value">"false"</span>/&gt;</span>
+        <span class="tag">&lt;/<span class="title">rsync</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">failLog</span> <span class="attribute">path</span>=<span class="value">"/var/log/rsync_fail.log"</span> <span class="attribute">timeToExecute</span>=<span class="value">"60"</span>/&gt;</span><span class="comment">&lt;!--default every 60mins execute once--&gt;</span>
+        <span class="tag">&lt;<span class="title">crontab</span> <span class="attribute">start</span>=<span class="value">"false"</span> <span class="attribute">schedule</span>=<span class="value">"600"</span>&gt;</span><span class="comment">&lt;!--600mins--&gt;</span>
+            <span class="tag">&lt;<span class="title">crontabfilter</span> <span class="attribute">start</span>=<span class="value">"false"</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">exclude</span> <span class="attribute">expression</span>=<span class="value">"*.php"</span>&gt;</span><span class="tag">&lt;/<span class="title">exclude</span>&gt;</span>
+                <span class="tag">&lt;<span class="title">exclude</span> <span class="attribute">expression</span>=<span class="value">"info/*"</span>&gt;</span><span class="tag">&lt;/<span class="title">exclude</span>&gt;</span>
+            <span class="tag">&lt;/<span class="title">crontabfilter</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">crontab</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">plugin</span> <span class="attribute">start</span>=<span class="value">"false"</span> <span class="attribute">name</span>=<span class="value">"command"</span>/&gt;</span>
+    <span class="tag">&lt;/<span class="title">sersync</span>&gt;</span>
+</code></pre><p>运行sersync2 后台运行</p>
+<pre><code>sersync2 -r -d -o /etc/sersync2/confxml<span class="class">.xml</span> 
+</code></pre><p>添加开机启动项：</p>
+<pre><code>vi <span class="regexp">/etc/</span>rc.d/rc.local
+sersync2 -d -o <span class="regexp">/etc/</span>sersync2<span class="regexp">/confxml.xml &gt;&gt; /</span>bakup/rsync.log <span class="number">2</span>&gt;&amp;<span class="number">1</span>
+
+
+sersync2常用参数 
+参数-<span class="string">d:</span>启用守护进程模式 
+参数-<span class="string">r:</span>在监控前，将监控目录与远程主机用rsync命令推送一遍 
+参数-<span class="string">n:</span> 指定开启守护线程的数量，默认为<span class="number">10</span>个 
+参数-<span class="string">o:</span>指定配置文件，默认使用confxml.xml文件 
+其他参数可以使用 sersync2 -help 查看
+</code></pre><p>rsync server端172.16.0.20实时同步到client端172.16.0.10部署配置完成。</p>
+<p><strong>服务验收：</strong> 在server创建文件 touch /home/server/test</p>
+<p>在client查看同步情况 ll /home/client</p>
+<p>在server删除clinet也删除</p>
+<hr>
+<p><strong>Question：</strong></p>
+<p>重启client端服务器后，发现同步报没有权限，但再手动重启service rsyncd restart后，同步又恢复正常。</p>
+<pre><code><span class="number">2014</span><span class="regexp">/05/</span><span class="number">29</span> <span class="number">14</span>:<span class="number">46</span>:<span class="number">24</span> [<span class="number">2971</span>] <span class="string">rsync:</span> failed to set times on <span class="string">"."</span> (<span class="keyword">in</span> test1): Permission denied (<span class="number">13</span>)
+<span class="number">2014</span><span class="regexp">/05/</span><span class="number">29</span> <span class="number">14</span>:<span class="number">46</span>:<span class="number">24</span> [<span class="number">2971</span>] <span class="string">rsync:</span> <span class="string">recv_generator:</span> mkdir <span class="string">"www"</span> (<span class="keyword">in</span> test1) <span class="string">failed:</span> Permission denied(<span class="number">13</span>)
+<span class="number">2014</span><span class="regexp">/05/</span><span class="number">29</span> <span class="number">14</span>:<span class="number">46</span>:<span class="number">24</span> [<span class="number">2971</span>] *** Skipping any contents from <span class="keyword">this</span> failed directory ***
+</code></pre><p>检查了服务器的同步的目录权限都没有问题，原因是开启了SELinux 的enforce模式，改成disable后，同步恢复正常。</p>
+<p><strong>注：如果发现无法同步等问题，大部分可以查看两边日志来针对解决</strong></p>
+<p>client日志在rsync.conf文件配置</p>
+<p>server日志在confxml.xml里failLog path=&#8221;/var/log/rsync_fail.log&#8221;</p>
+<p><strong>总结</strong>：rsync对于服务器不多得情况下还是非常好用得，程序同步也非常快，以前在uniqlo的app服务器上用，每天几w用户安装登录，lnmp架构rsync同步也没有出过问题，不过当时配置不完善，现在重写了启动脚本，服务器宕机再启的话也能继续实时同步。 ok，出门吃拉面！！！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block； padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/GeekNotes.jpg" alt="koy wechat" style="width: 200px; max-width: 100%;"/>
+    <div>我在公众号与你分享更多内容</div>
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://r.loli.io/UNn2An.png" alt="koy WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://r.loli.io/BVjiMz.jpg" alt="koy Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/rsync/" rel="tag">#rsync</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/307/" rel="next" title="使用saltstack批量管理服务器 （一）">
+                <i class="fa fa-chevron-left"></i> 使用saltstack批量管理服务器 （一）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/archives/376/" rel="prev" title="wordpress引用google开放css加载不到解决方法">
+                wordpress引用google开放css加载不到解决方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="/archives/322/"
+           data-title="rsync同步部署" data-url="http://linux48.com//archives/322/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/koy.jpg"
+               alt="koy" />
+          <p class="site-author-name" itemprop="name">koy</p>
+          <p class="site-description motion-element" itemprop="description">My Opensource Life & Notepad</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">分類</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">111</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/koy1619" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/koy1619" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/koy007" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.douban.com/people/71189491/" target="_blank" title="DouBan">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  DouBan
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/koy1619" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目錄</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2011 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">koy</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="powered-by">
+   鲁ICP备15013969号
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next/">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"linux48"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("HfEUHBkxIxPKFFWsM8E29K81-gzGzoHsz", "j8gTHCF5cxmeGRbV0QIujeUw");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

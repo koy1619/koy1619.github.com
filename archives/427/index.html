@@ -1,0 +1,989 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="VvyjvVXcJQa0QklHipu6pwm2PJGnnchIqX7s5JbbT_0" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="mysql," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="linux48" type="application/atom+xml" />
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文实例，运行于 MySQL 5.0 及以上版本。
+MySQL 赋予用户权限命令的简单格式可概括为：
+grant 权限 on 数据库对象 to 用户">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL的Grant赋权命令详解">
+<meta property="og:url" content="http://linux48.com/archives/427/index.html">
+<meta property="og:site_name" content="linux48">
+<meta property="og:description" content="本文实例，运行于 MySQL 5.0 及以上版本。
+MySQL 赋予用户权限命令的简单格式可概括为：
+grant 权限 on 数据库对象 to 用户">
+<meta property="og:updated_time" content="2016-04-09T09:12:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL的Grant赋权命令详解">
+<meta name="twitter:description" content="本文实例，运行于 MySQL 5.0 及以上版本。
+MySQL 赋予用户权限命令的简单格式可概括为：
+grant 权限 on 数据库对象 to 用户">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'xirong'
+    }
+  };
+</script>
+
+  <title> MySQL的Grant赋权命令详解 | linux48 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?d3d6790e839a0e8654347925181b01e9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">linux48</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '1hHhbYfnkeRSBbzVGQYE','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MySQL的Grant赋权命令详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2015-06-05T16:30:42+08:00" content="2015-06-05">
+              2015-06-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/archives/427/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/archives/427/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/archives/427/" class="leancloud_visitors" data-flag-title="MySQL的Grant赋权命令详解">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">閱讀次數 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文实例，运行于 MySQL 5.0 及以上版本。</p>
+<p>MySQL 赋予用户权限命令的简单格式可概括为：</p>
+<pre><code>grant 权限 <span class="function_start"><span class="keyword">on</span></span> 数据库对象 <span class="keyword">to</span> 用户
+</code></pre><a id="more"></a>
+<h1 id="普通数据库用户权限">普通数据库用户权限</h1><p>一、grant 普通数据用户，查询、插入、更新、删除 数据库中所有表数据的权利。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> common_user@<span class="string">'%'</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">insert</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> common_user@<span class="string">'%'</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">update</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> common_user@<span class="string">'%'</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">delete</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> common_user@<span class="string">'%'</span></span></span><br></pre></td></tr></table></figure>
+<p>或者，用一条 MySQL 命令来替代：</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span>, <span class="keyword">insert</span>, <span class="keyword">update</span>, <span class="keyword">delete</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> common_user@<span class="string">'%'</span></span>
+</code></pre><h1 id="数据库开发人员权限">数据库开发人员权限</h1><p>二、grant 数据库开发人员，创建表、索引、视图、存储过程、函数。。。等权限。</p>
+<p>grant 创建、修改、删除 MySQL 数据表结构权限。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">grant</span> <span class="keyword">create</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">grant</span> <span class="keyword">alter</span>  <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">grant</span> <span class="keyword">drop</span>   <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span></span><br></pre></td></tr></table></figure>
+<p>grant 操作 MySQL 外键权限。</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">references</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span>
+</code></pre><p>grant 操作 MySQL 临时表权限。</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">create</span> <span class="keyword">temporary</span> <span class="keyword">tables</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span>
+</code></pre><p>grant 操作 MySQL 索引权限。</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">index</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span>
+</code></pre><p>grant 操作 MySQL 视图、查看视图源代码 权限。</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">create</span> <span class="keyword">view</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span>
+<span class="operator"><span class="keyword">grant</span> <span class="keyword">show</span>   <span class="keyword">view</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span>
+</code></pre><p>grant 操作 MySQL 存储过程、函数 权限。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">grant</span> <span class="keyword">create</span> routine <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span> <span class="comment">-- now, can show procedure status</span></span><br><span class="line"><span class="operator"><span class="keyword">grant</span> <span class="keyword">alter</span>  routine <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span> <span class="comment">-- now, you can drop a procedure</span></span><br><span class="line"><span class="operator"><span class="keyword">grant</span> <span class="keyword">execute</span>        <span class="keyword">on</span> testdb.* <span class="keyword">to</span> developer@<span class="string">'192.168.0.%'</span>;</span></span><br></pre></td></tr></table></figure>
+<h1 id="普通DBA权限">普通DBA权限</h1><p>三、grant 普通 DBA 管理某个 MySQL 数据库的权限。</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span> <span class="keyword">on</span> testdb <span class="keyword">to</span> dba@<span class="string">'localhost'</span></span>
+</code></pre><p>其中，关键字 “privileges” 可以省略。</p>
+<h1 id="高级DBA权限">高级DBA权限</h1><p>四、grant 高级 DBA 管理 MySQL 中所有数据库的权限。</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> dba@<span class="string">'localhost'</span></span>
+</code></pre><h1 id="实际运用">实际运用</h1><p>五、MySQL grant 权限，分别可以作用在多个层次上。</p>
+<h2 id="grant_作用在整个_MySQL_服务器上：">grant 作用在整个 MySQL 服务器上：</h2><pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> dba@localhost;</span> 
+<span class="comment">-- dba 可以查询 MySQL 中所有数据库中的表。</span>
+
+<span class="operator"><span class="keyword">grant</span> <span class="keyword">all</span>    <span class="keyword">on</span> *.* <span class="keyword">to</span> dba@localhost;</span> 
+<span class="comment">-- dba 可以管理 MySQL 中的所有数据库</span>
+</code></pre><h2 id="grant_作用在单个数据库上：">grant 作用在单个数据库上：</h2><pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> dba@localhost;</span> 
+<span class="comment">-- dba 可以查询 testdb 中的表。</span>
+</code></pre><h2 id="grant_作用在单个数据表上：">grant 作用在单个数据表上：</h2><pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span>, <span class="keyword">insert</span>, <span class="keyword">update</span>, <span class="keyword">delete</span> <span class="keyword">on</span> testdb.orders <span class="keyword">to</span> dba@localhost;</span>
+</code></pre><p>这里在给一个用户授权多张表时，可以多次执行以上语句。例如：</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span>(user_id,username) <span class="keyword">on</span> smp.users <span class="keyword">to</span> mo_user@<span class="string">'%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'123345'</span>;</span>
+<span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> smp.mo_sms <span class="keyword">to</span> mo_user@<span class="string">'%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'123345'</span>;</span>
+</code></pre><h2 id="grant_作用在表中的列上：">grant 作用在表中的列上：</h2><pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span>(id, se, rank) <span class="keyword">on</span> testdb.apache_log <span class="keyword">to</span> dba@localhost;</span>
+</code></pre><h2 id="grant_作用在存储过程、函数上：">grant 作用在存储过程、函数上：</h2><pre><code>grant<span class="instruction"> execute </span>on procedure testdb.pr_add to 'dba'@'localhost'
+grant<span class="instruction"> execute </span>on function testdb.fn_add to 'dba'@'localhost'
+</code></pre><h1 id="查看权限">查看权限</h1><p>六、查看 MySQL 用户权限</p>
+<p>查看当前用户（自己）权限：</p>
+<pre><code><span class="operator"><span class="keyword">show</span> <span class="keyword">grants</span>;</span>
+</code></pre><p>查看其他 MySQL 用户权限：</p>
+<pre><code><span class="operator"><span class="keyword">show</span> <span class="keyword">grants</span> <span class="keyword">for</span> dba@localhost;</span>
+</code></pre><h1 id="撤销权限">撤销权限</h1><p>七、撤销已经赋予给 MySQL 用户权限的权限。</p>
+<p>revoke 跟 grant 的语法差不多，只需要把关键字 “to” 换成 “from” 即可：</p>
+<pre><code><span class="operator"><span class="keyword">grant</span>  <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">to</span>   dba@localhost;</span>
+<span class="operator"><span class="keyword">revoke</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">from</span> dba@localhost;</span>
+</code></pre><h1 id="注意事项">注意事项</h1><p>八、MySQL grant、revoke 用户权限注意事项</p>
+<p>grant, revoke 用户权限后，该用户只有重新连接 MySQL 数据库，权限才能生效。</p>
+<p>如果想让授权的用户，也可以将这些权限 grant 给其他用户，需要选项 “grant option“</p>
+<pre><code><span class="operator"><span class="keyword">grant</span> <span class="keyword">select</span> <span class="keyword">on</span> testdb.* <span class="keyword">to</span> dba@localhost <span class="keyword">with</span> <span class="keyword">grant</span> <span class="keyword">option</span>;</span>
+</code></pre><p>这个特性一般用不到。实际中，数据库权限最好由 DBA 来统一管理。</p>
+<hr>
+<p>遇到 SELECT command denied to user ‘用户名’@’主机名’ for table ‘表名’ 这种错误，解决方法是需要把吧后面的表名授权，即是要你授权核心数据库也要。</p>
+<p>我遇到的是SELECT command denied to user ‘my’@’%’ for table ‘proc’，是调用存储过程的时候出现，原以为只要把指定的数据库授权就行了，什么存储过程、函数等都不用再管了，谁知道也要把数据库mysql的proc表授权</p>
+<hr>
+<p>参考：<a href="http://zhidao.baidu.com/question/19633785.html" target="_blank" rel="external">http://zhidao.baidu.com/question/19633785.html</a></p>
+<hr>
+<p>mysql授权表共有5个表：user、db、host、tables_priv和columns_priv。</p>
+<p>授权表的内容有如下用途：<br>user表<br>user表列出可以连接服务器的用户及其口令，并且它指定他们有哪种全局（超级用户）权限。在user表启用的任何权限均是全局权限，并适用于所有数据库。例如，如果你启用了DELETE权限，在这里列出的用户可以从任何表中删除记录，所以在你这样做之前要认真考虑。</p>
+<p>db表<br>db表列出数据库，而用户有权限访问它们。在这里指定的权限适用于一个数据库中的所有表。</p>
+<p>host表<br>host表与db表结合使用在一个较好层次上控制特定主机对数据库的访问权限，这可能比单独使用db好些。这个表不受GRANT和REVOKE语句的影响，所以，你可能发觉你根本不是用它。</p>
+<p>tables_priv表<br>tables_priv表指定表级权限，在这里指定的一个权限适用于一个表的所有列。</p>
+<p>columns_priv表<br>columns_priv表指定列级权限。这里指定的权限适用于一个表的特定列。</p>
+<hr>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block； padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/GeekNotes.jpg" alt="koy wechat" style="width: 200px; max-width: 100%;"/>
+    <div>我在公众号与你分享更多内容</div>
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://r.loli.io/UNn2An.png" alt="koy WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://r.loli.io/BVjiMz.jpg" alt="koy Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag">#mysql</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/426/" rel="next" title="bitnami版gitlab修改端口">
+                <i class="fa fa-chevron-left"></i> bitnami版gitlab修改端口
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/archives/428/" rel="prev" title="关于PHP-FPM的backlog">
+                关于PHP-FPM的backlog <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="/archives/427/"
+           data-title="MySQL的Grant赋权命令详解" data-url="http://linux48.com//archives/427/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/koy.jpg"
+               alt="koy" />
+          <p class="site-author-name" itemprop="name">koy</p>
+          <p class="site-description motion-element" itemprop="description">My Opensource Life & Notepad</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">分類</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">111</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/koy1619" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/koy1619" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/koy007" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.douban.com/people/71189491/" target="_blank" title="DouBan">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  DouBan
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/koy1619" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#普通数据库用户权限"><span class="nav-number">1.</span> <span class="nav-text">普通数据库用户权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库开发人员权限"><span class="nav-number">2.</span> <span class="nav-text">数据库开发人员权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#普通DBA权限"><span class="nav-number">3.</span> <span class="nav-text">普通DBA权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高级DBA权限"><span class="nav-number">4.</span> <span class="nav-text">高级DBA权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实际运用"><span class="nav-number">5.</span> <span class="nav-text">实际运用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#grant_作用在整个_MySQL_服务器上："><span class="nav-number">5.1.</span> <span class="nav-text">grant 作用在整个 MySQL 服务器上：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grant_作用在单个数据库上："><span class="nav-number">5.2.</span> <span class="nav-text">grant 作用在单个数据库上：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grant_作用在单个数据表上："><span class="nav-number">5.3.</span> <span class="nav-text">grant 作用在单个数据表上：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grant_作用在表中的列上："><span class="nav-number">5.4.</span> <span class="nav-text">grant 作用在表中的列上：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grant_作用在存储过程、函数上："><span class="nav-number">5.5.</span> <span class="nav-text">grant 作用在存储过程、函数上：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看权限"><span class="nav-number">6.</span> <span class="nav-text">查看权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#撤销权限"><span class="nav-number">7.</span> <span class="nav-text">撤销权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意事项"><span class="nav-number">8.</span> <span class="nav-text">注意事项</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2011 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">koy</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="powered-by">
+   鲁ICP备15013969号
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next/">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"linux48"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("HfEUHBkxIxPKFFWsM8E29K81-gzGzoHsz", "j8gTHCF5cxmeGRbV0QIujeUw");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
