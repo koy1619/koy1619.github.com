@@ -220,16 +220,6 @@
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-commonweal">
-          <a href="/404.html" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
-            
-            公益404
-          </a>
-        </li>
-      
 
       
         <li class="menu-item menu-item-search">
@@ -277,6 +267,152 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/archives/454/" itemprop="url">
+                  zabbix使用自动发现规则自动化监控redis多实例
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2017-02-28T00:00:00+08:00" content="2017-02-28">
+              2017-02-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/zabbix/" itemprop="url" rel="index">
+                    <span itemprop="name">zabbix</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/archives/454/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/archives/454/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/archives/454/" class="leancloud_visitors" data-flag-title="zabbix使用自动发现规则自动化监控redis多实例">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">閱讀次數 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>zabbix使用自动发现规则自动化监控redis多实例，废话不多说，直接撸代码。</p>
+<h1 id="zabbix-agent">zabbix-agent</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/<span class="built_in">local</span>/zabbix-agent/redis.sh</span><br><span class="line"></span><br><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line"><span class="function"><span class="title">redis</span></span>() &#123;</span><br><span class="line">            port=($(sudo netstat -tpln | awk -F <span class="string">"[ :]+"</span> <span class="string">'/redis/ &amp;&amp; /0.0.0.0/ &#123;print $5&#125;'</span>))</span><br><span class="line">            <span class="built_in">printf</span> <span class="string">'&#123;\n'</span></span><br><span class="line">            <span class="built_in">printf</span> <span class="string">'\t"data":[\n'</span></span><br><span class="line">               <span class="keyword">for</span> key <span class="keyword">in</span> <span class="variable">$&#123;!port[@]&#125;</span></span><br><span class="line">                   <span class="keyword">do</span></span><br><span class="line">                       <span class="keyword">if</span> [[ <span class="string">"<span class="variable">$&#123;#port[@]&#125;</span>"</span> <span class="operator">-gt</span> <span class="number">1</span> &amp;&amp; <span class="string">"<span class="variable">$&#123;key&#125;</span>"</span> <span class="operator">-ne</span> <span class="string">"<span class="variable">$(($&#123;#port[@]&#125;-1)</span>)"</span> ]];<span class="keyword">then</span></span><br><span class="line">              socket=`ps aux|grep <span class="variable">$&#123;port[$&#123;key&#125;</span>]&#125;|grep -v grep|awk -F <span class="string">'='</span> <span class="string">'&#123;print $10&#125;'</span>|cut <span class="operator">-d</span> <span class="string">' '</span> <span class="operator">-f</span> <span class="number">1</span>`</span><br><span class="line">                          <span class="built_in">printf</span> <span class="string">'\t &#123;\n'</span></span><br><span class="line">                          <span class="built_in">printf</span> <span class="string">"\t\t\t\"&#123;#REDISPORT&#125;\":\"<span class="variable">$&#123;port[$&#123;key&#125;</span>]&#125;\"&#125;,\n"</span></span><br><span class="line">                     <span class="keyword">else</span> [[ <span class="string">"<span class="variable">$&#123;key&#125;</span>"</span> <span class="operator">-eq</span> <span class="string">"((<span class="variable">$&#123;#port[@]&#125;</span>-1))"</span> ]]</span><br><span class="line">              socket=`ps aux|grep <span class="variable">$&#123;port[$&#123;key&#125;</span>]&#125;|grep -v grep|awk -F <span class="string">'='</span> <span class="string">'&#123;print $10&#125;'</span>|cut <span class="operator">-d</span> <span class="string">' '</span> <span class="operator">-f</span> <span class="number">1</span>`</span><br><span class="line">                          <span class="built_in">printf</span> <span class="string">'\t &#123;\n'</span></span><br><span class="line">                          <span class="built_in">printf</span> <span class="string">"\t\t\t\"&#123;#REDISPORT&#125;\":\"<span class="variable">$&#123;port[$&#123;key&#125;</span>]&#125;\"&#125;\n"</span></span><br><span class="line">                       <span class="keyword">fi</span></span><br><span class="line">               <span class="keyword">done</span></span><br><span class="line">                          <span class="built_in">printf</span> <span class="string">'\t ]\n'</span></span><br><span class="line">                          <span class="built_in">printf</span> <span class="string">'&#125;\n'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$1</span></span><br></pre></td></tr></table></figure>
+<p>由于此脚本需要使用zabbix用户调用<code>netstat</code>命令，故需要允许zabbix用户无密码运行，同时关闭<code>requiretty</code></p>
+<p>然后给与755权限，并修改用户与组为zabbix</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"zabbix ALL=(root) NOPASSWD:/bin/netstat"</span>&gt;&gt;/etc/sudoers</span><br><span class="line">sed -i <span class="string">'s/^Defaults.*.requiretty/#Defaults    requiretty/'</span> /etc/sudoers</span><br><span class="line">chmod <span class="number">755</span> /usr/<span class="built_in">local</span>/zabbix-agent/etc/redis.sh</span><br><span class="line">chown -R zabbix.zabbix /usr/<span class="built_in">local</span>/zabbix-agent/etc/redis.sh</span><br></pre></td></tr></table></figure>
+<p>添加UserParameter</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@redis conf]<span class="comment"># cat /usr/local/zabbix-agent/etc/zabbix_agentd.conf</span></span><br><span class="line">UnsafeUserParameters=<span class="number">1</span></span><br><span class="line">UserParameter=zabbix_low_discovery[*],sh /usr/<span class="built_in">local</span>/zabbix-agent/etc/redis.sh <span class="variable">$1</span></span><br><span class="line">UserParameter=redis_stats[*],(<span class="built_in">echo</span> info; sleep <span class="number">1</span>) | telnet <span class="number">127.0</span>.<span class="number">0.1</span> <span class="variable">$1</span>   <span class="number">2</span>&gt;&amp;<span class="number">1</span> |grep -w <span class="variable">$2</span>|cut <span class="operator">-d</span> : <span class="operator">-f</span>2</span><br></pre></td></tr></table></figure>
+<p>以下为实现原理</p>
+<p>自动发现规则<strong>zabbix_low_discovery</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@redis conf]<span class="comment"># su zabbix</span></span><br><span class="line">[zabbix@redis conf]$ sh /usr/<span class="built_in">local</span>/zabbix-agent/etc/redis.sh</span><br><span class="line">&#123;</span><br><span class="line">        <span class="string">"data"</span>:[</span><br><span class="line">         &#123;</span><br><span class="line">                        <span class="string">"&#123;#REDISPORT&#125;"</span>:<span class="string">"6379"</span>&#125;,</span><br><span class="line">         &#123;</span><br><span class="line">                        <span class="string">"&#123;#REDISPORT&#125;"</span>:<span class="string">"26379"</span>&#125;,</span><br><span class="line">         &#123;</span><br><span class="line">                        <span class="string">"&#123;#REDISPORT&#125;"</span>:<span class="string">"16379"</span>&#125;</span><br><span class="line">         ]</span><br><span class="line">&#125;</span><br><span class="line">[zabbix@redis conf]$</span><br></pre></td></tr></table></figure></p>
+<p><strong>redis_stats</strong>的<strong>item</strong>获取利用<strong>telnet</strong>端口格式化各项参数信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@redis conf]<span class="comment"># su zabbix</span></span><br><span class="line">[zabbix@zhenru025 conf]$ (<span class="built_in">echo</span> info; sleep <span class="number">1</span>) | telnet <span class="number">127.0</span>.<span class="number">0.1</span> <span class="number">6379</span>   <span class="number">2</span>&gt;&amp;<span class="number">1</span> |grep -w used_memory|cut <span class="operator">-d</span> : <span class="operator">-f</span>2   </span><br><span class="line"><span class="number">25109752</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="zabbix_server">zabbix_server</h1><p>使用zabbix_get获取zabbix_agent的redis键值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@zabbix ebuy]<span class="comment"># /usr/local/zabbix-server/bin/zabbix_get -s 10.10.10.3 -k zabbix_low_discovery[redis]</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="string">"data"</span>:[</span><br><span class="line">         &#123;</span><br><span class="line">                        <span class="string">"&#123;#REDISPORT&#125;"</span>:<span class="string">"6379"</span>&#125;,</span><br><span class="line">         &#123;</span><br><span class="line">                        <span class="string">"&#123;#REDISPORT&#125;"</span>:<span class="string">"26379"</span>&#125;,</span><br><span class="line">         &#123;</span><br><span class="line">                        <span class="string">"&#123;#REDISPORT&#125;"</span>:<span class="string">"16379"</span>&#125;</span><br><span class="line">         ]</span><br><span class="line">&#125;</span><br><span class="line">[root@zabbix ebuy]<span class="comment"># </span></span><br><span class="line">[root@zabbix ebuy]<span class="comment"># /usr/local/zabbix-server/bin/zabbix_get -s 10.10.10.3 -k redis_stats[6379,total_connections_received] </span></span><br><span class="line"><span class="number">63711</span></span><br></pre></td></tr></table></figure>
+<p>以上配置完毕，测试没问题就万事俱备，导入<a href="http://pan.baidu.com/s/1eSIamJK" target="_blank" rel="external">模板</a>就OK！</p>
+<p>至于网上一些文章说还需要设置正则表达式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">设置正则</span><br><span class="line">在“管理”—&gt; “一般”—&gt;“正则表达式”里，选择“新的正则表达式”</span><br><span class="line">设置如下(填写所有redis的端口号)：</span><br><span class="line">name：Redis regex</span><br><span class="line">Result TRUE  = ^(<span class="number">6380</span>|<span class="number">6381</span>)$</span><br></pre></td></tr></table></figure>
+<p>我使用的是<strong>Zabbix 3.2.3</strong>版本，不用设置正则也可以。</p>
+<p>以下为监控图像，可根据自身业务需求设置相应的触发器报警机制。</p>
+<p><img src="http://wx3.sinaimg.cn/mw690/45d8cb2dgy1fd60w61t5lj20k10f9n2x.jpg" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1503,138 +1639,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/archives/444/" itemprop="url">
-                  CentOS下Nginx配置Perl运行Bugzilla
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-02-03T00:00:00+08:00" content="2016-02-03">
-              2016-02-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/devops/" itemprop="url" rel="index">
-                    <span itemprop="name">devops</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/archives/444/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/archives/444/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/archives/444/" class="leancloud_visitors" data-flag-title="CentOS下Nginx配置Perl运行Bugzilla">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">閱讀次數 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="安装LNMP">安装LNMP</h1><p>此处省略。。。</p>
-<h1 id="安装perl-fcgi模块">安装perl-fcgi模块</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum -y install perl-FCGI</span><br><span class="line"></span><br><span class="line"><span class="comment">#或者源码编译安装</span></span><br><span class="line"></span><br><span class="line">wget http://search.cpan.org/CPAN/authors/id/F/FL/FLORA/FCGI-<span class="number">0.74</span>.tar.gz</span><br><span class="line">tar zxvf FCGI-<span class="number">0.74</span>.tar.gz </span><br><span class="line"><span class="built_in">cd</span> FCGI-<span class="number">0.74</span></span><br><span class="line">perl Makefile.PL</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/archives/444/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1680,7 +1684,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">104</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1697,7 +1701,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">111</span>
+                <span class="site-state-item-count">112</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>
@@ -1927,8 +1931,8 @@
       ds.id = 'duoshuo-script';
       ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
       ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
+      (document.getElementsByTagName('footer')[0]
+      || document.getElementsByTagName('footer')[0]).appendChild(ds);
     })();
   </script>
 

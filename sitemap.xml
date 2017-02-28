@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     
+  <url>
+    <loc>http://linux48.com//archives/454/</loc>
+    <lastmod>2017-02-28T03:32:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>zabbix使用自动发现规则自动化监控redis多实例</title>
+        <pubTime>2017-02-27T16:00:00.000Z</pubTime>
+        
+        <tag>监控 zabbix redis </tag>
+         
+         
+           
+             
+              <breadCrumb title="zabbix" url="http://linux48.com/categories/zabbix/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
     
   <url>
     <loc>http://linux48.com//archives/453/</loc>
@@ -308,26 +329,6 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/441/</loc>
-    <lastmod>2016-04-09T09:12:49.000Z</lastmod>
-    <data>
-        <display>
-        <title>zabbix的proxy端安装配置</title>
-        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
-        
-        <tag>zabbix </tag>
-         
-         
-           
-             
-              <breadCrumb title="监控" url="http://linux48.com/categories/%E7%9B%91%E6%8E%A7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://linux48.com//archives/440/</loc>
     <lastmod>2016-04-09T09:12:49.000Z</lastmod>
     <data>
@@ -388,21 +389,21 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/402/</loc>
+    <loc>http://linux48.com//archives/403/</loc>
     <lastmod>2016-04-09T09:12:49.000Z</lastmod>
     <data>
         <display>
-        <title>SHELL syntax error:unexpected end of file 提示错误</title>
-        <pubTime>2014-08-10T16:00:00.000Z</pubTime>
+        <title>Sublime Text 3设置python编译支持环境设置</title>
+        <pubTime>2014-08-12T16:00:00.000Z</pubTime>
         
-        <tag>shell </tag>
+        <tag>Sublime </tag>
          
-        <tag>syntax </tag>
+        <tag>python </tag>
          
          
            
              
-              <breadCrumb title="os" url="http://linux48.com/categories/os/"/>
+              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
           
         </display>
     </data>
@@ -1154,28 +1155,6 @@
 
     
   <url>
-    <loc>http://linux48.com//archives/403/</loc>
-    <lastmod>2016-04-09T09:12:49.000Z</lastmod>
-    <data>
-        <display>
-        <title>Sublime Text 3设置python编译支持环境设置</title>
-        <pubTime>2014-08-12T16:00:00.000Z</pubTime>
-        
-        <tag>Sublime </tag>
-         
-        <tag>python </tag>
-         
-         
-           
-             
-              <breadCrumb title="dev" url="http://linux48.com/categories/dev/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://linux48.com//archives/437/</loc>
     <lastmod>2016-04-09T09:12:49.000Z</lastmod>
     <data>
@@ -1189,6 +1168,28 @@
            
              
               <breadCrumb title="database" url="http://linux48.com/categories/database/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://linux48.com//archives/402/</loc>
+    <lastmod>2016-04-09T09:12:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>SHELL syntax error:unexpected end of file 提示错误</title>
+        <pubTime>2014-08-10T16:00:00.000Z</pubTime>
+        
+        <tag>shell </tag>
+         
+        <tag>syntax </tag>
+         
+         
+           
+             
+              <breadCrumb title="os" url="http://linux48.com/categories/os/"/>
           
         </display>
     </data>
@@ -2229,6 +2230,25 @@
     </url>
 
     
+  <url>
+    <loc>http://linux48.com//archives/441/</loc>
+    <lastmod>2016-04-09T09:12:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>zabbix的proxy端安装配置</title>
+        <pubTime>2015-10-28T16:00:00.000Z</pubTime>
+        
+        <tag>zabbix </tag>
+         
+         
+           
+             
+              <breadCrumb title="监控" url="http://linux48.com/categories/%E7%9B%91%E6%8E%A7/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
     
     
