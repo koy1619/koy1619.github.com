@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="linux48">
 <meta property="og:description" content="bitnami版gitlab默认安装好web端口为80
 为了便于开放到外部访问，需要把端口改为其他的，比如8080">
-<meta property="og:updated_time" content="2016-04-09T09:12:49.000Z">
+<meta property="og:updated_time" content="2017-05-21T07:21:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bitnami版gitlab修改端口">
 <meta name="twitter:description" content="bitnami版gitlab默认安装好web端口为80
@@ -418,6 +418,9 @@ production: &amp;base
     host: <span class="number">120.26</span>.103.123
     port: <span class="number">8080</span>
     https: false
+</code></pre><h1 id="修改gitlab的gitlabci-runner配置文件">修改gitlab的gitlabci-runner配置文件</h1><pre><code>vim <span class="regexp">/dbdata/</span>gitlab-<span class="number">7.13</span>.1-<span class="number">0</span><span class="regexp">/apps/</span>gitlabci<span class="regexp">/gitlabci-runner/</span>config.yml
+<span class="label">
+url:</span> <span class="string">http:</span><span class="comment">//gitlab2.e-buychina.com.cn:80/gitlabci/</span>
 </code></pre><h1 id="重启服务">重启服务</h1><pre><code>[root@iZ23m1d4vwiZ ~]# <span class="keyword">sh</span> /<span class="keyword">opt</span>/gitlab-<span class="number">6.8</span>.<span class="number">1</span>-<span class="number">0</span>/ctlscript.<span class="keyword">sh</span>  restart
 </code></pre>
       
@@ -688,7 +691,7 @@ production: &amp;base
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#修改apache主配置文件"><span class="nav-number">1.</span> <span class="nav-text">修改apache主配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改apache的bitnami的配置文件"><span class="nav-number">2.</span> <span class="nav-text">修改apache的bitnami的配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改gitlab-shell的配置文件"><span class="nav-number">3.</span> <span class="nav-text">修改gitlab-shell的配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改gitlab的apache主目录配置文件"><span class="nav-number">4.</span> <span class="nav-text">修改gitlab的apache主目录配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重启服务"><span class="nav-number">5.</span> <span class="nav-text">重启服务</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#修改apache主配置文件"><span class="nav-number">1.</span> <span class="nav-text">修改apache主配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改apache的bitnami的配置文件"><span class="nav-number">2.</span> <span class="nav-text">修改apache的bitnami的配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改gitlab-shell的配置文件"><span class="nav-number">3.</span> <span class="nav-text">修改gitlab-shell的配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改gitlab的apache主目录配置文件"><span class="nav-number">4.</span> <span class="nav-text">修改gitlab的apache主目录配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改gitlab的gitlabci-runner配置文件"><span class="nav-number">5.</span> <span class="nav-text">修改gitlab的gitlabci-runner配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重启服务"><span class="nav-number">6.</span> <span class="nav-text">重启服务</span></a></li></ol></div>
             
           </div>
         </section>
