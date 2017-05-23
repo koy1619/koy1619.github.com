@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<title>阵列Cache写机制：Write-through与Write-back - linux48</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+<link rel="stylesheet" href="assets/css/bulma.min.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<!--[if lt IE 9]>
+<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="">
+</head>
+<body>
+
+<nav class="columns navbar">
+  <div class="column logo is-3 is-offset-1">
+    <a class="is-brand" href="index.html">
+      linux48
+    </a>
+  </div>
+</nav>
+
+<div class="columns content">
+  <div class="column is-2-desktop is-3-widescreen is-hidden-touch">
+  </div>
+  <div class="column article-container is-11-tablet is-8-desktop is-6-widescreen">
+    <div class="breadcrumb-area"><a href="index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-delimiter"> &gt; </span><a href="2015-08-27-Write-through-back.html" class="breadcrumb-item">阵列Cache写机制：Write-through与Write-back</a></div>
+    <h1 class="article-title">阵列Cache写机制：Write-through与Write-back</h1>
+    
+  <p>作者：<a href="http://linux48.com" target="_blank">Chris</a></p>
+
+
+    <div class="article">
+      <blockquote class="blockquote-center">Write Through和Write Back是阵列卡Cache的两种使用方式，也称为透写和回写。当选用write through方式时，系统的写磁盘操作并不利用阵列卡的Cache，而是直接与磁盘进行数据的交互。而write Back方式则利用阵列Cache作为系统与磁盘间的二传手，系统先将数据交给Cache，然后再由Cache将数据传给磁盘。</blockquote>
+<!-- more -->
+<p>最近在部署马来西亚DBServer的时候发现DB1的硬盘写入速度比DB2要慢好多</p>
+<figure><img src="http://r.loli.io/VnUZ7n.png" alt=""></figure>
+<figure><img src="http://r.loli.io/Yj6Zbm.png" alt=""></figure>
+<p>两台服务器在导入数据的过程中对硬盘测速结果如下</p>
+<figure><img src="http://r.loli.io/vYj2ye.png" alt=""></figure>
+<figure><img src="http://r.loli.io/BniYFf.png" alt=""></figure>
+<p>机房给出的解释也是一切正常</p>
+<p>后来老大帮忙推荐MegaCli工具去排查问题所在</p>
+<p>发现DB1的Cache写机制为Write-through而DB2为Write-back</p>
+<pre class="hljs"><code>[root@DBServer1 MegaCli]<span class="hljs-comment"># ./MegaCli64 -Ldinfo -lall -aall</span>
+                                     
+
+Adapter 0 -- Virtual Drive Information:
+Virtual Drive: 0 (Target Id: 0)
+Name                :
+RAID Level          : Primary-5, Secondary-0, RAID Level Qualifier-3
+Size                : 557.75 GB
+Sector Size         : 512
+Parity Size         : 278.875 GB
+State               : Optimal
+Strip Size          : 64 KB
+Number Of Drives    : 3
+Span Depth          : 1
+Default Cache Policy: WriteThrough, ReadAheadNone, Direct, No Write Cache <span class="hljs-keyword">if</span> Bad BBU
+Current Cache Policy: WriteThrough, ReadAheadNone, Direct, No Write Cache <span class="hljs-keyword">if</span> Bad BBU
+Default Access Policy: Read/Write
+Current Access Policy: Read/Write
+Disk Cache Policy   : Disk<span class="hljs-string">'s Default
+Encryption Type     : None
+Is VD Cached: No
+
+
+
+Exit Code: 0x00
+[root@DBServer1 MegaCli]# 
+</span></code></pre>
+<pre class="hljs"><code>[root@DBServer2 MegaCli]<span class="hljs-comment"># ./MegaCli64 -Ldinfo -lall -aall</span>
+                                     
+
+Adapter 0 -- Virtual Drive Information:
+Virtual Drive: 0 (Target Id: 0)
+Name                :
+RAID Level          : Primary-5, Secondary-0, RAID Level Qualifier-3
+Size                : 557.75 GB
+Sector Size         : 512
+Parity Size         : 278.875 GB
+State               : Optimal
+Strip Size          : 64 KB
+Number Of Drives    : 3
+Span Depth          : 1
+Default Cache Policy: WriteBack, ReadAheadNone, Direct, No Write Cache <span class="hljs-keyword">if</span> Bad BBU
+Current Cache Policy: WriteBack, ReadAheadNone, Direct, No Write Cache <span class="hljs-keyword">if</span> Bad BBU
+Default Access Policy: Read/Write
+Current Access Policy: Read/Write
+Disk Cache Policy   : Disk<span class="hljs-string">'s Default
+Encryption Type     : None
+Is VD Cached: No
+
+
+
+Exit Code: 0x00
+[root@DBServer2 MegaCli]# 
+
+</span></code></pre>
+<p><strong>以下为搜到的科普内容</strong></p>
+<p>Cache写机制</p>
+<p>参考 <a href="http://en.wikipedia.org/wiki/Cache#Writing_Policies" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Cache#Writing_Policies</a> 上的说明，<strong>Cache</strong>写机制分为<strong>write through</strong>和<strong>write back</strong>两种。</p>
+<blockquote>
+<ul>
+<li><strong>Write-through</strong> Write is done synchronously both to the cache and to the backing store.</li>
+<li><strong>Write-back</strong> (or Write-behind) – Writing is done only to the cache. A modified cache block is written back to the store, just before it is replaced.</li>
+</ul>
+</blockquote>
+<p><strong>Write-through</strong>（直写模式）在数据更新时，同时写入缓存Cache和后端存储。此模式的优点是操作简单；缺点是因为数据修改需要同时写入存储，数据写入速度较慢。</p>
+<p><strong>Write-back</strong>（回写模式）在数据更新时只写入缓存Cache。只在数据被替换出缓存时，被修改的缓存数据才会被写到后端存储。此模式的优点是数据写入速度快，因为不需要写存储；缺点是一旦更新后的数据未被写入存储时出现系统掉电的情况，数据将无法找回。</p>
+<p><strong>Write-misses写缺失的处理方式</strong></p>
+<p>对于写操作，存在写入缓存缺失数据的情况，这时有两种处理方式：</p>
+<blockquote>
+<ul>
+<li><strong>Write allocate</strong> (aka Fetch on write) – Datum at the missed-write location is loaded to cache, followed by a write-hit operation. In this approach, write misses are similar to read-misses.</li>
+<li><strong>No-write allocate</strong> (aka Write-no-allocate, Write around) – Datum at the missed-write location is not loaded to cache, and is written directly to the backing store. In this approach, actually only system reads are being cached.</li>
+</ul>
+</blockquote>
+<p><strong>Write allocate</strong>方式将写入位置读入缓存，然后采用write-hit（缓存命中写入）操作。写缺失操作与读缺失操作类似。</p>
+<p><strong>No-write allocate</strong>方式并不将写入位置读入缓存，而是直接将数据写入存储。这种方式下，只有读操作会被缓存。</p>
+<p>无论是Write-through还是Write-back都可以使用写缺失的两种方式之一。只是通常Write-back采用Write allocate方式，而Write-through采用No-write allocate方式；因为多次写入同一缓存时，Write allocate配合Write-back可以提升性能；而对于Write-through则没有帮助。</p>
+<p><strong>处理流程图</strong></p>
+<p>Write-through模式处理流程：</p>
+<figure><img src="http://r.loli.io/y67vYf.png" alt=""></figure>
+<p>Write-back模式处理流程：</p>
+<figure><img src="http://r.loli.io/2mU3Yb.png" alt=""></figure>
+<p>在创建raid阵列可选择Write Policy的策略</p>
+<figure><img src="http://r.loli.io/BZRNRf.jpg" alt=""></figure>
+<p>在了解了原理之后可以通过<strong>MegaCli</strong>来设置DB1的<strong>Write Policy</strong>为<strong>WriteBack</strong></p>
+<pre class="hljs"><code>[root@DBServer1 MegaCli]<span class="hljs-comment"># ./MegaCli64 -LDSetProp WB -LAll -aAll</span>
+                                     
+Set Write Policy to WriteBack on Adapter 0, VD 0 (target id: 0) success
+
+Exit Code: 0x00
+[root@DBServer1 MegaCli]<span class="hljs-comment"># </span>
+</code></pre>
+<p>此时在查看DB1的<strong>Write Policy</strong>已经成功设置为<strong>WriteBack</strong></p>
+<pre class="hljs"><code>[root@DBServer1 MegaCli]<span class="hljs-comment"># ./MegaCli64 -Ldinfo -lall -aall</span>
+                                     
+
+Adapter 0 -- Virtual Drive Information:
+Virtual Drive: 0 (Target Id: 0)
+Name                :
+RAID Level          : Primary-5, Secondary-0, RAID Level Qualifier-3
+Size                : 557.75 GB
+Sector Size         : 512
+Parity Size         : 278.875 GB
+State               : Optimal
+Strip Size          : 64 KB
+Number Of Drives    : 3
+Span Depth          : 1
+Default Cache Policy: WriteBack, ReadAheadNone, Direct, No Write Cache <span class="hljs-keyword">if</span> Bad BBU
+Current Cache Policy: WriteBack, ReadAheadNone, Direct, No Write Cache <span class="hljs-keyword">if</span> Bad BBU
+Default Access Policy: Read/Write
+Current Access Policy: Read/Write
+Disk Cache Policy   : Disk<span class="hljs-string">'s Default
+Encryption Type     : None
+Is VD Cached: No
+
+
+
+Exit Code: 0x00
+[root@DBServer1 MegaCli]# 
+</span></code></pre>
+<p>然后在测试DB1的写入速度，看以看到正常了<br>
+<img src="http://r.loli.io/2uYfMf.png" alt=""></p>
+<p>下一篇文章会着重记录一下<strong>MegaCli</strong>工具的安装与使用</p>
+<hr>
+<p>继续科普记录一下</p>
+<p>Write Through和Write Back是阵列卡Cache的两种使用方式，也称为透写和回写。当选用write through方式时，系统的写磁盘操作并不利用阵列卡的Cache，而是直接与磁盘进行数据的交互。而write Back方式则利用阵列Cache作为系统与磁盘间的二传手，系统先将数据交给Cache，然后再由Cache将数据传给磁盘。 在配置阵列的时候，如果不是很清楚的话，默认就可以了，系统会根据磁盘类型进行默认设置。</p>
+<p>生产环境中的配置要根据具体的业务类型及环境进行配置，比如：如果有外置UPS电源，选Write Back，如果没有外置电源，并且对数据安全性要求很高，不要求太高性能，就选Write Through。Write caching 或 write-through write-through意思是写操作根本不使用缓存。数据总是直接写入磁盘。关闭写缓存，可释放缓存用于读操作。（缓存被读写操作共用） Write caching可以提高写操作的性能。数据不是直接被写入磁盘；而是写入缓存。从应用程序的角度看，比等待完成磁盘写入操作要快的多。因此，可以提高写性能。由控制器将缓存内未写入磁盘的数据写入磁盘。表面上看，Write cache方式比write-through方式的读、写性能都要好，但是也要看磁盘访问方式和磁盘负荷了。 write-back（write cache）方式通常在磁盘负荷较轻时速度更快。负荷重时，每当数据被写入缓存后，就要马上再写入磁盘以释放缓存来保存将要写入的新数据，这时如果数据直接写入磁盘，控制器会以更快的速度运行。因此，负荷重时，将数据先写入缓存反而会降低吞吐量。 Starting and stopping cache flushing levels 这两个设置影响控制器如何处理未写入磁盘的缓存内数据，并且只在write-back cache方式下生效。缓存内数据写入磁盘称为flushing.你可以配置Starting and stopping cache flushing levels值，这个值表示占用整个缓存大小的百分比。当缓存内未写入磁盘的数据达到starting flushing value时，控制器开始flushing（由缓存写入磁盘）。当缓存内未写入磁盘数据量低于stop flush value时，flushing过程停止。控制器总是先flush旧的缓存数据。缓存内未写入数据停留超过20秒钟后被自动flushing. 典型的start flushing level是80%。通常情况下，stop flushing level也设置为80%。也就是说，控制器不允许超过80%的缓存用于write-back cache,但还是尽可能保持这一比例。如果你使用此设置，可以在缓存内存更多的未写入数据。这有利于提高写操作的性能，但是要牺牲数据保护。如果要得到数据保护，你可以使用较低的start and stop values。通过对这两个参数的设置，你可以调整缓存的读、写性能。经测试表明，使用接近的start and stop flushing levels时性能较好。如果stop level value远远低于start value，在flushing时会导致磁盘拥塞。 Cache block size 这个值指缓存分配单元大小，可以是4K或16K。选择合适的值，可以明显的改善缓存使用性能。 如果应用程序更多时候访问小于8K的数据，而将cache block size设置为16K，每次访问仅使用一部分cache block。在16K的cache block里总是存储8K或更小的数据，意味着只有50%的缓存容量被有效使用，使性能下降。对于随机I/O和小数据块的传送，4K比较合适。另一方面，如果是连续I/O 并使用大的segment size，最好选择16K。大的cache block size意味着cache block数量少并可缩短缓存消耗延时。另外，对于同样大小的数据，cache block size大一些，需要的缓存数据传送量更小。</p>
+<p>其他相关说明：</p>
+<p>保护内存里的数据</p>
+<p>备援电池的功能是确保万一当主电源故障或突然断电时内存里的数据不流失，因此如何确保备援电池的正常运行就显得格外重要。备援电池在2种情况下，系统视为无法正常运行以保护内存里的数据。一是坏掉的时候，背板的LED灯将亮起红灯。一是电池充电的时候，背板的LED灯将亮起黄灯。备援电池的使用寿命是根据充电的次数及电力释放的周期而变化的，这取决于用户本身对盘阵的使用情况，一般而言我们建议最好在盘阵使用了12个月之后更换备援电池模块（BBU）。备援电池在正常情况下充满电的时候是3.5V，当其电力降至2.7V的时候将自动进入充电状态，此时系统因为保护内存数据不流失的电力消失，自动地将数据的写入切换成“Write-Through”模式；当充完电后，又自动切换回“Write-Back”模式。这个动作是在事件启动装置（Event Trigger）功能来执行的，在安装管理软件的时候，事件启动装置对备援电池的管理初始值是打开的（Enable）。如果你没有更改过初始设置，那么上述的动作就会正常的运行。如果备援电池已经坏掉，不能正常保护内存里的数据时，而事件启动装置对备援电池的管理是设定在关闭的状态下，我们建议你手动将数据写入模式更改为“Write-Through”模式，以免数据写入没有电力保护的内存中而主电源故障或突然断电时，这些正在写入的数据就遗失了。</p>
+<p>减少延迟 当关闭内存“Write-Back”功能时就进入了“Write-Through”的模式，这时候主机数据是不会写入内存而直接写入硬盘的。在“Write-Through”模式下，所有的硬盘将与其相关的主机以适当的方式存取数据块，而大多数的时候硬盘处于接受写命令的状态。此时盘阵只要从主机接收到写入的命令，硬盘的读写头就会去寻找读写的位置，并等待硬盘处于可写入的状态，这个等待的现象就是所谓的延迟（Latency Time)，而硬盘经常处于等待写入的状态，增加了延迟的时间，不但缩短硬盘的使用寿命，并且系统也比较耗电。当打开内存的“Write-Back”功能时，从主机写入硬盘的数据先被写在内存里，在内存写满数据时盘阵控制器会将存在于内存的数据大量地写入硬盘。这个内存“Write-Back”的模式将主机写入的命令以写入内存来取代，可以大幅减少硬盘延迟的时间，并且相较于“Write-Through”模式，在大多数的时候提供更佳的写入政策。</p>
+<p>附上安装方法</p>
+<pre class="hljs"><code>wget http://docs.avagotech.com/docs-and-downloads/raid-controllers/raid-controllers-common-files/8-07-14_MegaCLI.zip
+unzip 8-07-14_MegaCLI.zip
+<span class="hljs-built_in">cd</span> Linux
+rpm -ivh MegaCli-8.07.14-1.noarch.rpm
+ls /opt/MegaRAID/MegaCli/           
+CmdTool.log  install.log  libstorelibir-2.so  libstorelibir-2.so.14.07-0  MegaCli64  MegaSAS.log
+chmod -R * +x /opt/MegaRAID
+</code></pre>
+
+      
+    </div>
+        
+        <h2>您的评论</h2>
+        <div id="disqus_thread"></div>
+        <script>
+          var disqus_config = function () {
+            this.page.url = location.origin + location.pathname;
+            this.page.identifier = location.pathname;
+            if (this.page.identifier.substr(-11) === '/index.html') {
+              this.page.identifier = this.page.identifier.substr(
+                0,
+                this.page.identifier.length - 10
+              );
+            }
+          };
+
+          (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = '//linux48.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+        </script>
+      
+
+    <div class="level article-bar is-mobile">
+      <div class="level-item has-text-centered">
+        <a title="previous page" class="previouse-article-link" href="2015-10-21-mysql-every-hour.html"><span class="icon icon-previous" data-icon="previous"></span><span class="link-content">&laquo; Previous</span></a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="font size" class="link-item link-item-size">
+          <span class="icon icon-size" data-icon="size"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="table of content" class="link-item link-item-toc">
+          <span class="icon icon-toc" data-icon="toc"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="top" href="#">
+          <span class="icon icon-up" data-icon="up"></span>
+          <span class="link-content">⤊ Top</span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="next page" class="next-article-link" href="2015-08-03-win10-cisco-vpn-repair.html"><span class="icon icon-next" data-icon="next"></span><span class="link-content">Next &raquo;</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="column is-2-widescreen is-hidden">
+  </div>
+</div>
+
+<div class="columns foot">
+  <div class="column is-3 is-offset-9 build-by">
+    Build by <a href="https://github.com/ruanyf/loppo" target="_blank">Loppo</a> 0.5.1
+  </div>
+</div>
+
+<div class="book-toc notification is-warning is-hidden">
+  <h3>目录&nbsp;<span class="title-close"><a class="button is-danger"> Close </a></span></h3>
+  <ul class="chapter-area"><li class="chapter-item "><a href="2017-02-28-zabbix-redis.html">zabbix使用自动发现规则自动化监控redis多实例</a></li><li class="chapter-item "><a href="2016-07-06-zabbix3.0-mail.html">zabbix 3.0邮件报警</a></li><li class="chapter-item "><a href="2016-06-30-hive-hdfs.html">hive整合hadoop通过flume+hue收集日志</a></li><li class="chapter-item "><a href="2016-05-27-mysql-duplicate-records.html">MySQL查询表内重复记录</a></li><li class="chapter-item "><a href="2016-05-24-free-ssl.html">Startssl免费SSL证书+Nginx搭建https</a></li><li class="chapter-item "><a href="2016-05-16-flume.html">flume+hdfs构建大数据</a></li><li class="chapter-item "><a href="2016-04-21-notepad.html">数据库维护文本编辑技巧记录</a></li><li class="chapter-item "><a href="2016-04-20-mysql-in-paixu.html">MySQL查询按IN的顺序输出结果</a></li><li class="chapter-item "><a href="2016-04-14-cisco-firewall-ha.html">CISCO ASA5520 HA 配置</a></li><li class="chapter-item "><a href="2016-04-09-centos7-config-bond.html">centos7配置bond和bond跨网段改IP</a></li><li class="chapter-item "><a href="2016-02-03-centos-install-bugzilla.html">CentOS下Nginx配置Perl运行Bugzilla</a></li><li class="chapter-item "><a href="2015-11-12-centos-install-maven.html">CentOS上搭建私有maven仓库</a></li><li class="chapter-item "><a href="2015-10-8-mysql-some-question.html">mysql You cant specify target table</a></li><li class="chapter-item "><a href="2015-10-30-mysql-row-usedisk.html">mysql中查看数据库中所有表的记录数</a></li><li class="chapter-item "><a href="2015-10-29-zabbix-proxy-install.html">zabbix的proxy端安装配置</a></li><li class="chapter-item "><a href="2015-10-28-zabbix-agent-install.html">zabbix的agent端安装配置</a></li><li class="chapter-item "><a href="2015-10-27-mysql-AVG-MIN-SUM.html">mysql求平均值、最小和总值</a></li><li class="chapter-item "><a href="2015-10-21-mysql-every-hour.html">mysql取每隔一小时数据</a></li><li class="chapter-item chapter-item-current"><a href="2015-08-27-Write-through-back.html">阵列Cache写机制：Write-through与Write-back</a></li><li class="chapter-item "><a href="2015-08-03-win10-cisco-vpn-repair.html">Repair Cisco vpnclient on windows10</a></li><li class="chapter-item "><a href="2015-07-30-sql-concat.html">MYSQL在一个字段值前面加字符串</a></li><li class="chapter-item "><a href="2015-07-22-Primary-key-conflicts.html">mysql双主主键冲突排查修复</a></li><li class="chapter-item "><a href="2015-07-15-mysql-dual-master.html">mysql双主互备设计搭建</a></li><li class="chapter-item "><a href="2015-07-07-svn-admin.html">CentOS6安装subversion 可视化管理工具iF.SVNAdmin</a></li><li class="chapter-item "><a href="2015-07-06-rhel-yum.html">Red Hat Enterprise Linux Server YUM配置</a></li><li class="chapter-item "><a href="2015-06-25-mysql-log.html">mysql全局日志开启</a></li><li class="chapter-item "><a href="2015-06-08-php-fpm-backlog.html">关于PHP-FPM的backlog</a></li><li class="chapter-item "><a href="2015-06-05-mysql-grant.html">MySQL的Grant赋权命令详解</a></li><li class="chapter-item "><a href="2015-06-03-bitnami-gitlab-port.html">bitnami版gitlab修改端口</a></li><li class="chapter-item "><a href="2015-03-13-awstats-install.html">awstats日志分析安装</a></li><li class="chapter-item "><a href="2015-03-07-h3c-vlan.html">H3C划分VLAN命令</a></li><li class="chapter-item "><a href="2015-03-05-redis-easy-install.html">Redis安装及主从配置</a></li><li class="chapter-item "><a href="2015-01-21-shadowsocks-python-node.html">shadowsocks的python和nodejs版搭建</a></li><li class="chapter-item "><a href="2015-01-07-ruby-Syntax-error-Invalid-GBK .html">ruby环境sass编译中文出现 Invalid GBK character</a></li><li class="chapter-item "><a href="2015-01-06-mysql-m-s-s.html">如何搭master-slave-slave</a></li><li class="chapter-item "><a href="2015-01-06-mysql5.1-ms.html">Mysql5.1主从服务设置</a></li><li class="chapter-item "><a href="2015-01-06-linux-rm-luanma.html">linux下删除乱码文件</a></li><li class="chapter-item "><a href="2014-12-17-SVNListParentPath.html">利用SVNListParentPath增加http浏览仓库根目录的功能</a></li><li class="chapter-item "><a href="2014-12-15-Chrome-css-failed.html">Chrome 浏览器加载 css Failed to load resource</a></li><li class="chapter-item "><a href="2014-12-04-centos-gitlab-yijian.html">centos gitlab一键安装备份恢复和迁移</a></li><li class="chapter-item "><a href="2014-12-02-linux-sar.html">linux sar命令</a></li><li class="chapter-item "><a href="2014-11-24-ruby-on-rails-err.html">ruby on rails 报错解决</a></li><li class="chapter-item "><a href="2014-11-18-awk-note.html">AWK统计随笔记录</a></li><li class="chapter-item "><a href="2014-11-12-svn-force-commit.html">SVN强制提交commit</a></li><li class="chapter-item "><a href="2014-11-12-rm-list-too-long.html">rm Argument list too long的解决办法</a></li><li class="chapter-item "><a href="2014-11-12-crontab-linux-lessthan.html">Crontab导致Linux的线程数枯竭</a></li><li class="chapter-item "><a href="2014-11-11-shell-ftp-uplod.html">用二句Shell命令实现FTP批量上传文件夹</a></li><li class="chapter-item "><a href="2014-11-10-redis-disk-memory-err.html">redis 写磁盘出错Cannot allocate memory</a></li><li class="chapter-item "><a href="2014-10-19-Jekyll_Variables.html">Jekyll目录结构与变量</a></li><li class="chapter-item "><a href="2014-10-19-git_common_command.html">Git 常用命令整理</a></li><li class="chapter-item "><a href="2014-10-18-windows_configuration_Jekyll.html">Windows平台配置Jekyll环境并与GitHub连接</a></li><li class="chapter-item "><a href="2014-08-21-centos-kvm-install.html">Redhat/CentOS系统KVM虚拟机安装过程详解</a></li><li class="chapter-item "><a href="2014-08-18-Sublime-add-youjian.html">将sublime text添加到右键菜单中</a></li><li class="chapter-item "><a href="2014-08-13-Sublime-python-build.html">Sublime Text 3设置python编译支持环境设置</a></li><li class="chapter-item "><a href="2014-08-11-shell-syntax-error.html">SHELL syntax error:unexpected end of file 提示错误</a></li><li class="chapter-item "><a href="2014-07-31-mysql-daxiaoxie.html">Windows下MySQL无法区分大小写解决方案</a></li><li class="chapter-item "><a href="2014-07-31-CentOS-NFS-mount.html">CentOS NFS的安装配置、启动及mount挂载方法</a></li><li class="chapter-item "><a href="2014-07-30-tencent-yun-repo.html">腾讯云的YUM repo</a></li><li class="chapter-item "><a href="2014-07-29-mysql-dump-all.html">Mysqldump参数大全</a></li><li class="chapter-item "><a href="2014-07-28-git-del-err-commit.html">git删除错误提交的commit</a></li><li class="chapter-item "><a href="2014-07-25-mysql-instet-other-table.html">MySql中把一个表的数据插入到另一个表中的实现</a></li><li class="chapter-item "><a href="2014-07-25-centos-install-ossec.html">centos安装ossec</a></li><li class="chapter-item "><a href="2014-07-24-phpmyadmin error.html">访问phpmyadmin错误</a></li><li class="chapter-item "><a href="2014-07-13-black apple.html">厚黑苹果售后</a></li><li class="chapter-item "><a href="2014-06-25-wordpress google css.html">wordpress引用google开放css加载不到解决方法</a></li><li class="chapter-item "><a href="2014-06-25-nginx https.html">centos下nginx的https配置</a></li><li class="chapter-item "><a href="2014-05-30-rsync.html">rsync同步部署</a></li><li class="chapter-item "><a href="2014-05-15-saltstack1.html">使用saltstack批量管理服务器 （一）</a></li><li class="chapter-item "><a href="2014-04-18-msmtpmutt.html">msmtp+mutt 服务器批量发送邮件</a></li><li class="chapter-item "><a href="2014-04-14-zabbix server install.html">zabbix的server端安装配置</a></li><li class="chapter-item "><a href="2014-04-05-wordpress them only one.html">wordpress后台主题只有一个解决方法</a></li><li class="chapter-item "><a href="2014-01-30-many-php-version.html">多版本php共存搭建</a></li><li class="chapter-item "><a href="2013-11-06-linux memery cat.html">linux查看内存相关命令</a></li><li class="chapter-item "><a href="2013-07-07-github easy install.html">github安装使用</a></li><li class="chapter-item "><a href="2013-06-30-localhost-127.0.0.1.html">localhost 与 127.0.0.1 的区别</a></li><li class="chapter-item "><a href="2013-06-15-rsync del hailiang.html">使用rsync删除海量文件</a></li><li class="chapter-item "><a href="2013-06-08-disk-data-recovery.html">记录一次服务器数据恢复</a></li><li class="chapter-item "><a href="2013-06-03-1nginx-502.html">记录一次nginx 502</a></li><li class="chapter-item "><a href="2013-06-02-linux nohup.html">linux命令后台运行详解</a></li><li class="chapter-item "><a href="2013-06-01-disk inode.html">深入理解磁盘inode</a></li><li class="chapter-item "><a href="2013-05-09-mysql error 1064.html">MySQL错误ERROR 1064 (type=myisam出错)</a></li><li class="chapter-item "><a href="2013-01-04-centos php oracle.html">centos6.2下php支持oracle</a></li><li class="chapter-item "><a href="2012-12-27-oracle-startup-failure.html">oracle startup failure</a></li><li class="chapter-item "><a href="2012-12-27-oracle-startup.html">'oracle startup 故障：ORA-00845: MEMORY_TARGET'</a></li><li class="chapter-item "><a href="2012-12-27-ora-01102-cannot-mount-database-in-exclusive-mode.html">'ORA-01102: cannot mount database in EXCLUSIVE mode'</a></li><li class="chapter-item "><a href="2012-12-20-centos-install-oracle-11g.html">centos install oracle 11g</a></li><li class="chapter-item "><a href="2012-11-14-mysql-slow-log.html">Mysql慢查询设置</a></li><li class="chapter-item "><a href="2012-11-14-mysql-ms-error.html">MYSQL主从同步故障事件</a></li><li class="chapter-item "><a href="2012-08-10-python-mysqldb-install.html">CentOS下python-mysqldb安装事件</a></li><li class="chapter-item "><a href="2012-08-03-sqlite-source-upgrade.html">sqlite3源码升级事件</a></li><li class="chapter-item "><a href="2012-08-01-centos6-pythonsqlite3.html">centos6.2升级python后处理sqlite3库事件</a></li><li class="chapter-item "><a href="2012-07-30-mysql5-5-ms.html">mysql5.5版本主从搭建</a></li><li class="chapter-item "><a href="2012-07-18-repair-yum.html">误卸载python导致yum无法使用修复事件</a></li><li class="chapter-item "><a href="2012-07-18-reload-upgrade-python.html">Centos平滑升级python事件</a></li><li class="chapter-item "><a href="2012-07-18-nginx413.html">Nginx出现“413 Request Entity Too Large”错误解决方法</a></li><li class="chapter-item "><a href="2012-07-06-nginx-apache-mulu-bd.html">Nginx、Apache目录浏览功能</a></li><li class="chapter-item "><a href="2012-06-27-yum-lamp-tomcat.html">CentOS yum安装配置LAMP+tomcat</a></li><li class="chapter-item "><a href="2012-06-11-ios-jiangji.html">ios5.0.1降级4.3.3事件</a></li><li class="chapter-item "><a href="2012-05-17-ocr-Tesseract.html">OCR之Tesseract的linux下安装</a></li><li class="chapter-item "><a href="2012-05-04-memcached-easy-install.html">memcached简易安装</a></li><li class="chapter-item "><a href="2012-04-11-centos-install-snmp.html">centos下snmp客户端安装</a></li><li class="chapter-item "><a href="2012-03-13-iptables-shell.html">一篇很不错的iptables的shell</a></li><li class="chapter-item "><a href="2012-03-07-cisco-fudong-luyou.html">思科静态浮动路由配置</a></li><li class="chapter-item "><a href="hello-world.html">Hello World</a></li></ul>
+</div>
+
+<div class="progress-indicator"></div>
+
+<!-- SCRIPTS -->
+<script>
+  var LOPPO = {};
+  LOPPO.current_path = '2015-08-27-Write-through-back.md';
+  LOPPO.relative_root_path = '';
+  LOPPO.article_toc = "";
+</script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
+
