@@ -1,3 +1,5 @@
+cd /root/koy1619.github.com
+rm -f `ls *|egrep -v '(CNAME|upload.sh)'`
 cp -Rf /home/wwwroot/linux48.com/dist/*   ./
 
 git init
