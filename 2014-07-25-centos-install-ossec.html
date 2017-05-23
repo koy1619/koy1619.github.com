@@ -36,14 +36,16 @@
 
 
     <div class="article">
-      <p>OSSEC是一款由Trend Micro（趋势科技）开发的开源的基于主机的入侵检测系统，可以简称为HIDS。它具备日志分析，文件完整性检查，策略监控，rootkit检测，实时报警以及联动响应等功能。它支持多种操作系统：Linux、Windows、MacOS、Solaris、HP-UX、AIX。属于企业安全之利器。</p>
+      <h2 id="fyi">fyi <a class="markdownIt-Anchor" href="#fyi">#</a></h2>
+<p>OSSEC是一款由Trend Micro（趋势科技）开发的开源的基于主机的入侵检测系统，可以简称为HIDS。它具备日志分析，文件完整性检查，策略监控，rootkit检测，实时报警以及联动响应等功能。它支持多种操作系统：Linux、Windows、MacOS、Solaris、HP-UX、AIX。属于企业安全之利器。</p>
 <p>详细的介绍和文档可以参考官网网站：</p>
 <p><a href="http://www.ossec.net/" target="_blank" rel="noopener">http://www.ossec.net/</a></p>
-<p>##<mark><mark><mark><mark><mark><mark><mark><mark>服务端安装</mark></mark></mark></mark></mark></mark></mark></mark></p>
+<h2 id="服务端安装">服务端安装 <a class="markdownIt-Anchor" href="#服务端安装">#</a></h2>
 <pre><code>计算机名：ossec-server.com
 IP地址：10.10.16.1
 </code></pre>
-<p>###server端支持环境安装<!-- more --></p>
+<h3 id="server端支持环境安装">server端支持环境安装 <a class="markdownIt-Anchor" href="#server端支持环境安装">#</a></h3>
+<!-- more -->
 <p>首先我们安装需要用到的关联库和软件，由于我们最终是需要把日志导入到MySQL中进行分析，以及需要通过web程序对报警结果进行展示，同时需要把本机当做SMTP，所以需要在本机安装MySQL、Apache和sendmail服务。在当前的终端中执行如下命令：</p>
 <pre><code>[root@ossec-server ~]# yum install wget gcc make mysql mysql-server mysql-devel httpd php php-mysql sendmail
 启动httpd、mysql、sendmail服务
@@ -59,7 +61,7 @@ mysql&gt; set password for ossec@localhost=PASSWORD('ossec');
 mysql&gt; flush privileges;
 mysql&gt; exit
 </code></pre>
-<p>###安装OSSEC服务端程序</p>
+<h3 id="安装ossec服务端程序">安装OSSEC服务端程序 <a class="markdownIt-Anchor" href="#安装ossec服务端程序">#</a></h3>
 <p>首先通过官网的链接下载当前的最新稳定版本 2.7 的服务端包，同时解压。</p>
 <pre><code>[root@ossec-server ~]# wget http://www.ossec.net/files/ossec-hids-2.7.1.tar.gz
 [root@ossec-server ~]# tar zxf ossec-hids-2.7.1.tar.gz
@@ -177,8 +179,8 @@ which: no host in (/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:
   --- 按 ENTER 以继续 ---
 </span></code></pre>
 <p>最后敲回车即可安装到<code>/usr/local/ossec</code>,注意上面的<code>email</code>地址和<code>白名单</code>后面可以在配置文件中修改。</p>
-<p>###OSSEC服务端配置<br>
-上面只是安装好了OSSEC服务端，下面则是为了配置服务端，使其工作正常。执行下面命令启用数据库支持：</p>
+<h3 id="ossec服务端配置">OSSEC服务端配置 <a class="markdownIt-Anchor" href="#ossec服务端配置">#</a></h3>
+<p>上面只是安装好了OSSEC服务端，下面则是为了配置服务端，使其工作正常。执行下面命令启用数据库支持：</p>
 <pre><code>[root@ossec-server ossec-hids-2.7.1]# /usr/local/ossec/bin/ossec-control enable database
 </code></pre>
 <p>然后导入MySQL表结构到MySQL中：</p>
@@ -294,7 +296,7 @@ udp        0      0 0.0.0.0:1514                0.0.0.0:*                       
 [root@ossec-server analogi-master]<span class="hljs-comment"># </span>
 </code></pre>
 <p>如果开启iptables，则需要开放这2个UDP端口到client</p>
-<p>##<mark><mark><mark><mark><mark><mark><mark><mark>客户端安装</mark></mark></mark></mark></mark></mark></mark></mark></p>
+<h2 id="客户端安装">客户端安装 <a class="markdownIt-Anchor" href="#客户端安装">#</a></h2>
 <pre><code>计算机名：client1.com
 IP地址：10.10.16.2
 </code></pre>
@@ -416,11 +418,11 @@ Choose your action: I or Q:
 <pre><code>[root@client1 ossec-hids-2.7.1]# /usr/local/ossec/bin/ossec-control start 
 </code></pre>
 <p>之后就可以收到服务器log更新的邮件了，但是这样子还不够，我们需要通过更加直观的方式统一集中式的查看服务器的log情况，这就需要安装web-gui</p>
-<p>##<mark><mark><mark><mark><mark><mark><mark><mark>WEB-GUI安装</mark></mark></mark></mark></mark></mark></mark></mark><br>
-ossec官方提供的ossec-wui    <a href="https://github.com/ossec/ossec-wui" target="_blank" rel="noopener">https://github.com/ossec/ossec-wui</a><br>
+<h2 id="web-gui安装">WEB-GUI安装 <a class="markdownIt-Anchor" href="#web-gui安装">#</a></h2>
+<p>ossec官方提供的ossec-wui    <a href="https://github.com/ossec/ossec-wui" target="_blank" rel="noopener">https://github.com/ossec/ossec-wui</a><br>
 github开源analogi-master   <a href="https://github.com/ECSC/analogi/archive/master.zip" target="_blank" rel="noopener">https://github.com/ECSC/analogi/archive/master.zip</a></p>
-<p>###ossec官方ossec-wui 安装方法<br>
-下载解压之后放到apache的web目录，并加apache用户权限</p>
+<h3 id="ossec官方ossec-wui-安装方法">ossec官方ossec-wui 安装方法 <a class="markdownIt-Anchor" href="#ossec官方ossec-wui-安装方法">#</a></h3>
+<p>下载解压之后放到apache的web目录，并加apache用户权限</p>
 <pre><code>[root@ossec-server ossec-wui-master]# chown -R apache.apache /usr/local/httpd/htdocs/ossec-wui-master/
 </code></pre>
 <p>执行安装脚本</p>
@@ -475,8 +477,8 @@ Setup completed successfuly.
 </code></pre>
 <p>重启web服务即可查看web界面</p>
 <figure><img src="http://segmentfault.com/img/bVcKTN" alt=""></figure>
-<p>###github开源analogi安装方法<br>
-下载并解压放到web目录，只需要修改一下mysql的连接池就ok</p>
+<h3 id="github开源analogi安装方法">github开源analogi安装方法 <a class="markdownIt-Anchor" href="#github开源analogi安装方法">#</a></h3>
+<p>下载并解压放到web目录，只需要修改一下mysql的连接池就ok</p>
 <pre class="hljs"><code>[root@ossec-server analogi-master]<span class="hljs-comment"># mv db_ossec.php.new db_ossec.php</span>
 [root@ossec-server analogi-master]<span class="hljs-comment"># vim db_ossec.php</span>
 &lt;?php
@@ -500,8 +502,8 @@ C DB"</span>);
 </code></pre>
 <p>web预览<br>
 <img src="http://segmentfault.com/img/bVcKTZ" alt="请输入图片描述"></p>
-<p>###FAQ：<br>
-发现无数据或者是看不到客户端，请查看<code>iptables</code>是否开放<code>udp</code>的<code>514</code>和<code>1514</code>端口并查看是否监听</p>
+<h2 id="faq：">FAQ： <a class="markdownIt-Anchor" href="#faq：">#</a></h2>
+<p>发现无数据或者是看不到客户端，请查看<code>iptables</code>是否开放<code>udp</code>的<code>514</code>和<code>1514</code>端口并查看是否监听</p>
 <p>web查看显示的时间不正确，可修改<code>php.ini</code>的date.timezone = Asia/Shanghai即可</p>
 <p>sendmail邮件发不出，可修改查看主机名是否规范,需要检查以下地方,修改完毕重启sendmail即可</p>
 <pre class="hljs"><code>[root@ossec-server analogi-master]<span class="hljs-comment"># cat /etc/hosts</span>
@@ -589,7 +591,7 @@ ossec-server.com
   var LOPPO = {};
   LOPPO.current_path = '2014-07-25-centos-install-ossec.md';
   LOPPO.relative_root_path = '';
-  LOPPO.article_toc = "";
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#fyi\">fyi</a></li>\n<li><a href=\"#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AE%89%E8%A3%85\">服务端安装</a>\n<ul>\n<li><a href=\"#server%E7%AB%AF%E6%94%AF%E6%8C%81%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85\">server端支持环境安装</a></li>\n<li><a href=\"#%E5%AE%89%E8%A3%85ossec%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%A8%8B%E5%BA%8F\">安装OSSEC服务端程序</a></li>\n<li><a href=\"#ossec%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE\">OSSEC服务端配置</a></li>\n</ul>\n</li>\n<li><a href=\"#%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%89%E8%A3%85\">客户端安装</a></li>\n<li><a href=\"#web-gui%E5%AE%89%E8%A3%85\">WEB-GUI安装</a>\n<ul>\n<li><a href=\"#ossec%E5%AE%98%E6%96%B9ossec-wui-%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95\">ossec官方ossec-wui 安装方法</a></li>\n<li><a href=\"#github%E5%BC%80%E6%BA%90analogi%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95\">github开源analogi安装方法</a></li>\n</ul>\n</li>\n<li><a href=\"#faq%EF%BC%9A\">FAQ：</a></li>\n</ul>\n";
 </script>
 <script src="assets/js/app.js"></script>
 </body>

@@ -37,7 +37,7 @@
 
     <div class="article">
       <p>zabbix使用自动发现规则自动化监控redis多实例，废话不多说，直接撸代码。</p>
-<h1 id="zabbix-agent">zabbix-agent <a class="markdownIt-Anchor" href="#zabbix-agent">#</a></h1>
+<h2 id="zabbix-agent-配置">zabbix-agent 配置 <a class="markdownIt-Anchor" href="#zabbix-agent-配置">#</a></h2>
 <pre class="hljs"><code>cat /usr/<span class="hljs-built_in">local</span>/zabbix-agent/redis.sh
 
 <span class="hljs-meta">#!/bin/bash
@@ -77,7 +77,7 @@ UnsafeUserParameters=1
 UserParameter=zabbix_low_discovery[*],sh /usr/<span class="hljs-built_in">local</span>/zabbix-agent/etc/redis.sh <span class="hljs-variable">$1</span>
 UserParameter=redis_stats[*],(<span class="hljs-built_in">echo</span> info; sleep 1) | telnet 127.0.0.1 <span class="hljs-variable">$1</span>   2&gt;&amp;1 |grep -w <span class="hljs-variable">$2</span>|cut <span class="hljs-_">-d</span> : <span class="hljs-_">-f</span>2
 </code></pre>
-<p>以下为实现原理</p>
+<h2 id="实现原理">实现原理 <a class="markdownIt-Anchor" href="#实现原理">#</a></h2>
 <p>自动发现规则<strong>zabbix_low_discovery</strong></p>
 <pre class="hljs"><code>[root@redis conf]<span class="hljs-comment"># su zabbix</span>
 [zabbix@redis conf]$ sh /usr/<span class="hljs-built_in">local</span>/zabbix-agent/etc/redis.sh redis
@@ -98,7 +98,7 @@ UserParameter=redis_stats[*],(<span class="hljs-built_in">echo</span> info; slee
 [zabbix@zhenru025 conf]$ (<span class="hljs-built_in">echo</span> info; sleep 1) | telnet 127.0.0.1 6379   2&gt;&amp;1 |grep -w used_memory|cut <span class="hljs-_">-d</span> : <span class="hljs-_">-f</span>2   
 25109752
 </code></pre>
-<h1 id="zabbix_server">zabbix_server <a class="markdownIt-Anchor" href="#zabbix_server">#</a></h1>
+<h2 id="zabbix_server-配置">zabbix_server 配置 <a class="markdownIt-Anchor" href="#zabbix_server-配置">#</a></h2>
 <p>使用zabbix_get获取zabbix_agent的redis键值</p>
 <pre class="hljs"><code>[root@zabbix ebuy]<span class="hljs-comment"># /usr/local/zabbix-server/bin/zabbix_get -s 10.10.10.3 -k zabbix_low_discovery[redis]</span>
 {
@@ -124,7 +124,8 @@ name：Redis regex
 Result TRUE  = ^(6380|6381)$
 </code></pre>
 <p>我使用的是<strong>Zabbix 3.2.3</strong>版本，不用设置正则也可以。</p>
-<p>以下为监控图像，可根据自身业务需求设置相应的触发器报警机制。</p>
+<h2 id="监控图像">监控图像 <a class="markdownIt-Anchor" href="#监控图像">#</a></h2>
+<p>可根据自身业务需求设置相应的触发器报警机制。</p>
 <figure><img src="http://wx3.sinaimg.cn/mw690/45d8cb2dgy1fd60w61t5lj20k10f9n2x.jpg" alt=""></figure>
 
       
@@ -200,7 +201,7 @@ Result TRUE  = ^(6380|6381)$
   var LOPPO = {};
   LOPPO.current_path = '2017-02-28-zabbix-redis.md';
   LOPPO.relative_root_path = '';
-  LOPPO.article_toc = "";
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#zabbix-agent-%E9%85%8D%E7%BD%AE\">zabbix-agent 配置</a></li>\n<li><a href=\"#%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86\">实现原理</a></li>\n<li><a href=\"#zabbix_server-%E9%85%8D%E7%BD%AE\">zabbix_server 配置</a></li>\n<li><a href=\"#%E7%9B%91%E6%8E%A7%E5%9B%BE%E5%83%8F\">监控图像</a></li>\n</ul>\n";
 </script>
 <script src="assets/js/app.js"></script>
 </body>

@@ -65,10 +65,11 @@
 <p>在A表中存在一个字段“name”，<br>
 而且不同记录之间的“name”值有可能会相同，<br>
 现在就是需要查询出在该表中的各记录之间，“name”值存在重复的项；</p>
-<pre><code>Select Name,Count(*) From A Group By Name Having Count(*) &gt; 1
+<pre class="hljs"><code><span class="hljs-keyword">Select</span> <span class="hljs-keyword">Name</span>,<span class="hljs-keyword">Count</span>(*) <span class="hljs-keyword">From</span> A <span class="hljs-keyword">Group</span> <span class="hljs-keyword">By</span> <span class="hljs-keyword">Name</span> <span class="hljs-keyword">Having</span> <span class="hljs-keyword">Count</span>(*) &gt; <span class="hljs-number">1</span>
 </code></pre>
 <p>如果还查性别也相同大则如下:</p>
-<pre><code>Select Name,sex,Count(*) From A Group By Name,sex Having Count(*) &gt; 1</code></pre>
+<pre class="hljs"><code><span class="hljs-keyword">Select</span> <span class="hljs-keyword">Name</span>,sex,<span class="hljs-keyword">Count</span>(*) <span class="hljs-keyword">From</span> A <span class="hljs-keyword">Group</span> <span class="hljs-keyword">By</span> <span class="hljs-keyword">Name</span>,sex <span class="hljs-keyword">Having</span> <span class="hljs-keyword">Count</span>(*) &gt; <span class="hljs-number">1</span>
+</code></pre>
 
       
     </div>

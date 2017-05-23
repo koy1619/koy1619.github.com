@@ -36,7 +36,7 @@
 
 
     <div class="article">
-      <p>#症状描述：</p>
+      <h2 id="症状描述：">症状描述： <a class="markdownIt-Anchor" href="#症状描述：">#</a></h2>
 <pre><code>ps -ef |grep sendmail 满屏
 ps -ef |grep postdrop 满屏
 </code></pre>
@@ -51,7 +51,7 @@ Nov 12 18:00:25 10-10-11-141 postfix/postdrop[3244]: warning: mail_queue_enter: 
 Nov 12 18:00:25 10-10-11-141 postfix/postdrop[2514]: warning: mail_queue_enter: create file maildrop/135247.2514: No such file or directory
 </code></pre>
 <p>同时<code>/var/spool/postfix/maildrop/</code>文件夹下出现大量簇文件</p>
-<p>#解决</p>
+<h2 id="解决">解决 <a class="markdownIt-Anchor" href="#解决">#</a></h2>
 <p>使用<code>pstree|grep crond</code>，结果如下：</p>
 <pre><code> |-crond---125*[crond---sendmail---postdrop]  
 </code></pre>
@@ -163,7 +163,7 @@ HOME=/
   var LOPPO = {};
   LOPPO.current_path = '2014-11-12-crontab-linux-lessthan.md';
   LOPPO.relative_root_path = '';
-  LOPPO.article_toc = "";
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#%E7%97%87%E7%8A%B6%E6%8F%8F%E8%BF%B0%EF%BC%9A\">症状描述：</a></li>\n<li><a href=\"#%E8%A7%A3%E5%86%B3\">解决</a></li>\n</ul>\n";
 </script>
 <script src="assets/js/app.js"></script>
 </body>

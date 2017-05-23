@@ -36,7 +36,7 @@
 
 
     <div class="article">
-      <p>##什么是 KVM ?</p>
+      <h2 id="什么是-kvm-">什么是 KVM ? <a class="markdownIt-Anchor" href="#什么是-kvm-">#</a></h2>
 <p>KVM 是指基于 Linux 内核的虚拟机（Kernel-based Virtual Machine）。 2006 年 10 月，由以色列的Qumranet 组织开发的一种新的“虚拟机”实现方案。 2007 年 2 月发布的 Linux 2.6.20 内核第一次包含了 KVM 。增加 KVM 到 Linux 内核是 Linux 发展的一个重要里程碑，这也是第一个整合到 Linux 主线内核的虚拟化技术。<!-- more --></p>
 <p>KVM 在标准的 Linux 内核中增加了虚拟技术，从而我们可以通过优化的内核来使用虚拟技术。在 KVM 模型中，每一个虚拟机都是一个由 Linux 调度程序管理的标准进程，你可以在用户空间启动客户机操作系统。一个普通的 Linux 进程有两种运行模式：内核和用户。 KVM 增加了第三种模式：客户模式（有自己的内核和用户模式）。</p>
 <p>一个典型的 KVM 安装包括以下部件：</p>
@@ -46,7 +46,7 @@
 <li>一个模拟硬件的用户空间部件，它是一个稍微改动过的 QEMU 进程。从客户机操作系统执行 I/O 会拥有QEMU 。 QEMU 是一个平台虚拟化方案，它允许整个 PC 环境（包括磁盘、显示卡（图形卡）、网络设备）的虚拟化。任何客户机操作系统所发出的 I/O 请求都被拦截，并被路由到用户模式用以被 QEMU 过程模拟仿真。</li>
 </ul>
 </blockquote>
-<p>##CentOS上安装KVM功能模块步骤</p>
+<h2 id="centos上安装kvm功能模块步骤">CentOS上安装KVM功能模块步骤 <a class="markdownIt-Anchor" href="#centos上安装kvm功能模块步骤">#</a></h2>
 <p><strong>1.KVM 需要有 CPU 的支持（Intel VT 或 AMD SVM），在安装 KVM 之前检查一下 CPU 是否提供了虚拟技术的支持。</strong></p>
 <blockquote>
 <ul>
@@ -98,7 +98,7 @@ iptables -A FORWARD -j DROP
 <p>使用<code>virsh list --all</code>查看已安装的kvm</p>
 <p>使用<code>virsh start test</code>启动虚拟机</p>
 <p>使用VNC工具连接KVM来进行初始化配置</p>
-<p>##配置KVM</p>
+<h2 id="配置kvm">配置KVM <a class="markdownIt-Anchor" href="#配置kvm">#</a></h2>
 <p>使用<code>virsh-install</code>安装完KVM之后，会自动生成相应配置</p>
 <p>KVM的配置文件存储在<code>/etc/libvirt/qemu/</code></p>
 <pre class="hljs"><code>[root@localhost ~]<span class="hljs-comment"># cd /etc/libvirt/qemu/</span>
@@ -200,7 +200,7 @@ or other application using the libvirt API.
 <p>修改配置的时候需要关闭KVM <code>virsh destroy vm_1</code></p>
 <p>使用<code>virsh define vm_1.xml</code>使配置生效</p>
 <p>使用<code>virsh start vm_1</code>启动虚拟机</p>
-<p>##配置网路环境</p>
+<h2 id="配置网路环境">配置网路环境 <a class="markdownIt-Anchor" href="#配置网路环境">#</a></h2>
 <p><strong>1.nat模式配置</strong></p>
 <p>KVM默认采用nat模式，用户网络（User Networking）：让虚拟机访问主机、互联网或本地网络上的资源的简单方法，但是不能从网络或其他的客户机访问客户机。在公网IP不够使用KVM还需要上网的时候可以使用，大大节省了公网IP！同时这种模式也使得KVM不用暴露在公网之中，也增加了安全性。</p>
 <p>下图是虚拟机管理模块产生的接口关系：</p>
@@ -348,7 +348,7 @@ IPV6INIT=no
 USERCTL=no
 </code></pre>
 <p><strong>注意：网络配置可以同时存在nat和Bridge，看最上面的vm_1.xml</strong></p>
-<p>#---2014.10.29更新---</p>
+<h2 id="---20141029更新---">---2014.10.29更新--- <a class="markdownIt-Anchor" href="#---20141029更新---">#</a></h2>
 <p>由于按照上文的NAT方式配置的机器，过了几个月宿主机重启之后死活连接不上外网ping不通<code>virbr0</code>(192.168.122.1)，<code>virsh net-destroy default</code>和 <code>virsh net-start default</code>之后也是不行，尝试了各种方案，最后<code>/etc/init.d/libvirtd restart</code>之后会偶尔联上外网ping通192.168.122.1，但是<code>virsh net-destroy default</code>和 <code>virsh net-start default</code>之后又连不上外网，今天又在测试环境测试都是OK的也没发现问题~~~~</p>
 <p>真实匪夷所思~~~</p>
 <p>最后抱着尝试一下的心态按照http://www.linuxidc.com/Linux/2012-05/61445.htm这篇文章配置了，果断就OK了！再此记录一下！</p>
@@ -460,7 +460,7 @@ USERCTL=no
   var LOPPO = {};
   LOPPO.current_path = '2014-08-21-centos-kvm-install.md';
   LOPPO.relative_root_path = '';
-  LOPPO.article_toc = "";
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#%E4%BB%80%E4%B9%88%E6%98%AF-kvm-\">什么是 KVM ?</a></li>\n<li><a href=\"#centos%E4%B8%8A%E5%AE%89%E8%A3%85kvm%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E6%AD%A5%E9%AA%A4\">CentOS上安装KVM功能模块步骤</a></li>\n<li><a href=\"#%E9%85%8D%E7%BD%AEkvm\">配置KVM</a></li>\n<li><a href=\"#%E9%85%8D%E7%BD%AE%E7%BD%91%E8%B7%AF%E7%8E%AF%E5%A2%83\">配置网路环境</a></li>\n<li><a href=\"#---20141029%E6%9B%B4%E6%96%B0---\">---2014.10.29更新---</a></li>\n</ul>\n";
 </script>
 <script src="assets/js/app.js"></script>
 </body>

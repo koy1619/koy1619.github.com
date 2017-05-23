@@ -39,12 +39,12 @@
       <p>bitnami版gitlab默认安装好web端口为80</p>
 <p>为了便于开放到外部访问，需要把端口改为其他的，比如8080</p>
 <!-- more -->
-<p>#修改apache主配置文件</p>
+<h2 id="修改apache主配置文件">修改apache主配置文件 <a class="markdownIt-Anchor" href="#修改apache主配置文件">#</a></h2>
 <pre><code>[root@iZ23m1d4vwiZ ~]# vim /opt/gitlab-6.8.1-0/apache2/conf/httpd.conf
 
 Listen 8080
 </code></pre>
-<p>#修改apache的bitnami的配置文件</p>
+<h2 id="修改apache的bitnami的配置文件">修改apache的bitnami的配置文件 <a class="markdownIt-Anchor" href="#修改apache的bitnami的配置文件">#</a></h2>
 <pre><code>[root@iZ23m1d4vwiZ ~]# vim /opt/gitlab-6.8.1-0/apache2/conf/bitnami/bitnami.conf
 # Default Virtual Host configuration.
 
@@ -67,7 +67,7 @@ Listen 8080
     &lt;/IfVersion&gt;
   &lt;/Directory&gt;
 </code></pre>
-<p>#修改gitlab-shell的配置文件</p>
+<h2 id="修改gitlab-shell的配置文件">修改gitlab-shell的配置文件 <a class="markdownIt-Anchor" href="#修改gitlab-shell的配置文件">#</a></h2>
 <pre><code>[root@iZ23m1d4vwiZ ~]# vim /opt/gitlab-6.8.1-0/apps/gitlab/gitlab-shell/config.yml
 # GitLab user. git by default
 user: git
@@ -75,7 +75,7 @@ user: git
 # Url to gitlab instance. Used for api calls. Should end with a slash.
 gitlab_url: &quot;http://120.26.103.123:8080/&quot;
 </code></pre>
-<p>#修改gitlab的apache主目录配置文件</p>
+<h2 id="修改gitlab的apache主目录配置文件">修改gitlab的apache主目录配置文件 <a class="markdownIt-Anchor" href="#修改gitlab的apache主目录配置文件">#</a></h2>
 <pre><code>[root@iZ23m1d4vwiZ ~]# vim /opt/gitlab-6.8.1-0/apps/gitlab/htdocs/config/gitlab.yml
 # # # # # # # # # # # # # # # # # #
 # GitLab application config file  #
@@ -98,12 +98,12 @@ production: &amp;base
     port: 8080
     https: false
 </code></pre>
-<p>#修改gitlab的gitlabci-runner配置文件</p>
+<h2 id="修改gitlab的gitlabci-runner配置文件">修改gitlab的gitlabci-runner配置文件 <a class="markdownIt-Anchor" href="#修改gitlab的gitlabci-runner配置文件">#</a></h2>
 <pre><code>vim /opt/gitlab-6.8.1-0/apps/gitlabci/gitlabci-runner/config.yml
 
 url: http://120.26.103.123:80/gitlabci/
 </code></pre>
-<p>#重启服务</p>
+<h2 id="重启服务">重启服务 <a class="markdownIt-Anchor" href="#重启服务">#</a></h2>
 <pre><code>[root@iZ23m1d4vwiZ ~]# sh /opt/gitlab-6.8.1-0/ctlscript.sh  restart
 </code></pre>
 
@@ -180,7 +180,7 @@ url: http://120.26.103.123:80/gitlabci/
   var LOPPO = {};
   LOPPO.current_path = '2015-06-03-bitnami-gitlab-port.md';
   LOPPO.relative_root_path = '';
-  LOPPO.article_toc = "";
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#%E4%BF%AE%E6%94%B9apache%E4%B8%BB%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6\">修改apache主配置文件</a></li>\n<li><a href=\"#%E4%BF%AE%E6%94%B9apache%E7%9A%84bitnami%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6\">修改apache的bitnami的配置文件</a></li>\n<li><a href=\"#%E4%BF%AE%E6%94%B9gitlab-shell%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6\">修改gitlab-shell的配置文件</a></li>\n<li><a href=\"#%E4%BF%AE%E6%94%B9gitlab%E7%9A%84apache%E4%B8%BB%E7%9B%AE%E5%BD%95%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6\">修改gitlab的apache主目录配置文件</a></li>\n<li><a href=\"#%E4%BF%AE%E6%94%B9gitlab%E7%9A%84gitlabci-runner%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6\">修改gitlab的gitlabci-runner配置文件</a></li>\n<li><a href=\"#%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1\">重启服务</a></li>\n</ul>\n";
 </script>
 <script src="assets/js/app.js"></script>
 </body>

@@ -50,15 +50,15 @@
 <li>ip地址：  192.168.1.2</li>
 </ul>
 </blockquote>
-<p>#源码编译安装lnmp</p>
+<h2 id="源码编译安装lnmp">源码编译安装lnmp <a class="markdownIt-Anchor" href="#源码编译安装lnmp">#</a></h2>
 <pre><code>git clone https://git.coding.net/svip/lnamp.git
 sh lnmp/lnmp.sh
 </code></pre>
 <p>这里使用源码编译lnmp环境主要是后面需要yum安装httpd和svn(这样子的好处是，默认会整合好apache和svn无需手动在整合配置)，apache只服务于svn，而nginx+php则是为了跑svnadmin</p>
-<p>#yum安装apache+svn</p>
+<h2 id="yum安装apachesvn">yum安装apache+svn <a class="markdownIt-Anchor" href="#yum安装apachesvn">#</a></h2>
 <pre><code>yum -y install httpd subversion mod_dav_svn
 </code></pre>
-<p>#配置apache的svn</p>
+<h2 id="配置apache的svn">配置apache的svn <a class="markdownIt-Anchor" href="#配置apache的svn">#</a></h2>
 <p>装完SVN后默认生成/etc/httpd/conf.d/subversion.conf文件</p>
 <pre class="hljs"><code>[root@iZ setup]<span class="hljs-comment"># cat /etc/httpd/conf.d/subversion.conf </span>
 
@@ -76,11 +76,11 @@ LoadModule authz_svn_module   modules/mod_authz_svn.so
             Require valid-user
 &lt;/Location&gt;
 </code></pre>
-<p>#创建SVN repo目录和权限信息目录</p>
+<h2 id="创建svn-repo目录和权限信息目录">创建SVN repo目录和权限信息目录 <a class="markdownIt-Anchor" href="#创建svn-repo目录和权限信息目录">#</a></h2>
 <pre><code>mkdir /var/www/svn
 mkdir /var/www/svnconfig
 </code></pre>
-<p>#创建SVN权限文件和密码文件</p>
+<h2 id="创建svn权限文件和密码文件">创建SVN权限文件和密码文件 <a class="markdownIt-Anchor" href="#创建svn权限文件和密码文件">#</a></h2>
 <p>创建权限控制文件</p>
 <pre class="hljs"><code>[root@iZ]<span class="hljs-comment"># cat /var/www/svnconfig/accessfile</span>
 
@@ -100,20 +100,20 @@ mkdir /var/www/svnconfig
 <span class="hljs-comment"># sally = sallyssecret</span>
 user1:aWW1oIsRihOHc
 </code></pre>
-<p>#安装iF.SVnAdmin</p>
+<h2 id="安装ifsvnadmin">安装iF.SVnAdmin <a class="markdownIt-Anchor" href="#安装ifsvnadmin">#</a></h2>
 <pre><code>wget http://sourceforge.net/projects/ifsvnadmin/files/svnadmin-1.6.2.zip
 unzip svnadmin-1.6.2.zip
 mv iF.SVNAdmin-stable-1.6.2 /home/wwwroot/svnadmin
 chmod 777 -R /home/wwwroot/svnadmin/data
 </code></pre>
 <p>配置nginx,配置apache，注意2个web引擎的端口不要冲突，并开启相应端口到防火墙</p>
-<p>#初始化iF.SVnAdmin</p>
+<h2 id="初始化ifsvnadmin">初始化iF.SVnAdmin <a class="markdownIt-Anchor" href="#初始化ifsvnadmin">#</a></h2>
 <p>浏览器输入http://192.168.1.2/svnadmin/index.php</p>
 <p>使用刚才生成的密码登陆进去可以看到下面的配置页面</p>
 <p><img src="http://r.loli.io/meMjmi.png" alt=""><br>
 选择Test提示没有写入权限的话chmod一下，</p>
 <p>登录后如下，可以看到软件版本信息、已有的仓库、用户、组、权限路径等</p>
-<p>#投入使用</p>
+<h2 id="投入使用">投入使用 <a class="markdownIt-Anchor" href="#投入使用">#</a></h2>
 <p>svn管理地址   <a href="http://192.168.1.2/svnadmin/index.php" target="_blank" rel="noopener">http://192.168.1.2/svnadmin/index.php</a><br>
 svn项目地址   <a href="http://192.168.1.2:8888/project/project_name/" target="_blank" rel="noopener">http://192.168.1.2:8888/project/project_name/</a></p>
 
@@ -190,7 +190,7 @@ svn项目地址   <a href="http://192.168.1.2:8888/project/project_name/" target
   var LOPPO = {};
   LOPPO.current_path = '2015-07-07-svn-admin.md';
   LOPPO.relative_root_path = '';
-  LOPPO.article_toc = "";
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85lnmp\">源码编译安装lnmp</a></li>\n<li><a href=\"#yum%E5%AE%89%E8%A3%85apachesvn\">yum安装apache+svn</a></li>\n<li><a href=\"#%E9%85%8D%E7%BD%AEapache%E7%9A%84svn\">配置apache的svn</a></li>\n<li><a href=\"#%E5%88%9B%E5%BB%BAsvn-repo%E7%9B%AE%E5%BD%95%E5%92%8C%E6%9D%83%E9%99%90%E4%BF%A1%E6%81%AF%E7%9B%AE%E5%BD%95\">创建SVN repo目录和权限信息目录</a></li>\n<li><a href=\"#%E5%88%9B%E5%BB%BAsvn%E6%9D%83%E9%99%90%E6%96%87%E4%BB%B6%E5%92%8C%E5%AF%86%E7%A0%81%E6%96%87%E4%BB%B6\">创建SVN权限文件和密码文件</a></li>\n<li><a href=\"#%E5%AE%89%E8%A3%85ifsvnadmin\">安装iF.SVnAdmin</a></li>\n<li><a href=\"#%E5%88%9D%E5%A7%8B%E5%8C%96ifsvnadmin\">初始化iF.SVnAdmin</a></li>\n<li><a href=\"#%E6%8A%95%E5%85%A5%E4%BD%BF%E7%94%A8\">投入使用</a></li>\n</ul>\n";
 </script>
 <script src="assets/js/app.js"></script>
 </body>

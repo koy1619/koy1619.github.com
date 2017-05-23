@@ -36,7 +36,7 @@
 
 
     <div class="article">
-      <p>#背景</p>
+      <h2 id="背景">背景 <a class="markdownIt-Anchor" href="#背景">#</a></h2>
 <p>线上A和B互为主主，A为业务写库，B为读库</p>
 <p>19号下午收到短信报警A的slave delay，果断VPN上去数据库查看到</p>
 <pre><code>Last_SQL_Error: Error 'Duplicate entry '4960446' for key 'transaction_id'' on query. Default database
@@ -55,14 +55,14 @@ mysql&gt; START SLAVE;
 <p>因为A为业务写库，所以现在需要把A上这两条正确的数据插入到B，并在B上面删除错误的。</p>
 <p>由于这个是自增的主键，所以还不好操作，下面大概就测试环境详细说明一下复现方案以及解决办法。</p>
 <hr>
-<p>#复现方案</p>
+<h2 id="复现方案">复现方案 <a class="markdownIt-Anchor" href="#复现方案">#</a></h2>
 <blockquote>
 <ul>
 <li>192.168.1.52  模拟线上A 负责写入</li>
 <li>192.168.1.42  模拟线上B 负责读取</li>
 </ul>
 </blockquote>
-<p>##设置my.cnf，差开自增ID</p>
+<h3 id="设置mycnf，差开自增id">设置my.cnf，差开自增ID <a class="markdownIt-Anchor" href="#设置mycnf，差开自增id">#</a></h3>
 <p>52配置</p>
 <pre><code>auto-increment-increment=10
 auto-increment-offset=8
@@ -71,7 +71,7 @@ auto-increment-offset=8
 <pre><code>auto-increment-increment=10
 auto-increment-offset=6
 </code></pre>
-<p>##创建测试表</p>
+<h3 id="创建测试表">创建测试表 <a class="markdownIt-Anchor" href="#创建测试表">#</a></h3>
 <p>随便在其中一台的test库中创建测试表，双主自动同步到另一台</p>
 <pre class="hljs"><code><span class="hljs-keyword">use</span> <span class="hljs-keyword">test</span>;
 
@@ -82,7 +82,7 @@ auto-increment-offset=6
   <span class="hljs-keyword">UNIQUE</span> <span class="hljs-keyword">KEY</span> <span class="hljs-string">`transaction_id`</span> (<span class="hljs-string">`transaction_id`</span>) <span class="hljs-keyword">USING</span> BTREE
 ) <span class="hljs-keyword">ENGINE</span>=<span class="hljs-keyword">InnoDB</span> AUTO_INCREMENT=<span class="hljs-number">896</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">CHARSET</span>=utf8;
 </code></pre>
-<p>##插入测试数据</p>
+<h3 id="插入测试数据">插入测试数据 <a class="markdownIt-Anchor" href="#插入测试数据">#</a></h3>
 <p>在52插入测试数据，可以发现&quot;qrpay_id&quot;的值是依照 auto-increment-offset 格式的, 同步过去也是如此</p>
 <pre class="hljs"><code>INSERT INTO `<span class="hljs-built_in">test</span>` VALUES (<span class="hljs-string">'null'</span>,<span class="hljs-string">'1'</span>);
 INSERT INTO `<span class="hljs-built_in">test</span>` VALUES (<span class="hljs-string">'null'</span>,<span class="hljs-string">'2'</span>);
@@ -93,7 +93,7 @@ INSERT INTO `<span class="hljs-built_in">test</span>` VALUES (<span class="hljs-
 INSERT INTO `<span class="hljs-built_in">test</span>` VALUES (<span class="hljs-string">'null'</span>,<span class="hljs-string">'5'</span>);
 INSERT INTO `<span class="hljs-built_in">test</span>` VALUES (<span class="hljs-string">'null'</span>,<span class="hljs-string">'6'</span>);
 </code></pre>
-<p>##模拟同步异常</p>
+<h3 id="模拟同步异常">模拟同步异常 <a class="markdownIt-Anchor" href="#模拟同步异常">#</a></h3>
 <p>停掉42的同步</p>
 <pre><code>slave stop;
 </code></pre>
@@ -116,7 +116,7 @@ set global sql_slave_skip_counter=1;
 slave start;
 </code></pre>
 <p>再show slave status \G;查看正常</p>
-<p>##模拟数据差异1</p>
+<h3 id="模拟数据差异1">模拟数据差异1 <a class="markdownIt-Anchor" href="#模拟数据差异1">#</a></h3>
 <p>在42上面删掉transaction_id刚才冲突的那条transaction_id='7'的记录,按照qrpay_id找</p>
 <pre><code>delete from test where qrpay_id='1166';
 </code></pre>
@@ -127,7 +127,7 @@ INSERT INTO `<span class="hljs-built_in">test</span>` VALUES (<span class="hljs-
 </code></pre>
 <p>这个时候52上面比42的多了一条transaction_id='7'的记录</p>
 <p>以上目地是模拟出真实数据库A比B多数据的场景</p>
-<p>##修复同步</p>
+<h3 id="修复同步">修复同步 <a class="markdownIt-Anchor" href="#修复同步">#</a></h3>
 <p>在42上插入数据</p>
 <pre><code>INSERT INTO `test` VALUES ('null','7');
 </code></pre>
@@ -147,14 +147,14 @@ INSERT INTO `<span class="hljs-built_in">test</span>` VALUES (<span class="hljs-
 INSERT INTO `<span class="hljs-built_in">test</span>` VALUES (<span class="hljs-string">'null'</span>,<span class="hljs-string">'13'</span>);
 </code></pre>
 <p>发现42也健康的同步过来了</p>
-<p>##复现完毕</p>
+<h3 id="复现完毕">复现完毕 <a class="markdownIt-Anchor" href="#复现完毕">#</a></h3>
 <p>数据差异为transaction_id='7'这条记录,需要修复</p>
 <hr>
-<p>#线上解决方案</p>
-<p>##备份线上数据表</p>
+<h2 id="线上解决方案">线上解决方案 <a class="markdownIt-Anchor" href="#线上解决方案">#</a></h2>
+<h3 id="备份线上数据表">备份线上数据表 <a class="markdownIt-Anchor" href="#备份线上数据表">#</a></h3>
 <p>晚上12点过后备份A和B的<code>test</code>表（需要恢复的表，为了隐私这里用test代替）</p>
 <p>还好这张表里只有100多万条数据，很快就备份出来了，要不然备份锁表就不能这样搞了</p>
-<p>##导库到测试</p>
+<h3 id="导库到测试">导库到测试 <a class="markdownIt-Anchor" href="#导库到测试">#</a></h3>
 <p>次日上班处理</p>
 <p>停掉测试环境52，42双方的slave</p>
 <p>线上A备份导入到52的test库，线上B备份导入到42的test库,两个库的input_date框在同一时间,并比对一下条数记录是否一致</p>
@@ -163,7 +163,7 @@ INSERT INTO `<span class="hljs-built_in">test</span>` VALUES (<span class="hljs-
 </code></pre>
 <p>双方重新 记录<strong><code>show master status</code></strong>的值  并<strong><code>change master</code></strong></p>
 <p>开启双方<code>slave</code>,这个时候双方的数据就有差异，而不会双向同步问题数据咯</p>
-<p>##修复数据</p>
+<h3 id="修复数据">修复数据 <a class="markdownIt-Anchor" href="#修复数据">#</a></h3>
 <p>因为52和42是双主模式，具体正确数据以线上A导入到52的数据为准</p>
 <p>在52上面执行下面命令，来检测数据的一致性</p>
 <pre><code>pt-table-checksum --nocheck-replication-filters  --no-check-binlog-format  --replicate=test.checksums  --databases=test --tables=test  --host=localhost    --password=123456
@@ -203,7 +203,7 @@ flush privileges;
 <p>tip:为什么要print直接打印出来问题sql，这是因为pt-table-sync会重建数据，所以有一定的风险，最好提前备份好数据。如果仍然不放心，可以使用它提供的「print」选项，它会打印出相应的SQL，你可以审查一下到底执行了那些操作，然后通过手动执行来完成同步, <strong><code>--charset=utf8</code></strong>  这个参数是让打印出来的sql语句中的汉字正常显示，不然会是乱码。</p>
 <pre><code>也可以通过(--execute)直接修复，但是建议千万不要这么做。
 </code></pre>
-<p>#附：</p>
+<h2 id="附：">附： <a class="markdownIt-Anchor" href="#附：">#</a></h2>
 <p>-----------------Percona Toolkit INSTALL-------------------------</p>
 <pre class="hljs"><code>yum install perl-ExtUtils-CBuilder perl-ExtUtils-MakeMaker -y
 yum perl-DBD-MySQL -y
@@ -297,7 +297,7 @@ make install
   var LOPPO = {};
   LOPPO.current_path = '2015-07-22-Primary-key-conflicts.md';
   LOPPO.relative_root_path = '';
-  LOPPO.article_toc = "";
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#%E8%83%8C%E6%99%AF\">背景</a></li>\n<li><a href=\"#%E5%A4%8D%E7%8E%B0%E6%96%B9%E6%A1%88\">复现方案</a>\n<ul>\n<li><a href=\"#%E8%AE%BE%E7%BD%AEmycnf%EF%BC%8C%E5%B7%AE%E5%BC%80%E8%87%AA%E5%A2%9Eid\">设置my.cnf，差开自增ID</a></li>\n<li><a href=\"#%E5%88%9B%E5%BB%BA%E6%B5%8B%E8%AF%95%E8%A1%A8\">创建测试表</a></li>\n<li><a href=\"#%E6%8F%92%E5%85%A5%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE\">插入测试数据</a></li>\n<li><a href=\"#%E6%A8%A1%E6%8B%9F%E5%90%8C%E6%AD%A5%E5%BC%82%E5%B8%B8\">模拟同步异常</a></li>\n<li><a href=\"#%E6%A8%A1%E6%8B%9F%E6%95%B0%E6%8D%AE%E5%B7%AE%E5%BC%821\">模拟数据差异1</a></li>\n<li><a href=\"#%E4%BF%AE%E5%A4%8D%E5%90%8C%E6%AD%A5\">修复同步</a></li>\n<li><a href=\"#%E5%A4%8D%E7%8E%B0%E5%AE%8C%E6%AF%95\">复现完毕</a></li>\n</ul>\n</li>\n<li><a href=\"#%E7%BA%BF%E4%B8%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88\">线上解决方案</a>\n<ul>\n<li><a href=\"#%E5%A4%87%E4%BB%BD%E7%BA%BF%E4%B8%8A%E6%95%B0%E6%8D%AE%E8%A1%A8\">备份线上数据表</a></li>\n<li><a href=\"#%E5%AF%BC%E5%BA%93%E5%88%B0%E6%B5%8B%E8%AF%95\">导库到测试</a></li>\n<li><a href=\"#%E4%BF%AE%E5%A4%8D%E6%95%B0%E6%8D%AE\">修复数据</a></li>\n</ul>\n</li>\n<li><a href=\"#%E9%99%84%EF%BC%9A\">附：</a></li>\n</ul>\n";
 </script>
 <script src="assets/js/app.js"></script>
 </body>

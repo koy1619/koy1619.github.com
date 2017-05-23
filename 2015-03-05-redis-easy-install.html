@@ -36,10 +36,10 @@
 
 
     <div class="article">
-      <p>#Redis简介</p>
+      <h2 id="redis简介">Redis简介 <a class="markdownIt-Anchor" href="#redis简介">#</a></h2>
 <p>redis是一个key-value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)和zset(有序集合)。这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。在此基础上，redis支持各种不同方式的排序。与memcached一样，为了保证效率，数据都是缓存在内存中。区别的是redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，并且在此基础上实现了master-slave(主从)同步。Redis 是一个高性能的key-value数据库。 redis的出现，很大程度补偿了memcached这类keyvalue存储的不足，在部分场合可以对关系数据库起到很好的补充作用。</p>
 <!-- more -->
-<p>#编译安装</p>
+<h2 id="编译安装">编译安装 <a class="markdownIt-Anchor" href="#编译安装">#</a></h2>
 <pre class="hljs"><code>yum -y install make gcc gcc-c++ tcl
 
 wget http://download.redis.io/releases/redis-2.8.19.tar.gz
@@ -63,14 +63,14 @@ nohup /usr/<span class="hljs-built_in">local</span>/redis-2.8.19/bin/redis-serve
 /usr/<span class="hljs-built_in">local</span>/redis-2.8.19/bin/redis-cli
 
 </code></pre>
-<p>#启动脚本</p>
+<h2 id="启动脚本">启动脚本 <a class="markdownIt-Anchor" href="#启动脚本">#</a></h2>
 <pre class="hljs"><code>cat redis-2.8.19/start.sh
 <span class="hljs-meta">#!/bin/bash
 </span>
 dir=$(<span class="hljs-built_in">pwd</span>)
 nohup <span class="hljs-variable">$dir</span>/bin/redis-server redis.conf  &gt;&gt; redis.log &amp;
 </code></pre>
-<p>#Redis主从配置</p>
+<h2 id="redis主从配置">Redis主从配置 <a class="markdownIt-Anchor" href="#redis主从配置">#</a></h2>
 <p>Redis的主从复制功能非常强大，一个master可以拥有多个slave，而一个slave又可以拥有多个slave，如此下去，形成了强大的多级服务器集群架构。</p>
 <p>流程如下图</p>
 <figure><img src="http://ww3.sinaimg.cn/mw690/c54c0af5gw1f2ty4psfy4j20kh0fsmxt.jpg" alt=""></figure>
@@ -86,7 +86,7 @@ slaveof 127.0.0.1 6379   <span class="hljs-comment"># (映射到主服务器上)
 </code></pre>
 <p>如果master设置了验证密码，还需配置masterauth。</p>
 <p>配置完之后启动slave的Redis服务，主从配置完成。</p>
-<p>##主从测试</p>
+<h2 id="主从测试">主从测试 <a class="markdownIt-Anchor" href="#主从测试">#</a></h2>
 <p>在master和slave分别执行info命令，查看结果如下(这里只贴主从相关打印)：</p>
 <p><strong>master</strong></p>
 <pre class="hljs"><code><span class="hljs-comment"># redis-2.8.19/redis-cli </span>
@@ -209,7 +209,7 @@ OK
   var LOPPO = {};
   LOPPO.current_path = '2015-03-05-redis-easy-install.md';
   LOPPO.relative_root_path = '';
-  LOPPO.article_toc = "";
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#redis%E7%AE%80%E4%BB%8B\">Redis简介</a></li>\n<li><a href=\"#%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85\">编译安装</a></li>\n<li><a href=\"#%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC\">启动脚本</a></li>\n<li><a href=\"#redis%E4%B8%BB%E4%BB%8E%E9%85%8D%E7%BD%AE\">Redis主从配置</a></li>\n<li><a href=\"#%E4%B8%BB%E4%BB%8E%E6%B5%8B%E8%AF%95\">主从测试</a></li>\n</ul>\n";
 </script>
 <script src="assets/js/app.js"></script>
 </body>

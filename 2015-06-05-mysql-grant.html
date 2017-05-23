@@ -41,7 +41,7 @@
 <pre><code>grant 权限 on 数据库对象 to 用户
 </code></pre>
 <!-- more -->
-<p>#普通数据库用户权限</p>
+<h2 id="普通数据库用户权限">普通数据库用户权限 <a class="markdownIt-Anchor" href="#普通数据库用户权限">#</a></h2>
 <p>一、grant 普通数据用户，查询、插入、更新、删除 数据库中所有表数据的权利。</p>
 <pre class="hljs"><code><span class="hljs-keyword">grant</span> <span class="hljs-keyword">select</span> <span class="hljs-keyword">on</span> testdb.* <span class="hljs-keyword">to</span> common_user@<span class="hljs-string">'%'</span>
 <span class="hljs-keyword">grant</span> <span class="hljs-keyword">insert</span> <span class="hljs-keyword">on</span> testdb.* <span class="hljs-keyword">to</span> common_user@<span class="hljs-string">'%'</span>
@@ -51,7 +51,7 @@
 <p>或者，用一条 MySQL 命令来替代：</p>
 <pre><code>grant select, insert, update, delete on testdb.* to common_user@'%'
 </code></pre>
-<p>#数据库开发人员权限</p>
+<h2 id="数据库开发人员权限">数据库开发人员权限 <a class="markdownIt-Anchor" href="#数据库开发人员权限">#</a></h2>
 <p>二、grant 数据库开发人员，创建表、索引、视图、存储过程、函数。。。等权限。</p>
 <p>grant 创建、修改、删除 MySQL 数据表结构权限。</p>
 <pre class="hljs"><code><span class="hljs-keyword">grant</span> <span class="hljs-keyword">create</span> <span class="hljs-keyword">on</span> testdb.* <span class="hljs-keyword">to</span> developer@<span class="hljs-string">'192.168.0.%'</span>;
@@ -76,43 +76,43 @@ grant show   view on testdb.* to developer@'192.168.0.%';
 <span class="hljs-keyword">grant</span> <span class="hljs-keyword">alter</span>  routine <span class="hljs-keyword">on</span> testdb.* <span class="hljs-keyword">to</span> developer@<span class="hljs-string">'192.168.0.%'</span>; <span class="hljs-comment">-- now, you can drop a procedure</span>
 <span class="hljs-keyword">grant</span> <span class="hljs-keyword">execute</span>        <span class="hljs-keyword">on</span> testdb.* <span class="hljs-keyword">to</span> developer@<span class="hljs-string">'192.168.0.%'</span>;
 </code></pre>
-<p>#普通DBA权限</p>
+<h2 id="普通dba权限">普通DBA权限 <a class="markdownIt-Anchor" href="#普通dba权限">#</a></h2>
 <p>三、grant 普通 DBA 管理某个 MySQL 数据库的权限。</p>
 <pre><code>grant all privileges on testdb to dba@'localhost'
 </code></pre>
 <p>其中，关键字 “privileges” 可以省略。</p>
-<p>#高级DBA权限</p>
+<h2 id="高级dba权限">高级DBA权限 <a class="markdownIt-Anchor" href="#高级dba权限">#</a></h2>
 <p>四、grant 高级 DBA 管理 MySQL 中所有数据库的权限。</p>
 <pre><code>grant all on *.* to dba@'localhost'
 </code></pre>
-<p>#实际运用</p>
+<h2 id="实际运用">实际运用 <a class="markdownIt-Anchor" href="#实际运用">#</a></h2>
 <p>五、MySQL grant 权限，分别可以作用在多个层次上。</p>
-<p>##grant 作用在整个 MySQL 服务器上：</p>
+<h3 id="grant-作用在整个-mysql-服务器上：">grant 作用在整个 MySQL 服务器上： <a class="markdownIt-Anchor" href="#grant-作用在整个-mysql-服务器上：">#</a></h3>
 <pre><code>grant select on *.* to dba@localhost; 
 -- dba 可以查询 MySQL 中所有数据库中的表。
 
 grant all    on *.* to dba@localhost; 
 -- dba 可以管理 MySQL 中的所有数据库
 </code></pre>
-<p>##grant 作用在单个数据库上：</p>
+<h3 id="grant-作用在单个数据库上：">grant 作用在单个数据库上： <a class="markdownIt-Anchor" href="#grant-作用在单个数据库上：">#</a></h3>
 <pre><code>grant select on testdb.* to dba@localhost; 
 -- dba 可以查询 testdb 中的表。
 </code></pre>
-<p>##grant 作用在单个数据表上：</p>
+<h3 id="grant-作用在单个数据表上：">grant 作用在单个数据表上： <a class="markdownIt-Anchor" href="#grant-作用在单个数据表上：">#</a></h3>
 <pre><code>grant select, insert, update, delete on testdb.orders to dba@localhost;
 </code></pre>
 <p>这里在给一个用户授权多张表时，可以多次执行以上语句。例如：</p>
 <pre><code>grant select(user_id,username) on smp.users to mo_user@'%' identified by '123345';
 grant select on smp.mo_sms to mo_user@'%' identified by '123345';
 </code></pre>
-<p>##grant 作用在表中的列上：</p>
+<h3 id="grant-作用在表中的列上：">grant 作用在表中的列上： <a class="markdownIt-Anchor" href="#grant-作用在表中的列上：">#</a></h3>
 <pre><code>grant select(id, se, rank) on testdb.apache_log to dba@localhost;
 </code></pre>
-<p>##grant 作用在存储过程、函数上：</p>
+<h3 id="grant-作用在存储过程、函数上：">grant 作用在存储过程、函数上： <a class="markdownIt-Anchor" href="#grant-作用在存储过程、函数上：">#</a></h3>
 <pre><code>grant execute on procedure testdb.pr_add to 'dba'@'localhost'
 grant execute on function testdb.fn_add to 'dba'@'localhost'
 </code></pre>
-<p>#查看权限</p>
+<h2 id="查看权限">查看权限 <a class="markdownIt-Anchor" href="#查看权限">#</a></h2>
 <p>六、查看 MySQL 用户权限</p>
 <p>查看当前用户（自己）权限：</p>
 <pre><code>show grants;
@@ -120,13 +120,13 @@ grant execute on function testdb.fn_add to 'dba'@'localhost'
 <p>查看其他 MySQL 用户权限：</p>
 <pre><code>show grants for dba@localhost;
 </code></pre>
-<p>#撤销权限</p>
+<h2 id="撤销权限">撤销权限 <a class="markdownIt-Anchor" href="#撤销权限">#</a></h2>
 <p>七、撤销已经赋予给 MySQL 用户权限的权限。</p>
 <p>revoke 跟 grant 的语法差不多，只需要把关键字 “to” 换成 “from” 即可：</p>
 <pre><code>grant  all on *.* to   dba@localhost;
 revoke all on *.* from dba@localhost;
 </code></pre>
-<p>#注意事项</p>
+<h2 id="注意事项">注意事项 <a class="markdownIt-Anchor" href="#注意事项">#</a></h2>
 <p>八、MySQL grant、revoke 用户权限注意事项</p>
 <p>grant, revoke 用户权限后，该用户只有重新连接 MySQL 数据库，权限才能生效。</p>
 <p>如果想让授权的用户，也可以将这些权限 grant 给其他用户，需要选项 “grant option“</p>
@@ -226,7 +226,7 @@ columns_priv表指定列级权限。这里指定的权限适用于一个表的�
   var LOPPO = {};
   LOPPO.current_path = '2015-06-05-mysql-grant.md';
   LOPPO.relative_root_path = '';
-  LOPPO.article_toc = "";
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#%E6%99%AE%E9%80%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90\">普通数据库用户权限</a></li>\n<li><a href=\"#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E6%9D%83%E9%99%90\">数据库开发人员权限</a></li>\n<li><a href=\"#%E6%99%AE%E9%80%9Adba%E6%9D%83%E9%99%90\">普通DBA权限</a></li>\n<li><a href=\"#%E9%AB%98%E7%BA%A7dba%E6%9D%83%E9%99%90\">高级DBA权限</a></li>\n<li><a href=\"#%E5%AE%9E%E9%99%85%E8%BF%90%E7%94%A8\">实际运用</a>\n<ul>\n<li><a href=\"#grant-%E4%BD%9C%E7%94%A8%E5%9C%A8%E6%95%B4%E4%B8%AA-mysql-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%EF%BC%9A\">grant 作用在整个 MySQL 服务器上：</a></li>\n<li><a href=\"#grant-%E4%BD%9C%E7%94%A8%E5%9C%A8%E5%8D%95%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8A%EF%BC%9A\">grant 作用在单个数据库上：</a></li>\n<li><a href=\"#grant-%E4%BD%9C%E7%94%A8%E5%9C%A8%E5%8D%95%E4%B8%AA%E6%95%B0%E6%8D%AE%E8%A1%A8%E4%B8%8A%EF%BC%9A\">grant 作用在单个数据表上：</a></li>\n<li><a href=\"#grant-%E4%BD%9C%E7%94%A8%E5%9C%A8%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%88%97%E4%B8%8A%EF%BC%9A\">grant 作用在表中的列上：</a></li>\n<li><a href=\"#grant-%E4%BD%9C%E7%94%A8%E5%9C%A8%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E3%80%81%E5%87%BD%E6%95%B0%E4%B8%8A%EF%BC%9A\">grant 作用在存储过程、函数上：</a></li>\n</ul>\n</li>\n<li><a href=\"#%E6%9F%A5%E7%9C%8B%E6%9D%83%E9%99%90\">查看权限</a></li>\n<li><a href=\"#%E6%92%A4%E9%94%80%E6%9D%83%E9%99%90\">撤销权限</a></li>\n<li><a href=\"#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9\">注意事项</a></li>\n</ul>\n";
 </script>
 <script src="assets/js/app.js"></script>
 </body>

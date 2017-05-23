@@ -36,7 +36,8 @@
 
 
     <div class="article">
-      <p>zabbix proxy可以代替zabbix server检索客户端的数据，然后把数据汇报给zabbix server，并且在一定程度上分担了zabbix server的压力。zabbix proxy可以非常简便的实现了集中式、分布式监控。</p>
+      <h2 id="zabbix-proxy-介绍">zabbix proxy 介绍 <a class="markdownIt-Anchor" href="#zabbix-proxy-介绍">#</a></h2>
+<p>zabbix proxy可以代替zabbix server检索客户端的数据，然后把数据汇报给zabbix server，并且在一定程度上分担了zabbix server的压力。zabbix proxy可以非常简便的实现了集中式、分布式监控。</p>
 <p>zabbix proxy使用场景:</p>
 <blockquote>
 <ul>
@@ -52,7 +53,7 @@
 <p>zabbix proxy仅仅需要一条tcp连接到zabbix server,所以防火墙上仅仅需要加上一条规则即可，zabbix proxy数据库必须和server分开，否则数据会被破坏，毕竟这两个数据库的表大部分都相同。总之记住，数据库分开即可。<br>
 proxy收集到数据之后，首先将数据缓存在本地，然后在一定得时间之后传递给zabbix server，这个时间由proxy配置文件中参数ProxyLocalBuffer and ProxyOfflineBuffer决定.<br>
 zabbix proxy是一个数据收集器，它不计算触发器、不处理事件、不发送报警。</p>
-<p>##安装搭建zabbix proxy</p>
+<h2 id="安装搭建zabbix-proxy">安装搭建zabbix proxy <a class="markdownIt-Anchor" href="#安装搭建zabbix-proxy">#</a></h2>
 <p>安装mysql此处省略</p>
 <pre class="hljs"><code>yum -y install curl curl-devel net-snmp net-snmp-devel perl-DBI
 tar zxvf zabbix-2.4.5.tar.gz 
@@ -60,7 +61,7 @@ tar zxvf zabbix-2.4.5.tar.gz
 ./configure --prefix=/usr/<span class="hljs-built_in">local</span>/zabbix_proxy --enable-proxy --enable-agent --with-mysql=/usr/<span class="hljs-built_in">local</span>/mysql/bin/mysql_config --with-net-snmp --with-libcurl
 make install
 </code></pre>
-<p>##建立数据库并授权</p>
+<h2 id="建立数据库并授权">建立数据库并授权 <a class="markdownIt-Anchor" href="#建立数据库并授权">#</a></h2>
 <pre class="hljs"><code><span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> zabbix <span class="hljs-built_in">character</span> <span class="hljs-keyword">set</span> utf8;
 <span class="hljs-keyword">grant</span> all <span class="hljs-keyword">on</span> zabbix.* <span class="hljs-keyword">to</span> zabbix@localhost <span class="hljs-keyword">identified</span> <span class="hljs-keyword">by</span> <span class="hljs-string">'zabbix'</span>;
 <span class="hljs-keyword">flush</span> <span class="hljs-keyword">privileges</span>;
@@ -68,7 +69,7 @@ make install
 <p>导入数据结构：</p>
 <p><code>mysql -uzabbix -p'zabbix' zabbix &lt; database/mysql/schema.sql</code></p>
 <p>需要注意的是proxy不需要导入data.sql 和 images.sql 这两份SQL，否则会有问题</p>
-<p>##配置zabbix proxy</p>
+<h2 id="配置zabbix-proxy">配置zabbix proxy <a class="markdownIt-Anchor" href="#配置zabbix-proxy">#</a></h2>
 <pre class="hljs"><code>[root@server]<span class="hljs-comment"># cat /usr/local/zabbix_proxy/etc/zabbix_proxy.conf |grep -v "#"</span>
 ProxyMode=1
 Server=10.10.3.222
@@ -90,7 +91,7 @@ ConfigFrequency=60
 <li>ConfigFrequency 这个是server和proxy两端配置同步的时间间隔，server和proxy要设定同一个值才好，默认是3600，我想配置同步快一点，改成60</li>
 </ul>
 </blockquote>
-<p>##启动zabbix proxy</p>
+<h2 id="启动zabbix-proxy">启动zabbix proxy <a class="markdownIt-Anchor" href="#启动zabbix-proxy">#</a></h2>
 <p>启动守护进程agent</p>
 <p><code>/usr/local/zabbix_proxy/sbin/zabbix_proxy</code></p>
 <p>zabbix_proxy启动端口为10051</p>
@@ -110,15 +111,15 @@ vi /etc/init.d/zabbix_proxy
 将DAEMON后面的参数改成你自定义的路径
 DAEMON=/usr/<span class="hljs-built_in">local</span>/zabbix_proxy/sbin/zabbix_proxy
 </code></pre>
-<p>加入开机启动</p>
+<h2 id="加入开机启动">加入开机启动 <a class="markdownIt-Anchor" href="#加入开机启动">#</a></h2>
 <pre class="hljs"><code>chkconfig --add zabbix_proxy
 chkconfig zabbix_proxy on
 </code></pre>
-<p>重启服务：</p>
+<h2 id="重启服务：">重启服务： <a class="markdownIt-Anchor" href="#重启服务：">#</a></h2>
 <p><code>service zabbix_proxy restart</code></p>
-<p>##添加zabbix proxy节点</p>
+<h2 id="添加zabbix-proxy节点">添加zabbix proxy节点 <a class="markdownIt-Anchor" href="#添加zabbix-proxy节点">#</a></h2>
 <figure><img src="http://r.loli.io/Uf2qau.png" alt=""></figure>
-<p>##添加被监控的主机</p>
+<h2 id="添加被监控的主机">添加被监控的主机 <a class="markdownIt-Anchor" href="#添加被监控的主机">#</a></h2>
 <p>添加被监控的主机勾选<strong>由系统代理程式监控</strong></p>
 <figure><img src="http://r6.loli.io/iiENna.png" alt=""></figure>
 
@@ -195,7 +196,7 @@ chkconfig zabbix_proxy on
   var LOPPO = {};
   LOPPO.current_path = '2015-10-29-zabbix-proxy-install.md';
   LOPPO.relative_root_path = '';
-  LOPPO.article_toc = "";
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#zabbix-proxy-%E4%BB%8B%E7%BB%8D\">zabbix proxy 介绍</a></li>\n<li><a href=\"#%E5%AE%89%E8%A3%85%E6%90%AD%E5%BB%BAzabbix-proxy\">安装搭建zabbix proxy</a></li>\n<li><a href=\"#%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B6%E6%8E%88%E6%9D%83\">建立数据库并授权</a></li>\n<li><a href=\"#%E9%85%8D%E7%BD%AEzabbix-proxy\">配置zabbix proxy</a></li>\n<li><a href=\"#%E5%90%AF%E5%8A%A8zabbix-proxy\">启动zabbix proxy</a></li>\n<li><a href=\"#%E5%8A%A0%E5%85%A5%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8\">加入开机启动</a></li>\n<li><a href=\"#%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1%EF%BC%9A\">重启服务：</a></li>\n<li><a href=\"#%E6%B7%BB%E5%8A%A0zabbix-proxy%E8%8A%82%E7%82%B9\">添加zabbix proxy节点</a></li>\n<li><a href=\"#%E6%B7%BB%E5%8A%A0%E8%A2%AB%E7%9B%91%E6%8E%A7%E7%9A%84%E4%B8%BB%E6%9C%BA\">添加被监控的主机</a></li>\n</ul>\n";
 </script>
 <script src="assets/js/app.js"></script>
 </body>

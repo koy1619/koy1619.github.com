@@ -36,7 +36,7 @@
 
 
     <div class="article">
-      <p>一、环境介绍：</p>
+      <h2 id="环境介绍：">环境介绍： <a class="markdownIt-Anchor" href="#环境介绍：">#</a></h2>
 <blockquote>
 <ul>
 <li>服务器：centos 192.168.1.225</li>
@@ -47,19 +47,19 @@
 <li>客户端：centos 192.168.1.226</li>
 </ul>
 </blockquote>
-<p>二、安装：</p>
+<h2 id="安装：">安装： <a class="markdownIt-Anchor" href="#安装：">#</a></h2>
 <p>centos 5 :</p>
 <pre><code>yum -y install nfs-utils portmap
 </code></pre>
 <p>centos 6 :</p>
 <pre><code>yum -y install nfs-utils rpcbind
 </code></pre>
-<p>三、服务器端配置：</p>
-<p>1、创建共享目录：</p>
+<h2 id="服务器端配置：">服务器端配置： <a class="markdownIt-Anchor" href="#服务器端配置：">#</a></h2>
+<h3 id="创建共享目录：">创建共享目录： <a class="markdownIt-Anchor" href="#创建共享目录：">#</a></h3>
 <pre><code>[root@centos2 /]# mkdir /usr/local/test  
 </code></pre>
 <!-- more -->
-<p>2、NFS文件配置：</p>
+<h3 id="nfs文件配置：">NFS文件配置： <a class="markdownIt-Anchor" href="#nfs文件配置：">#</a></h3>
 <pre class="hljs"><code>[root@centos2 /]<span class="hljs-comment"># vi /etc/exports </span>
 <span class="hljs-comment">#增加一行：</span>
 /usr/<span class="hljs-built_in">local</span>/<span class="hljs-built_in">test</span>/ 192.168.1.226(rw,no_root_squash,no_all_squash,sync)
@@ -83,7 +83,7 @@
 <li>anongid：匿名用户的GID值。</li>
 </ul>
 </blockquote>
-<p>3、启动:</p>
+<h2 id="启动">启动: <a class="markdownIt-Anchor" href="#启动">#</a></h2>
 <p>centos6:</p>
 <pre><code>[root@centos2 /]# service rpcbind start
 [root@centos2 /]# service nfs start
@@ -92,18 +92,18 @@
 <pre><code>[root@centos2 /]# service portmap start
 [root@centos2 /]# service nfs start
 </code></pre>
-<p>四、客户端挂载：</p>
-<p>1、创建需要挂载的目录：</p>
+<h2 id="客户端挂载：">客户端挂载： <a class="markdownIt-Anchor" href="#客户端挂载：">#</a></h2>
+<h3 id="创建需要挂载的目录：">创建需要挂载的目录： <a class="markdownIt-Anchor" href="#创建需要挂载的目录：">#</a></h3>
 <pre><code>[root@localhost ~]# mkdir /usr/local/test
 </code></pre>
-<p>2、测试挂载：</p>
+<h3 id="测试挂载：">测试挂载： <a class="markdownIt-Anchor" href="#测试挂载：">#</a></h3>
 <pre class="hljs"><code>[root@localhost ~]<span class="hljs-comment"># service rpcbind start  ##centos5 service portmap start</span>
 [root@localhost ~]<span class="hljs-comment"># showmount -e 192.168.1.225</span>
 Export list <span class="hljs-keyword">for</span> 192.168.1.225:
 /usr/<span class="hljs-built_in">local</span>/<span class="hljs-built_in">test</span> 192.168.1.226
 </code></pre>
 <p>如果显示：<code>rpc mount export: RPC: Unable to receive; errno = No route to host</code>则需要在服务端关闭防火墙（稍候会详细说）。</p>
-<p>3、挂载：</p>
+<h3 id="挂载：">挂载： <a class="markdownIt-Anchor" href="#挂载：">#</a></h3>
 <pre class="hljs"><code>[root@localhost ~]<span class="hljs-comment"># mount -t nfs 192.168.1.225:/usr/local/test /usr/local/test</span>
 
 [root@localhost ~]<span class="hljs-comment"># mount</span>
@@ -119,7 +119,7 @@ nfsd on /proc/fs/nfsd <span class="hljs-built_in">type</span> nfsd (rw)
 192.168.1.225:/usr/<span class="hljs-built_in">local</span>/<span class="hljs-built_in">test</span> on /usr/<span class="hljs-built_in">local</span>/<span class="hljs-built_in">test</span> <span class="hljs-built_in">type</span> nfs (rw,vers=4,addr=192.168.1.225,clientaddr=192.168.1.226)
 </code></pre>
 <p>如果信息如上显示则挂载成功！</p>
-<p>4、测试：</p>
+<h3 id="测试：">测试： <a class="markdownIt-Anchor" href="#测试：">#</a></h3>
 <p>客户端生成一个文件：</p>
 <pre class="hljs"><code>[root@centos2 /]<span class="hljs-comment"># cd /usr/local/test/</span>
 [root@centos2 <span class="hljs-built_in">test</span>]<span class="hljs-comment"># echo "hello nfs test"&gt;&gt;test</span>
@@ -134,7 +134,7 @@ total 4
 -rw-r--r-- 1 root root 15 Apr  9 13:24 <span class="hljs-built_in">test</span>
 </code></pre>
 <p>挂载成功！</p>
-<p>五、解除挂载：</p>
+<h2 id="解除挂载：">解除挂载： <a class="markdownIt-Anchor" href="#解除挂载：">#</a></h2>
 <pre class="hljs"><code>[root@localhost ~]<span class="hljs-comment"># umount /usr/local/test</span>
 
 [root@localhost ~]<span class="hljs-comment"># mount</span>
@@ -161,7 +161,7 @@ nfsd on /proc/fs/nfsd <span class="hljs-built_in">type</span> nfsd (rw)
 
 [root@localhost /]<span class="hljs-comment"># umount /usr/local/test</span>
 </code></pre>
-<p>六、服务器端防火墙设置（NFS 开启防墙配置）：</p>
+<h2 id="服务器端防火墙设置（nfs-开启防墙配置）：">服务器端防火墙设置（NFS 开启防墙配置）： <a class="markdownIt-Anchor" href="#服务器端防火墙设置（nfs-开启防墙配置）：">#</a></h2>
 <p>1、修改/etc/service,添加以下内容（端口号必须在1024以下,且未被占用）</p>
 <pre class="hljs"><code> <span class="hljs-comment"># Local services  </span>
     mountd 1011/tcp <span class="hljs-comment">#rpc.mountd  </span>
@@ -197,7 +197,8 @@ nfsd on /proc/fs/nfsd <span class="hljs-built_in">type</span> nfsd (rw)
 -A INPUT -m state --state NEW -m tcp -p tcp --dport 32768 -j ACCEPT
 </code></pre>
 <p>客户端在挂载的时候遇到的一个问题如下，可能是网络不太稳定，NFS默认是用UDP协议，换成TCP协议即可：</p>
-<pre><code>mount -t nfs 192.168.1.225:/usr/local/test /usr/local/test  -o proto=tcp -o nolock</code></pre>
+<pre><code>mount -t nfs 192.168.1.225:/usr/local/test /usr/local/test  -o proto=tcp -o nolock
+</code></pre>
 
       
     </div>
@@ -272,7 +273,7 @@ nfsd on /proc/fs/nfsd <span class="hljs-built_in">type</span> nfsd (rw)
   var LOPPO = {};
   LOPPO.current_path = '2014-07-31-CentOS-NFS-mount.md';
   LOPPO.relative_root_path = '';
-  LOPPO.article_toc = "";
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#%E7%8E%AF%E5%A2%83%E4%BB%8B%E7%BB%8D%EF%BC%9A\">环境介绍：</a></li>\n<li><a href=\"#%E5%AE%89%E8%A3%85%EF%BC%9A\">安装：</a></li>\n<li><a href=\"#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E9%85%8D%E7%BD%AE%EF%BC%9A\">服务器端配置：</a>\n<ul>\n<li><a href=\"#%E5%88%9B%E5%BB%BA%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95%EF%BC%9A\">创建共享目录：</a></li>\n<li><a href=\"#nfs%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%EF%BC%9A\">NFS文件配置：</a></li>\n</ul>\n</li>\n<li><a href=\"#%E5%90%AF%E5%8A%A8\">启动:</a></li>\n<li><a href=\"#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8C%82%E8%BD%BD%EF%BC%9A\">客户端挂载：</a>\n<ul>\n<li><a href=\"#%E5%88%9B%E5%BB%BA%E9%9C%80%E8%A6%81%E6%8C%82%E8%BD%BD%E7%9A%84%E7%9B%AE%E5%BD%95%EF%BC%9A\">创建需要挂载的目录：</a></li>\n<li><a href=\"#%E6%B5%8B%E8%AF%95%E6%8C%82%E8%BD%BD%EF%BC%9A\">测试挂载：</a></li>\n<li><a href=\"#%E6%8C%82%E8%BD%BD%EF%BC%9A\">挂载：</a></li>\n<li><a href=\"#%E6%B5%8B%E8%AF%95%EF%BC%9A\">测试：</a></li>\n</ul>\n</li>\n<li><a href=\"#%E8%A7%A3%E9%99%A4%E6%8C%82%E8%BD%BD%EF%BC%9A\">解除挂载：</a></li>\n<li><a href=\"#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E9%98%B2%E7%81%AB%E5%A2%99%E8%AE%BE%E7%BD%AE%EF%BC%88nfs-%E5%BC%80%E5%90%AF%E9%98%B2%E5%A2%99%E9%85%8D%E7%BD%AE%EF%BC%89%EF%BC%9A\">服务器端防火墙设置（NFS 开启防墙配置）：</a></li>\n</ul>\n";
 </script>
 <script src="assets/js/app.js"></script>
 </body>

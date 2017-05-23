@@ -36,12 +36,12 @@
 
 
     <div class="article">
-      <p>##安装</p>
+      <h2 id="安装">安装 <a class="markdownIt-Anchor" href="#安装">#</a></h2>
 <pre class="hljs"><code>wget https://downloads.bitnami.com/files/stacks/gitlab/7.4.3-0/bitnami-gitlab-7.4.3-0-linux-x64-installer.run
 chmod +x bitnami-gitlab-7.4.3-0-linux-x64-installer.run
 ./bitnami-gitlab-7.4.3-0-linux-x64-installer.run
 </code></pre>
-<p>##备份和恢复</p>
+<h2 id="备份和恢复">备份和恢复 <a class="markdownIt-Anchor" href="#备份和恢复">#</a></h2>
 <p><strong>备份以及恢复的操作，以下操作使用root用户执行</strong></p>
 <p>1、指定备份路径</p>
 <pre class="hljs"><code>vi /opt/gitlab-7.4.3-0/apps/gitlab/htdocs/config/gitlab.yml
@@ -69,7 +69,7 @@ chown git:git -R /opt/gitlab-7.4.3-0/apps/gitlab/repositories
 <p>如果备份的目录下不止一个备份文件，则RAILS_ENV=production后面需要指定备份文件 BACKUP=xxx。<br>
 至此备份恢复完毕。</p>
 <p>ps：经过我自己的研究发现可以直接拷贝repositories目录到新机器也是OK的;也成功测试通过。至于正式迁移还是要按照官方文档！</p>
-<p>##迁移</p>
+<h2 id="迁移">迁移 <a class="markdownIt-Anchor" href="#迁移">#</a></h2>
 <p>以上备份可以整理成备份脚本，定期备份，也可以用于gitlab服务器迁移（迁移必须使用相同gitlab版本方可兼容）</p>
 <p>迁移过程：</p>
 <p>1、安装版本一致的bitnami-gitlab</p>
@@ -78,19 +78,19 @@ chown git:git -R /opt/gitlab-7.4.3-0/apps/gitlab/repositories
 <p>4、拷贝备份数据到新server，并导入</p>
 <p>5、客户端进行测试</p>
 <p>6、测试成功方可正式迁移</p>
-<p>##迁移过程中碰到的问题</p>
-<p>###客户端git pull 提示 gitlab-shell.log Permission denied</p>
+<h3 id="迁移过程中碰到的问题">迁移过程中碰到的问题 <a class="markdownIt-Anchor" href="#迁移过程中碰到的问题">#</a></h3>
+<h3 id="客户端git-pull-提示-gitlab-shelllog-permission-denied">客户端git pull 提示 gitlab-shell.log Permission denied <a class="markdownIt-Anchor" href="#客户端git-pull-提示-gitlab-shelllog-permission-denied">#</a></h3>
 <p><code>chown -R git.git /dbdata/gitlab-7.13.1-0/apps/gitlab/gitlab-shell/gitlab-shell.log</code></p>
-<p>###客户端提示指纹对不上</p>
+<h3 id="客户端提示指纹对不上">客户端提示指纹对不上 <a class="markdownIt-Anchor" href="#客户端提示指纹对不上">#</a></h3>
 <p><code>rm -rf /root/.ssh/known_hosts</code></p>
-<p>###gitlab首页不显示commit更新事件</p>
+<h3 id="gitlab首页不显示commit更新事件">gitlab首页不显示commit更新事件 <a class="markdownIt-Anchor" href="#gitlab首页不显示commit更新事件">#</a></h3>
 <p>那是因为备份出来的repositories里的hook的软链接还指向的是老server的hook路径</p>
 <p>需要依次重新设置每个git仓库的hook，如果新server的gitlab安装路径和老server一样，请忽略</p>
 <pre class="hljs"><code><span class="hljs-built_in">cd</span> /dbdata/gitlab-7.13.1-0/apps/gitlab/repositories/ops/opslegend.git
 rm -rf hooks
 ln <span class="hljs-_">-s</span> /dbdata/gitlab-7.13.1-0/apps/gitlab/gitlab-shell/hooks hooks
 </code></pre>
-<p>###gitlab上传头像报500错误</p>
+<h3 id="gitlab上传头像报500错误">gitlab上传头像报500错误 <a class="markdownIt-Anchor" href="#gitlab上传头像报500错误">#</a></h3>
 <p>查看apache的log显示权限不足</p>
 <pre class="hljs"><code><span class="hljs-comment"># tail -f /dbdata/gitlab-7.13.1-0/apps/gitlab/htdocs/log/production.log </span>
 
@@ -174,7 +174,7 @@ Errno::EACCES (Permission denied - /dbdata/gitlab-7.13.1-0/apps/gitlab/htdocs/pu
   var LOPPO = {};
   LOPPO.current_path = '2014-12-04-centos-gitlab-yijian.md';
   LOPPO.relative_root_path = '';
-  LOPPO.article_toc = "";
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#%E5%AE%89%E8%A3%85\">安装</a></li>\n<li><a href=\"#%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D\">备份和恢复</a></li>\n<li><a href=\"#%E8%BF%81%E7%A7%BB\">迁移</a>\n<ul>\n<li><a href=\"#%E8%BF%81%E7%A7%BB%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%A2%B0%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98\">迁移过程中碰到的问题</a></li>\n<li><a href=\"#%E5%AE%A2%E6%88%B7%E7%AB%AFgit-pull-%E6%8F%90%E7%A4%BA-gitlab-shelllog-permission-denied\">客户端git pull 提示 gitlab-shell.log Permission denied</a></li>\n<li><a href=\"#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8F%90%E7%A4%BA%E6%8C%87%E7%BA%B9%E5%AF%B9%E4%B8%8D%E4%B8%8A\">客户端提示指纹对不上</a></li>\n<li><a href=\"#gitlab%E9%A6%96%E9%A1%B5%E4%B8%8D%E6%98%BE%E7%A4%BAcommit%E6%9B%B4%E6%96%B0%E4%BA%8B%E4%BB%B6\">gitlab首页不显示commit更新事件</a></li>\n<li><a href=\"#gitlab%E4%B8%8A%E4%BC%A0%E5%A4%B4%E5%83%8F%E6%8A%A5500%E9%94%99%E8%AF%AF\">gitlab上传头像报500错误</a></li>\n</ul>\n</li>\n</ul>\n";
 </script>
 <script src="assets/js/app.js"></script>
 </body>
