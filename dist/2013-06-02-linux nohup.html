@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<title>linux命令后台运行详解 - linux48</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+<link rel="stylesheet" href="assets/css/bulma.min.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<!--[if lt IE 9]>
+<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="">
+</head>
+<body>
+
+<nav class="columns navbar">
+  <div class="column logo is-3 is-offset-1">
+    <a class="is-brand" href="index.html">
+      linux48
+    </a>
+  </div>
+</nav>
+
+<div class="columns content">
+  <div class="column is-2-desktop is-3-widescreen is-hidden-touch">
+  </div>
+  <div class="column article-container is-11-tablet is-8-desktop is-6-widescreen">
+    <div class="breadcrumb-area"><a href="index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-delimiter"> &gt; </span><a href="2013-06-02-linux nohup.html" class="breadcrumb-item">linux命令后台运行详解</a></div>
+    <h1 class="article-title">linux命令后台运行详解</h1>
+    
+  <p>作者：<a href="http://linux48.com" target="_blank">Chris</a></p>
+
+
+    <div class="article">
+      <div id="cnblogs_post_body">
+  <p>
+     <strong> 有两种方式：</strong>
+  </p>
+  <p>
+    1. command & ： 后台运行，你关掉终端会停止运行<br /> 2. nohup command & ： 后台运行，你关掉终端也会继续运行<!-- more -->
+  </p>
+  <div id="app-share-content">
+    <p>
+      <strong>一、 简介</strong><br /> Linux/Unix 区别于微软平台最大的优点就是真正的多用户，多任务。因此在任务管理上也有别具特色的管理思想。<br /> 我们知道，在 Windows 上面，我们要么让一个程序作为服务在后台一直运行，要么停止这个服务。而不能让程序在前台后台之间切换。而 Linux 提供了 fg 和bg 命令，让你轻松调度正在运行的任务。假设你发现前台运行的一个程序需要很长的时间，但是需要干其他的事情，你就可以用 Ctrl-Z ，挂起这个程序，然后可以看到系统提示：<br /> [1]+ Stopped /root/bin/rsync.sh<br /> 然后我们可以把程序调度到后台执行：（bg 后面的数字为作业号）<br /> <strong>#bg 1</strong><br /> [1]+ /root/bin/rsync.sh &<br /> 用 jobs 命令查看正在运行的任务：<br /> <strong>#jobs</strong><br /> [1]+ Running /root/bin/rsync.sh &<br /> 如果想把它调回到前台运行，可以用<br /> <strong>#fg 1</strong><br /> /root/bin/rsync.sh<br /> 这样，你在控制台上就只能等待这个任务完成了。
+    </p>
+<pre><code>&lt;p&gt;
+  &lt;strong&gt;&amp;&lt;/strong&gt; 将指令丢到后台中去执行&lt;br /&gt; &lt;strong&gt;[ctrl]+z&lt;/strong&gt; 將前台任务丟到后台中暂停&lt;br /&gt; &lt;strong&gt;jobs&lt;/strong&gt; 查看后台的工作状态&lt;br /&gt; &lt;strong&gt;fg %jobnumber&lt;/strong&gt; 将后台的任务拿到前台来处理&lt;br /&gt; &lt;strong&gt;bg %jobnumber&lt;/strong&gt; 将任务放到后台中去处理&lt;br /&gt; &lt;strong&gt;kill&lt;/strong&gt; 管理后台的任务
+&lt;/p&gt;
+
+&lt;p&gt;
+  &lt;strong&gt;二、&amp;&lt;/strong&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+  在Linux中，当在前台运行某个作业时，终端被该作业占据；而在后台运行作业时，它不会占据终端。可以使用&amp;命令把作业放到后台执行。实际上，这样是将命令放入到一个作业队列中了：
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ ./test.sh &amp;&lt;br /&gt; [1] 17208
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ jobs -l&lt;br /&gt; [1]+ 17208 Running                 ./test.sh &amp;&lt;br /&gt; 在后台运行作业时要当心：需要用户交互的命令不要放在后台执行，因为这样你的机器就会在那里傻等。不过，作业在后台运行一样会将结果输出到屏幕上，干扰你的工作。如果放在后台运行的作业会产生大量的输出，最好使用下面的方法把它的输出重定向到某个文件中：&lt;br /&gt; command &gt;out.file 2&gt;&amp;1 &amp;&lt;br /&gt; 在上面的例子中，2&gt;&amp;1表示所有的标准输出和错误输出都将被重定向到一个叫做out.file 的文件中。 当你成功地提交进程以后，就会显示出一个进程号，可以用它来监控该进程，或杀死它。&lt;br /&gt; 例：查找名为“httpd.conf”的文件，并把所有标准输出和错误输出重定向到find.dt的文件中：&lt;br /&gt; # find /etc/httpd/ -name &amp;#8220;httpd.conf&amp;#8221; -print &gt;find.dt 2&gt;&amp;1 &amp;&lt;br /&gt; [2] 7832&lt;br /&gt; 成功提交该命令之后，系统给出了它的进程号7832。 对于已经在前台执行的命令，也可以重新放到后台执行，首先按ctrl+z暂停已经运行的进程，然后使用bg命令将停止的作业放到后台运行，例如对正在前台执行的tesh.sh使用ctrl+z挂起它：&lt;br /&gt; $ ./test.sh&lt;br /&gt; [1]+ Stopped                 ./test.sh
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ bg %1&lt;br /&gt; [1]+ ./test.sh &amp;
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ jobs -l&lt;br /&gt; [1]+ 22794 Running                 ./test.sh &amp;
+&lt;/p&gt;
+
+&lt;p&gt;
+  但是如上方到后台执行的进程，其父进程还是当前终端shell的进程，而一旦父进程退出，则会发送hangup信号给所有子进程，子进程收到hangup以后也会退出。如果我们要在退出shell的时候继续运行进程，则需要使用nohup忽略hangup信号，或者setsid将将父进程设为init进程(进程号为1)
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ echo $$&lt;br /&gt; 21734
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ nohup ./test.sh &amp;&lt;br /&gt; [1] 29016
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ ps -ef | grep test&lt;br /&gt; 515      29710 21734 0 11:47 pts/12   00:00:00 /bin/sh ./test.sh&lt;br /&gt; 515      29713 21734 0 11:47 pts/12   00:00:00 grep test&lt;br /&gt; $ setsid ./test.sh &amp;&lt;br /&gt; [1] 409
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ ps -ef | grep test&lt;br /&gt; 515        410     1 0 11:49 ?        00:00:00 /bin/sh ./test.sh&lt;br /&gt; 515        413 21734 0 11:49 pts/12   00:00:00 grep test&lt;br /&gt; 上面的试验演示了使用nohup/setsid加上&amp;使进程在后台运行，同时不受当前shell退出的影响。那么对于已经在后台运行的进程，该怎么办呢？可以使用disown命令：
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ ./test.sh &amp;&lt;br /&gt; [1] 2539
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ jobs -l&lt;br /&gt; [1]+ 2539 Running                 ./test.sh &amp;
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ disown -h %1
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ ps -ef | grep test&lt;br /&gt; 515        410     1 0 11:49 ?        00:00:00 /bin/sh ./test.sh&lt;br /&gt; 515       2542 21734 0 11:52 pts/12   00:00:00 grep test&lt;br /&gt; 另外还有一种方法，即使将进程在一个subshell中执行，其实这和setsid异曲同工。方法很简单，将命令用括号() 括起来即可：
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ (./test.sh &amp;)
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ ps -ef | grep test&lt;br /&gt; 515        410     1 0 11:49 ?        00:00:00 /bin/sh ./test.sh&lt;br /&gt; 515      12483 21734 0 11:59 pts/12   00:00:00 grep test&lt;br /&gt; 注：本文试验环境为Red Hat Enterprise Linux AS release 4 (Nahant Update 5),shell为/bin/bash，不同的OS和shell可能命令有些不一样。例如AIX的ksh，没有disown，但是可以使用nohup -p PID来获得disown同样的效果。
+&lt;/p&gt;
+
+&lt;p&gt;
+  还有一种更加强大的方式是使用screen，首先创建一个断开模式的虚拟终端，然后用-r选项重新连接这个虚拟终端，在其中执行的任何命令，都能达到nohup的效果，这在有多个命令需要在后台连续执行的时候比较方便：
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ screen -dmS screen_test
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ screen -list&lt;br /&gt; There is a screen on:&lt;br /&gt; 27963.screen_test       (Detached)&lt;br /&gt; 1 Socket in /tmp/uscreens/S-jiangfeng.
+&lt;/p&gt;
+
+&lt;p&gt;
+  $ screen -r screen_test
+&lt;/p&gt;
+
+&lt;p&gt;
+  &lt;strong&gt;三、 nohup&lt;br /&gt; &lt;/strong&gt;    如果你正在运行一个进程，而且你觉得在退出帐户时该进程还不会结束，那么可以使用nohup命令。该命令可以在你退出帐户之后继续运行相应的进程。nohup就是不挂起的意思( no hang up)。 该命令的一般形式为：&lt;br /&gt; nohup conmmand &amp;&lt;br /&gt; 如果使用nohup命令提交作业，那么在缺省情况下该作业的所有输出都被重定向到一个名为nohup.out的文件中，除非另外指定了输出文件：&lt;br /&gt; nohup command &gt; myout.file 2&gt;&amp;1&lt;br /&gt; 在上面的例子中，输出被重定向到myout.file文件中。&lt;br /&gt; &lt;strong&gt;四、.*，？，[...]，[!...]等&lt;/strong&gt;&lt;br /&gt; 下面就是这些特殊字符：&lt;br /&gt; * 匹配文件名中的任何字符串，包括空字符串。&lt;br /&gt; ？ 匹配文件名中的任何单个字符。&lt;br /&gt; [...] 匹配[ ]中所包含的任何字符。&lt;br /&gt; [!...] 匹配[ ]中非感叹号！之后的字符。&lt;br /&gt; 当s h e l l遇到上述字符时，就会把它们当作特殊字符，而不是文件名中的普通字符，这样用户就可以用它们来匹配相应的文件名。
+&lt;/p&gt;
+
+&lt;p&gt;
+  1)列出以i或o开头的文件名：     #ls [io]*&lt;br /&gt; 2)列出log.开头、后面跟随一个数字、然后可以是任意字符串的文件名： #ls log.[0-9]*&lt;br /&gt; 3)与例二相反，列出log.开头、后面不跟随一个数字、然后可以是任意字符串的文件名 : #ls log.[!0-9]*&lt;br /&gt; 4)列出所有以LPS开头、中间可以是任何两个字符，最后以1结尾的文件名：#ls LPS??1&lt;br /&gt; 5)列出所有以大写字母开头的文件名：$ ls [A-Z]* 6)列出所有以. 开头的文件名（隐含文件，例如. profile、.rhosts、.histo ry等）: $ ls .*
+&lt;/p&gt;
+</code></pre>
+  </div>
+  <ul>
+    <li>
+      <h3>
+        其他相关命令：<strong></strong>
+      </h3>
+    </li>
+  </ul>
+  <p>
+    <strong>jobs</strong>：查看当前有多少在后台运行的命令<br /> <strong>fg</strong>：将后台中的命令调至前台继续运行。如果后台中有多个命令，可以用 fg %jobnumber将选中的命令调出，%jobnumber是通过jobs命令查到的后台正在执行的命令的序号(不是pid)<br /> <strong>bg</strong>：将一个在后台暂停的命令，变成继续执行。如果后台中有多个命令，可以用bg %jobnumber将选中的命令调出，%jobnumber是通过jobs命令查到的后台正在执行的命令的序号(不是pid)
+  </p>
+  <ul>
+    <li>
+      <h3>
+        杀死进程
+      </h3>
+    </li>
+  </ul>
+  <p>
+    杀死已经启动的程序和普通方式一样：
+  </p>
+  <blockquote>
+    <ul>
+      <li>
+        <strong>pkill -9 name</strong>
+      </li>
+      <li>
+        <strong>killall name</strong>
+      </li>
+      <li>
+        <strong>kill pid</strong>
+      </li>
+      <li>
+        <strong>…<br /> </strong>
+      </li>
+    </ul>
+  </blockquote>
+</div>
+<div id="blog_post_info_block">
+</div>
+      
+    </div>
+        
+        <h2>您的评论</h2>
+        <div id="disqus_thread"></div>
+        <script>
+          var disqus_config = function () {
+            this.page.url = location.origin + location.pathname;
+            this.page.identifier = location.pathname;
+            if (this.page.identifier.substr(-11) === '/index.html') {
+              this.page.identifier = this.page.identifier.substr(
+                0,
+                this.page.identifier.length - 10
+              );
+            }
+          };
+
+          (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = '//linux48.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+        </script>
+      
+
+    <div class="level article-bar is-mobile">
+      <div class="level-item has-text-centered">
+        <a title="previous page" class="previouse-article-link" href="2013-06-03-1nginx-502.html"><span class="icon icon-previous" data-icon="previous"></span><span class="link-content">&laquo; Previous</span></a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="font size" class="link-item link-item-size">
+          <span class="icon icon-size" data-icon="size"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="table of content" class="link-item link-item-toc">
+          <span class="icon icon-toc" data-icon="toc"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="top" href="#">
+          <span class="icon icon-up" data-icon="up"></span>
+          <span class="link-content">⤊ Top</span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="next page" class="next-article-link" href="2013-06-01-disk inode.html"><span class="icon icon-next" data-icon="next"></span><span class="link-content">Next &raquo;</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="column is-2-widescreen is-hidden">
+  </div>
+</div>
+
+<div class="columns foot">
+  <div class="column is-3 is-offset-9 build-by">
+    Build by <a href="https://github.com/ruanyf/loppo" target="_blank">Loppo</a> 0.5.1
+  </div>
+</div>
+
+<div class="book-toc notification is-warning is-hidden">
+  <h3>目录&nbsp;<span class="title-close"><a class="button is-danger"> Close </a></span></h3>
+  <ul class="chapter-area"><li class="chapter-item "><a href="2017-02-28-zabbix-redis.html">zabbix使用自动发现规则自动化监控redis多实例</a></li><li class="chapter-item "><a href="2016-07-06-zabbix3.0-mail.html">zabbix 3.0邮件报警</a></li><li class="chapter-item "><a href="2016-06-30-hive-hdfs.html">hive整合hadoop通过flume+hue收集日志</a></li><li class="chapter-item "><a href="2016-05-27-mysql-duplicate-records.html">MySQL查询表内重复记录</a></li><li class="chapter-item "><a href="2016-05-24-free-ssl.html">Startssl免费SSL证书+Nginx搭建https</a></li><li class="chapter-item "><a href="2016-05-16-flume.html">flume+hdfs构建大数据</a></li><li class="chapter-item "><a href="2016-04-21-notepad.html">数据库维护文本编辑技巧记录</a></li><li class="chapter-item "><a href="2016-04-20-mysql-in-paixu.html">MySQL查询按IN的顺序输出结果</a></li><li class="chapter-item "><a href="2016-04-14-cisco-firewall-ha.html">CISCO ASA5520 HA 配置</a></li><li class="chapter-item "><a href="2016-04-09-centos7-config-bond.html">centos7配置bond和bond跨网段改IP</a></li><li class="chapter-item "><a href="2016-02-03-centos-install-bugzilla.html">CentOS下Nginx配置Perl运行Bugzilla</a></li><li class="chapter-item "><a href="2015-11-12-centos-install-maven.html">CentOS上搭建私有maven仓库</a></li><li class="chapter-item "><a href="2015-10-8-mysql-some-question.html">mysql You cant specify target table</a></li><li class="chapter-item "><a href="2015-10-30-mysql-row-usedisk.html">mysql中查看数据库中所有表的记录数</a></li><li class="chapter-item "><a href="2015-10-29-zabbix-proxy-install.html">zabbix的proxy端安装配置</a></li><li class="chapter-item "><a href="2015-10-28-zabbix-agent-install.html">zabbix的agent端安装配置</a></li><li class="chapter-item "><a href="2015-10-27-mysql-AVG-MIN-SUM.html">mysql求平均值、最小和总值</a></li><li class="chapter-item "><a href="2015-10-21-mysql-every-hour.html">mysql取每隔一小时数据</a></li><li class="chapter-item "><a href="2015-08-27-Write-through-back.html">阵列Cache写机制：Write-through与Write-back</a></li><li class="chapter-item "><a href="2015-08-03-win10-cisco-vpn-repair.html">Repair Cisco vpnclient on windows10</a></li><li class="chapter-item "><a href="2015-07-30-sql-concat.html">MYSQL在一个字段值前面加字符串</a></li><li class="chapter-item "><a href="2015-07-22-Primary-key-conflicts.html">mysql双主主键冲突排查修复</a></li><li class="chapter-item "><a href="2015-07-15-mysql-dual-master.html">mysql双主互备设计搭建</a></li><li class="chapter-item "><a href="2015-07-07-svn-admin.html">CentOS6安装subversion 可视化管理工具iF.SVNAdmin</a></li><li class="chapter-item "><a href="2015-07-06-rhel-yum.html">Red Hat Enterprise Linux Server YUM配置</a></li><li class="chapter-item "><a href="2015-06-25-mysql-log.html">mysql全局日志开启</a></li><li class="chapter-item "><a href="2015-06-08-php-fpm-backlog.html">关于PHP-FPM的backlog</a></li><li class="chapter-item "><a href="2015-06-05-mysql-grant.html">MySQL的Grant赋权命令详解</a></li><li class="chapter-item "><a href="2015-06-03-bitnami-gitlab-port.html">bitnami版gitlab修改端口</a></li><li class="chapter-item "><a href="2015-03-13-awstats-install.html">awstats日志分析安装</a></li><li class="chapter-item "><a href="2015-03-07-h3c-vlan.html">H3C划分VLAN命令</a></li><li class="chapter-item "><a href="2015-03-05-redis-easy-install.html">Redis安装及主从配置</a></li><li class="chapter-item "><a href="2015-01-21-shadowsocks-python-node.html">shadowsocks的python和nodejs版搭建</a></li><li class="chapter-item "><a href="2015-01-07-ruby-Syntax-error-Invalid-GBK .html">ruby环境sass编译中文出现 Invalid GBK character</a></li><li class="chapter-item "><a href="2015-01-06-mysql-m-s-s.html">如何搭master-slave-slave</a></li><li class="chapter-item "><a href="2015-01-06-mysql5.1-ms.html">Mysql5.1主从服务设置</a></li><li class="chapter-item "><a href="2015-01-06-linux-rm-luanma.html">linux下删除乱码文件</a></li><li class="chapter-item "><a href="2014-12-17-SVNListParentPath.html">利用SVNListParentPath增加http浏览仓库根目录的功能</a></li><li class="chapter-item "><a href="2014-12-15-Chrome-css-failed.html">Chrome 浏览器加载 css Failed to load resource</a></li><li class="chapter-item "><a href="2014-12-04-centos-gitlab-yijian.html">centos gitlab一键安装备份恢复和迁移</a></li><li class="chapter-item "><a href="2014-12-02-linux-sar.html">linux sar命令</a></li><li class="chapter-item "><a href="2014-11-24-ruby-on-rails-err.html">ruby on rails 报错解决</a></li><li class="chapter-item "><a href="2014-11-18-awk-note.html">AWK统计随笔记录</a></li><li class="chapter-item "><a href="2014-11-12-svn-force-commit.html">SVN强制提交commit</a></li><li class="chapter-item "><a href="2014-11-12-rm-list-too-long.html">rm Argument list too long的解决办法</a></li><li class="chapter-item "><a href="2014-11-12-crontab-linux-lessthan.html">Crontab导致Linux的线程数枯竭</a></li><li class="chapter-item "><a href="2014-11-11-shell-ftp-uplod.html">用二句Shell命令实现FTP批量上传文件夹</a></li><li class="chapter-item "><a href="2014-11-10-redis-disk-memory-err.html">redis 写磁盘出错Cannot allocate memory</a></li><li class="chapter-item "><a href="2014-10-19-Jekyll_Variables.html">Jekyll目录结构与变量</a></li><li class="chapter-item "><a href="2014-10-19-git_common_command.html">Git 常用命令整理</a></li><li class="chapter-item "><a href="2014-10-18-windows_configuration_Jekyll.html">Windows平台配置Jekyll环境并与GitHub连接</a></li><li class="chapter-item "><a href="2014-08-21-centos-kvm-install.html">Redhat/CentOS系统KVM虚拟机安装过程详解</a></li><li class="chapter-item "><a href="2014-08-18-Sublime-add-youjian.html">将sublime text添加到右键菜单中</a></li><li class="chapter-item "><a href="2014-08-13-Sublime-python-build.html">Sublime Text 3设置python编译支持环境设置</a></li><li class="chapter-item "><a href="2014-08-11-shell-syntax-error.html">SHELL syntax error:unexpected end of file 提示错误</a></li><li class="chapter-item "><a href="2014-07-31-mysql-daxiaoxie.html">Windows下MySQL无法区分大小写解决方案</a></li><li class="chapter-item "><a href="2014-07-31-CentOS-NFS-mount.html">CentOS NFS的安装配置、启动及mount挂载方法</a></li><li class="chapter-item "><a href="2014-07-30-tencent-yun-repo.html">腾讯云的YUM repo</a></li><li class="chapter-item "><a href="2014-07-29-mysql-dump-all.html">Mysqldump参数大全</a></li><li class="chapter-item "><a href="2014-07-28-git-del-err-commit.html">git删除错误提交的commit</a></li><li class="chapter-item "><a href="2014-07-25-mysql-instet-other-table.html">MySql中把一个表的数据插入到另一个表中的实现</a></li><li class="chapter-item "><a href="2014-07-25-centos-install-ossec.html">centos安装ossec</a></li><li class="chapter-item "><a href="2014-07-24-phpmyadmin error.html">访问phpmyadmin错误</a></li><li class="chapter-item "><a href="2014-07-13-black apple.html">厚黑苹果售后</a></li><li class="chapter-item "><a href="2014-06-25-wordpress google css.html">wordpress引用google开放css加载不到解决方法</a></li><li class="chapter-item "><a href="2014-06-25-nginx https.html">centos下nginx的https配置</a></li><li class="chapter-item "><a href="2014-05-30-rsync.html">rsync同步部署</a></li><li class="chapter-item "><a href="2014-05-15-saltstack1.html">使用saltstack批量管理服务器 （一）</a></li><li class="chapter-item "><a href="2014-04-18-msmtpmutt.html">msmtp+mutt 服务器批量发送邮件</a></li><li class="chapter-item "><a href="2014-04-14-zabbix server install.html">zabbix的server端安装配置</a></li><li class="chapter-item "><a href="2014-04-05-wordpress them only one.html">wordpress后台主题只有一个解决方法</a></li><li class="chapter-item "><a href="2014-01-30-many-php-version.html">多版本php共存搭建</a></li><li class="chapter-item "><a href="2013-11-06-linux memery cat.html">linux查看内存相关命令</a></li><li class="chapter-item "><a href="2013-07-07-github easy install.html">github安装使用</a></li><li class="chapter-item "><a href="2013-06-30-localhost-127.0.0.1.html">localhost 与 127.0.0.1 的区别</a></li><li class="chapter-item "><a href="2013-06-15-rsync del hailiang.html">使用rsync删除海量文件</a></li><li class="chapter-item "><a href="2013-06-08-disk-data-recovery.html">记录一次服务器数据恢复</a></li><li class="chapter-item "><a href="2013-06-03-1nginx-502.html">记录一次nginx 502</a></li><li class="chapter-item chapter-item-current"><a href="2013-06-02-linux nohup.html">linux命令后台运行详解</a></li><li class="chapter-item "><a href="2013-06-01-disk inode.html">深入理解磁盘inode</a></li><li class="chapter-item "><a href="2013-05-09-mysql error 1064.html">MySQL错误ERROR 1064 (type=myisam出错)</a></li><li class="chapter-item "><a href="2013-01-04-centos php oracle.html">centos6.2下php支持oracle</a></li><li class="chapter-item "><a href="2012-12-27-oracle-startup-failure.html">oracle startup failure</a></li><li class="chapter-item "><a href="2012-12-27-oracle-startup.html">'oracle startup 故障：ORA-00845: MEMORY_TARGET'</a></li><li class="chapter-item "><a href="2012-12-27-ora-01102-cannot-mount-database-in-exclusive-mode.html">'ORA-01102: cannot mount database in EXCLUSIVE mode'</a></li><li class="chapter-item "><a href="2012-12-20-centos-install-oracle-11g.html">centos install oracle 11g</a></li><li class="chapter-item "><a href="2012-11-14-mysql-slow-log.html">Mysql慢查询设置</a></li><li class="chapter-item "><a href="2012-11-14-mysql-ms-error.html">MYSQL主从同步故障事件</a></li><li class="chapter-item "><a href="2012-08-10-python-mysqldb-install.html">CentOS下python-mysqldb安装事件</a></li><li class="chapter-item "><a href="2012-08-03-sqlite-source-upgrade.html">sqlite3源码升级事件</a></li><li class="chapter-item "><a href="2012-08-01-centos6-pythonsqlite3.html">centos6.2升级python后处理sqlite3库事件</a></li><li class="chapter-item "><a href="2012-07-30-mysql5-5-ms.html">mysql5.5版本主从搭建</a></li><li class="chapter-item "><a href="2012-07-18-repair-yum.html">误卸载python导致yum无法使用修复事件</a></li><li class="chapter-item "><a href="2012-07-18-reload-upgrade-python.html">Centos平滑升级python事件</a></li><li class="chapter-item "><a href="2012-07-18-nginx413.html">Nginx出现“413 Request Entity Too Large”错误解决方法</a></li><li class="chapter-item "><a href="2012-07-06-nginx-apache-mulu-bd.html">Nginx、Apache目录浏览功能</a></li><li class="chapter-item "><a href="2012-06-27-yum-lamp-tomcat.html">CentOS yum安装配置LAMP+tomcat</a></li><li class="chapter-item "><a href="2012-06-11-ios-jiangji.html">ios5.0.1降级4.3.3事件</a></li><li class="chapter-item "><a href="2012-05-17-ocr-Tesseract.html">OCR之Tesseract的linux下安装</a></li><li class="chapter-item "><a href="2012-05-04-memcached-easy-install.html">memcached简易安装</a></li><li class="chapter-item "><a href="2012-04-11-centos-install-snmp.html">centos下snmp客户端安装</a></li><li class="chapter-item "><a href="2012-03-13-iptables-shell.html">一篇很不错的iptables的shell</a></li><li class="chapter-item "><a href="2012-03-07-cisco-fudong-luyou.html">思科静态浮动路由配置</a></li><li class="chapter-item "><a href="hello-world.html">Hello World</a></li></ul>
+</div>
+
+<div class="progress-indicator"></div>
+
+<!-- SCRIPTS -->
+<script>
+  var LOPPO = {};
+  LOPPO.current_path = '2013-06-02-linux nohup.md';
+  LOPPO.relative_root_path = '';
+  LOPPO.article_toc = "";
+</script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
+
