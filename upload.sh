@@ -1,4 +1,4 @@
-#rsync -avu --progress --delete /home/wwwroot/linux48.com/dist  /root/koy1619.github.com
+cp -Rf /home/wwwroot/linux48.com/dist/*   ./
 
 git init
 git add -A
