@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<title>Markdown 简明语法手册 - linux48</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+<link rel="stylesheet" href="assets/css/bulma.min.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<!--[if lt IE 9]>
+<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="">
+</head>
+<body dir="ltr">
+
+<nav class="columns navbar">
+  <div class="column logo is-3 is-offset-1">
+    <a class="is-brand" href="index.html">
+      linux48
+    </a>
+  </div>
+</nav>
+
+<div class="columns content">
+  <div class="column is-2-desktop is-3-widescreen is-hidden-touch">
+  </div>
+  <div class="column article-container is-11-tablet is-8-desktop is-6-widescreen">
+    <div class="breadcrumb-area"><a href="index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-delimiter"> &gt; </span><a href="markdown.html" class="breadcrumb-item">Markdown 简明语法手册</a></div>
+    <h1 class="article-title">Markdown 简明语法手册</h1>
+    <div class="article">
+      <p>什么是 Markdown</p>
+<p>Markdown 是一种方便记忆、书写的纯文本标记语言，用户可以使用这些标记符号以最小的输入代价生成极富表现力的文档：譬如您正在阅读的这份文档。它使用简单的符号标记不同的标题</p>
+<h1 id="cmd-markdown-简明语法手册">Cmd Markdown 简明语法手册 <a class="markdownIt-Anchor" href="#cmd-markdown-简明语法手册">#</a></h1>
+<h3 id="1-斜体和粗体">1. 斜体和粗体 <a class="markdownIt-Anchor" href="#1-斜体和粗体">#</a></h3>
+<p>使用 * 和 ** 表示斜体和粗体。</p>
+<p>示例：</p>
+<p>这是 <em>斜体</em>，这是 <strong>粗体</strong>。</p>
+<h3 id="2-分级标题">2. 分级标题 <a class="markdownIt-Anchor" href="#2-分级标题">#</a></h3>
+<p>使用 === 表示一级标题，使用 --- 表示二级标题。</p>
+<p>示例：</p>
+<pre class="hljs"><code>这是一个一级标题
+============================
+
+这是一个二级标题
+--------------------------------------------------
+
+### 这是一个三级标题
+</code></pre>
+<p>你也可以选择在行首加井号表示不同级别的标题 (H1-H6)，例如：# H1, ## H2, ### H3，#### H4。</p>
+<h3 id="3-外链接">3. 外链接 <a class="markdownIt-Anchor" href="#3-外链接">#</a></h3>
+<p>使用 [描述](链接地址) 为文字增加外链接。</p>
+<p>示例：</p>
+<p>这是去往 <a href="http://ghosertblog.github.com" target="_blank" rel="noopener">本人博客</a> 的链接。</p>
+<h3 id="4-无序列表">4. 无序列表 <a class="markdownIt-Anchor" href="#4-无序列表">#</a></h3>
+<p>使用 *，+，- 表示无序列表。</p>
+<p>示例：</p>
+<ul>
+<li>无序列表项 一</li>
+<li>无序列表项 二</li>
+<li>无序列表项 三</li>
+</ul>
+<h3 id="5-有序列表">5. 有序列表 <a class="markdownIt-Anchor" href="#5-有序列表">#</a></h3>
+<p>使用数字和点表示有序列表。</p>
+<p>示例：</p>
+<ol>
+<li>有序列表项 一</li>
+<li>有序列表项 二</li>
+<li>有序列表项 三</li>
+</ol>
+<h3 id="6-文字引用">6. 文字引用 <a class="markdownIt-Anchor" href="#6-文字引用">#</a></h3>
+<p>使用 &gt; 表示文字引用。</p>
+<p>示例：</p>
+<blockquote>
+<p>野火烧不尽，春风吹又生。</p>
+</blockquote>
+<h3 id="7-行内代码块">7. 行内代码块 <a class="markdownIt-Anchor" href="#7-行内代码块">#</a></h3>
+<p>使用 `代码` 表示行内代码块。</p>
+<p>示例：</p>
+<p>让我们聊聊 <code>html</code>。</p>
+<h3 id="8--代码块">8.  代码块 <a class="markdownIt-Anchor" href="#8--代码块">#</a></h3>
+<p>使用 四个缩进空格 表示代码块。</p>
+<p>示例：</p>
+<pre><code>这是一个代码块，此行左侧有四个不可见的空格。
+</code></pre>
+<h3 id="9--插入图像">9.  插入图像 <a class="markdownIt-Anchor" href="#9--插入图像">#</a></h3>
+<p>使用 ![描述](图片链接地址) 插入图像。</p>
+<p>示例：</p>
+<figure><img src="https://www.zybuluo.com/static/img/my_head.jpg" alt="我的头像"><figcaption>我的头像</figcaption></figure>
+<h1 id="cmd-markdown-高阶语法手册">Cmd Markdown 高阶语法手册 <a class="markdownIt-Anchor" href="#cmd-markdown-高阶语法手册">#</a></h1>
+<h3 id="1-内容目录">1. 内容目录 <a class="markdownIt-Anchor" href="#1-内容目录">#</a></h3>
+<p>在段落中填写 <code>[TOC]</code> 以显示全文内容的目录结构。</p>
+<p><div id="toc" class="toc">undefined</div></p>
+<h3 id="2-标签分类">2. 标签分类 <a class="markdownIt-Anchor" href="#2-标签分类">#</a></h3>
+<p>在编辑区任意行的列首位置输入以下代码给文稿标签：</p>
+<p>标签： 数学 英语 Markdown</p>
+<p>或者</p>
+<p>Tags： 数学 英语 Markdown</p>
+<h3 id="3-删除线">3. 删除线 <a class="markdownIt-Anchor" href="#3-删除线">#</a></h3>
+<p>使用 ~~ 表示删除线。</p>
+<p><s>这是一段错误的文本。</s></p>
+<h3 id="4-注脚">4. 注脚 <a class="markdownIt-Anchor" href="#4-注脚">#</a></h3>
+<p>使用 [^keyword] 表示注脚。</p>
+<p>这是一个注脚<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>的样例。</p>
+<p>这是第二个注脚<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>的样例。</p>
+<h3 id="5-latex-公式">5. LaTeX 公式 <a class="markdownIt-Anchor" href="#5-latex-公式">#</a></h3>
+<p>$ 表示行内公式：</p>
+<p>质能守恒方程可以用一个很简洁的方程式 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E=mc^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.05764em;">E</span><span class="mrel">=</span><span class="mord mathit">m</span><span class="mord"><span class="mord mathit">c</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord mathrm">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span> 来表达。</p>
+ 表示整行公式：
+
+$$\sum_{i=1}^n a_i=0
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>x</mi><mi>x</mi></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>x</mi><mi>n</mi></msub><mo>)</mo><mo>=</mo><msubsup><mi>x</mi><mn>1</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>x</mi><mn>2</mn><mn>2</mn></msubsup><mo>+</mo><mo>⋯</mo><mo>+</mo><msubsup><mi>x</mi><mi>n</mi><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">f(x_1,x_x,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8641079999999999em;"></span><span class="strut bottom" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span class="base displaystyle textstyle uncramped"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathit">x</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathrm">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mpunct">,</span><span class="mord"><span class="mord mathit">x</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">x</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mpunct">,</span><span class="minner">…</span><span class="mpunct">,</span><span class="mord"><span class="mord mathit">x</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">n</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mclose">)</span><span class="mrel">=</span><span class="mord"><span class="mord mathit">x</span><span class="vlist"><span style="top:0.247em;margin-left:0em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathrm">1</span></span></span><span style="top:-0.4129999999999999em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord mathrm">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mbin">+</span><span class="mord"><span class="mord mathit">x</span><span class="vlist"><span style="top:0.247em;margin-left:0em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathrm">2</span></span></span><span style="top:-0.4129999999999999em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord mathrm">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mbin">+</span><span class="minner">⋯</span><span class="mbin">+</span><span class="mord"><span class="mord mathit">x</span><span class="vlist"><span style="top:0.247em;margin-left:0em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">n</span></span></span><span style="top:-0.4129999999999999em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord mathrm">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span></span></p>
+\sum^{j-1}_{k=0}{\widehat{\gamma}_{kj} z_k}
+
+<p>访问 <a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="noopener">MathJax</a> 参考更多使用方法。</p>
+<h3 id="6-加强的代码块">6. 加强的代码块 <a class="markdownIt-Anchor" href="#6-加强的代码块">#</a></h3>
+<p>支持四十一种编程语言的语法高亮的显示，行号显示。</p>
+<p>非代码示例：</p>
+<pre class="hljs"><code>$ sudo apt-get install vim-gnome
+</code></pre>
+<p>Python 示例：</p>
+<pre class="hljs"><code><span class="hljs-meta">@requires_authorization</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">somefunc</span><span class="hljs-params">(param1=<span class="hljs-string">''</span>, param2=<span class="hljs-number">0</span>)</span>:</span>
+    <span class="hljs-string">'''A docstring'''</span>
+    <span class="hljs-keyword">if</span> param1 &gt; param2: <span class="hljs-comment"># interesting</span>
+        <span class="hljs-keyword">print</span> <span class="hljs-string">'Greater'</span>
+    <span class="hljs-keyword">return</span> (param2 - param1 + <span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> <span class="hljs-keyword">None</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomeClass</span>:</span>
+    <span class="hljs-keyword">pass</span>
+
+<span class="hljs-meta">&gt;&gt;&gt; </span>message = <span class="hljs-string">'''interpreter
+<span class="hljs-meta">... </span>prompt'''</span>
+</code></pre>
+<p>JavaScript 示例：</p>
+<pre class="hljs"><code><span class="hljs-comment">/**
+* nth element in the fibonacci series.
+* @param n &gt;= 0
+* @return the nth element, &gt;= 0.
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(<span class="hljs-params">n</span>) </span>{
+  <span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>, b = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">var</span> tmp;
+  <span class="hljs-keyword">while</span> (--n &gt;= <span class="hljs-number">0</span>) {
+    tmp = a;
+    a += b;
+    b = tmp;
+  }
+  <span class="hljs-keyword">return</span> a;
+}
+
+<span class="hljs-built_in">document</span>.write(fib(<span class="hljs-number">10</span>));
+</code></pre>
+<h3 id="7-流程图">7. 流程图 <a class="markdownIt-Anchor" href="#7-流程图">#</a></h3>
+<h4 id="示例">示例 <a class="markdownIt-Anchor" href="#示例">#</a></h4>
+<pre class="hljs"><code>st=&gt;start: Start:&gt;https://www.zybuluo.com
+io=&gt;inputoutput: verification
+op=&gt;operation: Your Operation
+cond=&gt;condition: Yes or No?
+sub=&gt;subroutine: Your Subroutine
+e=&gt;end
+
+st-&gt;io-&gt;op-&gt;cond
+cond(yes)-&gt;e
+cond(no)-&gt;sub-&gt;io
+</code></pre>
+<h4 id="更多语法参考：流程图语法参考">更多语法参考：<a href="http://adrai.github.io/flowchart.js/" target="_blank" rel="noopener">流程图语法参考</a> <a class="markdownIt-Anchor" href="#更多语法参考：流程图语法参考">#</a></h4>
+<h3 id="8-序列图">8. 序列图 <a class="markdownIt-Anchor" href="#8-序列图">#</a></h3>
+<h4 id="示例-1">示例 1 <a class="markdownIt-Anchor" href="#示例-1">#</a></h4>
+<pre class="hljs"><code>Alice-&gt;Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob--&gt;Alice: I am good thanks!
+</code></pre>
+<h4 id="示例-2">示例 2 <a class="markdownIt-Anchor" href="#示例-2">#</a></h4>
+<pre class="hljs"><code>Title: Here is a title
+A-&gt;B: Normal line
+B--&gt;C: Dashed line
+C-&gt;&gt;D: Open arrow
+D--&gt;&gt;A: Dashed open arrow
+</code></pre>
+<h4 id="更多语法参考：序列图语法参考">更多语法参考：<a href="http://bramp.github.io/js-sequence-diagrams/" target="_blank" rel="noopener">序列图语法参考</a> <a class="markdownIt-Anchor" href="#更多语法参考：序列图语法参考">#</a></h4>
+<h3 id="9-甘特图">9. 甘特图 <a class="markdownIt-Anchor" href="#9-甘特图">#</a></h3>
+<p>甘特图内在思想简单。基本是一条线条图，横轴表示时间，纵轴表示活动（项目），线条表示在整个期间上计划和实际的活动完成情况。它直观地表明任务计划在什么时候进行，及实际进展与计划要求的对比。</p>
+<pre class="hljs"><code>    title 项目开发流程
+    section 项目确定
+        需求分析       :a1, 2016-06-22, 3d
+        可行性报告     :after a1, 5d
+        概念验证       : 5d
+    section 项目实施
+        概要设计      :2016-07-05  , 5d
+        详细设计      :2016-07-08, 10d
+        编码          :2016-07-15, 10d
+        测试          :2016-07-22, 5d
+    section 发布验收
+        发布: 2d
+        验收: 3d
+</code></pre>
+<h4 id="更多语法参考：甘特图语法参考">更多语法参考：<a href="https://knsv.github.io/mermaid/#gant-diagrams" target="_blank" rel="noopener">甘特图语法参考</a> <a class="markdownIt-Anchor" href="#更多语法参考：甘特图语法参考">#</a></h4>
+<h3 id="10-mermaid-流程图">10. Mermaid 流程图 <a class="markdownIt-Anchor" href="#10-mermaid-流程图">#</a></h3>
+<pre class="hljs"><code>    A[Hard edge] --&gt;|Link text| B(Round edge)
+    B --&gt; C{Decision}
+    C --&gt;|One| D[Result one]
+    C --&gt;|Two| E[Result two]
+</code></pre>
+<h4 id="更多语法参考：mermaid-流程图语法参考">更多语法参考：<a href="https://knsv.github.io/mermaid/#flowcharts-basic-syntax" target="_blank" rel="noopener">Mermaid 流程图语法参考</a> <a class="markdownIt-Anchor" href="#更多语法参考：mermaid-流程图语法参考">#</a></h4>
+<h3 id="11-mermaid-序列图">11. Mermaid 序列图 <a class="markdownIt-Anchor" href="#11-mermaid-序列图">#</a></h3>
+<pre class="hljs"><code>    Alice-&gt;John: Hello John, how are you?
+    loop every minute
+        John--&gt;Alice: Great!
+    end
+</code></pre>
+<h4 id="更多语法参考：mermaid-序列图语法参考">更多语法参考：<a href="https://knsv.github.io/mermaid/#sequence-diagrams" target="_blank" rel="noopener">Mermaid 序列图语法参考</a> <a class="markdownIt-Anchor" href="#更多语法参考：mermaid-序列图语法参考">#</a></h4>
+<h3 id="12-表格支持">12. 表格支持 <a class="markdownIt-Anchor" href="#12-表格支持">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">价格</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计算机</td>
+<td style="text-align:right">$1600</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td>手机</td>
+<td style="text-align:right">$12</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td>管线</td>
+<td style="text-align:right">$1</td>
+<td style="text-align:center">234</td>
+</tr>
+</tbody>
+</table>
+<h3 id="13-定义型列表">13. 定义型列表 <a class="markdownIt-Anchor" href="#13-定义型列表">#</a></h3>
+<dl>
+<dt>名词 1</dt>
+<dd>
+<p>定义 1（左侧有一个可见的冒号和四个不可见的空格）</p>
+</dd>
+<dt>代码块 2</dt>
+<dd>
+<p>这是代码块的定义（左侧有一个可见的冒号和四个不可见的空格）</p>
+<pre><code>  代码块（左侧有八个不可见的空格）
+</code></pre>
+</dd>
+</dl>
+<h3 id="14-html-标签">14. Html 标签 <a class="markdownIt-Anchor" href="#14-html-标签">#</a></h3>
+<p>本站支持在 Markdown 语法中嵌套 Html 标签，譬如，你可以用 Html 写一个纵跨两行的表格：</p>
+<pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th rowspan=&quot;2&quot;&gt;值班人员&lt;/th&gt;
+        &lt;th&gt;星期一&lt;/th&gt;
+        &lt;th&gt;星期二&lt;/th&gt;
+        &lt;th&gt;星期三&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;李强&lt;/td&gt;
+        &lt;td&gt;张明&lt;/td&gt;
+        &lt;td&gt;王平&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+<table>
+    <tr>
+        <th rowspan="2">值班人员</th>
+        <th>星期一</th>
+        <th>星期二</th>
+        <th>星期三</th>
+    </tr>
+    <tr>
+        <td>李强</td>
+        <td>张明</td>
+        <td>王平</td>
+    </tr>
+</table>
+<h3 id="15-内嵌图标">15. 内嵌图标 <a class="markdownIt-Anchor" href="#15-内嵌图标">#</a></h3>
+<p>本站的图标系统对外开放，在文档中输入</p>
+<pre><code>&lt;i class=&quot;icon-weibo&quot;&gt;&lt;/i&gt;
+</code></pre>
+<p>即显示微博的图标： <i class="icon-weibo icon-2x"></i></p>
+<p>替换 上述 <code>i 标签</code> 内的 <code>icon-weibo</code> 以显示不同的图标，例如：</p>
+<pre><code>&lt;i class=&quot;icon-renren&quot;&gt;&lt;/i&gt;
+</code></pre>
+<p>即显示人人的图标： <i class="icon-renren icon-2x"></i></p>
+<p>更多的图标和玩法可以参看 <a href="http://fortawesome.github.io/Font-Awesome/3.2.1/icons/" target="_blank" rel="noopener">font-awesome</a> 官方网站。</p>
+<h3 id="16-待办事宜-todo-列表">16. 待办事宜 Todo 列表 <a class="markdownIt-Anchor" href="#16-待办事宜-todo-列表">#</a></h3>
+<p>使用带有 [ ] 或 [x] （未完成或已完成）项的列表语法撰写一个待办事宜列表，并且支持子列表嵌套以及混用Markdown语法，例如：</p>
+<pre><code>- [ ] **Cmd Markdown 开发**
+    - [ ] 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率
+    - [ ] 支持以 PDF 格式导出文稿
+    - [x] 新增Todo列表功能 [语法参考](https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments)
+    - [x] 改进 LaTex 功能
+        - [x] 修复 LaTex 公式渲染问题
+        - [x] 新增 LaTex 公式编号功能 [语法参考](http://docs.mathjax.org/en/latest/tex.html#tex-eq-numbers)
+- [ ] **七月旅行准备**
+    - [ ] 准备邮轮上需要携带的物品
+    - [ ] 浏览日本免税店的物品
+    - [x] 购买蓝宝石公主号七月一日的船票
+</code></pre>
+<p>对应显示如下待办事宜 Todo 列表：</p>
+<ul class="task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <strong>Cmd Markdown 开发</strong>
+<ul class="task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> 支持以 PDF 格式导出文稿</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> 新增Todo列表功能 <a href="https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments" target="_blank" rel="noopener">语法参考</a></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> 改进 LaTex 功能
+<ul class="task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> 修复 LaTex 公式渲染问题</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> 新增 LaTex 公式编号功能 <a href="http://docs.mathjax.org/en/latest/tex.html#tex-eq-numbers" target="_blank" rel="noopener">语法参考</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> <strong>七月旅行准备</strong>
+<ul class="task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> 准备邮轮上需要携带的物品</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> 浏览日本免税店的物品</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> 购买蓝宝石公主号七月一日的船票</li>
+</ul>
+</li>
+</ul>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>这是一个 <em>注脚</em> 的 <strong>文本</strong>。 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>这是另一个 <em>注脚</em> 的 <strong>文本</strong>。 <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+      
+    </div>
+    <div  dir="ltr" class="level article-bar is-mobile">
+      <div class="level-item has-text-centered">
+        <a title="previous page" class="previouse-article-link" href="2012-03-07-cisco-fudong-luyou.html"><span class="icon icon-previous" data-icon="previous"></span><span class="link-content">&laquo; Previous</span></a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="font size" class="link-item link-item-size">
+          <span class="icon icon-size" data-icon="size"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="table of content" class="link-item link-item-toc">
+          <span class="icon icon-toc" data-icon="toc"></span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="top" href="#">
+          <span class="icon icon-up" data-icon="up"></span>
+          <span class="link-content">⤊ Top</span>
+        </a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a title="next page" class="next-article-link" href="hello-world.html"><span class="icon icon-next" data-icon="next"></span><span class="link-content">Next &raquo;</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="column is-2-widescreen is-hidden">
+  </div>
+</div>
+
+<div class="columns foot">
+  <div class="column is-3 is-offset-9 build-by">
+    Build by <a href="https://github.com/ruanyf/loppo" target="_blank">Loppo</a> 0.5.1
+  </div>
+</div>
+
+<div class="book-toc notification is-warning is-hidden">
+  <h3>Table of chapters &nbsp;<span class="title-close"><a class="button is-danger"> Close </a></span></h3>
+  <ul class="chapter-area"><li class="chapter-item "><a href="2017-05-24-redis-twemproxy.html">基于Twemproxy的Redis集群方案</a></li><li class="chapter-item "><a href="2017-02-28-zabbix-redis.html">zabbix使用自动发现规则自动化监控redis多实例</a></li><li class="chapter-item "><a href="2016-07-06-zabbix3.0-mail.html">zabbix 3.0邮件报警</a></li><li class="chapter-item "><a href="2016-06-30-hive-hdfs.html">hive整合hadoop通过flume+hue收集日志</a></li><li class="chapter-item "><a href="2016-05-27-mysql-duplicate-records.html">MySQL查询表内重复记录</a></li><li class="chapter-item "><a href="2016-05-24-free-ssl.html">Startssl免费SSL证书+Nginx搭建https</a></li><li class="chapter-item "><a href="2016-05-16-flume.html">flume+hdfs构建大数据</a></li><li class="chapter-item "><a href="2016-04-21-notepad.html">数据库维护文本编辑技巧记录</a></li><li class="chapter-item "><a href="2016-04-20-mysql-in-paixu.html">MySQL查询按IN的顺序输出结果</a></li><li class="chapter-item "><a href="2016-04-14-cisco-firewall-ha.html">CISCO ASA5520 HA 配置</a></li><li class="chapter-item "><a href="2016-04-09-centos7-config-bond.html">centos7配置bond和bond跨网段改IP</a></li><li class="chapter-item "><a href="2016-02-03-centos-install-bugzilla.html">CentOS下Nginx配置Perl运行Bugzilla</a></li><li class="chapter-item "><a href="2015-11-12-centos-install-maven.html">CentOS上搭建私有maven仓库(迁移，升级)</a></li><li class="chapter-item "><a href="2015-10-8-mysql-some-question.html">mysql You cant specify target table</a></li><li class="chapter-item "><a href="2015-10-30-mysql-row-usedisk.html">mysql中查看数据库中所有表的记录数</a></li><li class="chapter-item "><a href="2015-10-29-zabbix-proxy-install.html">zabbix的proxy端安装配置</a></li><li class="chapter-item "><a href="2015-10-28-zabbix-agent-install.html">zabbix的agent端安装配置</a></li><li class="chapter-item "><a href="2015-10-27-mysql-AVG-MIN-SUM.html">mysql求平均值、最小和总值</a></li><li class="chapter-item "><a href="2015-10-21-mysql-every-hour.html">mysql取每隔一小时数据</a></li><li class="chapter-item "><a href="2015-08-27-Write-through-back.html">阵列Cache写机制：Write-through与Write-back</a></li><li class="chapter-item "><a href="2015-08-03-win10-cisco-vpn-repair.html">Repair Cisco vpnclient on windows10</a></li><li class="chapter-item "><a href="2015-07-30-sql-concat.html">MYSQL在一个字段值前面加字符串</a></li><li class="chapter-item "><a href="2015-07-22-Primary-key-conflicts.html">mysql双主主键冲突排查修复</a></li><li class="chapter-item "><a href="2015-07-15-mysql-dual-master.html">mysql双主互备设计搭建</a></li><li class="chapter-item "><a href="2015-07-07-svn-admin.html">CentOS6安装subversion 可视化管理工具iF.SVNAdmin</a></li><li class="chapter-item "><a href="2015-07-06-rhel-yum.html">Red Hat Enterprise Linux Server YUM配置</a></li><li class="chapter-item "><a href="2015-06-25-mysql-log.html">mysql全局日志开启</a></li><li class="chapter-item "><a href="2015-06-08-php-fpm-backlog.html">关于PHP-FPM的backlog</a></li><li class="chapter-item "><a href="2015-06-05-mysql-grant.html">MySQL的Grant赋权命令详解</a></li><li class="chapter-item "><a href="2015-06-03-bitnami-gitlab-port.html">bitnami版gitlab修改端口</a></li><li class="chapter-item "><a href="2015-03-13-awstats-install.html">awstats日志分析安装</a></li><li class="chapter-item "><a href="2015-03-07-h3c-vlan.html">H3C划分VLAN命令</a></li><li class="chapter-item "><a href="2015-03-05-redis-easy-install.html">Redis安装及主从配置</a></li><li class="chapter-item "><a href="2015-01-21-shadowsocks-python-node.html">shadowsocks的python和nodejs版搭建</a></li><li class="chapter-item "><a href="2015-01-07-ruby-Syntax-error-Invalid-GBK.html">ruby环境sass编译中文出现 Invalid GBK character</a></li><li class="chapter-item "><a href="2015-01-06-mysql-m-s-s.html">如何搭master-slave-slave</a></li><li class="chapter-item "><a href="2015-01-06-mysql5.1-ms.html">Mysql5.1主从服务设置</a></li><li class="chapter-item "><a href="2015-01-06-linux-rm-luanma.html">linux下删除乱码文件</a></li><li class="chapter-item "><a href="2014-12-17-SVNListParentPath.html">利用SVNListParentPath增加http浏览仓库根目录的功能</a></li><li class="chapter-item "><a href="2014-12-15-Chrome-css-failed.html">Chrome 浏览器加载 css Failed to load resource</a></li><li class="chapter-item "><a href="2014-12-04-centos-gitlab-yijian.html">centos gitlab一键安装备份恢复和迁移</a></li><li class="chapter-item "><a href="2014-12-02-linux-sar.html">linux sar命令</a></li><li class="chapter-item "><a href="2014-11-24-ruby-on-rails-err.html">ruby on rails 报错解决</a></li><li class="chapter-item "><a href="2014-11-18-awk-note.html">AWK统计随笔记录</a></li><li class="chapter-item "><a href="2014-11-12-svn-force-commit.html">SVN强制提交commit</a></li><li class="chapter-item "><a href="2014-11-12-rm-list-too-long.html">rm Argument list too long的解决办法</a></li><li class="chapter-item "><a href="2014-11-12-crontab-linux-lessthan.html">Crontab导致Linux的线程数枯竭</a></li><li class="chapter-item "><a href="2014-11-11-shell-ftp-uplod.html">用二句Shell命令实现FTP批量上传文件夹</a></li><li class="chapter-item "><a href="2014-11-10-redis-disk-memory-err.html">redis 写磁盘出错Cannot allocate memory</a></li><li class="chapter-item "><a href="2014-10-19-Jekyll_Variables.html">Jekyll目录结构与变量</a></li><li class="chapter-item "><a href="2014-10-19-git_common_command.html">Git 常用命令整理</a></li><li class="chapter-item "><a href="2014-10-18-windows_configuration_Jekyll.html">Windows平台配置Jekyll环境并与GitHub连接</a></li><li class="chapter-item "><a href="2014-08-21-centos-kvm-install.html">Redhat/CentOS系统KVM虚拟机安装过程详解</a></li><li class="chapter-item "><a href="2014-08-18-Sublime-add-youjian.html">将sublime text添加到右键菜单中</a></li><li class="chapter-item "><a href="2014-08-13-Sublime-python-build.html">Sublime Text 3设置python编译支持环境设置</a></li><li class="chapter-item "><a href="2014-08-11-shell-syntax-error.html">SHELL syntax error:unexpected end of file 提示错误</a></li><li class="chapter-item "><a href="2014-07-31-mysql-daxiaoxie.html">Windows下MySQL无法区分大小写解决方案</a></li><li class="chapter-item "><a href="2014-07-31-CentOS-NFS-mount.html">CentOS NFS的安装配置、启动及mount挂载方法</a></li><li class="chapter-item "><a href="2014-07-30-tencent-yun-repo.html">腾讯云的YUM repo</a></li><li class="chapter-item "><a href="2014-07-29-mysql-dump-all.html">Mysqldump参数大全</a></li><li class="chapter-item "><a href="2014-07-28-git-del-err-commit.html">git删除错误提交的commit</a></li><li class="chapter-item "><a href="2014-07-25-mysql-instet-other-table.html">MySql中把一个表的数据插入到另一个表中的实现</a></li><li class="chapter-item "><a href="2014-07-25-centos-install-ossec.html">centos安装ossec</a></li><li class="chapter-item "><a href="2014-07-24-phpmyadmin-error.html">访问phpmyadmin错误</a></li><li class="chapter-item "><a href="2014-07-13-black-apple.html">厚黑苹果售后</a></li><li class="chapter-item "><a href="2014-06-25-wordpress-google-css.html">wordpress引用google开放css加载不到解决方法</a></li><li class="chapter-item "><a href="2014-06-25-nginx-https.html">centos下nginx的https配置</a></li><li class="chapter-item "><a href="2014-05-30-rsync.html">rsync同步部署</a></li><li class="chapter-item "><a href="2014-05-15-saltstack1.html">使用saltstack批量管理服务器 （一）</a></li><li class="chapter-item "><a href="2014-04-18-msmtpmutt.html">msmtp+mutt 服务器批量发送邮件</a></li><li class="chapter-item "><a href="2014-04-14-zabbix-server-install.html">zabbix的server端安装配置</a></li><li class="chapter-item "><a href="2014-04-05-wordpress-them-only-one.html">wordpress后台主题只有一个解决方法</a></li><li class="chapter-item "><a href="2014-01-30-many-php-version.html">多版本php共存搭建</a></li><li class="chapter-item "><a href="2013-11-06-linux-memery-cat.html">linux查看内存相关命令</a></li><li class="chapter-item "><a href="2013-07-07-github-easy-install.html">github安装使用</a></li><li class="chapter-item "><a href="2013-06-30-localhost-127.0.0.1.html">localhost 与 127.0.0.1 的区别</a></li><li class="chapter-item "><a href="2013-06-15-rsync-del-hailiang.html">使用rsync删除海量文件</a></li><li class="chapter-item "><a href="2013-06-08-disk-data-recovery.html">记录一次服务器数据恢复</a></li><li class="chapter-item "><a href="2013-06-03-1nginx-502.html">记录一次nginx 502</a></li><li class="chapter-item "><a href="2013-06-02-linux-nohup.html">linux命令后台运行详解</a></li><li class="chapter-item "><a href="2013-06-01-disk-inode.html">深入理解磁盘inode</a></li><li class="chapter-item "><a href="2013-05-09-mysql-error-1064.html">MySQL错误ERROR 1064 (type=myisam出错)</a></li><li class="chapter-item "><a href="2013-01-04-centos-php-oracle.html">centos6.2下php支持oracle</a></li><li class="chapter-item "><a href="2012-12-27-oracle-startup-failure.html">oracle startup failure</a></li><li class="chapter-item "><a href="2012-12-27-oracle-startup.html">oracle startup 故障：ORA-00845: MEMORY_TARGET</a></li><li class="chapter-item "><a href="2012-12-27-ora-01102-cannot-mount-database-in-exclusive-mode.html">ORA-01102: cannot mount database in EXCLUSIVE mode</a></li><li class="chapter-item "><a href="2012-12-20-centos-install-oracle-11g.html">centos install oracle 11g</a></li><li class="chapter-item "><a href="2012-11-14-mysql-slow-log.html">Mysql慢查询设置</a></li><li class="chapter-item "><a href="2012-11-14-mysql-ms-error.html">MYSQL主从同步故障事件</a></li><li class="chapter-item "><a href="2012-08-10-python-mysqldb-install.html">CentOS下python-mysqldb安装事件</a></li><li class="chapter-item "><a href="2012-08-03-sqlite-source-upgrade.html">sqlite3源码升级事件</a></li><li class="chapter-item "><a href="2012-08-01-centos6-pythonsqlite3.html">centos6.2升级python后处理sqlite3库事件</a></li><li class="chapter-item "><a href="2012-07-30-mysql5-5-ms.html">mysql5.5版本主从搭建</a></li><li class="chapter-item "><a href="2012-07-18-repair-yum.html">误卸载python导致yum无法使用修复事件</a></li><li class="chapter-item "><a href="2012-07-18-reload-upgrade-python.html">Centos平滑升级python事件</a></li><li class="chapter-item "><a href="2012-07-18-nginx413.html">Nginx出现“413 Request Entity Too Large”错误解决方法</a></li><li class="chapter-item "><a href="2012-07-06-nginx-apache-mulu-bd.html">Nginx、Apache目录浏览功能</a></li><li class="chapter-item "><a href="2012-06-27-yum-lamp-tomcat.html">CentOS yum安装配置LAMP+tomcat</a></li><li class="chapter-item "><a href="2012-06-11-ios-jiangji.html">ios5.0.1降级4.3.3事件</a></li><li class="chapter-item "><a href="2012-05-17-ocr-Tesseract.html">OCR之Tesseract的linux下安装</a></li><li class="chapter-item "><a href="2012-05-04-memcached-easy-install.html">memcached简易安装</a></li><li class="chapter-item "><a href="2012-04-11-centos-install-snmp.html">centos下snmp客户端安装</a></li><li class="chapter-item "><a href="2012-03-13-iptables-shell.html">一篇很不错的iptables的shell</a></li><li class="chapter-item "><a href="2012-03-07-cisco-fudong-luyou.html">思科静态浮动路由配置</a></li><li class="chapter-item chapter-item-current"><a href="markdown.html">Markdown 简明语法手册</a></li><li class="chapter-item "><a href="hello-world.html">Hello World</a></li></ul>
+</div>
+
+<div class="progress-indicator"></div>
+
+<!-- SCRIPTS -->
+<script>
+  var LOPPO = {};
+  LOPPO.current_path = 'markdown.md';
+  LOPPO.relative_root_path = '';
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li>\n<ul>\n<li><a href=\"#1-%E6%96%9C%E4%BD%93%E5%92%8C%E7%B2%97%E4%BD%93\">1. 斜体和粗体</a></li>\n<li><a href=\"#2-%E5%88%86%E7%BA%A7%E6%A0%87%E9%A2%98\">2. 分级标题</a></li>\n<li><a href=\"#3-%E5%A4%96%E9%93%BE%E6%8E%A5\">3. 外链接</a></li>\n<li><a href=\"#4-%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8\">4. 无序列表</a></li>\n<li><a href=\"#5-%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8\">5. 有序列表</a></li>\n<li><a href=\"#6-%E6%96%87%E5%AD%97%E5%BC%95%E7%94%A8\">6. 文字引用</a></li>\n<li><a href=\"#7-%E8%A1%8C%E5%86%85%E4%BB%A3%E7%A0%81%E5%9D%97\">7. 行内代码块</a></li>\n<li><a href=\"#8--%E4%BB%A3%E7%A0%81%E5%9D%97\">8.  代码块</a></li>\n<li><a href=\"#9--%E6%8F%92%E5%85%A5%E5%9B%BE%E5%83%8F\">9.  插入图像</a></li>\n<li><a href=\"#1-%E5%86%85%E5%AE%B9%E7%9B%AE%E5%BD%95\">1. 内容目录</a></li>\n<li><a href=\"#2-%E6%A0%87%E7%AD%BE%E5%88%86%E7%B1%BB\">2. 标签分类</a></li>\n<li><a href=\"#3-%E5%88%A0%E9%99%A4%E7%BA%BF\">3. 删除线</a></li>\n<li><a href=\"#4-%E6%B3%A8%E8%84%9A\">4. 注脚</a></li>\n<li><a href=\"#5-latex-%E5%85%AC%E5%BC%8F\">5. LaTeX 公式</a></li>\n<li><a href=\"#6-%E5%8A%A0%E5%BC%BA%E7%9A%84%E4%BB%A3%E7%A0%81%E5%9D%97\">6. 加强的代码块</a></li>\n<li><a href=\"#7-%E6%B5%81%E7%A8%8B%E5%9B%BE\">7. 流程图</a></li>\n<li><a href=\"#8-%E5%BA%8F%E5%88%97%E5%9B%BE\">8. 序列图</a></li>\n<li><a href=\"#9-%E7%94%98%E7%89%B9%E5%9B%BE\">9. 甘特图</a></li>\n<li><a href=\"#10-mermaid-%E6%B5%81%E7%A8%8B%E5%9B%BE\">10. Mermaid 流程图</a></li>\n<li><a href=\"#11-mermaid-%E5%BA%8F%E5%88%97%E5%9B%BE\">11. Mermaid 序列图</a></li>\n<li><a href=\"#12-%E8%A1%A8%E6%A0%BC%E6%94%AF%E6%8C%81\">12. 表格支持</a></li>\n<li><a href=\"#13-%E5%AE%9A%E4%B9%89%E5%9E%8B%E5%88%97%E8%A1%A8\">13. 定义型列表</a></li>\n<li><a href=\"#14-html-%E6%A0%87%E7%AD%BE\">14. Html 标签</a></li>\n<li><a href=\"#15-%E5%86%85%E5%B5%8C%E5%9B%BE%E6%A0%87\">15. 内嵌图标</a></li>\n<li><a href=\"#16-%E5%BE%85%E5%8A%9E%E4%BA%8B%E5%AE%9C-todo-%E5%88%97%E8%A1%A8\">16. 待办事宜 Todo 列表</a></li>\n</ul>\n</li>\n</ul>\n";
+</script>
+<script src="assets/js/app.js"></script>
+
+</body>
+</html>
+
