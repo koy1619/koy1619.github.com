@@ -2,6 +2,8 @@ cd /root/koy1619.github.com
 rm -f `ls *|egrep -v '(CNAME|upload.sh)'`
 cp -Rf /home/wwwroot/linux48.com/dist/*   ./
 
+touch `date +%Y-%m-%d-----%H:%M:%S`
+
 git init
 git add -A
 git commit -m "update" .
