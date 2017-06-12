@@ -34,7 +34,10 @@
     <div class="article">
       <h2 id="安装启动mysql数据库">安装启动mysql数据库 <a class="markdownIt-Anchor" href="#安装启动mysql数据库">#</a></h2>
 <p>在进行RDS本地恢复数据之前，我们需要先在本地服务器上安装mysql的5.6版本，因为RDS是5.6版本，所以我们本地的mysql数据库要与RDS版本对应。</p>
+<p>以下为了省去编译安装mysql,采取了使用<code>mysql_glibc</code>二进制免编译快速安装启动</p>
 <pre class="hljs"><code>wget http://mirrors.sohu.com/mysql/MySQL-5.6/mysql-5.6.35-linux-glibc2.5-x86_64.tar.gz
+
+<span class="hljs-comment"># wget http://mirrors.sohu.com/mysql/MySQL-5.5/mysql-5.5.55-linux2.6-x86_64.tar.gz</span>
 
 tar zxvf mysql-5.6.35-linux-glibc2.5-x86_64.tar.gz
 
@@ -68,25 +71,24 @@ SHOW VARIABLES LIKE <span class="hljs-string">'socket'</span>;
 </code></pre>
 <h2 id="下载rds备份">下载RDS备份 <a class="markdownIt-Anchor" href="#下载rds备份">#</a></h2>
 <p>登陆阿里云RDS控制台自行下载</p>
-<p>下载下来解压可见是通过<code>xtrabackup</code>备份的</p>
+<p>下载下来解压可以很明显的看出，RDS是通过<code>percona-Xtrabackup</code>进行全量物理备份的</p>
 <h2 id="上传备份至本地mysql的data目录">上传备份至本地mysql的data目录 <a class="markdownIt-Anchor" href="#上传备份至本地mysql的data目录">#</a></h2>
 <p>停止本地mysqld</p>
 <p>清空本地data目录</p>
-<p>``bash<br>
-rm -rf /data/mysql-5.6.36-linux-glibc2.5-x86_64/data/*</p>
-<pre class="hljs"><code>
-上传RDS备份至本地mysql的data目录
-
-## 启动本地mysqld查看数据
-
-```bash
-./bin/mysqld_safe --defaults-file=etc/my.cnf
+<pre class="hljs"><code>rm -rf /data/mysql-5.6.36-linux-glibc2.5-x86_64/data/*
+</code></pre>
+<p>上传RDS备份至本地mysql的data目录</p>
+<h2 id="启动本地mysqld查看数据">启动本地mysqld查看数据 <a class="markdownIt-Anchor" href="#启动本地mysqld查看数据">#</a></h2>
+<pre class="hljs"><code>./bin/mysqld_safe --defaults-file=etc/my.cnf
 ./bin/mysql  -uroot -p -h 127.0.0.1 -P 8888
-## RDS本地是没有root密码的
+<span class="hljs-comment">## RDS本地是没有root密码的</span>
 show databases;
 use xxx;
 select * from xxx;
 </code></pre>
+<p>参考：</p>
+<p><a href="http://www.cnblogs.com/ilanni/archive/2016/02/25/5218129.html" target="_blank" rel="noopener">http://www.cnblogs.com/ilanni/archive/2016/02/25/5218129.html</a></p>
+<p><a href="https://help.aliyun.com/knowledge_detail/41817.html" target="_blank" rel="noopener">https://help.aliyun.com/knowledge_detail/41817.html</a></p>
 
       
     </div>
@@ -137,7 +139,7 @@ select * from xxx;
   var LOPPO = {};
   LOPPO.current_path = '2017-06-12-RDS-recovery-local-mysql.md';
   LOPPO.relative_root_path = '';
-  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#%E5%AE%89%E8%A3%85%E5%90%AF%E5%8A%A8mysql%E6%95%B0%E6%8D%AE%E5%BA%93\">安装启动mysql数据库</a></li>\n<li><a href=\"#%E4%B8%8B%E8%BD%BDrds%E5%A4%87%E4%BB%BD\">下载RDS备份</a></li>\n<li><a href=\"#%E4%B8%8A%E4%BC%A0%E5%A4%87%E4%BB%BD%E8%87%B3%E6%9C%AC%E5%9C%B0mysql%E7%9A%84data%E7%9B%AE%E5%BD%95\">上传备份至本地mysql的data目录</a></li>\n</ul>\n";
+  LOPPO.article_toc = "<ul class=\"markdownIt-TOC\">\n<li><a href=\"#%E5%AE%89%E8%A3%85%E5%90%AF%E5%8A%A8mysql%E6%95%B0%E6%8D%AE%E5%BA%93\">安装启动mysql数据库</a></li>\n<li><a href=\"#%E4%B8%8B%E8%BD%BDrds%E5%A4%87%E4%BB%BD\">下载RDS备份</a></li>\n<li><a href=\"#%E4%B8%8A%E4%BC%A0%E5%A4%87%E4%BB%BD%E8%87%B3%E6%9C%AC%E5%9C%B0mysql%E7%9A%84data%E7%9B%AE%E5%BD%95\">上传备份至本地mysql的data目录</a></li>\n<li><a href=\"#%E5%90%AF%E5%8A%A8%E6%9C%AC%E5%9C%B0mysqld%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE\">启动本地mysqld查看数据</a></li>\n</ul>\n";
 </script>
 <script src="assets/js/app.js"></script>
 
