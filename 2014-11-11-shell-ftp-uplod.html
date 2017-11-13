@@ -71,6 +71,44 @@ EOF
 <pre><code>aaa=`find /root/sk -type f -printf 'put %p %P \n'`
 </code></pre>
 <p>这句主要是使用find找出非目录文件，然后格式化输出，最后就是在初始化目录之后可以直接使用put上传文件。</p>
+<p>shell脚本进行sftp文件上传与下载</p>
+<p><a href="http://blog.csdn.net/u012204058/article/details/53160419" target="_blank" rel="noopener">http://blog.csdn.net/u012204058/article/details/53160419</a></p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash
+</span>
+<span class="hljs-comment">#SFTP配置信息</span>
+<span class="hljs-comment">#用户名</span>
+USER=<span class="hljs-built_in">test</span>
+<span class="hljs-comment">#密码</span>
+PASSWORD=test123
+<span class="hljs-comment">#待上传文件根目录</span>
+SRCDIR=/home/mysql/sqllog
+<span class="hljs-comment">#FTP目录</span>
+DESDIR=/nas/sqllog
+<span class="hljs-comment">#IP</span>
+IP=127.0.0.1
+<span class="hljs-comment">#端口</span>
+PORT=22
+
+<span class="hljs-comment">#获取文件</span>
+<span class="hljs-built_in">cd</span> <span class="hljs-variable">${SRCDIR}</span> ;
+<span class="hljs-comment">#目录下的所有文件</span>
+FILES=`ls`
+<span class="hljs-comment">#修改时间在执行时间五分钟之前的xml文件</span>
+<span class="hljs-comment">#FILES=`find ${SRCDIR} -mmin -50 -name '*.xml'`</span>
+
+<span class="hljs-keyword">for</span> FILE <span class="hljs-keyword">in</span> <span class="hljs-variable">${FILES}</span>
+<span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">${FILE}</span>
+<span class="hljs-comment">#发送文件 (关键部分）</span>
+lftp -u <span class="hljs-variable">${USER}</span>,<span class="hljs-variable">${PASSWORD}</span> sftp://<span class="hljs-variable">${IP}</span>:<span class="hljs-variable">${PORT}</span> &lt;&lt;EOF
+<span class="hljs-built_in">cd</span> <span class="hljs-variable">${DESDIR}</span>/
+lcd <span class="hljs-variable">${SRCDIR}</span>
+put <span class="hljs-variable">${FILE}</span>
+by
+EOF
+
+<span class="hljs-keyword">done</span>
+</code></pre>
 
       
     </div>
