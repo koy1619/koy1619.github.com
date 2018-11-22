@@ -4,28 +4,29 @@
 <![endif]--><link rel="shortcut icon" href=""></head><body><nav class="columns navbar"><div class="column logo is-3 is-offset-1"><a class="is-brand" href="index.html">linux48</a></div></nav><div class="columns content"><div class="column is-2-desktop is-3-widescreen is-hidden-touch"></div><div class="column article-container is-11-tablet is-8-desktop is-6-widescreen"><div class="breadcrumb-area"><a href="index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-delimiter"> &gt; </span><a href="2018-11-15-redis-rdb-tools.html" class="breadcrumb-item">使用redis-rdb-tools分析Redis内存</a></div><h1 class="article-title">使用redis-rdb-tools分析Redis内存</h1><p>作者：<a href="http://linux48.com" target="_blank">Chris</a></p><div class="article"><p>当一个项目中Redis缓存的数据量逐渐增大，Redis缓存的数据占用内存也会越来越大，当积累到一定程度由于<code>bgsave</code>的原因有很大可能导致<code>FORK</code>或者<code>OOM</code>从而影响线上业务</p><p>由于redis其中有很多很可能是价值不大的过期数据；所以必须要加以分析清理</p><p>前面写到过<a href="http://linux48.com/2017-02-28-zabbix-redis.html" target="_blank" rel="noopener">zabbix使用自动发现规则自动化监控redis多实例</a>但是这也只是监控层面，还得必须加以分析才能得出结论哪些<code>key</code>可以清理</p><p>由于Redis是一个key-value数据库，所以对其中的数据进行分析没有mysql数据库那么直观。那么此时，我们需要<code>redis-rdb-tools</code>工具来分析Redis缓存中的哪些数据占用内存比较大，并结合项目实际的情况来分析这些数据存储的价值如何？从而作出具体删减数据的方案</p><p>闲话不多说直接开搞</p><pre class="hljs"><code>pip install rdbtools python-lzf
 
 rdb -c memory dump.rdb &gt; memory.csv
-</code></pre><p>使用Navicat把memory.csv导入mysql</p><p>此处需要分析的数据：</p><blockquote><ul><li>每一种key所在用的总内存大小（size_in_bytes_sum）</li><li>每一种key的总数（PS：因为有的key设计是前缀+用户id，这样的情况都属于一种key）（record_count）</li><li>每一种key所在数据库（database）</li><li>每一种key的数据类型（type）</li><li>每一种key的编码类型（encoding）</li><li>每一种key的名称（key）</li><li>每一种key占用的平均内存大小（size_in_bytes_avg）</li><li>......</li></ul></blockquote><pre class="hljs"><code>mysql&gt; <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">SUM</span>(<span class="hljs-string">`size_in_bytes`</span>) <span class="hljs-keyword">FROM</span> <span class="hljs-string">`memory`</span>;
-+<span class="hljs-comment">----------------------+</span>
-| SUM(`size_in_bytes`) |
-+<span class="hljs-comment">----------------------+</span>
-|           4532615112 |
-+<span class="hljs-comment">----------------------+</span>
+</code></pre><p>使用Navicat把memory.csv导入mysql</p><p>此处需要分析的数据：</p><blockquote><ul><li>每一种key所在用的总内存大小（size_in_bytes_sum）</li><li>每一种key的总数（PS：因为有的key设计是前缀+用户id，这样的情况都属于一种key）（record_count）</li><li>每一种key所在数据库（database）</li><li>每一种key的数据类型（type）</li><li>每一种key的编码类型（encoding）</li><li>每一种key的名称（key）</li><li>每一种key占用的平均内存大小（size_in_bytes_avg）</li><li>......</li></ul></blockquote><pre class="hljs"><code>mysql&gt; <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">CONCAT</span>(<span class="hljs-keyword">TRUNCATE</span>(<span class="hljs-keyword">SUM</span>(size_in_bytes)/<span class="hljs-number">1024</span>/<span class="hljs-number">1024</span>,<span class="hljs-number">2</span>),<span class="hljs-string">'MB'</span>) <span class="hljs-keyword">AS</span> data_size <span class="hljs-keyword">FROM</span> <span class="hljs-string">`memory`</span>;
++<span class="hljs-comment">-----------+</span>
+| data_size |
++<span class="hljs-comment">-----------+</span>
+| 4322.63MB |
++<span class="hljs-comment">-----------+</span>
 1 row in <span class="hljs-keyword">set</span> (<span class="hljs-number">0.04</span> sec)
-//可以看到内存占用总大小大概为<span class="hljs-number">4.5</span>G和redis-info显示的一样
+//可以看到内存占用总大小大概为<span class="hljs-number">4.3</span>G和redis-info显示的一样
 
 
-mysql&gt; <span class="hljs-keyword">SELECT</span> <span class="hljs-string">`key`</span>,<span class="hljs-keyword">SUM</span>(<span class="hljs-string">`size_in_bytes`</span>) <span class="hljs-keyword">FROM</span> <span class="hljs-string">`memory`</span> <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-string">`key`</span> <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">SUM</span>(<span class="hljs-string">`size_in_bytes`</span>) <span class="hljs-keyword">DESC</span> <span class="hljs-keyword">limit</span> <span class="hljs-number">6</span>;
-+<span class="hljs-comment">------------------------------------------+----------------------+</span>
-| key                                      | SUM(`size_in_bytes`) |
-+<span class="hljs-comment">------------------------------------------+----------------------+</span>
-| CardNo.9458.49218.105499.2859.10311339   |            457790876 |
-| CardNo.14488.83488.104299.2539.10308859  |            220934964 |
-| CardNo.14488.83478.105519.2879.10311359  |            200697044 |
-| CardNo.9078.49138.105489.2849.10311349   |            107148884 |
-| CardNo.14488.501574.500263.2879.10311359 |             43500492 |
-| Point:20170630                           |             35338708 |
-+<span class="hljs-comment">------------------------------------------+----------------------+</span>
-//每一种key所在用的总内存大小
+mysql&gt; <span class="hljs-keyword">SELECT</span> <span class="hljs-string">`key`</span>,<span class="hljs-keyword">CONCAT</span>(<span class="hljs-keyword">TRUNCATE</span>(<span class="hljs-keyword">SUM</span>(size_in_bytes)/<span class="hljs-number">1024</span>/<span class="hljs-number">1024</span>,<span class="hljs-number">2</span>),<span class="hljs-string">'MB'</span>) <span class="hljs-keyword">AS</span> data_size <span class="hljs-keyword">FROM</span> <span class="hljs-string">`memory`</span> <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> <span class="hljs-string">`key`</span> <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">SUM</span>(<span class="hljs-string">`size_in_bytes`</span>) <span class="hljs-keyword">DESC</span> <span class="hljs-keyword">limit</span> <span class="hljs-number">6</span>;
++<span class="hljs-comment">------------------------------------------+-----------+</span>
+| key                                      | data_size |
++<span class="hljs-comment">------------------------------------------+-----------+</span>
+| CardNo.9458.49218.105499.2859.10311339   | 436.58MB  |
+| CardNo.14488.83488.104299.2539.10308859  | 210.70MB  |
+| CardNo.14488.83478.105519.2879.10311359  | 191.39MB  |
+| CardNo.9078.49138.105489.2849.10311349   | 102.18MB  |
+| CardNo.14488.501574.500263.2879.10311359 | 41.48MB   |
+| Point:20170630                           | 33.70MB   |
++<span class="hljs-comment">------------------------------------------+-----------+</span>
+//每一种key所用内存大小
+
 
 mysql&gt; <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">COUNT</span>(<span class="hljs-number">1</span>) <span class="hljs-keyword">FROM</span> <span class="hljs-string">`memory`</span> <span class="hljs-keyword">WHERE</span> <span class="hljs-string">`key`</span> <span class="hljs-keyword">LIKE</span> <span class="hljs-string">'%CardNo%'</span>;
 +<span class="hljs-comment">----------+</span>
