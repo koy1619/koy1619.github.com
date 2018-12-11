@@ -58,7 +58,7 @@ cat /usr/<span class="hljs-built_in">local</span>/bin/master_ip_failover
 cat /usr/<span class="hljs-built_in">local</span>/bin/master_ip_online_change
 cat /usr/<span class="hljs-built_in">local</span>/bin/load_cnf
 cat /data/mha/3306/mha.cnf
-</code></pre><h3 id="check-mha">CHECK MHA <a class="markdownIt-Anchor" href="#check-mha">#</a></h3><pre class="hljs"><code>-- 129 mha-manager
+</code></pre><h2 id="check-mha">CHECK MHA <a class="markdownIt-Anchor" href="#check-mha">#</a></h2><pre class="hljs"><code>-- 129 mha-manager
 
 
 <span class="hljs-comment"># 检查ssh连接</span>
@@ -75,9 +75,9 @@ masterha_check_status --conf=/data/mha/3306/mha.cnf
 
 <span class="hljs-comment"># 启动mha_manager</span>
 nohup /usr/<span class="hljs-built_in">local</span>/bin/masterha_manager --conf=/data/mha/3306/mha.cnf --ignore_last_failover &gt;&gt; /data/mha/3306/<span class="hljs-built_in">log</span>/manager.log 2&gt;&amp;1 &amp;
-</code></pre><h3 id="test">TEST... <a class="markdownIt-Anchor" href="#test">#</a></h3><h3 id="修复宕机的master">修复宕机的Master <a class="markdownIt-Anchor" href="#修复宕机的master">#</a></h3><p>如果Master主机修复好了，可以在修复好后的<strong>Master</strong>执行<code>CHANGE MASTER</code>操作，作为新的<strong>slave</strong>库。</p><pre class="hljs"><code>[root@localhost ~]<span class="hljs-comment"># grep -i "All other slaves should start"  /data/mha/3306/log/manager.log </span>
+</code></pre><h2 id="test">TEST... <a class="markdownIt-Anchor" href="#test">#</a></h2><h2 id="修复宕机的master">修复宕机的Master <a class="markdownIt-Anchor" href="#修复宕机的master">#</a></h2><p>如果Master主机修复好了，可以在修复好后的<strong>Master</strong>执行<code>CHANGE MASTER</code>操作，作为新的<strong>slave</strong>库。</p><pre class="hljs"><code>[root@localhost ~]<span class="hljs-comment"># grep -i "All other slaves should start"  /data/mha/3306/log/manager.log </span>
 Tue Dec 11 01:31:59 2018 - [info]  All other slaves should start replication from here. Statement should be: CHANGE MASTER TO MASTER_HOST=<span class="hljs-string">'192.168.179.129'</span>, MASTER_PORT=3306, MASTER_LOG_FILE=<span class="hljs-string">'mysql-bin.000009'</span>, MASTER_LOG_POS=498, MASTER_USER=<span class="hljs-string">'repl'</span>, MASTER_PASSWORD=<span class="hljs-string">'xxx'</span>;
-</code></pre><hr><p>本着先开搞后研究的套路，搞出来都测试OK，然后在研究代码就很easy了！</p><hr><h3 id="mha组件说明">MHA组件说明 <a class="markdownIt-Anchor" href="#mha组件说明">#</a></h3><p>前面说过<code>MHA</code>就是一套<strong>Perl脚本集合</strong>；所以他的各个文件都是<strong>Perl脚本</strong></p><p>以下列举常用的组件</p><p><strong>Manager</strong>工具包主要包括以下几个工具：</p><pre class="hljs"><code>masterha_check_ssh              <span class="hljs-comment">#检查MHA的SSH配置状况</span>
+</code></pre><hr><p>本着先开搞后研究的套路，搞出来都测试OK，然后在研究代码就很easy了！</p><hr><h2 id="mha组件说明">MHA组件说明 <a class="markdownIt-Anchor" href="#mha组件说明">#</a></h2><p>前面说过<code>MHA</code>就是一套<strong>Perl脚本集合</strong>；所以他的各个文件都是<strong>Perl脚本</strong></p><p>以下列举常用的组件</p><p><strong>Manager</strong>工具包主要包括以下几个工具：</p><pre class="hljs"><code>masterha_check_ssh              <span class="hljs-comment">#检查MHA的SSH配置状况</span>
 masterha_check_repl             <span class="hljs-comment">#检查MySQL复制状况</span>
 masterha_manger                 <span class="hljs-comment">#启动MHA</span>
 masterha_check_status           <span class="hljs-comment">#检测当前MHA运行状态</span>
@@ -91,7 +91,7 @@ load_cnf                        <span class="hljs-comment">#保存密码</span>
 apply_diff_relay_logs           <span class="hljs-comment">#识别差异的中继日志事件并将其差异的事件应用于其他的slave</span>
 filter_mysqlbinlog              <span class="hljs-comment">#去除不必要的ROLLBACK事件（MHA已不再使用这个工具）</span>
 purge_relay_logs                <span class="hljs-comment">#清除中继日志（不会阻塞SQL线程）**重要**</span>
-</code></pre><h3 id="配置文件说明">配置文件说明 <a class="markdownIt-Anchor" href="#配置文件说明">#</a></h3><pre class="hljs"><code>[root@localhost ~]<span class="hljs-comment"># cat /data/mha/3306/mha.cnf </span>
+</code></pre><h2 id="配置文件说明">配置文件说明 <a class="markdownIt-Anchor" href="#配置文件说明">#</a></h2><pre class="hljs"><code>[root@localhost ~]<span class="hljs-comment"># cat /data/mha/3306/mha.cnf </span>
 [server default]
 client_bindir=/data/mysql-5.7.22-linux-glibc2.12-x86_64/bin/
 manager_log=/data/mha/3306/<span class="hljs-built_in">log</span>/manager.log  <span class="hljs-comment">##设置manager的日志</span>
@@ -122,20 +122,7 @@ check_repl_delay=0  <span class="hljs-comment">##默认情况下如果一个slav
 hostname=192.168.179.129
 port=3306
 [root@localhost ~]<span class="hljs-comment"># </span>
-</code></pre><h3 id="切换vip脚本">切换vip脚本 <a class="markdownIt-Anchor" href="#切换vip脚本">#</a></h3><p>自动切换vip脚本<code>master_ip_failover</code><br>在线切换vip脚本<code>master_ip_online_change</code><br>须根据自行方案修改</p><hr><pre class="hljs"><code>[root@localhost ~]<span class="hljs-comment"># cat /usr/local/bin/master_ip_failover </span>
-<span class="hljs-comment">#!/usr/bin/env perl</span>
-
-<span class="hljs-keyword">use</span> strict;
-<span class="hljs-keyword">use</span> warnings <span class="hljs-string">FATAL =&gt;</span> <span class="hljs-string">'all'</span>;
-
-<span class="hljs-keyword">use</span> Getopt::Long;
-
-<span class="hljs-keyword">my</span> (
-    $command,          $ssh_user,        $orig_master_host, $orig_master_ip,
-    $orig_master_port, $new_master_host, $new_master_ip,    $new_master_port,   $orig_master_ssh_port,
-        $new_master_user,$new_master_password,$new_master_ssh_port
-);
-
+</code></pre><h2 id="切换vip脚本">切换vip脚本 <a class="markdownIt-Anchor" href="#切换vip脚本">#</a></h2><p>自动切换vip脚本<code>master_ip_failover</code><br>在线切换vip脚本<code>master_ip_online_change</code><br>须根据自行方案修改</p><pre class="hljs"><code>[root@localhost ~]<span class="hljs-comment"># cat /usr/local/bin/master_ip_failover |grep 'my' |awk '(NR&lt;8 &amp;&amp; NR&gt;1)'</span>
 <span class="hljs-keyword">my</span> $vip = <span class="hljs-string">'192.168.179.130'</span>;
 <span class="hljs-keyword">my</span> $key = <span class="hljs-string">'1'</span>;
 <span class="hljs-keyword">my</span> $gateway1 = <span class="hljs-string">'10.69.213.254'</span>;
@@ -143,419 +130,17 @@ port=3306
 <span class="hljs-keyword">my</span> $ssh_start_vip = <span class="hljs-string">"/sbin/ip addr add  $vip/24 dev ens33:$key"</span>;
 <span class="hljs-keyword">my</span> $ssh_stop_vip  = <span class="hljs-string">"/sbin/ip addr del  $vip/24 dev ens33:$key"</span>;
 
-GetOptions(
-    <span class="hljs-string">'command=s'</span>          =&gt; \$command,
-    <span class="hljs-string">'ssh_user=s'</span>         =&gt; \$ssh_user,
-    <span class="hljs-string">'orig_master_host=s'</span> =&gt; \$orig_master_host,
-    <span class="hljs-string">'orig_master_ip=s'</span>   =&gt; \$orig_master_ip,
-    <span class="hljs-string">'orig_master_port=i'</span> =&gt; \$orig_master_port,
-    <span class="hljs-string">'new_master_host=s'</span>  =&gt; \$new_master_host,
-    <span class="hljs-string">'new_master_ip=s'</span>    =&gt; \$new_master_ip,
-    <span class="hljs-string">'new_master_port=i'</span>  =&gt; \$new_master_port,
-    <span class="hljs-string">'orig_master_ssh_port=i'</span>  =&gt; \$orig_master_ssh_port,
-    <span class="hljs-string">'new_master_user=s'</span>  =&gt; \$new_master_user,
-    <span class="hljs-string">'new_master_password=s'</span>  =&gt; \$new_master_password,
-    <span class="hljs-string">'new_master_ssh_port=i'</span>  =&gt; \$new_master_ssh_port,
-);
 
-$orig_master_ssh_port = <span class="hljs-number">22</span> <span class="hljs-keyword">unless</span>($orig_master_ssh_port);
-$new_master_ssh_port  = <span class="hljs-number">22</span> <span class="hljs-keyword">unless</span>($new_master_ssh_port);
 
-<span class="hljs-keyword">exit</span> &amp;main();
 
-<span class="hljs-function"><span class="hljs-keyword">sub</span> <span class="hljs-title">main</span> </span>{
 
-    <span class="hljs-keyword">print</span> <span class="hljs-string">"\n\nIN SCRIPT TEST====$ssh_stop_vip==$ssh_start_vip===\n\n"</span>;
 
-    <span class="hljs-keyword">if</span> ( $command eq <span class="hljs-string">"stop"</span> || $command eq <span class="hljs-string">"stopssh"</span> ) {
-
-        <span class="hljs-keyword">my</span> $exit_code = <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">eval</span> {
-            <span class="hljs-keyword">print</span> <span class="hljs-string">"Disabling the VIP on old master: $orig_master_host ... "</span>;
-            &amp;stop_vip();
-            $exit_code = <span class="hljs-number">0</span>;
-        };
-        <span class="hljs-keyword">if</span> ($@) {
-            <span class="hljs-keyword">warn</span> <span class="hljs-string">"Got Error: $@\n"</span>;
-            <span class="hljs-keyword">exit</span> $exit_code;
-        }
-        <span class="hljs-keyword">else</span>{
-                <span class="hljs-keyword">print</span> <span class="hljs-string">"on ens33:$key successfully!\n"</span>;
-        }
-        <span class="hljs-keyword">exit</span> $exit_code;
-    }
-    <span class="hljs-keyword">elsif</span> ( $command eq <span class="hljs-string">"start"</span> ) {
-
-        isused($vip);
-
-        <span class="hljs-keyword">my</span> $exit_code = <span class="hljs-number">10</span>;
-        <span class="hljs-keyword">eval</span> {
-            <span class="hljs-keyword">print</span> <span class="hljs-string">"Enabling the VIP - $vip on the new master - $new_master_host ... "</span>;
-            &amp;start_vip();
-            $exit_code = <span class="hljs-number">0</span>;
-        };
-        <span class="hljs-keyword">if</span> ($@) {
-            <span class="hljs-keyword">warn</span> $@;
-            <span class="hljs-keyword">exit</span> $exit_code;
-        }
-        <span class="hljs-keyword">else</span>{
-                <span class="hljs-keyword">print</span> <span class="hljs-string">"on ens33:$key successfully!\n"</span>;
-        }
-        <span class="hljs-keyword">exit</span> $exit_code;
-    }
-    <span class="hljs-keyword">elsif</span> ( $command eq <span class="hljs-string">"status"</span> ) {
-        <span class="hljs-keyword">print</span> <span class="hljs-string">"Checking the Status of the script.. OK \n"</span>;
-        <span class="hljs-keyword">exit</span> <span class="hljs-number">0</span>;
-    }
-    <span class="hljs-keyword">else</span> {
-        &amp;usage();
-        <span class="hljs-keyword">exit</span> <span class="hljs-number">1</span>;
-    }
-}
-
-<span class="hljs-function"><span class="hljs-keyword">sub</span> <span class="hljs-title">start_vip</span>() </span>{
-
-    <span class="hljs-string">`ssh -o StrictHostKeyChecking=no -o GSSAPIAuthentication=no -p$new_master_ssh_port $ssh_user\@$new_master_host \" $ssh_start_vip \"`</span>;
-
-    <span class="hljs-string">`ssh -o StrictHostKeyChecking=no -o GSSAPIAuthentication=no -p$new_master_ssh_port $ssh_user\@$new_master_host \" ping -I $vip $gateway1 -c 1 \"`</span>;
-
-    <span class="hljs-string">`ssh -o StrictHostKeyChecking=no -o GSSAPIAuthentication=no -p$new_master_ssh_port $ssh_user\@$new_master_host \" ping -I $vip $gateway2 -c 1 \"`</span>;
-
-}
-
-<span class="hljs-function"><span class="hljs-keyword">sub</span> <span class="hljs-title">stop_vip</span>() </span>{
-
-     <span class="hljs-keyword">unless</span> ($ssh_user){
-        $ssh_user=<span class="hljs-string">'root'</span>;
-        <span class="hljs-keyword">system</span>(<span class="hljs-string">"nohup sh /usr/local/bin/stop_vip $ssh_user $orig_master_ssh_port $orig_master_ip &amp;"</span>);
-<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-}
-  <span class="hljs-comment">#      eval {</span>
-    <span class="hljs-string">`ssh -o StrictHostKeyChecking=no -o GSSAPIAuthentication=no -p$orig_master_ssh_port $ssh_user\@$orig_master_host \" $ssh_stop_vip \"`</span>;
-  <span class="hljs-comment">#      };</span>
-  <span class="hljs-comment">#          if ($@) {</span>
-   <span class="hljs-comment">#         warn $@;</span>
-    <span class="hljs-comment">#            system("nohup sh /usr/local/bin/stop_vip &amp;");</span>
-<span class="hljs-comment">#               $@=();</span>
- <span class="hljs-comment">#       }</span>
-<span class="hljs-comment">#return 0;</span>
-}
-
-<span class="hljs-function"><span class="hljs-keyword">sub</span> <span class="hljs-title">usage</span> </span>{
-    <span class="hljs-keyword">print</span>
-    <span class="hljs-string">"Usage: master_ip_failover --command=start|stop|stopssh|status --orig_master_host=host --orig_master_ip=ip --orig_master_port=port --new_master_host=host --new_master_ip=ip --new_master_port=port\n"</span>;
-}
-
-<span class="hljs-function"><span class="hljs-keyword">sub</span> <span class="hljs-title">isused</span></span>{
-        <span class="hljs-keyword">my</span> $ip = <span class="hljs-keyword">shift</span>;
-        <span class="hljs-keyword">print</span> <span class="hljs-string">"checking vip if in used ... "</span>;
-        <span class="hljs-keyword">my</span> $cmd = <span class="hljs-string">"ping -c 2 $ip &gt; /dev/null"</span>;
-        <span class="hljs-keyword">my</span> $val = <span class="hljs-keyword">system</span>($cmd);
-        <span class="hljs-keyword">if</span>($val != <span class="hljs-number">0</span>){
-                <span class="hljs-keyword">print</span> <span class="hljs-string">"$ip is not in used. return OK.\n"</span>;
-                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-        }
-        <span class="hljs-keyword">else</span>{
-                <span class="hljs-keyword">print</span> <span class="hljs-string">"$ip is already in used! But MHA will still enable the vip on the new master!\n"</span>;
-                <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
-        }
-}
+[root@localhost ~]<span class="hljs-comment"># cat /usr/local/bin/master_ip_online_change |grep 'my' |awk '(NR&lt;10 &amp;&amp; NR&gt;3)'</span>
+<span class="hljs-keyword">my</span> $vip = <span class="hljs-string">'192.168.179.130'</span>;
+<span class="hljs-keyword">my</span> $key = <span class="hljs-string">'1'</span>;
+<span class="hljs-keyword">my</span> $gateway1 = <span class="hljs-string">'10.69.213.254'</span>;
+<span class="hljs-keyword">my</span> $gateway2 = <span class="hljs-string">'10.69.59.254'</span>;
+<span class="hljs-keyword">my</span> $ssh_start_vip = <span class="hljs-string">"/sbin/ip addr add  $vip/24 dev ens33:$key"</span>;
+<span class="hljs-keyword">my</span> $ssh_stop_vip  = <span class="hljs-string">"/sbin/ip addr del  $vip/24 dev ens33:$key"</span>;
 [root@localhost ~]<span class="hljs-comment"># </span>
-</code></pre><hr><pre class="hljs"><code>[root@localhost ~]# cat /usr/local/bin/master_ip_online_change 
-#!/usr/bin/env perl
-
-#  Copyright (C) 2011 DeNA Co.,Ltd.
-#
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#   along with this program; if not, write to the Free Software
-#  Foundation, Inc.,
-#  51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-
-## Note: This is a sample script and is not complete. Modify the script based on your environment.
-
-use strict;
-use warnings FATAL =&gt; 'all';
-
-use Getopt::Long;
-use MHA::DBHelper;
-use MHA::NodeUtil;
-use Time::HiRes qw( sleep gettimeofday tv_interval );
-use Data::Dumper;
-
-my $_tstart;
-my $_running_interval = 0.1;
-my (
-  $command,              $orig_master_is_new_slave, $orig_master_host,
-  $orig_master_ip,       $orig_master_port,         $orig_master_user,
-  $orig_master_password, $orig_master_ssh_user,     $new_master_host,
-  $new_master_ip,        $new_master_port,          $new_master_user,
-  $new_master_password,  $new_master_ssh_user,$orig_master_ssh_port,$new_master_ssh_port
-);
-my $vip = '192.168.179.130';
-my $key = '1';
-my $gateway1 = '10.69.213.254';
-my $gateway2 = '10.69.59.254';
-my $ssh_start_vip = &quot;/sbin/ip addr add  $vip/24 dev ens33:$key&quot;;
-my $ssh_stop_vip  = &quot;/sbin/ip addr del  $vip/24 dev ens33:$key&quot;;
-
-GetOptions(
-  'command=s'                =&gt; \$command,
-  'orig_master_is_new_slave' =&gt; \$orig_master_is_new_slave,
-  'orig_master_host=s'       =&gt; \$orig_master_host,
-  'orig_master_ip=s'         =&gt; \$orig_master_ip,
-  'orig_master_port=i'       =&gt; \$orig_master_port,
-  'orig_master_user=s'       =&gt; \$orig_master_user,
-  'orig_master_password=s'   =&gt; \$orig_master_password,
-  'orig_master_ssh_user=s'   =&gt; \$orig_master_ssh_user,
-  'new_master_host=s'        =&gt; \$new_master_host,
-  'new_master_ip=s'          =&gt; \$new_master_ip,
-  'new_master_port=i'        =&gt; \$new_master_port,
-  'new_master_user=s'        =&gt; \$new_master_user,
-  'new_master_password=s'    =&gt; \$new_master_password,
-  'new_master_ssh_user=s'    =&gt; \$new_master_ssh_user,
-  'orig_master_ssh_port=i'   =&gt; \$orig_master_ssh_port,
-  'new_master_ssh_port=i'    =&gt; \$new_master_ssh_port,
-);
-
-$orig_master_ssh_port = 22 unless($orig_master_ssh_port);
-$new_master_ssh_port  = 22 unless($new_master_ssh_port);
-
-exit &amp;main();
-
-sub current_time_us {
-  my ( $sec, $microsec ) = gettimeofday();
-  my $curdate = localtime($sec);
-  return $curdate . &quot; &quot; . sprintf( &quot;%06d&quot;, $microsec );
-}
-
-sub sleep_until {
-  my $elapsed = tv_interval($_tstart);
-  if ( $_running_interval &gt; $elapsed ) {
-    sleep( $_running_interval - $elapsed );
-  }
-}
-
-sub get_threads_util {
-  my $dbh                    = shift;
-  my $my_connection_id       = shift;
-  my $running_time_threshold = shift;
-  my $type                   = shift;
-  $running_time_threshold = 0 unless ($running_time_threshold);
-  $type                   = 0 unless ($type);
-  my @threads;
-
-  my $sth = $dbh-&gt;prepare(&quot;SHOW PROCESSLIST&quot;);
-  $sth-&gt;execute();
-
-  while ( my $ref = $sth-&gt;fetchrow_hashref() ) {
-    my $id         = $ref-&gt;{Id};
-    my $user       = $ref-&gt;{User};
-    my $host       = $ref-&gt;{Host};
-    my $command    = $ref-&gt;{Command};
-    my $state      = $ref-&gt;{State};
-    my $query_time = $ref-&gt;{Time};
-    my $info       = $ref-&gt;{Info};
-    $info =~ s/^\s*(.*?)\s*$/$1/ if defined($info);
-    next if ( $my_connection_id == $id );
-    next if ( defined($query_time) &amp;&amp; $query_time &lt; $running_time_threshold );
-    next if ( defined($command)    &amp;&amp; $command eq &quot;Binlog Dump&quot; );
-    next if ( defined($user)       &amp;&amp; $user eq &quot;system user&quot; );
-    next
-      if ( defined($command)
-      &amp;&amp; $command eq &quot;Sleep&quot;
-      &amp;&amp; defined($query_time)
-      &amp;&amp; $query_time &gt;= 1 );
-
-    if ( $type &gt;= 1 ) {
-      next if ( defined($command) &amp;&amp; $command eq &quot;Sleep&quot; );
-      next if ( defined($command) &amp;&amp; $command eq &quot;Connect&quot; );
-    }
-
-    if ( $type &gt;= 2 ) {
-      next if ( defined($info) &amp;&amp; $info =~ m/^select/i );
-      next if ( defined($info) &amp;&amp; $info =~ m/^show/i );
-    }
-
-    push @threads, $ref;
-  }
-  return @threads;
-}
-
-sub main {
-  if ( $command eq &quot;stop&quot; ) {
-    ## Gracefully killing connections on the current master
-    # 1. Set read_only= 1 on the new master
-    # 2. DROP USER so that no app user can establish new connections
-    # 3. Set read_only= 1 on the current master
-    # 4. Kill current queries
-    # * Any database access failure will result in script die.
-    my $exit_code = 1;
-    eval {
-      ## Setting read_only=1 on the new master (to avoid accident)
-      my $new_master_handler = new MHA::DBHelper();
-
-      # args: hostname, port, user, password, raise_error(die_on_error)_or_not
-      $new_master_handler-&gt;connect( $new_master_ip, $new_master_port,
-        $new_master_user, $new_master_password, 1 );
-      print current_time_us() . &quot; Set read_only on the new master.. &quot;;
-      $new_master_handler-&gt;enable_read_only();
-      if ( $new_master_handler-&gt;is_read_only() ) {
-        print &quot;ok.\n&quot;;
-      }
-      else {
-        die &quot;Failed!\n&quot;;
-      }
-      $new_master_handler-&gt;disconnect();
-
-      # Connecting to the orig master, die if any database error happens
-      my $orig_master_handler = new MHA::DBHelper();
-      $orig_master_handler-&gt;connect( $orig_master_ip, $orig_master_port,
-        $orig_master_user, $orig_master_password, 1 );
-
-      ## Drop application user so that nobody can connect. Disabling per-session binlog beforehand
-      $orig_master_handler-&gt;disable_log_bin_local();
-      print current_time_us() . &quot; Drpping app user on the orig master..\n&quot;;
-      #FIXME_xxx_drop_app_user($orig_master_handler);
-
-      ## Waiting for N * 100 milliseconds so that current connections can exit
-      my $time_until_read_only = 15;
-      $_tstart = [gettimeofday];
-      my @threads = get_threads_util( $orig_master_handler-&gt;{dbh},
-        $orig_master_handler-&gt;{connection_id} );
-      while ( $time_until_read_only &gt; 0 &amp;&amp; $#threads &gt;= 0 ) {
-        if ( $time_until_read_only % 5 == 0 ) {
-          printf
-&quot;%s Waiting all running %d threads are disconnected.. (max %d milliseconds)\n&quot;,
-            current_time_us(), $#threads + 1, $time_until_read_only * 100;
-          if ( $#threads &lt; 5 ) {
-            print Data::Dumper-&gt;new( [$_] )-&gt;Indent(0)-&gt;Terse(1)-&gt;Dump . &quot;\n&quot;
-              foreach (@threads);
-          }
-        }
-        sleep_until();
-        $_tstart = [gettimeofday];
-        $time_until_read_only--;
-        @threads = get_threads_util( $orig_master_handler-&gt;{dbh},
-          $orig_master_handler-&gt;{connection_id} );
-      }
-
-      ## Setting read_only=1 on the current master so that nobody(except SUPER) can write
-      print current_time_us() . &quot; Set read_only=1 on the orig master.. &quot;;
-      $orig_master_handler-&gt;enable_read_only();
-      if ( $orig_master_handler-&gt;is_read_only() ) {
-        print &quot;ok.\n&quot;;
-      }
-      else {
-        die &quot;Failed!\n&quot;;
-      }
-
-      ## Waiting for M * 100 milliseconds so that current update queries can complete
-      my $time_until_kill_threads = 5;
-      @threads = get_threads_util( $orig_master_handler-&gt;{dbh},
-        $orig_master_handler-&gt;{connection_id} );
-      while ( $time_until_kill_threads &gt; 0 &amp;&amp; $#threads &gt;= 0 ) {
-        if ( $time_until_kill_threads % 5 == 0 ) {
-          printf
-&quot;%s Waiting all running %d queries are disconnected.. (max %d milliseconds)\n&quot;,
-            current_time_us(), $#threads + 1, $time_until_kill_threads * 100;
-          if ( $#threads &lt; 5 ) {
-            print Data::Dumper-&gt;new( [$_] )-&gt;Indent(0)-&gt;Terse(1)-&gt;Dump . &quot;\n&quot;
-              foreach (@threads);
-          }
-        }
-        sleep_until();
-        $_tstart = [gettimeofday];
-        $time_until_kill_threads--;
-        @threads = get_threads_util( $orig_master_handler-&gt;{dbh},
-          $orig_master_handler-&gt;{connection_id} );
-      }
-
-      ## Terminating all threads
-      print current_time_us() . &quot; Killing all application threads..\n&quot;;
-      $orig_master_handler-&gt;kill_threads(@threads) if ( $#threads &gt;= 0 );
-      print current_time_us() . &quot; done.\n&quot;;
-      $orig_master_handler-&gt;enable_log_bin_local();
-      $orig_master_handler-&gt;disconnect();
-
-      ## After finishing the script, MHA executes FLUSH TABLES WITH READ LOCK
-      eval {
-      `ssh -o StrictHostKeyChecking=no -o GSSAPIAuthentication=no -p$orig_master_ssh_port $orig_master_ssh_user\@$orig_master_host \&quot; $ssh_stop_vip \&quot;`;
-        };
-        if ($@) {
-            warn $@;
-        }
-      $exit_code = 0;
-    };
-    if ($@) {
-      warn &quot;Got Error: $@\n&quot;;
-      exit $exit_code;
-    }
-    exit $exit_code;
-  }
-  elsif ( $command eq &quot;start&quot; ) {
-    ## Activating master ip on the new master
-    # 1. Create app user with write privileges
-    # 2. Moving backup script if needed
-    # 3. Register new master's ip to the catalog database
-
-# We don't return error even though activating updatable accounts/ip failed so that we don't interrupt slaves' recovery.
-# If exit code is 0 or 10, MHA does not abort
-    my $exit_code = 10;
-    eval {
-      my $new_master_handler = new MHA::DBHelper();
-
-      # args: hostname, port, user, password, raise_error_or_not
-      $new_master_handler-&gt;connect( $new_master_ip, $new_master_port,
-        $new_master_user, $new_master_password, 1 );
-
-      ## Set read_only=0 on the new master
-      $new_master_handler-&gt;disable_log_bin_local();
-      print current_time_us() . &quot; Set read_only=0 on the new master.\n&quot;;
-      $new_master_handler-&gt;disable_read_only();
-
-      ## Creating an app user on the new master
-      print current_time_us() . &quot; Creating app user on the new master..\n&quot;;
-      #FIXME_xxx_create_app_user($new_master_handler);
-      $new_master_handler-&gt;enable_log_bin_local();
-      $new_master_handler-&gt;disconnect();
-
-      ## Update master ip on the catalog database, etc
-      `ssh -o StrictHostKeyChecking=no -o GSSAPIAuthentication=no -p$new_master_ssh_port $new_master_ssh_user\@$new_master_host \&quot; $ssh_start_vip \&quot;`;
-      `ssh -o StrictHostKeyChecking=no -o GSSAPIAuthentication=no -p$new_master_ssh_port $new_master_ssh_user\@$new_master_host \&quot; ping -I $vip $gateway1 -c 1 \&quot;`;
-      `ssh -o StrictHostKeyChecking=no -o GSSAPIAuthentication=no -p$new_master_ssh_port $new_master_ssh_user\@$new_master_host \&quot; ping -I $vip $gateway2 -c 1 \&quot;`;
-      $exit_code = 0;
-    };
-    if ($@) {
-      warn &quot;Got Error: $@\n&quot;;
-      exit $exit_code;
-    }
-    exit $exit_code;
-  }
-  elsif ( $command eq &quot;status&quot; ) {
-
-    # do nothing
-    exit 0;
-  }
-  else {
-    &amp;usage();
-    exit 1;
-  }
-}
-
-sub usage {
-  print
-&quot;Usage: master_ip_online_change --command=start|stop|status --orig_master_host=host --orig_master_ip=ip --orig_master_port=port --new_master_host=host --new_master_ip=ip --new_master_port=port\n&quot;;
-  die;
-}
-[root@localhost ~]# 
-</code></pre></div><h2>您的评论</h2><div id="disqus_thread"></div><script>var disqus_config=function(){this.page.url=location.origin+location.pathname,this.page.identifier=location.pathname,"/index.html"===this.page.identifier.substr(-11)&&(this.page.identifier=this.page.identifier.substr(0,this.page.identifier.length-10))};!function(){var i=document,e=i.createElement("script");e.src="//linux48.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(i.head||i.body).appendChild(e)}()</script><div class="level article-bar is-mobile"><div class="level-item has-text-centered"><a title="previous page" class="previouse-article-link" href="index.html"><span class="icon icon-previous" data-icon="previous"></span><span class="link-content">&laquo; Previous</span></a></div><div class="level-item has-text-centered"><a title="font size" class="link-item link-item-size"><span class="icon icon-size" data-icon="size"></span></a></div><div class="level-item has-text-centered"><a title="table of content" class="link-item link-item-toc"><span class="icon icon-toc" data-icon="toc"></span></a></div><div class="level-item has-text-centered"><a title="top" href="#"><span class="icon icon-up" data-icon="up"></span> <span class="link-content">⤊ Top</span></a></div><div class="level-item has-text-centered"><a title="next page" class="next-article-link" href="2018-11-22-redis-think.html"><span class="icon icon-next" data-icon="next"></span><span class="link-content">Next &raquo;</span></a></div></div></div><div class="column is-2-widescreen is-hidden"></div></div><div class="columns foot"><div class="column is-3 is-offset-9 build-by">Build by <a href="https://github.com/ruanyf/loppo" target="_blank">Loppo</a> 0.6.14</div></div><div class="book-toc notification is-warning is-hidden"><h3>目录&nbsp;<span class="title-close"><a class="button is-danger"> Close</a></span></h3><ul class="chapter-area"><li class="chapter-item chapter-item-current"><a href="2018-12-11-mha.html">MySQL高可用之MHA</a></li><li class="chapter-item"><a href="2018-11-22-redis-think.html">使用Redis的一些想法和建议</a></li><li class="chapter-item"><a href="2018-11-15-redis-rdb-tools.html">使用redis-rdb-tools分析Redis内存</a></li><li class="chapter-item"><a href="2017-06-12-RDS-recovery-local-mysql.html">RDS备份文件恢复到自建数据库</a></li><li class="chapter-item"><a href="2017-06-08-excel-merge.html">多个EXCEL文件合并成一个EXCEL</a></li><li class="chapter-item"><a href="2017-05-24-redis-twemproxy.html">基于Twemproxy的Redis集群方案</a></li><li class="chapter-item"><a href="2017-02-28-zabbix-redis.html">zabbix使用自动发现规则自动化监控redis多实例</a></li><li class="chapter-item"><a href="2016-09-10-mysqlsla.html">MySQL慢日志分析工具mysqlsla</a></li><li class="chapter-item"><a href="2016-09-15-redis-stat.html">Redis-stat的安装与使用</a></li><li class="chapter-item"><a href="2016-07-06-zabbix3.0-mail.html">zabbix 3.0邮件报警</a></li><li class="chapter-item"><a href="2016-06-30-hive-hdfs.html">hive整合hadoop通过flume+hue收集日志</a></li><li class="chapter-item"><a href="2016-05-27-mysql-duplicate-records.html">MySQL查询表内重复记录</a></li><li class="chapter-item"><a href="2016-05-24-free-ssl.html">Startssl免费SSL证书+Nginx搭建https</a></li><li class="chapter-item"><a href="2016-05-16-flume.html">flume+hdfs构建大数据</a></li><li class="chapter-item"><a href="2016-04-21-notepad.html">数据库维护文本编辑技巧记录</a></li><li class="chapter-item"><a href="2016-04-20-mysql-in-paixu.html">MySQL查询按IN的顺序输出结果</a></li><li class="chapter-item"><a href="2016-04-14-cisco-firewall-ha.html">CISCO ASA5520 HA 配置</a></li><li class="chapter-item"><a href="2016-04-09-centos7-config-bond.html">centos7配置bond和bond跨网段改IP</a></li><li class="chapter-item"><a href="2016-02-03-centos-install-bugzilla.html">CentOS下Nginx配置Perl运行Bugzilla</a></li><li class="chapter-item"><a href="2015-11-12-centos-install-maven.html">CentOS上搭建私有maven仓库(迁移，升级)</a></li><li class="chapter-item"><a href="2015-10-8-mysql-some-question.html">mysql You cant specify target table</a></li><li class="chapter-item"><a href="2015-10-30-mysql-row-usedisk.html">mysql中查看数据库中所有表的记录数</a></li><li class="chapter-item"><a href="2015-10-29-zabbix-proxy-install.html">zabbix的proxy端安装配置</a></li><li class="chapter-item"><a href="2015-10-28-zabbix-agent-install.html">zabbix的agent端安装配置</a></li><li class="chapter-item"><a href="2015-10-27-mysql-AVG-MIN-SUM.html">mysql求平均值、最小和总值</a></li><li class="chapter-item"><a href="2015-10-21-mysql-every-hour.html">mysql取每隔一小时数据</a></li><li class="chapter-item"><a href="2015-08-27-Write-through-back.html">阵列Cache写机制：Write-through与Write-back</a></li><li class="chapter-item"><a href="2015-08-03-win10-cisco-vpn-repair.html">Repair Cisco vpnclient on windows10</a></li><li class="chapter-item"><a href="2015-07-30-sql-concat.html">MYSQL在一个字段值前面加字符串</a></li><li class="chapter-item"><a href="2015-07-22-Primary-key-conflicts.html">mysql双主主键冲突排查修复</a></li><li class="chapter-item"><a href="2015-07-15-mysql-dual-master.html">mysql双主互备设计搭建</a></li><li class="chapter-item"><a href="2015-07-07-svn-admin.html">CentOS6安装subversion 可视化管理工具iF.SVNAdmin</a></li><li class="chapter-item"><a href="2015-07-06-rhel-yum.html">Red Hat Enterprise Linux Server YUM配置</a></li><li class="chapter-item"><a href="2015-06-25-mysql-log.html">mysql全局日志开启</a></li><li class="chapter-item"><a href="2015-06-08-php-fpm-backlog.html">关于PHP-FPM的backlog</a></li><li class="chapter-item"><a href="2015-06-05-mysql-grant.html">MySQL的Grant赋权命令详解</a></li><li class="chapter-item"><a href="2015-06-03-bitnami-gitlab-port.html">bitnami版gitlab修改端口</a></li><li class="chapter-item"><a href="2015-03-13-awstats-install.html">awstats日志分析安装</a></li><li class="chapter-item"><a href="2015-03-07-h3c-vlan.html">H3C划分VLAN命令</a></li><li class="chapter-item"><a href="2015-03-05-redis-easy-install.html">Redis安装及主从配置</a></li><li class="chapter-item"><a href="2015-01-21-shadowsocks-python-node.html">shadowsocks的python和nodejs版搭建</a></li><li class="chapter-item"><a href="2015-01-07-ruby-Syntax-error-Invalid-GBK.html">ruby环境sass编译中文出现 Invalid GBK character</a></li><li class="chapter-item"><a href="2015-01-06-mysql-m-s-s.html">如何搭master-slave-slave</a></li><li class="chapter-item"><a href="2015-01-06-mysql5.1-ms.html">Mysql5.1主从服务设置</a></li><li class="chapter-item"><a href="2015-01-06-linux-rm-luanma.html">linux下删除乱码文件</a></li><li class="chapter-item"><a href="2014-12-17-SVNListParentPath.html">利用SVNListParentPath增加http浏览仓库根目录的功能</a></li><li class="chapter-item"><a href="2014-12-15-Chrome-css-failed.html">Chrome 浏览器加载 css Failed to load resource</a></li><li class="chapter-item"><a href="2014-12-04-centos-gitlab-yijian.html">centos gitlab一键安装备份恢复和迁移</a></li><li class="chapter-item"><a href="2014-12-02-linux-sar.html">linux sar命令</a></li><li class="chapter-item"><a href="2014-11-24-ruby-on-rails-err.html">ruby on rails 报错解决</a></li><li class="chapter-item"><a href="2014-11-18-awk-note.html">AWK统计随笔记录</a></li><li class="chapter-item"><a href="2014-11-12-svn-force-commit.html">SVN强制提交commit</a></li><li class="chapter-item"><a href="2014-11-12-rm-list-too-long.html">rm Argument list too long的解决办法</a></li><li class="chapter-item"><a href="2014-11-12-crontab-linux-lessthan.html">Crontab导致Linux的线程数枯竭</a></li><li class="chapter-item"><a href="2014-11-11-shell-ftp-uplod.html">用二句Shell命令实现FTP批量上传文件夹</a></li><li class="chapter-item"><a href="2014-11-10-redis-disk-memory-err.html">redis 写磁盘出错Cannot allocate memory</a></li><li class="chapter-item"><a href="2014-10-19-Jekyll_Variables.html">Jekyll目录结构与变量</a></li><li class="chapter-item"><a href="2014-10-19-git_common_command.html">Git 常用命令整理</a></li><li class="chapter-item"><a href="2014-10-18-windows_configuration_Jekyll.html">Windows平台配置Jekyll环境并与GitHub连接</a></li><li class="chapter-item"><a href="2014-08-21-centos-kvm-install.html">Redhat/CentOS系统KVM虚拟机安装过程详解</a></li><li class="chapter-item"><a href="2014-08-18-Sublime-add-youjian.html">将sublime text添加到右键菜单中</a></li><li class="chapter-item"><a href="2014-08-13-Sublime-python-build.html">Sublime Text 3设置python编译支持环境设置</a></li><li class="chapter-item"><a href="2014-08-11-shell-syntax-error.html">SHELL syntax error:unexpected end of file 提示错误</a></li><li class="chapter-item"><a href="2014-07-31-mysql-daxiaoxie.html">Windows下MySQL无法区分大小写解决方案</a></li><li class="chapter-item"><a href="2014-07-31-CentOS-NFS-mount.html">CentOS NFS的安装配置、启动及mount挂载方法</a></li><li class="chapter-item"><a href="2014-07-30-tencent-yun-repo.html">腾讯云的YUM repo</a></li><li class="chapter-item"><a href="2014-07-29-mysql-dump-all.html">Mysqldump参数大全</a></li><li class="chapter-item"><a href="2014-07-28-git-del-err-commit.html">git删除错误提交的commit</a></li><li class="chapter-item"><a href="2014-07-25-mysql-instet-other-table.html">MySql中把一个表的数据插入到另一个表中的实现</a></li><li class="chapter-item"><a href="2014-07-25-centos-install-ossec.html">centos安装ossec</a></li><li class="chapter-item"><a href="2014-07-24-phpmyadmin-error.html">访问phpmyadmin错误</a></li><li class="chapter-item"><a href="2014-07-13-black-apple.html">厚黑苹果售后</a></li><li class="chapter-item"><a href="2014-06-25-wordpress-google-css.html">wordpress引用google开放css加载不到解决方法</a></li><li class="chapter-item"><a href="2014-06-25-nginx-https.html">centos下nginx的https配置</a></li><li class="chapter-item"><a href="2014-05-30-rsync.html">rsync同步部署</a></li><li class="chapter-item"><a href="2014-05-15-saltstack1.html">使用saltstack批量管理服务器 （一）</a></li><li class="chapter-item"><a href="2014-04-18-msmtpmutt.html">msmtp+mutt 服务器批量发送邮件</a></li><li class="chapter-item"><a href="2014-04-14-zabbix-server-install.html">zabbix的server端安装配置</a></li><li class="chapter-item"><a href="2014-04-05-wordpress-them-only-one.html">wordpress后台主题只有一个解决方法</a></li><li class="chapter-item"><a href="2014-01-30-many-php-version.html">多版本php共存搭建</a></li><li class="chapter-item"><a href="2013-11-06-linux-memery-cat.html">linux查看内存相关命令</a></li><li class="chapter-item"><a href="2013-07-07-github-easy-install.html">github安装使用</a></li><li class="chapter-item"><a href="2013-06-30-localhost-127.0.0.1.html">localhost 与 127.0.0.1 的区别</a></li><li class="chapter-item"><a href="2013-06-15-rsync-del-hailiang.html">使用rsync删除海量文件</a></li><li class="chapter-item"><a href="2013-06-08-disk-data-recovery.html">记录一次服务器数据恢复</a></li><li class="chapter-item"><a href="2013-06-03-1nginx-502.html">记录一次nginx 502</a></li><li class="chapter-item"><a href="2013-06-02-linux-nohup.html">linux命令后台运行详解</a></li><li class="chapter-item"><a href="2013-06-01-disk-inode.html">深入理解磁盘inode</a></li><li class="chapter-item"><a href="2013-05-09-mysql-error-1064.html">MySQL错误ERROR 1064 (type=myisam出错)</a></li><li class="chapter-item"><a href="2013-01-04-centos-php-oracle.html">centos6.2下php支持oracle</a></li><li class="chapter-item"><a href="2012-12-27-oracle-startup-failure.html">oracle startup failure</a></li><li class="chapter-item"><a href="2012-12-27-oracle-startup.html">oracle startup 故障：ORA-00845: MEMORY_TARGET</a></li><li class="chapter-item"><a href="2012-12-27-ora-01102-cannot-mount-database-in-exclusive-mode.html">ORA-01102: cannot mount database in EXCLUSIVE mode</a></li><li class="chapter-item"><a href="2012-12-20-centos-install-oracle-11g.html">centos install oracle 11g</a></li><li class="chapter-item"><a href="2012-11-14-mysql-slow-log.html">Mysql慢查询设置</a></li><li class="chapter-item"><a href="2012-11-14-mysql-ms-error.html">MYSQL主从同步故障事件</a></li><li class="chapter-item"><a href="2012-08-10-python-mysqldb-install.html">CentOS下python-mysqldb安装事件</a></li><li class="chapter-item"><a href="2012-08-03-sqlite-source-upgrade.html">sqlite3源码升级事件</a></li><li class="chapter-item"><a href="2012-08-01-centos6-pythonsqlite3.html">centos6.2升级python后处理sqlite3库事件</a></li><li class="chapter-item"><a href="2012-07-30-mysql5-5-ms.html">mysql5.5版本主从搭建</a></li><li class="chapter-item"><a href="2012-07-18-repair-yum.html">误卸载python导致yum无法使用修复事件</a></li><li class="chapter-item"><a href="2012-07-18-reload-upgrade-python.html">Centos平滑升级python事件</a></li><li class="chapter-item"><a href="2012-07-18-nginx413.html">Nginx出现“413 Request Entity Too Large”错误解决方法</a></li><li class="chapter-item"><a href="2012-07-06-nginx-apache-mulu-bd.html">Nginx、Apache目录浏览功能</a></li><li class="chapter-item"><a href="2012-06-27-yum-lamp-tomcat.html">CentOS yum安装配置LAMP+tomcat</a></li><li class="chapter-item"><a href="2012-06-11-ios-jiangji.html">ios5.0.1降级4.3.3事件</a></li><li class="chapter-item"><a href="2012-05-17-ocr-Tesseract.html">OCR之Tesseract的linux下安装</a></li><li class="chapter-item"><a href="2012-05-04-memcached-easy-install.html">memcached简易安装</a></li><li class="chapter-item"><a href="2012-04-11-centos-install-snmp.html">centos下snmp客户端安装</a></li><li class="chapter-item"><a href="2012-03-13-iptables-shell.html">一篇很不错的iptables的shell</a></li><li class="chapter-item"><a href="2012-03-07-cisco-fudong-luyou.html">思科静态浮动路由配置</a></li><li class="chapter-item"><a href="markdown.html">Markdown 简明语法手册</a></li><li class="chapter-item"><a href="hello-world.html">Hello World</a></li></ul></div><div class="progress-indicator"></div><!-- SCRIPTS --><script>var LOPPO={current_path:"2018-12-11-mha.md",relative_root_path:"",article_toc:'<ul class="markdownIt-TOC">\n<li><a href="#mha%E7%AE%80%E4%BB%8B">MHA简介</a></li>\n<li><a href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86">工作原理</a></li>\n<li><a href="#install">INSTALL</a>\n<ul>\n<li><a href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E4%BB%8E%EF%BC%8Cvip%EF%BC%8Cssh%E4%BA%92%E4%BF%A1%EF%BC%8C%E6%8E%88%E6%9D%83mysql%E7%AE%A1%E7%90%86%E8%B4%A6%E6%88%B7">配置主从，VIP，SSH互信，授权mysql管理账户</a></li>\n<li><a href="#install-mha">INSTALL MHA</a></li>\n<li><a href="#check-mha">CHECK MHA</a></li>\n<li><a href="#test">TEST...</a></li>\n<li><a href="#%E4%BF%AE%E5%A4%8D%E5%AE%95%E6%9C%BA%E7%9A%84master">修复宕机的Master</a></li>\n<li><a href="#mha%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E">MHA组件说明</a></li>\n<li><a href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E">配置文件说明</a></li>\n<li><a href="#%E5%88%87%E6%8D%A2vip%E8%84%9A%E6%9C%AC">切换vip脚本</a></li>\n</ul>\n</li>\n</ul>\n'}</script><script src="assets/js/app.js"></script></body></html>
+</code></pre></div><h2>您的评论</h2><div id="disqus_thread"></div><script>var disqus_config=function(){this.page.url=location.origin+location.pathname,this.page.identifier=location.pathname,"/index.html"===this.page.identifier.substr(-11)&&(this.page.identifier=this.page.identifier.substr(0,this.page.identifier.length-10))};!function(){var i=document,e=i.createElement("script");e.src="//linux48.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(i.head||i.body).appendChild(e)}()</script><div class="level article-bar is-mobile"><div class="level-item has-text-centered"><a title="previous page" class="previouse-article-link" href="index.html"><span class="icon icon-previous" data-icon="previous"></span><span class="link-content">&laquo; Previous</span></a></div><div class="level-item has-text-centered"><a title="font size" class="link-item link-item-size"><span class="icon icon-size" data-icon="size"></span></a></div><div class="level-item has-text-centered"><a title="table of content" class="link-item link-item-toc"><span class="icon icon-toc" data-icon="toc"></span></a></div><div class="level-item has-text-centered"><a title="top" href="#"><span class="icon icon-up" data-icon="up"></span> <span class="link-content">⤊ Top</span></a></div><div class="level-item has-text-centered"><a title="next page" class="next-article-link" href="2018-11-22-redis-think.html"><span class="icon icon-next" data-icon="next"></span><span class="link-content">Next &raquo;</span></a></div></div></div><div class="column is-2-widescreen is-hidden"></div></div><div class="columns foot"><div class="column is-3 is-offset-9 build-by">Build by <a href="https://github.com/ruanyf/loppo" target="_blank">Loppo</a> 0.6.14</div></div><div class="book-toc notification is-warning is-hidden"><h3>目录&nbsp;<span class="title-close"><a class="button is-danger"> Close</a></span></h3><ul class="chapter-area"><li class="chapter-item chapter-item-current"><a href="2018-12-11-mha.html">MySQL高可用之MHA</a></li><li class="chapter-item"><a href="2018-11-22-redis-think.html">使用Redis的一些想法和建议</a></li><li class="chapter-item"><a href="2018-11-15-redis-rdb-tools.html">使用redis-rdb-tools分析Redis内存</a></li><li class="chapter-item"><a href="2017-06-12-RDS-recovery-local-mysql.html">RDS备份文件恢复到自建数据库</a></li><li class="chapter-item"><a href="2017-06-08-excel-merge.html">多个EXCEL文件合并成一个EXCEL</a></li><li class="chapter-item"><a href="2017-05-24-redis-twemproxy.html">基于Twemproxy的Redis集群方案</a></li><li class="chapter-item"><a href="2017-02-28-zabbix-redis.html">zabbix使用自动发现规则自动化监控redis多实例</a></li><li class="chapter-item"><a href="2016-09-10-mysqlsla.html">MySQL慢日志分析工具mysqlsla</a></li><li class="chapter-item"><a href="2016-09-15-redis-stat.html">Redis-stat的安装与使用</a></li><li class="chapter-item"><a href="2016-07-06-zabbix3.0-mail.html">zabbix 3.0邮件报警</a></li><li class="chapter-item"><a href="2016-06-30-hive-hdfs.html">hive整合hadoop通过flume+hue收集日志</a></li><li class="chapter-item"><a href="2016-05-27-mysql-duplicate-records.html">MySQL查询表内重复记录</a></li><li class="chapter-item"><a href="2016-05-24-free-ssl.html">Startssl免费SSL证书+Nginx搭建https</a></li><li class="chapter-item"><a href="2016-05-16-flume.html">flume+hdfs构建大数据</a></li><li class="chapter-item"><a href="2016-04-21-notepad.html">数据库维护文本编辑技巧记录</a></li><li class="chapter-item"><a href="2016-04-20-mysql-in-paixu.html">MySQL查询按IN的顺序输出结果</a></li><li class="chapter-item"><a href="2016-04-14-cisco-firewall-ha.html">CISCO ASA5520 HA 配置</a></li><li class="chapter-item"><a href="2016-04-09-centos7-config-bond.html">centos7配置bond和bond跨网段改IP</a></li><li class="chapter-item"><a href="2016-02-03-centos-install-bugzilla.html">CentOS下Nginx配置Perl运行Bugzilla</a></li><li class="chapter-item"><a href="2015-11-12-centos-install-maven.html">CentOS上搭建私有maven仓库(迁移，升级)</a></li><li class="chapter-item"><a href="2015-10-8-mysql-some-question.html">mysql You cant specify target table</a></li><li class="chapter-item"><a href="2015-10-30-mysql-row-usedisk.html">mysql中查看数据库中所有表的记录数</a></li><li class="chapter-item"><a href="2015-10-29-zabbix-proxy-install.html">zabbix的proxy端安装配置</a></li><li class="chapter-item"><a href="2015-10-28-zabbix-agent-install.html">zabbix的agent端安装配置</a></li><li class="chapter-item"><a href="2015-10-27-mysql-AVG-MIN-SUM.html">mysql求平均值、最小和总值</a></li><li class="chapter-item"><a href="2015-10-21-mysql-every-hour.html">mysql取每隔一小时数据</a></li><li class="chapter-item"><a href="2015-08-27-Write-through-back.html">阵列Cache写机制：Write-through与Write-back</a></li><li class="chapter-item"><a href="2015-08-03-win10-cisco-vpn-repair.html">Repair Cisco vpnclient on windows10</a></li><li class="chapter-item"><a href="2015-07-30-sql-concat.html">MYSQL在一个字段值前面加字符串</a></li><li class="chapter-item"><a href="2015-07-22-Primary-key-conflicts.html">mysql双主主键冲突排查修复</a></li><li class="chapter-item"><a href="2015-07-15-mysql-dual-master.html">mysql双主互备设计搭建</a></li><li class="chapter-item"><a href="2015-07-07-svn-admin.html">CentOS6安装subversion 可视化管理工具iF.SVNAdmin</a></li><li class="chapter-item"><a href="2015-07-06-rhel-yum.html">Red Hat Enterprise Linux Server YUM配置</a></li><li class="chapter-item"><a href="2015-06-25-mysql-log.html">mysql全局日志开启</a></li><li class="chapter-item"><a href="2015-06-08-php-fpm-backlog.html">关于PHP-FPM的backlog</a></li><li class="chapter-item"><a href="2015-06-05-mysql-grant.html">MySQL的Grant赋权命令详解</a></li><li class="chapter-item"><a href="2015-06-03-bitnami-gitlab-port.html">bitnami版gitlab修改端口</a></li><li class="chapter-item"><a href="2015-03-13-awstats-install.html">awstats日志分析安装</a></li><li class="chapter-item"><a href="2015-03-07-h3c-vlan.html">H3C划分VLAN命令</a></li><li class="chapter-item"><a href="2015-03-05-redis-easy-install.html">Redis安装及主从配置</a></li><li class="chapter-item"><a href="2015-01-21-shadowsocks-python-node.html">shadowsocks的python和nodejs版搭建</a></li><li class="chapter-item"><a href="2015-01-07-ruby-Syntax-error-Invalid-GBK.html">ruby环境sass编译中文出现 Invalid GBK character</a></li><li class="chapter-item"><a href="2015-01-06-mysql-m-s-s.html">如何搭master-slave-slave</a></li><li class="chapter-item"><a href="2015-01-06-mysql5.1-ms.html">Mysql5.1主从服务设置</a></li><li class="chapter-item"><a href="2015-01-06-linux-rm-luanma.html">linux下删除乱码文件</a></li><li class="chapter-item"><a href="2014-12-17-SVNListParentPath.html">利用SVNListParentPath增加http浏览仓库根目录的功能</a></li><li class="chapter-item"><a href="2014-12-15-Chrome-css-failed.html">Chrome 浏览器加载 css Failed to load resource</a></li><li class="chapter-item"><a href="2014-12-04-centos-gitlab-yijian.html">centos gitlab一键安装备份恢复和迁移</a></li><li class="chapter-item"><a href="2014-12-02-linux-sar.html">linux sar命令</a></li><li class="chapter-item"><a href="2014-11-24-ruby-on-rails-err.html">ruby on rails 报错解决</a></li><li class="chapter-item"><a href="2014-11-18-awk-note.html">AWK统计随笔记录</a></li><li class="chapter-item"><a href="2014-11-12-svn-force-commit.html">SVN强制提交commit</a></li><li class="chapter-item"><a href="2014-11-12-rm-list-too-long.html">rm Argument list too long的解决办法</a></li><li class="chapter-item"><a href="2014-11-12-crontab-linux-lessthan.html">Crontab导致Linux的线程数枯竭</a></li><li class="chapter-item"><a href="2014-11-11-shell-ftp-uplod.html">用二句Shell命令实现FTP批量上传文件夹</a></li><li class="chapter-item"><a href="2014-11-10-redis-disk-memory-err.html">redis 写磁盘出错Cannot allocate memory</a></li><li class="chapter-item"><a href="2014-10-19-Jekyll_Variables.html">Jekyll目录结构与变量</a></li><li class="chapter-item"><a href="2014-10-19-git_common_command.html">Git 常用命令整理</a></li><li class="chapter-item"><a href="2014-10-18-windows_configuration_Jekyll.html">Windows平台配置Jekyll环境并与GitHub连接</a></li><li class="chapter-item"><a href="2014-08-21-centos-kvm-install.html">Redhat/CentOS系统KVM虚拟机安装过程详解</a></li><li class="chapter-item"><a href="2014-08-18-Sublime-add-youjian.html">将sublime text添加到右键菜单中</a></li><li class="chapter-item"><a href="2014-08-13-Sublime-python-build.html">Sublime Text 3设置python编译支持环境设置</a></li><li class="chapter-item"><a href="2014-08-11-shell-syntax-error.html">SHELL syntax error:unexpected end of file 提示错误</a></li><li class="chapter-item"><a href="2014-07-31-mysql-daxiaoxie.html">Windows下MySQL无法区分大小写解决方案</a></li><li class="chapter-item"><a href="2014-07-31-CentOS-NFS-mount.html">CentOS NFS的安装配置、启动及mount挂载方法</a></li><li class="chapter-item"><a href="2014-07-30-tencent-yun-repo.html">腾讯云的YUM repo</a></li><li class="chapter-item"><a href="2014-07-29-mysql-dump-all.html">Mysqldump参数大全</a></li><li class="chapter-item"><a href="2014-07-28-git-del-err-commit.html">git删除错误提交的commit</a></li><li class="chapter-item"><a href="2014-07-25-mysql-instet-other-table.html">MySql中把一个表的数据插入到另一个表中的实现</a></li><li class="chapter-item"><a href="2014-07-25-centos-install-ossec.html">centos安装ossec</a></li><li class="chapter-item"><a href="2014-07-24-phpmyadmin-error.html">访问phpmyadmin错误</a></li><li class="chapter-item"><a href="2014-07-13-black-apple.html">厚黑苹果售后</a></li><li class="chapter-item"><a href="2014-06-25-wordpress-google-css.html">wordpress引用google开放css加载不到解决方法</a></li><li class="chapter-item"><a href="2014-06-25-nginx-https.html">centos下nginx的https配置</a></li><li class="chapter-item"><a href="2014-05-30-rsync.html">rsync同步部署</a></li><li class="chapter-item"><a href="2014-05-15-saltstack1.html">使用saltstack批量管理服务器 （一）</a></li><li class="chapter-item"><a href="2014-04-18-msmtpmutt.html">msmtp+mutt 服务器批量发送邮件</a></li><li class="chapter-item"><a href="2014-04-14-zabbix-server-install.html">zabbix的server端安装配置</a></li><li class="chapter-item"><a href="2014-04-05-wordpress-them-only-one.html">wordpress后台主题只有一个解决方法</a></li><li class="chapter-item"><a href="2014-01-30-many-php-version.html">多版本php共存搭建</a></li><li class="chapter-item"><a href="2013-11-06-linux-memery-cat.html">linux查看内存相关命令</a></li><li class="chapter-item"><a href="2013-07-07-github-easy-install.html">github安装使用</a></li><li class="chapter-item"><a href="2013-06-30-localhost-127.0.0.1.html">localhost 与 127.0.0.1 的区别</a></li><li class="chapter-item"><a href="2013-06-15-rsync-del-hailiang.html">使用rsync删除海量文件</a></li><li class="chapter-item"><a href="2013-06-08-disk-data-recovery.html">记录一次服务器数据恢复</a></li><li class="chapter-item"><a href="2013-06-03-1nginx-502.html">记录一次nginx 502</a></li><li class="chapter-item"><a href="2013-06-02-linux-nohup.html">linux命令后台运行详解</a></li><li class="chapter-item"><a href="2013-06-01-disk-inode.html">深入理解磁盘inode</a></li><li class="chapter-item"><a href="2013-05-09-mysql-error-1064.html">MySQL错误ERROR 1064 (type=myisam出错)</a></li><li class="chapter-item"><a href="2013-01-04-centos-php-oracle.html">centos6.2下php支持oracle</a></li><li class="chapter-item"><a href="2012-12-27-oracle-startup-failure.html">oracle startup failure</a></li><li class="chapter-item"><a href="2012-12-27-oracle-startup.html">oracle startup 故障：ORA-00845: MEMORY_TARGET</a></li><li class="chapter-item"><a href="2012-12-27-ora-01102-cannot-mount-database-in-exclusive-mode.html">ORA-01102: cannot mount database in EXCLUSIVE mode</a></li><li class="chapter-item"><a href="2012-12-20-centos-install-oracle-11g.html">centos install oracle 11g</a></li><li class="chapter-item"><a href="2012-11-14-mysql-slow-log.html">Mysql慢查询设置</a></li><li class="chapter-item"><a href="2012-11-14-mysql-ms-error.html">MYSQL主从同步故障事件</a></li><li class="chapter-item"><a href="2012-08-10-python-mysqldb-install.html">CentOS下python-mysqldb安装事件</a></li><li class="chapter-item"><a href="2012-08-03-sqlite-source-upgrade.html">sqlite3源码升级事件</a></li><li class="chapter-item"><a href="2012-08-01-centos6-pythonsqlite3.html">centos6.2升级python后处理sqlite3库事件</a></li><li class="chapter-item"><a href="2012-07-30-mysql5-5-ms.html">mysql5.5版本主从搭建</a></li><li class="chapter-item"><a href="2012-07-18-repair-yum.html">误卸载python导致yum无法使用修复事件</a></li><li class="chapter-item"><a href="2012-07-18-reload-upgrade-python.html">Centos平滑升级python事件</a></li><li class="chapter-item"><a href="2012-07-18-nginx413.html">Nginx出现“413 Request Entity Too Large”错误解决方法</a></li><li class="chapter-item"><a href="2012-07-06-nginx-apache-mulu-bd.html">Nginx、Apache目录浏览功能</a></li><li class="chapter-item"><a href="2012-06-27-yum-lamp-tomcat.html">CentOS yum安装配置LAMP+tomcat</a></li><li class="chapter-item"><a href="2012-06-11-ios-jiangji.html">ios5.0.1降级4.3.3事件</a></li><li class="chapter-item"><a href="2012-05-17-ocr-Tesseract.html">OCR之Tesseract的linux下安装</a></li><li class="chapter-item"><a href="2012-05-04-memcached-easy-install.html">memcached简易安装</a></li><li class="chapter-item"><a href="2012-04-11-centos-install-snmp.html">centos下snmp客户端安装</a></li><li class="chapter-item"><a href="2012-03-13-iptables-shell.html">一篇很不错的iptables的shell</a></li><li class="chapter-item"><a href="2012-03-07-cisco-fudong-luyou.html">思科静态浮动路由配置</a></li><li class="chapter-item"><a href="markdown.html">Markdown 简明语法手册</a></li><li class="chapter-item"><a href="hello-world.html">Hello World</a></li></ul></div><div class="progress-indicator"></div><!-- SCRIPTS --><script>var LOPPO={current_path:"2018-12-11-mha.md",relative_root_path:"",article_toc:'<ul class="markdownIt-TOC">\n<li><a href="#mha%E7%AE%80%E4%BB%8B">MHA简介</a></li>\n<li><a href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86">工作原理</a></li>\n<li><a href="#install">INSTALL</a>\n<ul>\n<li><a href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E4%BB%8E%EF%BC%8Cvip%EF%BC%8Cssh%E4%BA%92%E4%BF%A1%EF%BC%8C%E6%8E%88%E6%9D%83mysql%E7%AE%A1%E7%90%86%E8%B4%A6%E6%88%B7">配置主从，VIP，SSH互信，授权mysql管理账户</a></li>\n<li><a href="#install-mha">INSTALL MHA</a></li>\n</ul>\n</li>\n<li><a href="#check-mha">CHECK MHA</a></li>\n<li><a href="#test">TEST...</a></li>\n<li><a href="#%E4%BF%AE%E5%A4%8D%E5%AE%95%E6%9C%BA%E7%9A%84master">修复宕机的Master</a></li>\n<li><a href="#mha%E7%BB%84%E4%BB%B6%E8%AF%B4%E6%98%8E">MHA组件说明</a></li>\n<li><a href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E">配置文件说明</a></li>\n<li><a href="#%E5%88%87%E6%8D%A2vip%E8%84%9A%E6%9C%AC">切换vip脚本</a></li>\n</ul>\n'}</script><script src="assets/js/app.js"></script></body></html>
