@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>树莓派python监控get脚本 | LINUX48</title>
+    <meta name="description" content=" 快应用UI组件库，简洁，易用，高效">
+    <link rel="icon" href="favicon.ico">
+    
+    <link rel="preload" href="/assets/css/0.styles.0b276b3d.css" as="style"><link rel="preload" href="/assets/js/app.d547739a.js" as="script"><link rel="preload" href="/assets/js/2.24623497.js" as="script"><link rel="preload" href="/assets/js/61.34ece49a.js" as="script"><link rel="prefetch" href="/assets/js/10.58691a3b.js"><link rel="prefetch" href="/assets/js/100.fbd94a6c.js"><link rel="prefetch" href="/assets/js/101.21e5ef41.js"><link rel="prefetch" href="/assets/js/102.88af2ccb.js"><link rel="prefetch" href="/assets/js/103.69e7affb.js"><link rel="prefetch" href="/assets/js/104.c5fd8014.js"><link rel="prefetch" href="/assets/js/105.f5812982.js"><link rel="prefetch" href="/assets/js/106.4e19a657.js"><link rel="prefetch" href="/assets/js/107.0069eb1b.js"><link rel="prefetch" href="/assets/js/108.59caf83f.js"><link rel="prefetch" href="/assets/js/109.5d808f8a.js"><link rel="prefetch" href="/assets/js/11.da6a6f94.js"><link rel="prefetch" href="/assets/js/110.95167197.js"><link rel="prefetch" href="/assets/js/111.1310b0d3.js"><link rel="prefetch" href="/assets/js/112.58cbc4b5.js"><link rel="prefetch" href="/assets/js/113.1fa21fcf.js"><link rel="prefetch" href="/assets/js/114.55a2217f.js"><link rel="prefetch" href="/assets/js/115.647f5372.js"><link rel="prefetch" href="/assets/js/116.c4b46617.js"><link rel="prefetch" href="/assets/js/117.245855f4.js"><link rel="prefetch" href="/assets/js/118.e9476d0e.js"><link rel="prefetch" href="/assets/js/119.7ef3cfaf.js"><link rel="prefetch" href="/assets/js/12.8932e2d7.js"><link rel="prefetch" href="/assets/js/120.acfd5c81.js"><link rel="prefetch" href="/assets/js/121.ec6e7a4e.js"><link rel="prefetch" href="/assets/js/122.5c03347f.js"><link rel="prefetch" href="/assets/js/123.2e2de112.js"><link rel="prefetch" href="/assets/js/124.f67e422e.js"><link rel="prefetch" href="/assets/js/125.32ef6e6e.js"><link rel="prefetch" href="/assets/js/126.bde58b63.js"><link rel="prefetch" href="/assets/js/127.dca014de.js"><link rel="prefetch" href="/assets/js/128.883ef7d7.js"><link rel="prefetch" href="/assets/js/129.2f95d808.js"><link rel="prefetch" href="/assets/js/13.d5c1637d.js"><link rel="prefetch" href="/assets/js/130.b0ae78fa.js"><link rel="prefetch" href="/assets/js/131.2ba5f958.js"><link rel="prefetch" href="/assets/js/132.61928b24.js"><link rel="prefetch" href="/assets/js/133.3144a66d.js"><link rel="prefetch" href="/assets/js/134.f944030c.js"><link rel="prefetch" href="/assets/js/135.72750127.js"><link rel="prefetch" href="/assets/js/136.6732d310.js"><link rel="prefetch" href="/assets/js/137.0714a5b0.js"><link rel="prefetch" href="/assets/js/138.f1f9096c.js"><link rel="prefetch" href="/assets/js/139.d8be7a78.js"><link rel="prefetch" href="/assets/js/14.9df06523.js"><link rel="prefetch" href="/assets/js/140.58d1da78.js"><link rel="prefetch" href="/assets/js/141.55f759b4.js"><link rel="prefetch" href="/assets/js/142.3fca9e1a.js"><link rel="prefetch" href="/assets/js/143.7ef2390e.js"><link rel="prefetch" href="/assets/js/144.85bafe20.js"><link rel="prefetch" href="/assets/js/145.00e4c2de.js"><link rel="prefetch" href="/assets/js/15.16fca8c0.js"><link rel="prefetch" href="/assets/js/16.144c592e.js"><link rel="prefetch" href="/assets/js/17.ca3f0154.js"><link rel="prefetch" href="/assets/js/18.9278d1c2.js"><link rel="prefetch" href="/assets/js/19.06cbda7b.js"><link rel="prefetch" href="/assets/js/20.86436084.js"><link rel="prefetch" href="/assets/js/21.5452a5f4.js"><link rel="prefetch" href="/assets/js/22.ffb9ccd7.js"><link rel="prefetch" href="/assets/js/23.39348297.js"><link rel="prefetch" href="/assets/js/24.772ac0b8.js"><link rel="prefetch" href="/assets/js/25.ce2cc958.js"><link rel="prefetch" href="/assets/js/26.fe928081.js"><link rel="prefetch" href="/assets/js/27.c5168e56.js"><link rel="prefetch" href="/assets/js/28.11c5cd93.js"><link rel="prefetch" href="/assets/js/29.d0df7513.js"><link rel="prefetch" href="/assets/js/3.afdbb220.js"><link rel="prefetch" href="/assets/js/30.8be6e657.js"><link rel="prefetch" href="/assets/js/31.b563a330.js"><link rel="prefetch" href="/assets/js/32.8d7a36e0.js"><link rel="prefetch" href="/assets/js/33.c9ee7217.js"><link rel="prefetch" href="/assets/js/34.759d0580.js"><link rel="prefetch" href="/assets/js/35.9833222c.js"><link rel="prefetch" href="/assets/js/36.21b23c90.js"><link rel="prefetch" href="/assets/js/37.6e35ee30.js"><link rel="prefetch" href="/assets/js/38.a773fb35.js"><link rel="prefetch" href="/assets/js/39.74e2e4de.js"><link rel="prefetch" href="/assets/js/4.5229681b.js"><link rel="prefetch" href="/assets/js/40.36302b4f.js"><link rel="prefetch" href="/assets/js/41.41e724a5.js"><link rel="prefetch" href="/assets/js/42.b5c593c6.js"><link rel="prefetch" href="/assets/js/43.468992cf.js"><link rel="prefetch" href="/assets/js/44.758e86a2.js"><link rel="prefetch" href="/assets/js/45.c2e2cf01.js"><link rel="prefetch" href="/assets/js/46.930a4274.js"><link rel="prefetch" href="/assets/js/47.7da62911.js"><link rel="prefetch" href="/assets/js/48.94502441.js"><link rel="prefetch" href="/assets/js/49.b3e09a7d.js"><link rel="prefetch" href="/assets/js/5.8dab3aa1.js"><link rel="prefetch" href="/assets/js/50.f39e943a.js"><link rel="prefetch" href="/assets/js/51.19210514.js"><link rel="prefetch" href="/assets/js/52.595f89b1.js"><link rel="prefetch" href="/assets/js/53.31682f4d.js"><link rel="prefetch" href="/assets/js/54.73839c6f.js"><link rel="prefetch" href="/assets/js/55.5dda3032.js"><link rel="prefetch" href="/assets/js/56.9c051c47.js"><link rel="prefetch" href="/assets/js/57.ca5c8068.js"><link rel="prefetch" href="/assets/js/58.f6e52010.js"><link rel="prefetch" href="/assets/js/59.bc6eb54a.js"><link rel="prefetch" href="/assets/js/6.fadf5b27.js"><link rel="prefetch" href="/assets/js/60.c301b2a0.js"><link rel="prefetch" href="/assets/js/62.14a7dca3.js"><link rel="prefetch" href="/assets/js/63.78db4810.js"><link rel="prefetch" href="/assets/js/64.66771257.js"><link rel="prefetch" href="/assets/js/65.cd745745.js"><link rel="prefetch" href="/assets/js/66.9db6be57.js"><link rel="prefetch" href="/assets/js/67.44ad15ae.js"><link rel="prefetch" href="/assets/js/68.5f9b9051.js"><link rel="prefetch" href="/assets/js/69.17fe060a.js"><link rel="prefetch" href="/assets/js/7.497a77ba.js"><link rel="prefetch" href="/assets/js/70.ceb8b968.js"><link rel="prefetch" href="/assets/js/71.784999cf.js"><link rel="prefetch" href="/assets/js/72.5cae45f8.js"><link rel="prefetch" href="/assets/js/73.be78be06.js"><link rel="prefetch" href="/assets/js/74.ca20f9c0.js"><link rel="prefetch" href="/assets/js/75.dd59bb63.js"><link rel="prefetch" href="/assets/js/76.3d59e426.js"><link rel="prefetch" href="/assets/js/77.29b6888a.js"><link rel="prefetch" href="/assets/js/78.f43a3d98.js"><link rel="prefetch" href="/assets/js/79.8d4441c4.js"><link rel="prefetch" href="/assets/js/8.d941bdbf.js"><link rel="prefetch" href="/assets/js/80.1ed0f009.js"><link rel="prefetch" href="/assets/js/81.d60bb7bb.js"><link rel="prefetch" href="/assets/js/82.fe19abeb.js"><link rel="prefetch" href="/assets/js/83.112d63e3.js"><link rel="prefetch" href="/assets/js/84.6024d92b.js"><link rel="prefetch" href="/assets/js/85.bbb0b0cd.js"><link rel="prefetch" href="/assets/js/86.6fb86e49.js"><link rel="prefetch" href="/assets/js/87.48e833b9.js"><link rel="prefetch" href="/assets/js/88.563a8225.js"><link rel="prefetch" href="/assets/js/89.7378c246.js"><link rel="prefetch" href="/assets/js/9.7e79e735.js"><link rel="prefetch" href="/assets/js/90.5f9203c7.js"><link rel="prefetch" href="/assets/js/91.264f56ea.js"><link rel="prefetch" href="/assets/js/92.c60856cb.js"><link rel="prefetch" href="/assets/js/93.0e844347.js"><link rel="prefetch" href="/assets/js/94.f0898a34.js"><link rel="prefetch" href="/assets/js/95.e20032b4.js"><link rel="prefetch" href="/assets/js/96.0d291bab.js"><link rel="prefetch" href="/assets/js/97.6210726a.js"><link rel="prefetch" href="/assets/js/98.4d2ad25a.js"><link rel="prefetch" href="/assets/js/99.5f24992c.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0b276b3d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">LINUX48</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">指南</a></div><div class="nav-item"><a href="/zh/CHANGELOG.html" class="nav-link">Changelog</a></div><div class="nav-item"><a href="https://github.com/JDsecretFE/quist-ui" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">指南</a></div><div class="nav-item"><a href="/zh/CHANGELOG.html" class="nav-link">Changelog</a></div><div class="nav-item"><a href="https://github.com/JDsecretFE/quist-ui" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Database</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Container</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Monitor</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>System</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>RaspberryPi</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/rpi/2018-12-06-nginx-rtmp.html" class="sidebar-link">树莓派使用nginx+rtmp搭建直播(监控)服务</a></li><li><a href="/rpi/2018-11-18-piow-first.html" class="sidebar-link">PI0W试玩(USB/Ethernet)  一根microUSB线玩转树莓派zeroW</a></li><li><a href="/rpi/2014-07-01-rpi-hexo.html" class="sidebar-link">树莓派安装node.js来跑Hexo静态博客</a></li><li><a href="/rpi/2014-05-24-rpi-Django.html" class="sidebar-link">树莓派Django试玩</a></li><li><a href="/rpi/2014-05-10-Pidora-2014.html" class="sidebar-link">Pidora 2014 试用</a></li><li><a href="/rpi/2014-05-10-firstboot.html" class="sidebar-link">关于firstboot</a></li><li><a href="/rpi/2014-04-30-rpi-vim-light.html" class="sidebar-link">树莓派vim代码高亮</a></li><li><a href="/rpi/2014-04-27-usbstorage.html" class="sidebar-link">树莓派自动挂载usb移动存储设备</a></li><li><a href="/rpi/2014-04-24-python-monitor.html" class="active sidebar-link">树莓派python监控get脚本</a></li><li><a href="/rpi/2014-04-22-GPG-error.html" class="sidebar-link">update由于没有公钥，无法验证下列签名</a></li><li><a href="/rpi/2014-04-19-xrdp-error.html" class="sidebar-link">XRDP远程登树莓派出错</a></li><li><a href="/rpi/2014-04-19-rpi-wlan.html" class="sidebar-link">树莓派(Raspberry Pi)无线网卡配置方法</a></li><li><a href="/rpi/2013-07-14-win-mstsc-rpi.html" class="sidebar-link">windows远程连接树莓派</a></li><li><a href="/rpi/2013-07-06-xively-on-rpi.html" class="sidebar-link">利用xively监控Raspberry Pi的Load和温度</a></li><li><a href="/rpi/2013-07-06-Markdown-on-rpi.html" class="sidebar-link">使用Markdown On RaspberryPi 写博客</a></li><li><a href="/rpi/2013-04-22-download.html" class="sidebar-link">BT 下载服务器</a></li><li><a href="/rpi/2013-03-06-ddns-on-rpi.html" class="sidebar-link">树莓派实现ddns</a></li><li><a href="/rpi/2013-02-23-doubanfm-on-rpi.html" class="sidebar-link">dbfmpi——树莓派豆瓣电台fm发射器</a></li><li><a href="/rpi/2013-01-23-rpilnmp.html" class="sidebar-link">RaspberryPi LNMP环境初始化基本完成</a></li><li><a href="/rpi/2012-12-22-about-on-rpi.html" class="sidebar-link">my Raspberry Pi</a></li><li><a href="/rpi/2012-12-18-rpi2b-first.html" class="sidebar-link">树莓派2B安装和启动</a></li><li><a href="/rpi/2012-08-31-notepad++-markdown-plugin.html" class="sidebar-link">notepad++ markdown插件安装</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>About</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="树莓派python监控get脚本"><a href="#树莓派python监控get脚本" aria-hidden="true" class="header-anchor">#</a> 树莓派python监控get脚本</h1> <p>================</p> <p>树莓派内置了一个传感器你可以用来获取树莓派的CPU和GPU温度。</p> <p>具体参数如下</p> <pre><code>pi@raspberrypi ~ $ cat /sys/class/thermal/thermal_zone0/temp
+38470
+pi@raspberrypi ~ $ vcgencmd measure_temp
+temp=38.5'C
+</code></pre> <p>根据这2个参数写一个python脚本可以在终端打印小派当前硬件的使用情况以及cpu和gpu温度的python脚本，后面可以设置计划任务，打点显示！比xively监控参数略多！</p> <p>这对于保护你的设备非常有用，举个例子：你可以在树莓派温度过高的时候关掉它或者在温度过热的时候报警。</p> <pre><code>import os
+import commands
+
+#vcgencmd measure_temp
+#cat /sys/class/thermal/thermal_zone0/temp
+
+
+# Return CPU temperature as a character string                                      
+def getCPUtemperature():
+    res = os.popen('vcgencmd measure_temp').readline()
+    return(res.replace(&quot;temp=&quot;,&quot;&quot;).replace(&quot;'C\n&quot;,&quot;&quot;))
+
+# Return GPU temperature as a character string
+def get_gpu_temp():
+    gpu_temp = commands.getoutput( '/opt/vc/bin/vcgencmd measure_temp' ).replace( 'temp=', '' ).replace( '\'C', '' )
+    return  float(gpu_temp)
+    # Uncomment the next line if you want the temp in Fahrenheit
+    # return float(1.8* gpu_temp)+32
+
+
+# Return RAM information (unit=kb) in a list                                       
+# Index 0: total RAM                                                               
+# Index 1: used RAM                                                                 
+# Index 2: free RAM                                                                 
+def getRAMinfo():
+    p = os.popen('free')
+    i = 0
+    while 1:
+        i = i + 1
+        line = p.readline()
+        if i==2:
+            return(line.split()[1:4])
+
+# Return % of CPU used by user as a character string                                
+def getCPUuse():
+    return(str(os.popen(&quot;top -n1 | awk '/Cpu\(s\):/ {print $2}'&quot;).readline().strip(\
+)))
+
+# Return information about disk space as a list (unit included)                     
+# Index 0: total disk space                                                         
+# Index 1: used disk space                                                         
+# Index 2: remaining disk space                                                     
+# Index 3: percentage of disk used                                                  
+def getDiskSpace():
+    p = os.popen(&quot;df -h /&quot;)
+    i = 0
+    while 1:
+        i = i +1
+        line = p.readline()
+        if i==2:
+            return(line.split()[1:5])
+
+
+# CPU informatiom
+CPU_temp = getCPUtemperature()
+CPU_usage = getCPUuse()
+
+# RAM information
+# Output is in kb, here I convert it in Mb for readability
+RAM_stats = getRAMinfo()
+RAM_total = round(int(RAM_stats[0]) / 1000,1)
+RAM_used = round(int(RAM_stats[1]) / 1000,1)
+RAM_free = round(int(RAM_stats[2]) / 1000,1)
+
+# Disk information
+DISK_stats = getDiskSpace()
+DISK_total = DISK_stats[0]
+DISK_used = DISK_stats[1]
+DISK_perc = DISK_stats[3]
+
+if __name__ == '__main__':
+  print('')
+  print('CPU Temperature = '+CPU_temp) , &quot;C&quot;
+  print('CPU Use = '+CPU_usage)
+  print &quot;GPU Temperature = &quot;, str(get_gpu_temp()), &quot;C&quot;
+  print('')
+  print('RAM Total = '+str(RAM_total)+' MB')
+  print('RAM Used = '+str(RAM_used)+' MB')
+  print('RAM Free = '+str(RAM_free)+' MB')
+  print('')  
+  print('DISK Total Space = '+str(DISK_total)+'B')
+  print('DISK Used Space = '+str(DISK_used)+'B')
+  print('DISK Used Percentage = '+str(DISK_perc))
+</code></pre> <p>执行效果</p> <pre><code>pi@raspberrypi ~ $ python /home/pi/sysdata/get.py
+
+CPU Temperature = 34.5 C
+CPU Use = 1.5
+GPU Temperature =  34.5 C
+
+RAM Total = 448.0 MB
+RAM Used = 383.0 MB
+RAM Free = 64.0 MB
+
+DISK Total Space = 7.2GB
+DISK Used Space = 2.1GB
+DISK Used Percentage = 31%
+</code></pre></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/rpi/2014-04-27-usbstorage.html" class="prev">树莓派自动挂载usb移动存储设备</a></span> <span class="next"><a href="/rpi/2014-04-22-GPG-error.html">update由于没有公钥，无法验证下列签名</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.d547739a.js" defer></script><script src="/assets/js/2.24623497.js" defer></script><script src="/assets/js/61.34ece49a.js" defer></script>
+  </body>
+</html>

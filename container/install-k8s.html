@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>使用kubeadm安装kubernetes_v1.16.1-转载 | LINUX48</title>
+    <meta name="description" content="Kubernete安装文档_Kubernetes最新稳定版v1.16.1的快速安装文档_该文档由众多网友验证并在线提出修改意见_持续不断地更新和完善_并且通过QQ群提供免费在线答疑的服务">
+    <link rel="icon" href="favicon.ico">
+    <meta name="keywords" content="Kubernetes安装,K8S安装,kubeadm,Kubernetes 安装,K8S 安装">
+    <link rel="preload" href="/assets/css/0.styles.0b276b3d.css" as="style"><link rel="preload" href="/assets/js/app.d547739a.js" as="script"><link rel="preload" href="/assets/js/2.24623497.js" as="script"><link rel="preload" href="/assets/js/8.d941bdbf.js" as="script"><link rel="prefetch" href="/assets/js/10.58691a3b.js"><link rel="prefetch" href="/assets/js/100.fbd94a6c.js"><link rel="prefetch" href="/assets/js/101.21e5ef41.js"><link rel="prefetch" href="/assets/js/102.88af2ccb.js"><link rel="prefetch" href="/assets/js/103.69e7affb.js"><link rel="prefetch" href="/assets/js/104.c5fd8014.js"><link rel="prefetch" href="/assets/js/105.f5812982.js"><link rel="prefetch" href="/assets/js/106.4e19a657.js"><link rel="prefetch" href="/assets/js/107.0069eb1b.js"><link rel="prefetch" href="/assets/js/108.59caf83f.js"><link rel="prefetch" href="/assets/js/109.5d808f8a.js"><link rel="prefetch" href="/assets/js/11.da6a6f94.js"><link rel="prefetch" href="/assets/js/110.95167197.js"><link rel="prefetch" href="/assets/js/111.1310b0d3.js"><link rel="prefetch" href="/assets/js/112.58cbc4b5.js"><link rel="prefetch" href="/assets/js/113.1fa21fcf.js"><link rel="prefetch" href="/assets/js/114.55a2217f.js"><link rel="prefetch" href="/assets/js/115.647f5372.js"><link rel="prefetch" href="/assets/js/116.c4b46617.js"><link rel="prefetch" href="/assets/js/117.245855f4.js"><link rel="prefetch" href="/assets/js/118.e9476d0e.js"><link rel="prefetch" href="/assets/js/119.7ef3cfaf.js"><link rel="prefetch" href="/assets/js/12.8932e2d7.js"><link rel="prefetch" href="/assets/js/120.acfd5c81.js"><link rel="prefetch" href="/assets/js/121.ec6e7a4e.js"><link rel="prefetch" href="/assets/js/122.5c03347f.js"><link rel="prefetch" href="/assets/js/123.2e2de112.js"><link rel="prefetch" href="/assets/js/124.f67e422e.js"><link rel="prefetch" href="/assets/js/125.32ef6e6e.js"><link rel="prefetch" href="/assets/js/126.bde58b63.js"><link rel="prefetch" href="/assets/js/127.dca014de.js"><link rel="prefetch" href="/assets/js/128.883ef7d7.js"><link rel="prefetch" href="/assets/js/129.2f95d808.js"><link rel="prefetch" href="/assets/js/13.d5c1637d.js"><link rel="prefetch" href="/assets/js/130.b0ae78fa.js"><link rel="prefetch" href="/assets/js/131.2ba5f958.js"><link rel="prefetch" href="/assets/js/132.61928b24.js"><link rel="prefetch" href="/assets/js/133.3144a66d.js"><link rel="prefetch" href="/assets/js/134.f944030c.js"><link rel="prefetch" href="/assets/js/135.72750127.js"><link rel="prefetch" href="/assets/js/136.6732d310.js"><link rel="prefetch" href="/assets/js/137.0714a5b0.js"><link rel="prefetch" href="/assets/js/138.f1f9096c.js"><link rel="prefetch" href="/assets/js/139.d8be7a78.js"><link rel="prefetch" href="/assets/js/14.9df06523.js"><link rel="prefetch" href="/assets/js/140.58d1da78.js"><link rel="prefetch" href="/assets/js/141.55f759b4.js"><link rel="prefetch" href="/assets/js/142.3fca9e1a.js"><link rel="prefetch" href="/assets/js/143.7ef2390e.js"><link rel="prefetch" href="/assets/js/144.85bafe20.js"><link rel="prefetch" href="/assets/js/145.00e4c2de.js"><link rel="prefetch" href="/assets/js/15.16fca8c0.js"><link rel="prefetch" href="/assets/js/16.144c592e.js"><link rel="prefetch" href="/assets/js/17.ca3f0154.js"><link rel="prefetch" href="/assets/js/18.9278d1c2.js"><link rel="prefetch" href="/assets/js/19.06cbda7b.js"><link rel="prefetch" href="/assets/js/20.86436084.js"><link rel="prefetch" href="/assets/js/21.5452a5f4.js"><link rel="prefetch" href="/assets/js/22.ffb9ccd7.js"><link rel="prefetch" href="/assets/js/23.39348297.js"><link rel="prefetch" href="/assets/js/24.772ac0b8.js"><link rel="prefetch" href="/assets/js/25.ce2cc958.js"><link rel="prefetch" href="/assets/js/26.fe928081.js"><link rel="prefetch" href="/assets/js/27.c5168e56.js"><link rel="prefetch" href="/assets/js/28.11c5cd93.js"><link rel="prefetch" href="/assets/js/29.d0df7513.js"><link rel="prefetch" href="/assets/js/3.afdbb220.js"><link rel="prefetch" href="/assets/js/30.8be6e657.js"><link rel="prefetch" href="/assets/js/31.b563a330.js"><link rel="prefetch" href="/assets/js/32.8d7a36e0.js"><link rel="prefetch" href="/assets/js/33.c9ee7217.js"><link rel="prefetch" href="/assets/js/34.759d0580.js"><link rel="prefetch" href="/assets/js/35.9833222c.js"><link rel="prefetch" href="/assets/js/36.21b23c90.js"><link rel="prefetch" href="/assets/js/37.6e35ee30.js"><link rel="prefetch" href="/assets/js/38.a773fb35.js"><link rel="prefetch" href="/assets/js/39.74e2e4de.js"><link rel="prefetch" href="/assets/js/4.5229681b.js"><link rel="prefetch" href="/assets/js/40.36302b4f.js"><link rel="prefetch" href="/assets/js/41.41e724a5.js"><link rel="prefetch" href="/assets/js/42.b5c593c6.js"><link rel="prefetch" href="/assets/js/43.468992cf.js"><link rel="prefetch" href="/assets/js/44.758e86a2.js"><link rel="prefetch" href="/assets/js/45.c2e2cf01.js"><link rel="prefetch" href="/assets/js/46.930a4274.js"><link rel="prefetch" href="/assets/js/47.7da62911.js"><link rel="prefetch" href="/assets/js/48.94502441.js"><link rel="prefetch" href="/assets/js/49.b3e09a7d.js"><link rel="prefetch" href="/assets/js/5.8dab3aa1.js"><link rel="prefetch" href="/assets/js/50.f39e943a.js"><link rel="prefetch" href="/assets/js/51.19210514.js"><link rel="prefetch" href="/assets/js/52.595f89b1.js"><link rel="prefetch" href="/assets/js/53.31682f4d.js"><link rel="prefetch" href="/assets/js/54.73839c6f.js"><link rel="prefetch" href="/assets/js/55.5dda3032.js"><link rel="prefetch" href="/assets/js/56.9c051c47.js"><link rel="prefetch" href="/assets/js/57.ca5c8068.js"><link rel="prefetch" href="/assets/js/58.f6e52010.js"><link rel="prefetch" href="/assets/js/59.bc6eb54a.js"><link rel="prefetch" href="/assets/js/6.fadf5b27.js"><link rel="prefetch" href="/assets/js/60.c301b2a0.js"><link rel="prefetch" href="/assets/js/61.34ece49a.js"><link rel="prefetch" href="/assets/js/62.14a7dca3.js"><link rel="prefetch" href="/assets/js/63.78db4810.js"><link rel="prefetch" href="/assets/js/64.66771257.js"><link rel="prefetch" href="/assets/js/65.cd745745.js"><link rel="prefetch" href="/assets/js/66.9db6be57.js"><link rel="prefetch" href="/assets/js/67.44ad15ae.js"><link rel="prefetch" href="/assets/js/68.5f9b9051.js"><link rel="prefetch" href="/assets/js/69.17fe060a.js"><link rel="prefetch" href="/assets/js/7.497a77ba.js"><link rel="prefetch" href="/assets/js/70.ceb8b968.js"><link rel="prefetch" href="/assets/js/71.784999cf.js"><link rel="prefetch" href="/assets/js/72.5cae45f8.js"><link rel="prefetch" href="/assets/js/73.be78be06.js"><link rel="prefetch" href="/assets/js/74.ca20f9c0.js"><link rel="prefetch" href="/assets/js/75.dd59bb63.js"><link rel="prefetch" href="/assets/js/76.3d59e426.js"><link rel="prefetch" href="/assets/js/77.29b6888a.js"><link rel="prefetch" href="/assets/js/78.f43a3d98.js"><link rel="prefetch" href="/assets/js/79.8d4441c4.js"><link rel="prefetch" href="/assets/js/80.1ed0f009.js"><link rel="prefetch" href="/assets/js/81.d60bb7bb.js"><link rel="prefetch" href="/assets/js/82.fe19abeb.js"><link rel="prefetch" href="/assets/js/83.112d63e3.js"><link rel="prefetch" href="/assets/js/84.6024d92b.js"><link rel="prefetch" href="/assets/js/85.bbb0b0cd.js"><link rel="prefetch" href="/assets/js/86.6fb86e49.js"><link rel="prefetch" href="/assets/js/87.48e833b9.js"><link rel="prefetch" href="/assets/js/88.563a8225.js"><link rel="prefetch" href="/assets/js/89.7378c246.js"><link rel="prefetch" href="/assets/js/9.7e79e735.js"><link rel="prefetch" href="/assets/js/90.5f9203c7.js"><link rel="prefetch" href="/assets/js/91.264f56ea.js"><link rel="prefetch" href="/assets/js/92.c60856cb.js"><link rel="prefetch" href="/assets/js/93.0e844347.js"><link rel="prefetch" href="/assets/js/94.f0898a34.js"><link rel="prefetch" href="/assets/js/95.e20032b4.js"><link rel="prefetch" href="/assets/js/96.0d291bab.js"><link rel="prefetch" href="/assets/js/97.6210726a.js"><link rel="prefetch" href="/assets/js/98.4d2ad25a.js"><link rel="prefetch" href="/assets/js/99.5f24992c.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0b276b3d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">LINUX48</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">指南</a></div><div class="nav-item"><a href="/zh/CHANGELOG.html" class="nav-link">Changelog</a></div><div class="nav-item"><a href="https://github.com/JDsecretFE/quist-ui" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">指南</a></div><div class="nav-item"><a href="/zh/CHANGELOG.html" class="nav-link">Changelog</a></div><div class="nav-item"><a href="https://github.com/JDsecretFE/quist-ui" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Database</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Container</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/container/2019-07-12-k8s.html" class="sidebar-link">kubernetes集群搭建-初探</a></li><li><a href="/container/install-k8s.html" class="active sidebar-link">使用kubeadm安装kubernetes_v1.16.1-转载</a></li><li><a href="/container/config-kubectl.html" class="sidebar-link">配置Kubectl</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Monitor</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>System</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>RaspberryPi</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>About</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="使用kubeadm安装kubernetes-v1-16-1-转载"><a href="#使用kubeadm安装kubernetes-v1-16-1-转载" aria-hidden="true" class="header-anchor">#</a> 使用kubeadm安装kubernetes_v1.16.1-转载</h1> <h2 id="文档特点"><a href="#文档特点" aria-hidden="true" class="header-anchor">#</a> 文档特点</h2> <div class="vfg-grid" style="margin-right:-0.5rem;margin-left:-0.5rem;flex-direction:row;flex-wrap:nowrap;"><div class="vfg-grid-item" style="padding-right:0.5rem;padding-left:0.5rem;width:66.6667%;flex-basis:66.6667%;max-width:66.6667%;padding:1rem 0 1rem 1rem;"><div><p><strong>网上那么多 Kubernetes 安装文档，为什么这篇文档更有参考价值？</strong></p> <ul><li><p><strong>众多网友验证</strong></p> <ul><li>每天有超过 300 人参照此文档完成 Kubernetes 安装</li> <li>不断有网友对安装文档提出改进意见</li></ul></li> <li><p><strong>持续更新和完善</strong></p> <ul><li>始终有最新的 Kubernetes 稳定版安装文档，当前版本 v1.16.1</li> <li>当前已更新了 <font color="red"> 60 次 </font>， <a href="https://github.com/eip-work/kuboard-press/commits/master/install/install-k8s.md" target="_blank" rel="noopener noreferrer">查看更新历史<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></li> <li><p><strong>在线答疑</strong></p> <Qq></Qq> QQ群号为：808894550，也可以扫描二维码加群
+<p><img src="/images/kuboard_qq.png" alt="Kubernetes安装：QQ群在线答疑"></p></li></ul></div></div> <div class="vfg-grid-item" style="padding-right:0.5rem;padding-left:0.5rem;width:33.3333%;flex-basis:33.3333%;max-width:33.3333%;padding:2rem 1rem 1rem 1rem;"><AdSenseVertical></AdSenseVertical></div></div> <h2 id="配置要求"><a href="#配置要求" aria-hidden="true" class="header-anchor">#</a> 配置要求</h2> <p>对于 Kubernetes 初学者，推荐在阿里云或腾讯云采购如下配置：（您也可以使用自己的虚拟机、私有云等您最容易获得的 Linux 环境）</p> <ul><li>3台 <strong>2核4G</strong> 的ECS（突发性能实例 t5 ecs.t5-c1m2.large或同等配置，单台约 0.4元/小时，停机时不收费）</li> <li><strong>Cent OS 7.6</strong></li></ul> <div class="vfg-grid" style="margin-right:-0.5rem;margin-left:-0.5rem;flex-direction:row;flex-wrap:nowrap;"><div class="vfg-grid-item" style="padding-right:0.5rem;padding-left:0.5rem;width:66.6667%;flex-basis:66.6667%;max-width:66.6667%;padding:1rem 0 1rem 1rem;"><div><p><a href="https://cloud.tencent.com/act/cps/redirect?redirect=1040&amp;cps_key=2ee6baa049659f4713ddc55a51314372&amp;from=console" target="_blank" rel="noopener noreferrer">领取腾讯云最高2860元代金券<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="https://cloud.tencent.com/act/cps/redirect?redirect=1044&amp;cps_key=2ee6baa049659f4713ddc55a51314372&amp;from=console" target="_blank" rel="noopener noreferrer">腾讯云限时1折秒杀<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=obezo3pg" target="_blank" rel="noopener noreferrer">领取阿里云最高2000元红包<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="https://www.aliyun.com/acts/limit-buy?userCode=obezo3pg" target="_blank" rel="noopener noreferrer">阿里云服务器限时2折<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><strong>安装后的软件版本为</strong></p> <ul><li>Kubernetes v1.16.1
+<ul><li>calico 3.8.2</li> <li>nginx-ingress 1.5.5</li></ul></li> <li>Docker 18.09.7</li></ul> <blockquote><p>如果要安装 Kubernetes 历史版本，请参考：</p> <ul><li><a href="/install/history-k8s/install-k8s-1.16.0.html">安装 Kubernetes v1.16.0 单Master节点</a></li> <li><a href="/install/history-k8s/install-k8s-1.15.4.html">安装 Kubernetes v1.15.4 单Master节点</a></li> <li><a href="/install/history-k8s/install-k8s-1.15.3.html">安装 Kubernetes v1.15.3 单Master节点</a></li> <li><a href="/install/history-k8s/install-k8s-1.15.2.html">安装 Kubernetes v1.15.2 单Master节点</a></li> <li><a href="/install/history-k8s/install-k8s-1.15.1.html">安装 Kubernetes v1.15.1 单Master节点</a></li></ul></blockquote></div></div> <div class="vfg-grid-item" style="padding-right:0.5rem;padding-left:0.5rem;width:33.3333%;flex-basis:33.3333%;max-width:33.3333%;padding:2rem 1rem 1rem 1rem;"><AdSenseVertical></AdSenseVertical></div></div> <p>安装后的拓扑图如下：<span><a href="/kuboard.rp" download="www.kuboard.cn.rp">下载拓扑图源文件</a></span> <font color="#999">使用Axure RP 9.0可打开该文件</font></p> <p style="max-width:720px;"><img src="/images/topology/k8s.png" alt="Kubernetes安装：Kubernetes安装拓扑图" style="max-width:100%;"></p> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p><strong>关于二进制安装</strong></p> <p>鉴于目前已经有比较方便的办法获得 kubernetes 镜像，我将回避 <em><strong>二进制</strong></em> 安装是否更好的争论。本文采用 kubernetes.io 官方推荐的 kubeadm 工具安装 kubernetes 集群。</p></div> <h2 id="检查-centos-hostname"><a href="#检查-centos-hostname" aria-hidden="true" class="header-anchor">#</a> 检查 centos / hostname</h2> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 在 master 节点和 worker 节点都要执行</span>
+<span class="token function">cat</span> /etc/redhat-release
+
+<span class="token comment"># 此处 hostname 的输出将会是该机器在 Kubernetes 集群中的节点名字</span>
+<span class="token comment"># 不能使用 localhost 作为节点的名字</span>
+<span class="token function">hostname</span>
+
+<span class="token comment"># 请使用 lscpu 命令，核对 CPU 信息</span>
+<span class="token comment"># Architecture: x86_64    本安装文档不支持 arm 架构</span>
+<span class="token comment"># CPU(s):       2         CPU 内核数量不能低于 2</span>
+lscpu
+</code></pre></div><p><strong>操作系统兼容性</strong></p> <div class="vfg-grid" style="margin-right:-0.5rem;margin-left:-0.5rem;flex-direction:row;flex-wrap:nowrap;"><div class="vfg-grid-item" style="padding-right:0.5rem;padding-left:0.5rem;width:66.6667%;flex-basis:66.6667%;max-width:66.6667%;padding:1rem 0 1rem 1rem;"><div><table><thead><tr><th>CentOS 版本</th> <th>本文档是否兼容</th> <th>备注</th></tr></thead> <tbody><tr><td>7.7</td> <td><span style="font-size:24px;">😄</span></td> <td>已验证</td></tr> <tr><td>7.6</td> <td><span style="font-size:24px;">😄</span></td> <td>已验证</td></tr> <tr><td>7.5</td> <td><span style="font-size:24px;">😄</span></td> <td>已验证</td></tr> <tr><td>7.4</td> <td><span style="font-size:24px;">🤔</span></td> <td>待验证</td></tr> <tr><td>7.3</td> <td><span style="font-size:24px;">🤔</span></td> <td>待验证</td></tr> <tr><td>7.2</td> <td><span style="font-size:24px;">😞</span></td> <td>已证实会出现 kubelet 无法启动的问题</td></tr></tbody></table></div></div> <div class="vfg-grid-item" style="padding-right:0.5rem;padding-left:0.5rem;width:33.3333%;flex-basis:33.3333%;max-width:33.3333%;padding:2rem 1rem 1rem 1rem;"><AdSenseVertical></AdSenseVertical></div></div> <div class="tip custom-block"><p class="custom-block-title">修改 hostname</p> <p>如果您需要修改 hostname，可执行如下指令：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 修改 hostname</span>
+hostnamectl set-hostname your-new-host-name
+<span class="token comment"># 查看修改结果</span>
+hostnamectl status
+<span class="token comment"># 设置 hostname 解析</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;127.0.0.1   <span class="token variable"><span class="token variable">$(</span><span class="token function">hostname</span><span class="token variable">)</span></span>&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/hosts
+</code></pre></div></div> <h2 id="安装-docker-kubelet"><a href="#安装-docker-kubelet" aria-hidden="true" class="header-anchor">#</a> 安装 docker / kubelet</h2> <div><div class="vfg-grid" style="margin-right:-0.5rem;margin-left:-0.5rem;flex-direction:row;flex-wrap:nowrap;"><div class="vfg-grid-item" style="padding-right:0.5rem;padding-left:0.5rem;width:66.6667%;flex-basis:66.6667%;max-width:66.6667%;padding:1rem 0 1rem 1rem;"><div><div class="danger custom-block"><p class="custom-block-title">必须选中下面的四个勾选框才能继续</p> <ul><li>选中后显示 <strong>安装 docker/kubelet 的文档</strong></li></ul> <div style="display:inline-block;width:480px;max-width:calc(100vw - 100px);overflow:hidden;line-height:40px;background-color:rgba(255,229,100,0.3);padding:20px 0 0 20px;margin-bottom:20px;border:1px solid #d7dae2;"><form class="el-form" style="text-align:left;"><div class="el-form-item env-form-item"><!----><div class="el-form-item__content"><div role="group" aria-label="checkbox-group" class="el-checkbox-group"><li style="height:40px;"><label class="el-checkbox" style="width:300px;max-width:calc(100vw - 100px);text-align:left;"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input type="checkbox" aria-hidden="false" value="centos" class="el-checkbox__original"></span><span class="el-checkbox__label">我的任意节点 centos 版本在兼容列表中<!----></span></label></li> <li style="height:40px;"><label class="el-checkbox" style="width:300px;max-width:calc(100vw - 100px);text-align:left;"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input type="checkbox" aria-hidden="false" value="hostname" class="el-checkbox__original"></span><span class="el-checkbox__label">我的任意节点 hostname 不是 localhost，且不包含下划线<!----></span></label></li> <li style="height:40px;"><label class="el-checkbox" style="width:300px;max-width:calc(100vw - 100px);text-align:left;"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input type="checkbox" aria-hidden="false" value="cpu" class="el-checkbox__original"></span><span class="el-checkbox__label">我的任意节点 CPU 内核数量大于等于 2<!----></span></label></li> <li style="height:40px;"><label class="el-checkbox" style="width:300px;max-width:calc(100vw - 100px);text-align:left;"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input type="checkbox" aria-hidden="false" value="docker" class="el-checkbox__original"></span><span class="el-checkbox__label">我的任意节点不会直接使用 docker run 或 docker-compose 运行容器<!----></span></label></li> <li style="height:40px;"><label class="el-checkbox" style="width:300px;max-width:calc(100vw - 100px);text-align:left;"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input type="checkbox" aria-hidden="false" value="networkcard" class="el-checkbox__original"></span><span class="el-checkbox__label">我的任意节点只有一块网卡（可以在完成K8S安装后再添加网卡）<!----></span></label></li></div><!----></div></div></form></div></div></div></div> <div class="vfg-grid-item" style="padding-right:0.5rem;padding-left:0.5rem;width:33.3333%;flex-basis:33.3333%;max-width:33.3333%;padding:2rem 1rem 1rem 1rem;"><AdSenseSquare></AdSenseSquare></div></div></div> <div style="display:none;"><p>使用 root 身份在所有节点执行如下代码，以安装软件：</p> <ul><li>docker</li> <li>nfs-utils</li> <li>kubectl / kubeadm / kubelet</li></ul> <div class="el-tabs el-tabs--top el-tabs--border-card"><div class="el-tabs__header is-top"><div class="el-tabs__nav-wrap is-top"><div class="el-tabs__nav-scroll"><div role="tablist" class="el-tabs__nav is-top" style="transform:translateX(-0px);"></div></div></div></div><div class="el-tabs__content"><div role="tabpanel" aria-hidden="true" id="pane-null" aria-labelledby="tab-null" class="el-tab-pane" style="display:none;"><div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 在 master 节点和 worker 节点都要执行</span>
+
+<span class="token function">curl</span> -sSL https://kuboard.cn/install-script/v1.16.1/install_kubelet.sh <span class="token operator">|</span> <span class="token function">sh</span>
+
+</code></pre></div></div> <div role="tabpanel" aria-hidden="true" id="pane-null" aria-labelledby="tab-null" class="el-tab-pane" style="display:none;"><p>手动执行以下代码，效果与快速安装完全相同。</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token comment"># 在 master 节点和 worker 节点都要执行</span>
+
+<span class="token comment"># 安装 docker</span>
+<span class="token comment"># 参考文档如下</span>
+<span class="token comment"># https://docs.docker.com/install/linux/docker-ce/centos/ </span>
+<span class="token comment"># https://docs.docker.com/install/linux/linux-postinstall/</span>
+
+<span class="token comment"># 卸载旧版本</span>
+yum remove -y docker <span class="token punctuation">\</span>
+docker-client <span class="token punctuation">\</span>
+docker-client-latest <span class="token punctuation">\</span>
+docker-common <span class="token punctuation">\</span>
+docker-latest <span class="token punctuation">\</span>
+docker-latest-logrotate <span class="token punctuation">\</span>
+docker-logrotate <span class="token punctuation">\</span>
+docker-selinux <span class="token punctuation">\</span>
+docker-engine-selinux <span class="token punctuation">\</span>
+docker-engine
+
+<span class="token comment"># 设置 yum repository</span>
+yum <span class="token function">install</span> -y yum-utils <span class="token punctuation">\</span>
+device-mapper-persistent-data <span class="token punctuation">\</span>
+lvm2
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+<span class="token comment"># 安装并启动 docker</span>
+yum <span class="token function">install</span> -y docker-ce-18.09.7 docker-ce-cli-18.09.7 containerd.io
+systemctl <span class="token builtin class-name">enable</span> docker
+systemctl start docker
+
+<span class="token comment"># 安装 nfs-utils</span>
+<span class="token comment"># 必须先安装 nfs-utils 才能挂载 nfs 网络存储</span>
+yum <span class="token function">install</span> -y nfs-utils
+
+<span class="token comment"># 关闭 防火墙</span>
+systemctl stop firewalld
+systemctl disable firewalld
+
+<span class="token comment"># 关闭 SeLinux</span>
+setenforce <span class="token number">0</span>
+<span class="token function">sed</span> -i <span class="token string">&quot;s/SELINUX=enforcing/SELINUX=disabled/g&quot;</span> /etc/selinux/config
+
+<span class="token comment"># 关闭 swap</span>
+swapoff -a
+<span class="token function">yes</span> <span class="token operator">|</span> <span class="token function">cp</span> /etc/fstab /etc/fstab_bak
+<span class="token function">cat</span> /etc/fstab_bak <span class="token operator">|</span><span class="token function">grep</span> -v swap <span class="token operator">&gt;</span> /etc/fstab
+
+<span class="token comment"># 修改 /etc/sysctl.conf</span>
+<span class="token comment"># 如果有配置，则修改</span>
+<span class="token function">sed</span> -i <span class="token string">&quot;s#^net.ipv4.ip_forward.*#net.ipv4.ip_forward=1#g&quot;</span>  /etc/sysctl.conf
+<span class="token function">sed</span> -i <span class="token string">&quot;s#^net.bridge.bridge-nf-call-ip6tables.*#net.bridge.bridge-nf-call-ip6tables=1#g&quot;</span>  /etc/sysctl.conf
+<span class="token function">sed</span> -i <span class="token string">&quot;s#^net.bridge.bridge-nf-call-iptables.*#net.bridge.bridge-nf-call-iptables=1#g&quot;</span>  /etc/sysctl.conf
+<span class="token comment"># 可能没有，追加</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;net.ipv4.ip_forward = 1&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/sysctl.conf
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;net.bridge.bridge-nf-call-ip6tables = 1&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/sysctl.conf
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;net.bridge.bridge-nf-call-iptables = 1&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/sysctl.conf
+<span class="token comment"># 执行命令以应用</span>
+sysctl -p
+
+<span class="token comment"># 配置K8S的yum源</span>
+<span class="token function">cat</span> <span class="token operator">&lt;&lt;</span>EOF <span class="token operator">&gt;</span> /etc/yum.repos.d/kubernetes.repo
+<span class="token punctuation">[</span>kubernetes<span class="token punctuation">]</span>
+<span class="token assign-left variable">name</span><span class="token operator">=</span>Kubernetes
+<span class="token assign-left variable">baseurl</span><span class="token operator">=</span>http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+<span class="token assign-left variable">enabled</span><span class="token operator">=</span><span class="token number">1</span>
+<span class="token assign-left variable">gpgcheck</span><span class="token operator">=</span><span class="token number">0</span>
+<span class="token assign-left variable">repo_gpgcheck</span><span class="token operator">=</span><span class="token number">0</span>
+<span class="token assign-left variable">gpgkey</span><span class="token operator">=</span>http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg
+       http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF
+
+<span class="token comment"># 卸载旧版本</span>
+yum remove -y kubelet kubeadm kubectl
+
+<span class="token comment"># 安装kubelet、kubeadm、kubectl</span>
+yum <span class="token function">install</span> -y kubelet-1.16.1 kubeadm-1.16.1 kubectl-1.16.1
+
+<span class="token comment"># 修改docker Cgroup Driver为systemd</span>
+<span class="token comment"># # 将/usr/lib/systemd/system/docker.service文件中的这一行 ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock</span>
+<span class="token comment"># # 修改为 ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd</span>
+<span class="token comment"># 如果不修改，在添加 worker 节点时可能会碰到如下错误</span>
+<span class="token comment"># [WARNING IsDockerSystemdCheck]: detected &quot;cgroupfs&quot; as the Docker cgroup driver. The recommended driver is &quot;systemd&quot;. </span>
+<span class="token comment"># Please follow the guide at https://kubernetes.io/docs/setup/cri/</span>
+<span class="token function">sed</span> -i <span class="token string">&quot;s#^ExecStart=/usr/bin/dockerd.*#ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd#g&quot;</span> /usr/lib/systemd/system/docker.service
+
+<span class="token comment"># 设置 docker 镜像，提高 docker 镜像下载速度和稳定性</span>
+<span class="token comment"># 如果您访问 https://hub.docker.io 速度非常稳定，亦可以跳过这个步骤</span>
+<span class="token function">curl</span> -sSL https://get.daocloud.io/daotools/set_mirror.sh <span class="token operator">|</span> <span class="token function">sh</span> -s http://f1361db2.m.daocloud.io
+
+<span class="token comment"># 重启 docker，并启动 kubelet</span>
+systemctl daemon-reload
+systemctl restart docker
+systemctl <span class="token builtin class-name">enable</span> kubelet <span class="token operator">&amp;&amp;</span> systemctl start kubelet
+
+docker version
+</code></pre></div><div class="warning custom-block"><p class="custom-block-title">WARNING</p> <p>如果此时执行 <code>service status kubelet</code> 命令，将得到 kubelet 启动失败的错误提示，请忽略此错误，因为必须完成后续步骤中 kubeadm init 的操作，kubelet 才能正常启动</p></div></div></div></div></div> <h2 id="初始化-master-节点"><a href="#初始化-master-节点" aria-hidden="true" class="header-anchor">#</a> 初始化 master 节点</h2> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <ul><li>以 root 身份在 demo-master-a-1 机器上执行</li> <li>初始化 master 节点时，如果因为中间某些步骤的配置出错，想要重新初始化 master 节点，请先执行 <code>kubeadm reset</code> 操作</li></ul></div> <div class="danger custom-block"><p class="custom-block-title">关于初始化时用到的环境变量</p> <ul><li><strong>APISERVER_NAME</strong> 不能是 master 的 hostname</li> <li><strong>APISERVER_NAME</strong> 必须全为小写字母、数字、小数点，不能包含减号</li> <li><strong>POD_SUBNET</strong> 所使用的网段不能与 <em><strong>master节点/worker节点</strong></em> 所在的网段重叠。该字段的取值为一个 <a href="/glossary/cidr.html" target="_blank">CIDR</a> 值，如果您对 CIDR 这个概念还不熟悉，请仍然执行 export POD_SUBNET=10.100.0.1/16 命令，不做修改</li></ul></div> <div class="el-tabs el-tabs--top el-tabs--border-card"><div class="el-tabs__header is-top"><div class="el-tabs__nav-wrap is-top"><div class="el-tabs__nav-scroll"><div role="tablist" class="el-tabs__nav is-top" style="transform:translateX(-0px);"></div></div></div></div><div class="el-tabs__content"><div role="tabpanel" aria-hidden="true" id="pane-null" aria-labelledby="tab-null" class="el-tab-pane" style="display:none;"><div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 只在 master 节点执行</span>
+<span class="token comment"># 替换 x.x.x.x 为 master 节点实际 IP（请使用内网 IP）</span>
+<span class="token comment"># export 命令只在当前 shell 会话中有效，开启新的 shell 窗口后，如果要继续安装过程，请重新执行此处的 export 命令</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">MASTER_IP</span><span class="token operator">=</span>x.x.x.x
+<span class="token comment"># 替换 apiserver.demo 为 您想要的 dnsName</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">APISERVER_NAME</span><span class="token operator">=</span>apiserver.demo
+<span class="token comment"># Kubernetes 容器组所在的网段，该网段安装完成后，由 kubernetes 创建，事先并不存在于您的物理网络中</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">POD_SUBNET</span><span class="token operator">=</span><span class="token number">10.100</span>.0.1/16
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${MASTER_IP}</span>    <span class="token variable">${APISERVER_NAME}</span>&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/hosts
+<span class="token function">curl</span> -sSL https://kuboard.cn/install-script/v1.16.1/init_master.sh <span class="token operator">|</span> <span class="token function">sh</span>
+</code></pre></div></div> <div role="tabpanel" aria-hidden="true" id="pane-null" aria-labelledby="tab-null" class="el-tab-pane" style="display:none;"><div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 只在 master 节点执行</span>
+<span class="token comment"># 替换 x.x.x.x 为 master 节点实际 IP（请使用内网 IP）</span>
+<span class="token comment"># export 命令只在当前 shell 会话中有效，开启新的 shell 窗口后，如果要继续安装过程，请重新执行此处的 export 命令</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">MASTER_IP</span><span class="token operator">=</span>x.x.x.x
+<span class="token comment"># 替换 apiserver.demo 为 您想要的 dnsName</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">APISERVER_NAME</span><span class="token operator">=</span>apiserver.demo
+<span class="token comment"># Kubernetes 容器组所在的网段，该网段安装完成后，由 kubernetes 创建，事先并不存在于您的物理网络中</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">POD_SUBNET</span><span class="token operator">=</span><span class="token number">10.100</span>.0.1/16
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${MASTER_IP}</span>    <span class="token variable">${APISERVER_NAME}</span>&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/hosts
+</code></pre></div><div class="language-sh extra-class"><pre class="language-sh"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token comment"># 只在 master 节点执行</span>
+
+<span class="token comment"># 脚本出错时终止执行</span>
+<span class="token builtin class-name">set</span> -e
+
+<span class="token comment"># 查看完整配置选项 https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2</span>
+<span class="token function">rm</span> -f ./kubeadm-config.yaml
+<span class="token function">cat</span> <span class="token operator">&lt;&lt;</span>EOF <span class="token operator">&gt;</span> ./kubeadm-config.yaml
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: ClusterConfiguration
+kubernetesVersion: v1.16.1
+imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
+controlPlaneEndpoint: <span class="token string">&quot;<span class="token variable">${APISERVER_NAME}</span>:6443&quot;</span>
+networking:
+  serviceSubnet: <span class="token string">&quot;10.96.0.0/16&quot;</span>
+  podSubnet: <span class="token string">&quot;<span class="token variable">${POD_SUBNET}</span>&quot;</span>
+  dnsDomain: <span class="token string">&quot;cluster.local&quot;</span>
+EOF
+
+<span class="token comment"># kubeadm init</span>
+<span class="token comment"># 根据您服务器网速的情况，您需要等候 3 - 10 分钟</span>
+kubeadm init --config<span class="token operator">=</span>kubeadm-config.yaml --upload-certs
+
+<span class="token comment"># 配置 kubectl</span>
+<span class="token function">rm</span> -rf /root/.kube/
+<span class="token function">mkdir</span> /root/.kube/
+<span class="token function">cp</span> -i /etc/kubernetes/admin.conf /root/.kube/config
+
+<span class="token comment"># 安装 calico 网络插件</span>
+<span class="token comment"># 参考文档 https://docs.projectcalico.org/v3.8/getting-started/kubernetes/</span>
+<span class="token function">rm</span> -f calico.yaml
+<span class="token function">wget</span> https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+<span class="token function">sed</span> -i <span class="token string">&quot;s#192\.168\.0\.0/16#<span class="token variable">${POD_SUBNET}</span>#&quot;</span> calico.yaml
+kubectl apply -f calico.yaml
+</code></pre></div></div></div></div> <p><strong>检查 master 初始化结果</strong></p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 只在 master 节点执行</span>
+
+<span class="token comment"># 执行如下命令，等待 3-10 分钟，直到所有的容器组处于 Running 状态</span>
+<span class="token function">watch</span> kubectl get pod -n kube-system -o wide
+
+<span class="token comment"># 查看 master 节点初始化结果</span>
+kubectl get nodes -o wide
+</code></pre></div> <h2 id="初始化-worker节点"><a href="#初始化-worker节点" aria-hidden="true" class="header-anchor">#</a> 初始化 worker节点</h2> <h3 id="获得-join命令参数"><a href="#获得-join命令参数" aria-hidden="true" class="header-anchor">#</a> 获得 join命令参数</h3> <p><strong>在 master 节点上执行</strong></p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 只在 master 节点执行</span>
+kubeadm token create --print-join-command
+</code></pre></div><p>可获取kubeadm join 命令及参数，如下所示</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># kubeadm token create 命令的输出</span>
+kubeadm <span class="token function">join</span> apiserver.demo:6443 --token mpfjma.4vjjg8flqihor4vt     --discovery-token-ca-cert-hash sha256:6f7a8e40a810323672de5eee6f4d19aa2dbdb38411845a1bf5dd63485c43d303
+</code></pre></div><h3 id="初始化worker"><a href="#初始化worker" aria-hidden="true" class="header-anchor">#</a> 初始化worker</h3> <p><strong>针对所有的 worker 节点执行</strong></p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 只在 worker 节点执行</span>
+<span class="token comment"># 替换 x.x.x.x 为 master 节点实际 IP（请使用内网 IP）</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">MASTER_IP</span><span class="token operator">=</span>x.x.x.x
+<span class="token comment"># 替换 apiserver.demo 为初始化 master 节点时所使用的 APISERVER_NAME</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">APISERVER_NAME</span><span class="token operator">=</span>apiserver.demo
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${MASTER_IP}</span>    <span class="token variable">${APISERVER_NAME}</span>&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/hosts
+
+<span class="token comment"># 替换为 master 节点上 kubeadm token create 命令的输出</span>
+kubeadm <span class="token function">join</span> apiserver.demo:6443 --token mpfjma.4vjjg8flqihor4vt     --discovery-token-ca-cert-hash sha256:6f7a8e40a810323672de5eee6f4d19aa2dbdb38411845a1bf5dd63485c43d303
+</code></pre></div><h3 id="检查初始化结果"><a href="#检查初始化结果" aria-hidden="true" class="header-anchor">#</a> 检查初始化结果</h3> <p>在 master 节点上执行</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 只在 master 节点执行</span>
+kubectl get nodes -o wide
+</code></pre></div><p>输出结果如下所示：</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token punctuation">[</span>root@demo-master-a-1 ~<span class="token punctuation">]</span><span class="token comment"># kubectl get nodes</span>
+NAME     STATUS   ROLES    AGE     VERSION
+demo-master-a-1   Ready    master   5m3s    v1.16.1
+demo-worker-a-1   Ready    <span class="token operator">&lt;</span>none<span class="token operator">&gt;</span>   2m26s   v1.16.1
+demo-worker-a-2   Ready    <span class="token operator">&lt;</span>none<span class="token operator">&gt;</span>   3m56s   v1.16.1
+</code></pre></div><h2 id="移除-worker-节点"><a href="#移除-worker-节点" aria-hidden="true" class="header-anchor">#</a> 移除 worker 节点</h2> <div class="warning custom-block"><p class="custom-block-title">WARNING</p> <p>正常情况下，您无需移除 worker 节点，如果添加到集群出错，您可以移除 worker 节点，再重新尝试添加</p></div> <p>在准备移除的 worker 节点上执行</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 只在 worker 节点执行</span>
+kubeadm reset
+</code></pre></div><p>在 master 节点 demo-master-a-1 上执行</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 只在 master 节点执行</span>
+kubectl delete node demo-worker-x-x
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">TIP</p> <ul><li>将 demo-worker-x-x 替换为要移除的 worker 节点的名字</li> <li>worker 节点的名字可以通过在节点 demo-master-a-1 上执行 kubectl get nodes 命令获得</li></ul></div> <h2 id="安装-ingress-controller"><a href="#安装-ingress-controller" aria-hidden="true" class="header-anchor">#</a> 安装 Ingress Controller</h2> <div class="el-tabs el-tabs--top el-tabs--border-card"><div class="el-tabs__header is-top"><div class="el-tabs__nav-wrap is-top"><div class="el-tabs__nav-scroll"><div role="tablist" class="el-tabs__nav is-top" style="transform:translateX(-0px);"></div></div></div></div><div class="el-tabs__content"><div role="tabpanel" aria-hidden="true" id="pane-null" aria-labelledby="tab-null" class="el-tab-pane" style="display:none;"><p><strong>在 master 节点上执行</strong></p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 只在 master 节点执行</span>
+kubectl apply -f https://kuboard.cn/install-script/v1.16.1/nginx-ingress.yaml
+</code></pre></div></div> <div role="tabpanel" aria-hidden="true" id="pane-null" aria-labelledby="tab-null" class="el-tab-pane" style="display:none;"><p><strong>在 master 节点上执行</strong></p> <p>只在您想选择其他 Ingress Controller 的情况下卸载</p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 只在 master 节点执行</span>
+kubectl delete -f https://kuboard.cn/install-script/v1.16.1/nginx-ingress.yaml
+</code></pre></div></div> <div role="tabpanel" aria-hidden="true" id="pane-null" aria-labelledby="tab-null" class="el-tab-pane" style="display:none;"><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token comment"># 如果打算用于生产环境，请参考 https://github.com/nginxinc/kubernetes-ingress/blob/v1.5.5/docs/installation.md 并根据您自己的情况做进一步定制</span>
+
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Namespace
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress
+
+<span class="token punctuation">---</span>
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> ServiceAccount
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress 
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress
+
+<span class="token punctuation">---</span>
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Secret
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> default<span class="token punctuation">-</span>server<span class="token punctuation">-</span>secret
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress
+<span class="token key atrule">type</span><span class="token punctuation">:</span> Opaque
+<span class="token key atrule">data</span><span class="token punctuation">:</span>
+  <span class="token key atrule">tls.crt</span><span class="token punctuation">:</span> LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN2akNDQWFZQ0NRREFPRjl0THNhWFhEQU5CZ2txaGtpRzl3MEJBUXNGQURBaE1SOHdIUVlEVlFRRERCWk8KUjBsT1dFbHVaM0psYzNORGIyNTBjbTlzYkdWeU1CNFhEVEU0TURreE1qRTRNRE16TlZvWERUSXpNRGt4TVRFNApNRE16TlZvd0lURWZNQjBHQTFVRUF3d1dUa2RKVGxoSmJtZHlaWE56UTI5dWRISnZiR3hsY2pDQ0FTSXdEUVlKCktvWklodmNOQVFFQkJRQURnZ0VQQURDQ0FRb0NnZ0VCQUwvN2hIUEtFWGRMdjNyaUM3QlBrMTNpWkt5eTlyQ08KR2xZUXYyK2EzUDF0azIrS3YwVGF5aGRCbDRrcnNUcTZzZm8vWUk1Y2Vhbkw4WGM3U1pyQkVRYm9EN2REbWs1Qgo4eDZLS2xHWU5IWlg0Rm5UZ0VPaStlM2ptTFFxRlBSY1kzVnNPazFFeUZBL0JnWlJVbkNHZUtGeERSN0tQdGhyCmtqSXVuektURXUyaDU4Tlp0S21ScUJHdDEwcTNRYzhZT3ExM2FnbmovUWRjc0ZYYTJnMjB1K1lYZDdoZ3krZksKWk4vVUkxQUQ0YzZyM1lma1ZWUmVHd1lxQVp1WXN2V0RKbW1GNWRwdEMzN011cDBPRUxVTExSakZJOTZXNXIwSAo1TmdPc25NWFJNV1hYVlpiNWRxT3R0SmRtS3FhZ25TZ1JQQVpQN2MwQjFQU2FqYzZjNGZRVXpNQ0F3RUFBVEFOCkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQWpLb2tRdGRPcEsrTzhibWVPc3lySmdJSXJycVFVY2ZOUitjb0hZVUoKdGhrYnhITFMzR3VBTWI5dm15VExPY2xxeC9aYzJPblEwMEJCLzlTb0swcitFZ1U2UlVrRWtWcitTTFA3NTdUWgozZWI4dmdPdEduMS9ienM3bzNBaS9kclkrcUI5Q2k1S3lPc3FHTG1US2xFaUtOYkcyR1ZyTWxjS0ZYQU80YTY3Cklnc1hzYktNbTQwV1U3cG9mcGltU1ZmaXFSdkV5YmN3N0NYODF6cFErUyt1eHRYK2VBZ3V0NHh3VlI5d2IyVXYKelhuZk9HbWhWNThDd1dIQnNKa0kxNXhaa2VUWXdSN0diaEFMSkZUUkk3dkhvQXprTWIzbjAxQjQyWjNrN3RXNQpJUDFmTlpIOFUvOWxiUHNoT21FRFZkdjF5ZytVRVJxbStGSis2R0oxeFJGcGZnPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  <span class="token key atrule">tls.key</span><span class="token punctuation">:</span> LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBdi91RWM4b1JkMHUvZXVJTHNFK1RYZUprckxMMnNJNGFWaEMvYjVyYy9XMlRiNHEvClJOcktGMEdYaVN1eE9ycXgrajlnamx4NXFjdnhkenRKbXNFUkJ1Z1B0ME9hVGtIekhvb3FVWmcwZGxmZ1dkT0EKUTZMNTdlT1l0Q29VOUZ4amRXdzZUVVRJVUQ4R0JsRlNjSVo0b1hFTkhzbysyR3VTTWk2Zk1wTVM3YUhudzFtMApxWkdvRWEzWFNyZEJ6eGc2clhkcUNlUDlCMXl3VmRyYURiUzc1aGQzdUdETDU4cGszOVFqVUFQaHpxdmRoK1JWClZGNGJCaW9CbTVpeTlZTW1hWVhsMm0wTGZzeTZuUTRRdFFzdEdNVWozcGJtdlFmazJBNnljeGRFeFpkZFZsdmwKMm82MjBsMllxcHFDZEtCRThCay90elFIVTlKcU56cHpoOUJUTXdJREFRQUJBb0lCQVFDZklHbXowOHhRVmorNwpLZnZJUXQwQ0YzR2MxNld6eDhVNml4MHg4Mm15d1kxUUNlL3BzWE9LZlRxT1h1SENyUlp5TnUvZ2IvUUQ4bUFOCmxOMjRZTWl0TWRJODg5TEZoTkp3QU5OODJDeTczckM5bzVvUDlkazAvYzRIbjAzSkVYNzZ5QjgzQm9rR1FvYksKMjhMNk0rdHUzUmFqNjd6Vmc2d2szaEhrU0pXSzBwV1YrSjdrUkRWYmhDYUZhNk5nMUZNRWxhTlozVDhhUUtyQgpDUDNDeEFTdjYxWTk5TEI4KzNXWVFIK3NYaTVGM01pYVNBZ1BkQUk3WEh1dXFET1lvMU5PL0JoSGt1aVg2QnRtCnorNTZud2pZMy8yUytSRmNBc3JMTnIwMDJZZi9oY0IraVlDNzVWYmcydVd6WTY3TWdOTGQ5VW9RU3BDRkYrVm4KM0cyUnhybnhBb0dCQU40U3M0ZVlPU2huMVpQQjdhTUZsY0k2RHR2S2ErTGZTTXFyY2pOZjJlSEpZNnhubmxKdgpGenpGL2RiVWVTbWxSekR0WkdlcXZXaHFISy9iTjIyeWJhOU1WMDlRQ0JFTk5jNmtWajJTVHpUWkJVbEx4QzYrCk93Z0wyZHhKendWelU0VC84ajdHalRUN05BZVpFS2FvRHFyRG5BYWkyaW5oZU1JVWZHRXFGKzJyQW9HQkFOMVAKK0tZL0lsS3RWRzRKSklQNzBjUis3RmpyeXJpY05iWCtQVzUvOXFHaWxnY2grZ3l4b25BWlBpd2NpeDN3QVpGdwpaZC96ZFB2aTBkWEppc1BSZjRMazg5b2pCUmpiRmRmc2l5UmJYbyt3TFU4NUhRU2NGMnN5aUFPaTVBRHdVU0FkCm45YWFweUNweEFkREtERHdObit3ZFhtaTZ0OHRpSFRkK3RoVDhkaVpBb0dCQUt6Wis1bG9OOTBtYlF4VVh5YUwKMjFSUm9tMGJjcndsTmVCaWNFSmlzaEhYa2xpSVVxZ3hSZklNM2hhUVRUcklKZENFaHFsV01aV0xPb2I2NTNyZgo3aFlMSXM1ZUtka3o0aFRVdnpldm9TMHVXcm9CV2xOVHlGanIrSWhKZnZUc0hpOGdsU3FkbXgySkJhZUFVWUNXCndNdlQ4NmNLclNyNkQrZG8wS05FZzFsL0FvR0FlMkFVdHVFbFNqLzBmRzgrV3hHc1RFV1JqclRNUzRSUjhRWXQKeXdjdFA4aDZxTGxKUTRCWGxQU05rMXZLTmtOUkxIb2pZT2pCQTViYjhibXNVU1BlV09NNENoaFJ4QnlHbmR2eAphYkJDRkFwY0IvbEg4d1R0alVZYlN5T294ZGt5OEp0ek90ajJhS0FiZHd6NlArWDZDODhjZmxYVFo5MWpYL3RMCjF3TmRKS2tDZ1lCbyt0UzB5TzJ2SWFmK2UwSkN5TGhzVDQ5cTN3Zis2QWVqWGx2WDJ1VnRYejN5QTZnbXo5aCsKcDNlK2JMRUxwb3B0WFhNdUFRR0xhUkcrYlNNcjR5dERYbE5ZSndUeThXczNKY3dlSTdqZVp2b0ZpbmNvVlVIMwphdmxoTUVCRGYxSjltSDB5cDBwWUNaS2ROdHNvZEZtQktzVEtQMjJhTmtsVVhCS3gyZzR6cFE9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+
+<span class="token punctuation">---</span>
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> ConfigMap
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>config
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress
+<span class="token key atrule">data</span><span class="token punctuation">:</span>
+  <span class="token key atrule">server-names-hash-bucket-size</span><span class="token punctuation">:</span> <span class="token string">&quot;1024&quot;</span>
+
+
+<span class="token punctuation">---</span>
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> ClusterRole
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> rbac.authorization.k8s.io/v1beta1
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress
+<span class="token key atrule">rules</span><span class="token punctuation">:</span>
+<span class="token punctuation">-</span> <span class="token key atrule">apiGroups</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token string">&quot;&quot;</span>
+  <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> services
+  <span class="token punctuation">-</span> endpoints
+  <span class="token key atrule">verbs</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> get
+  <span class="token punctuation">-</span> list
+  <span class="token punctuation">-</span> watch
+<span class="token punctuation">-</span> <span class="token key atrule">apiGroups</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token string">&quot;&quot;</span>
+  <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> secrets
+  <span class="token key atrule">verbs</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> get
+  <span class="token punctuation">-</span> list
+  <span class="token punctuation">-</span> watch
+<span class="token punctuation">-</span> <span class="token key atrule">apiGroups</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token string">&quot;&quot;</span>
+  <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> configmaps
+  <span class="token key atrule">verbs</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> get
+  <span class="token punctuation">-</span> list
+  <span class="token punctuation">-</span> watch
+  <span class="token punctuation">-</span> update
+  <span class="token punctuation">-</span> create
+<span class="token punctuation">-</span> <span class="token key atrule">apiGroups</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token string">&quot;&quot;</span>
+  <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> pods
+  <span class="token key atrule">verbs</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> list
+<span class="token punctuation">-</span> <span class="token key atrule">apiGroups</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token string">&quot;&quot;</span>
+  <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> events
+  <span class="token key atrule">verbs</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> create
+  <span class="token punctuation">-</span> patch
+<span class="token punctuation">-</span> <span class="token key atrule">apiGroups</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> extensions
+  <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> ingresses
+  <span class="token key atrule">verbs</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> list
+  <span class="token punctuation">-</span> watch
+  <span class="token punctuation">-</span> get
+<span class="token punctuation">-</span> <span class="token key atrule">apiGroups</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token string">&quot;extensions&quot;</span>
+  <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> ingresses/status
+  <span class="token key atrule">verbs</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> update
+<span class="token punctuation">-</span> <span class="token key atrule">apiGroups</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> k8s.nginx.org
+  <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> virtualservers
+  <span class="token punctuation">-</span> virtualserverroutes
+  <span class="token key atrule">verbs</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> list
+  <span class="token punctuation">-</span> watch
+  <span class="token punctuation">-</span> get
+
+<span class="token punctuation">---</span>
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> ClusterRoleBinding
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> rbac.authorization.k8s.io/v1beta1
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress
+<span class="token key atrule">subjects</span><span class="token punctuation">:</span>
+<span class="token punctuation">-</span> <span class="token key atrule">kind</span><span class="token punctuation">:</span> ServiceAccount
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress
+<span class="token key atrule">roleRef</span><span class="token punctuation">:</span>
+  <span class="token key atrule">kind</span><span class="token punctuation">:</span> ClusterRole
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress
+  <span class="token key atrule">apiGroup</span><span class="token punctuation">:</span> rbac.authorization.k8s.io
+
+<span class="token punctuation">---</span>
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DaemonSet
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress
+  <span class="token key atrule">annotations</span><span class="token punctuation">:</span>
+    <span class="token key atrule">prometheus.io/scrape</span><span class="token punctuation">:</span> <span class="token string">&quot;true&quot;</span>
+    <span class="token key atrule">prometheus.io/port</span><span class="token punctuation">:</span> <span class="token string">&quot;9113&quot;</span>
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">serviceAccountName</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx/nginx<span class="token punctuation">-</span>ingress<span class="token punctuation">:</span>1.5.5
+        <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>ingress
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> http
+          <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span>
+          <span class="token key atrule">hostPort</span><span class="token punctuation">:</span> <span class="token number">80</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> https
+          <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">443</span>
+          <span class="token key atrule">hostPort</span><span class="token punctuation">:</span> <span class="token number">443</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> prometheus
+          <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">9113</span>
+        <span class="token key atrule">env</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> POD_NAMESPACE
+          <span class="token key atrule">valueFrom</span><span class="token punctuation">:</span>
+            <span class="token key atrule">fieldRef</span><span class="token punctuation">:</span>
+              <span class="token key atrule">fieldPath</span><span class="token punctuation">:</span> metadata.namespace
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> POD_NAME
+          <span class="token key atrule">valueFrom</span><span class="token punctuation">:</span>
+            <span class="token key atrule">fieldRef</span><span class="token punctuation">:</span>
+              <span class="token key atrule">fieldPath</span><span class="token punctuation">:</span> metadata.name
+        <span class="token key atrule">args</span><span class="token punctuation">:</span>
+          <span class="token punctuation">-</span> <span class="token punctuation">-</span>nginx<span class="token punctuation">-</span>configmaps=$(POD_NAMESPACE)/nginx<span class="token punctuation">-</span>config
+          <span class="token punctuation">-</span> <span class="token punctuation">-</span>default<span class="token punctuation">-</span>server<span class="token punctuation">-</span>tls<span class="token punctuation">-</span>secret=$(POD_NAMESPACE)/default<span class="token punctuation">-</span>server<span class="token punctuation">-</span>secret
+         <span class="token comment">#- -v=3 # Enables extensive logging. Useful for troubleshooting.</span>
+         <span class="token comment">#- -report-ingress-status</span>
+         <span class="token comment">#- -external-service=nginx-ingress</span>
+         <span class="token comment">#- -enable-leader-election</span>
+          <span class="token punctuation">-</span> <span class="token punctuation">-</span>enable<span class="token punctuation">-</span>prometheus<span class="token punctuation">-</span>metrics
+         <span class="token comment">#- -enable-custom-resources</span>
+</code></pre></div></div></div></div> <p><strong>配置域名解析</strong></p> <p>将域名 *.demo.yourdomain.com 解析到 demo-worker-a-2 的 IP 地址 z.z.z.z （也可以是 demo-worker-a-1 的地址 y.y.y.y）</p> <p><strong>验证配置</strong></p> <p>在浏览器访问 a.demo.yourdomain.com，将得到 404 NotFound 错误页面</p> <div class="tip custom-block"><p class="custom-block-title">提示</p> <p>许多初学者在安装 Ingress Controller 时会碰到问题，请不要灰心，可暂时跳过 <em><strong>安装 Ingress Controller</strong></em> 这个部分，等您学完 www.kuboard.cn 上 <a href="/learning/k8s-basics/kubernetes-basics.html">Kubernetes 入门</a> 以及 <a href="/learning/k8s-intermediate/service/ingress.html">通过互联网访问您的应用程序</a> 这两部分内容后，再来回顾 Ingress Controller 的安装。</p></div> <div class="warning custom-block"><p class="custom-block-title">WARNING</p> <p>如果您打算将 Kubernetes 用于生产环境，请参考此文档 <a href="https://github.com/nginxinc/kubernetes-ingress/blob/v1.5.3/docs/installation.md" target="_blank" rel="noopener noreferrer">Installing Ingress Controller<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>，完善 Ingress 的配置</p></div> <h2 id="下一步"><a href="#下一步" aria-hidden="true" class="header-anchor">#</a> 下一步</h2> <div class="danger custom-block"><p class="custom-block-title">关于重启</p> <p>已经默认开启了 kubelet、docker 的开机启动，但是仍然有网友在重启虚拟机之后抱怨 kubernetes 不能正常使用。这种情况大多数是因为 <strong>重启后，你的内网IP地址发生了变化</strong></p></div> <p>🎉 🎉 🎉</p> <p>您已经完成了 Kubernetes 集群的安装，下一步请：</p> <p><a href="/install/install-dashboard.html">安装 Kuboard - 微服务管理界面</a></p> <p>安装 Kuboard 之前先
+<a target="_blank" href="http://demo.kuboard.cn/#/dashboard?k8sToken=undefined">
+在线体验 Kuboard
+</a></p> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <ul><li>Kubernetes 初学者，<a href="/learning/">点击这里获取 Kubernetes 学习路径</a></li></ul></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/container/2019-07-12-k8s.html" class="prev">kubernetes集群搭建-初探</a></span> <span class="next"><a href="/container/config-kubectl.html">配置Kubectl</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.d547739a.js" defer></script><script src="/assets/js/2.24623497.js" defer></script><script src="/assets/js/8.d941bdbf.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Mysqldump参数大全 | LINUX48</title>
+    <meta name="description" content=" 快应用UI组件库，简洁，易用，高效">
+    <link rel="icon" href="favicon.ico">
+    
+    <link rel="preload" href="/assets/css/0.styles.0b276b3d.css" as="style"><link rel="preload" href="/assets/js/app.d547739a.js" as="script"><link rel="preload" href="/assets/js/2.24623497.js" as="script"><link rel="preload" href="/assets/js/18.9278d1c2.js" as="script"><link rel="prefetch" href="/assets/js/10.58691a3b.js"><link rel="prefetch" href="/assets/js/100.fbd94a6c.js"><link rel="prefetch" href="/assets/js/101.21e5ef41.js"><link rel="prefetch" href="/assets/js/102.88af2ccb.js"><link rel="prefetch" href="/assets/js/103.69e7affb.js"><link rel="prefetch" href="/assets/js/104.c5fd8014.js"><link rel="prefetch" href="/assets/js/105.f5812982.js"><link rel="prefetch" href="/assets/js/106.4e19a657.js"><link rel="prefetch" href="/assets/js/107.0069eb1b.js"><link rel="prefetch" href="/assets/js/108.59caf83f.js"><link rel="prefetch" href="/assets/js/109.5d808f8a.js"><link rel="prefetch" href="/assets/js/11.da6a6f94.js"><link rel="prefetch" href="/assets/js/110.95167197.js"><link rel="prefetch" href="/assets/js/111.1310b0d3.js"><link rel="prefetch" href="/assets/js/112.58cbc4b5.js"><link rel="prefetch" href="/assets/js/113.1fa21fcf.js"><link rel="prefetch" href="/assets/js/114.55a2217f.js"><link rel="prefetch" href="/assets/js/115.647f5372.js"><link rel="prefetch" href="/assets/js/116.c4b46617.js"><link rel="prefetch" href="/assets/js/117.245855f4.js"><link rel="prefetch" href="/assets/js/118.e9476d0e.js"><link rel="prefetch" href="/assets/js/119.7ef3cfaf.js"><link rel="prefetch" href="/assets/js/12.8932e2d7.js"><link rel="prefetch" href="/assets/js/120.acfd5c81.js"><link rel="prefetch" href="/assets/js/121.ec6e7a4e.js"><link rel="prefetch" href="/assets/js/122.5c03347f.js"><link rel="prefetch" href="/assets/js/123.2e2de112.js"><link rel="prefetch" href="/assets/js/124.f67e422e.js"><link rel="prefetch" href="/assets/js/125.32ef6e6e.js"><link rel="prefetch" href="/assets/js/126.bde58b63.js"><link rel="prefetch" href="/assets/js/127.dca014de.js"><link rel="prefetch" href="/assets/js/128.883ef7d7.js"><link rel="prefetch" href="/assets/js/129.2f95d808.js"><link rel="prefetch" href="/assets/js/13.d5c1637d.js"><link rel="prefetch" href="/assets/js/130.b0ae78fa.js"><link rel="prefetch" href="/assets/js/131.2ba5f958.js"><link rel="prefetch" href="/assets/js/132.61928b24.js"><link rel="prefetch" href="/assets/js/133.3144a66d.js"><link rel="prefetch" href="/assets/js/134.f944030c.js"><link rel="prefetch" href="/assets/js/135.72750127.js"><link rel="prefetch" href="/assets/js/136.6732d310.js"><link rel="prefetch" href="/assets/js/137.0714a5b0.js"><link rel="prefetch" href="/assets/js/138.f1f9096c.js"><link rel="prefetch" href="/assets/js/139.d8be7a78.js"><link rel="prefetch" href="/assets/js/14.9df06523.js"><link rel="prefetch" href="/assets/js/140.58d1da78.js"><link rel="prefetch" href="/assets/js/141.55f759b4.js"><link rel="prefetch" href="/assets/js/142.3fca9e1a.js"><link rel="prefetch" href="/assets/js/143.7ef2390e.js"><link rel="prefetch" href="/assets/js/144.85bafe20.js"><link rel="prefetch" href="/assets/js/145.00e4c2de.js"><link rel="prefetch" href="/assets/js/15.16fca8c0.js"><link rel="prefetch" href="/assets/js/16.144c592e.js"><link rel="prefetch" href="/assets/js/17.ca3f0154.js"><link rel="prefetch" href="/assets/js/19.06cbda7b.js"><link rel="prefetch" href="/assets/js/20.86436084.js"><link rel="prefetch" href="/assets/js/21.5452a5f4.js"><link rel="prefetch" href="/assets/js/22.ffb9ccd7.js"><link rel="prefetch" href="/assets/js/23.39348297.js"><link rel="prefetch" href="/assets/js/24.772ac0b8.js"><link rel="prefetch" href="/assets/js/25.ce2cc958.js"><link rel="prefetch" href="/assets/js/26.fe928081.js"><link rel="prefetch" href="/assets/js/27.c5168e56.js"><link rel="prefetch" href="/assets/js/28.11c5cd93.js"><link rel="prefetch" href="/assets/js/29.d0df7513.js"><link rel="prefetch" href="/assets/js/3.afdbb220.js"><link rel="prefetch" href="/assets/js/30.8be6e657.js"><link rel="prefetch" href="/assets/js/31.b563a330.js"><link rel="prefetch" href="/assets/js/32.8d7a36e0.js"><link rel="prefetch" href="/assets/js/33.c9ee7217.js"><link rel="prefetch" href="/assets/js/34.759d0580.js"><link rel="prefetch" href="/assets/js/35.9833222c.js"><link rel="prefetch" href="/assets/js/36.21b23c90.js"><link rel="prefetch" href="/assets/js/37.6e35ee30.js"><link rel="prefetch" href="/assets/js/38.a773fb35.js"><link rel="prefetch" href="/assets/js/39.74e2e4de.js"><link rel="prefetch" href="/assets/js/4.5229681b.js"><link rel="prefetch" href="/assets/js/40.36302b4f.js"><link rel="prefetch" href="/assets/js/41.41e724a5.js"><link rel="prefetch" href="/assets/js/42.b5c593c6.js"><link rel="prefetch" href="/assets/js/43.468992cf.js"><link rel="prefetch" href="/assets/js/44.758e86a2.js"><link rel="prefetch" href="/assets/js/45.c2e2cf01.js"><link rel="prefetch" href="/assets/js/46.930a4274.js"><link rel="prefetch" href="/assets/js/47.7da62911.js"><link rel="prefetch" href="/assets/js/48.94502441.js"><link rel="prefetch" href="/assets/js/49.b3e09a7d.js"><link rel="prefetch" href="/assets/js/5.8dab3aa1.js"><link rel="prefetch" href="/assets/js/50.f39e943a.js"><link rel="prefetch" href="/assets/js/51.19210514.js"><link rel="prefetch" href="/assets/js/52.595f89b1.js"><link rel="prefetch" href="/assets/js/53.31682f4d.js"><link rel="prefetch" href="/assets/js/54.73839c6f.js"><link rel="prefetch" href="/assets/js/55.5dda3032.js"><link rel="prefetch" href="/assets/js/56.9c051c47.js"><link rel="prefetch" href="/assets/js/57.ca5c8068.js"><link rel="prefetch" href="/assets/js/58.f6e52010.js"><link rel="prefetch" href="/assets/js/59.bc6eb54a.js"><link rel="prefetch" href="/assets/js/6.fadf5b27.js"><link rel="prefetch" href="/assets/js/60.c301b2a0.js"><link rel="prefetch" href="/assets/js/61.34ece49a.js"><link rel="prefetch" href="/assets/js/62.14a7dca3.js"><link rel="prefetch" href="/assets/js/63.78db4810.js"><link rel="prefetch" href="/assets/js/64.66771257.js"><link rel="prefetch" href="/assets/js/65.cd745745.js"><link rel="prefetch" href="/assets/js/66.9db6be57.js"><link rel="prefetch" href="/assets/js/67.44ad15ae.js"><link rel="prefetch" href="/assets/js/68.5f9b9051.js"><link rel="prefetch" href="/assets/js/69.17fe060a.js"><link rel="prefetch" href="/assets/js/7.497a77ba.js"><link rel="prefetch" href="/assets/js/70.ceb8b968.js"><link rel="prefetch" href="/assets/js/71.784999cf.js"><link rel="prefetch" href="/assets/js/72.5cae45f8.js"><link rel="prefetch" href="/assets/js/73.be78be06.js"><link rel="prefetch" href="/assets/js/74.ca20f9c0.js"><link rel="prefetch" href="/assets/js/75.dd59bb63.js"><link rel="prefetch" href="/assets/js/76.3d59e426.js"><link rel="prefetch" href="/assets/js/77.29b6888a.js"><link rel="prefetch" href="/assets/js/78.f43a3d98.js"><link rel="prefetch" href="/assets/js/79.8d4441c4.js"><link rel="prefetch" href="/assets/js/8.d941bdbf.js"><link rel="prefetch" href="/assets/js/80.1ed0f009.js"><link rel="prefetch" href="/assets/js/81.d60bb7bb.js"><link rel="prefetch" href="/assets/js/82.fe19abeb.js"><link rel="prefetch" href="/assets/js/83.112d63e3.js"><link rel="prefetch" href="/assets/js/84.6024d92b.js"><link rel="prefetch" href="/assets/js/85.bbb0b0cd.js"><link rel="prefetch" href="/assets/js/86.6fb86e49.js"><link rel="prefetch" href="/assets/js/87.48e833b9.js"><link rel="prefetch" href="/assets/js/88.563a8225.js"><link rel="prefetch" href="/assets/js/89.7378c246.js"><link rel="prefetch" href="/assets/js/9.7e79e735.js"><link rel="prefetch" href="/assets/js/90.5f9203c7.js"><link rel="prefetch" href="/assets/js/91.264f56ea.js"><link rel="prefetch" href="/assets/js/92.c60856cb.js"><link rel="prefetch" href="/assets/js/93.0e844347.js"><link rel="prefetch" href="/assets/js/94.f0898a34.js"><link rel="prefetch" href="/assets/js/95.e20032b4.js"><link rel="prefetch" href="/assets/js/96.0d291bab.js"><link rel="prefetch" href="/assets/js/97.6210726a.js"><link rel="prefetch" href="/assets/js/98.4d2ad25a.js"><link rel="prefetch" href="/assets/js/99.5f24992c.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0b276b3d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">LINUX48</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">指南</a></div><div class="nav-item"><a href="/zh/CHANGELOG.html" class="nav-link">Changelog</a></div><div class="nav-item"><a href="https://github.com/JDsecretFE/quist-ui" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">指南</a></div><div class="nav-item"><a href="/zh/CHANGELOG.html" class="nav-link">Changelog</a></div><div class="nav-item"><a href="https://github.com/JDsecretFE/quist-ui" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Database</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/database/2019-01-23-redis-sentinel.html" class="sidebar-link">redis-sentinel安装配置</a></li><li><a href="/database/2018-12-11-mha.html" class="sidebar-link">MySQL高可用之MHA</a></li><li><a href="/database/2018-11-22-redis-think.html" class="sidebar-link">使用Redis的一些想法和建议</a></li><li><a href="/database/2018-11-15-redis-rdb-tools.html" class="sidebar-link">使用redis-rdb-tools分析Redis内存</a></li><li><a href="/database/2017-06-12-RDS-recovery-local-mysql.html" class="sidebar-link">RDS备份文件恢复到自建数据库</a></li><li><a href="/database/2017-06-08-excel-merge.html" class="sidebar-link">多个EXCEL文件合并成一个EXCEL</a></li><li><a href="/database/2017-05-24-redis-twemproxy.html" class="sidebar-link">基于Twemproxy的Redis集群方案</a></li><li><a href="/database/2016-09-15-redis-stat.html" class="sidebar-link">Redis-stat的安装与使用</a></li><li><a href="/database/2016-09-10-mysqlsla.html" class="sidebar-link">MySQL慢日志分析工具mysqlsla</a></li><li><a href="/database/2016-05-27-mysql-duplicate-records.html" class="sidebar-link">MySQL查询表内重复记录</a></li><li><a href="/database/2016-04-20-mysql-in-paixu.html" class="sidebar-link">MySQL查询按IN的顺序输出结果</a></li><li><a href="/database/2015-10-8-mysql-some-question.html" class="sidebar-link">mysql You cant specify target table</a></li><li><a href="/database/2015-10-30-mysql-row-usedisk.html" class="sidebar-link">mysql中查看数据库中所有表的记录数</a></li><li><a href="/database/2015-10-27-mysql-AVG-MIN-SUM.html" class="sidebar-link">mysql求平均值、最小和总值</a></li><li><a href="/database/2015-10-21-mysql-every-hour.html" class="sidebar-link">mysql取每隔一小时数据</a></li><li><a href="/database/2015-07-30-sql-concat.html" class="sidebar-link">MYSQL在一个字段值前面加字符串</a></li><li><a href="/database/2015-07-22-Primary-key-conflicts.html" class="sidebar-link">mysql双主主键冲突排查修复</a></li><li><a href="/database/2015-07-15-mysql-dual-master.html" class="sidebar-link">mysql双主互备设计搭建</a></li><li><a href="/database/2015-06-25-mysql-log.html" class="sidebar-link">mysql全局日志开启</a></li><li><a href="/database/2015-06-05-mysql-grant.html" class="sidebar-link">MySQL的Grant赋权命令详解</a></li><li><a href="/database/2015-03-05-redis-easy-install.html" class="sidebar-link">Redis安装及主从配置</a></li><li><a href="/database/2015-01-06-mysql-m-s-s.html" class="sidebar-link">如何搭master-slave-slave</a></li><li><a href="/database/2015-01-06-mysql5.1-ms.html" class="sidebar-link">Mysql5.1主从服务设置</a></li><li><a href="/database/2014-07-31-mysql-daxiaoxie.html" class="sidebar-link">Windows下MySQL无法区分大小写解决方案</a></li><li><a href="/database/2014-07-29-mysql-dump-all.html" class="active sidebar-link">Mysqldump参数大全</a></li><li><a href="/database/2014-07-25-mysql-instet-other-table.html" class="sidebar-link">MySql中把一个表的数据插入到另一个表中的实现</a></li><li><a href="/database/2013-05-09-mysql-error-1064.html" class="sidebar-link">MySQL错误ERROR 1064 (type=myisam出错)</a></li><li><a href="/database/2012-12-27-oracle-startup-failure.html" class="sidebar-link">oracle startup failure</a></li><li><a href="/database/2012-12-27-oracle-startup.html" class="sidebar-link">oracle startup 故障：ORA-00845: MEMORY_TARGET</a></li><li><a href="/database/2012-12-27-ora-01102-cannot-mount-database-in-exclusive-mode.html" class="sidebar-link">ORA-01102: cannot mount database in EXCLUSIVE mode</a></li><li><a href="/database/2012-12-20-centos-install-oracle-11g.html" class="sidebar-link">centos install oracle 11g</a></li><li><a href="/database/2012-11-14-mysql-slow-log.html" class="sidebar-link">Mysql慢查询设置</a></li><li><a href="/database/2012-11-14-mysql-ms-error.html" class="sidebar-link">MYSQL主从同步故障事件</a></li><li><a href="/database/2012-07-30-mysql5-5-ms.html" class="sidebar-link">mysql5.5版本主从搭建</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Container</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Monitor</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>System</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>RaspberryPi</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>About</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="mysqldump参数大全"><a href="#mysqldump参数大全" aria-hidden="true" class="header-anchor">#</a> Mysqldump参数大全</h1> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--all-databases  , -A**</span>
+
+导出全部数据库。
+
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases`</span>
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--all-tablespaces  , -Y**</span>
+
+导出全部表空间。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --all-tablespaces`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--no-tablespaces  , -y**</span>
+
+不导出任何表空间信息。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --no-tablespaces`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--add-drop-database**</span>
+
+每个数据库创建之前添加<span class="token keyword">drop</span>数据库语句。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --add-drop-database`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--add-drop-table**</span>
+
+每个数据表创建之前添加<span class="token keyword">drop</span>数据表语句。<span class="token punctuation">(</span>默认为打开状态，使用<span class="token comment">--skip-add-drop-table取消选项)</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases  (默认添加drop语句)`</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases –skip-add-drop-table  (取消drop语句)`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--add-locks**</span>
+
+在每个表导出之前增加<span class="token keyword">LOCK</span> <span class="token keyword">TABLES</span>并且之后<span class="token keyword">UNLOCK</span>  <span class="token keyword">TABLE</span>。<span class="token punctuation">(</span>默认为打开状态，使用<span class="token comment">--skip-add-locks取消选项)</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases  (默认添加LOCK语句)`</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases –skip-add-locks   (取消LOCK语句)`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--allow-keywords**</span>
+
+允许创建是关键词的列名字。这由表名前缀于每个列名做到。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --allow-keywords`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--apply-slave-statements**</span>
+
+在<span class="token string">'CHANGE MASTER'</span>前添加<span class="token string">'STOP SLAVE'</span>，并且在导出的最后添加<span class="token string">'START SLAVE'</span>。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --apply-slave-statements`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--character-sets-dir**</span>
+
+字符集文件的目录
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases  --character-sets-dir=/usr/local/mysql/share/mysql/charsets`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--comments**</span>
+
+附加注释信息。默认为打开，可以用<span class="token comment">--skip-comments取消</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases  (默认记录注释)`</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --skip-comments   (取消注释)`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--compatible**</span>
+
+导出的数据将和其它数据库或旧版本的MySQL 相兼容。值可以为ansi、mysql323、mysql40、postgresql、oracle、mssql、db2、maxdb、no_key_options、no_tables_options、no_field_options等，要使用几个值，用逗号将它们隔开。它并不保证能完全兼容，而是尽量兼容。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --compatible=ansi`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--compact**</span>
+
+导出更少的输出信息<span class="token punctuation">(</span>用于调试<span class="token punctuation">)</span>。去掉注释和头尾等结构。可以使用选项：<span class="token comment">--skip-add-drop-table  --skip-add-locks --skip-comments --skip-disable-keys</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --compact`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--complete-insert,  -c**</span>
+
+使用完整的<span class="token keyword">insert</span>语句<span class="token punctuation">(</span>包含列名称<span class="token punctuation">)</span>。这么做能提高插入效率，但是可能会受到max_allowed_packet参数的影响而导致插入失败。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --complete-insert`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--compress, -C**</span>
+
+在客户端和服务器之间启用压缩传递所有信息
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --compress`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--create-options,  -a**</span>
+
+在<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span>语句中包括所有MySQL特性选项。<span class="token punctuation">(</span>默认为打开状态<span class="token punctuation">)</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--databases,  -B**</span>
+
+导出几个数据库。参数后面所有名字参量都被看作数据库名。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--databases test mysql`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--debug**</span>
+
+输出debug信息，用于调试。默认值为：d:t:o<span class="token punctuation">,</span><span class="token operator">/</span>tmp<span class="token operator">/</span>mysqldump<span class="token punctuation">.</span>trace
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --debug`</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --debug=&quot;d:t:o,/tmp/debug.trace&quot;`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--debug-check**</span>
+
+检查内存和打开文件使用说明并退出。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --debug-check`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--debug-info**</span>
+
+输出调试信息并退出
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --debug-info`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--default-character-set**</span>
+
+设置默认字符集，默认值为utf8
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --default-character-set=latin1`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--delayed-insert**</span>
+
+采用延时插入方式（<span class="token keyword">INSERT</span> <span class="token keyword">DELAYED</span>）导出数据
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --delayed-insert`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--delete-master-logs**</span>
+
+master备份后删除日志<span class="token punctuation">.</span> 这个参数将自动激活<span class="token comment">--master-data。</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --delete-master-logs`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--disable-keys**</span>
+
+对于每个表，用<span class="token comment">/*!40000 ALTER TABLE tbl_name DISABLE KEYS */</span><span class="token punctuation">;</span>和<span class="token comment">/*!40000 ALTER TABLE tbl_name ENABLE KEYS */</span><span class="token punctuation">;</span>语句引用<span class="token keyword">INSERT</span>语句。这样可以更快地导入<span class="token keyword">dump</span>出来的文件，因为它是在插入所有行后创建索引的。该选项只适合MyISAM表，默认为打开状态。
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--dump-slave**</span>
+
+该选项将导致主的binlog位置和文件名追加到导出数据的文件中。设置为<span class="token number">1</span>时，将会以CHANGE MASTER命令输出到数据文件；设置为<span class="token number">2</span>时，在命令前增加说明信息。该选项将会打开<span class="token comment">--lock-all-tables，除非--single-transaction被指定。该选项会自动关闭--lock-tables选项。默认值为0。</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --dump-slave=1`</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --dump-slave=2`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--events, -E**</span>
+
+导出事件。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --events`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--extended-insert,  -e**</span>
+
+使用具有多个<span class="token keyword">VALUES</span>列的<span class="token keyword">INSERT</span>语法。这样使导出文件更小，并加速导入时的速度。默认为打开状态，使用<span class="token comment">--skip-extended-insert取消选项。</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases`</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases--skip-extended-insert   (取消选项)`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--fields-terminated-by**</span>
+
+导出文件中忽略给定字段。与<span class="token comment">--tab选项一起使用，不能用于--databases和--all-databases选项</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p test test <span class="token comment">--tab=”/home/mysql” --fields-terminated-by=&quot;#&quot;`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--fields-enclosed-by**</span>
+
+输出文件中的各个字段用给定字符包裹。与<span class="token comment">--tab选项一起使用，不能用于--databases和--all-databases选项</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p test test <span class="token comment">--tab=”/home/mysql” --fields-enclosed-by=&quot;#&quot;`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--fields-optionally-enclosed-by**</span>
+
+输出文件中的各个字段用给定字符选择性包裹。与<span class="token comment">--tab选项一起使用，不能用于--databases和--all-databases选项</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p test test <span class="token comment">--tab=”/home/mysql”  --fields-enclosed-by=”#” --fields-optionally-enclosed-by  =”#”`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--fields-escaped-by**</span>
+
+输出文件中的各个字段忽略给定字符。与<span class="token comment">--tab选项一起使用，不能用于--databases和--all-databases选项</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p mysql <span class="token keyword">user</span> <span class="token comment">--tab=”/home/mysql” --fields-escaped-by=”#”`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--flush-logs**</span>
+
+开始导出之前刷新日志。
+
+请注意：假如一次导出多个数据库<span class="token punctuation">(</span>使用选项<span class="token comment">--databases或者--all-databases)，将会逐个数据库刷新日志。除使用--lock-all-tables或者--master-data外。在这种情况下，日志将会被刷新一次，相应的所以表同时被锁定。因此，如果打算同时导出和刷新日志应该使用--lock-all-tables 或者--master-data 和--flush-logs。</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --flush-logs`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--flush-privileges**</span>
+
+在导出mysql数据库之后，发出一条FLUSH  <span class="token keyword">PRIVILEGES</span> 语句。为了正确恢复，该选项应该用于导出mysql数据库和依赖mysql数据库数据的任何时候。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --flush-privileges`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--force**</span>
+
+在导出过程中忽略出现的<span class="token keyword">SQL</span>错误。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --force`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--help**</span>
+
+显示帮助信息并退出。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token comment">--help`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--hex-blob**</span>
+
+使用十六进制格式导出二进制字符串字段。如果有二进制数据就必须使用该选项。影响到的字段类型有<span class="token keyword">BINARY</span>、<span class="token keyword">VARBINARY</span>、<span class="token keyword">BLOB</span>。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--all-databases --hex-blob`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--host, -h**</span>
+
+需要导出的主机信息
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--ignore-table**</span>
+
+不导出指定表。指定忽略多个表时，需要重复多次，每次一个表。每个表必须同时指定数据库和表名。例如：<span class="token comment">--ignore-table=database.table1 --ignore-table=database.table2 ……</span>
+
+mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --ignore-table=mysql.user</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--include-master-host-port**</span>
+
+在<span class="token comment">--dump-slave产生的'CHANGE  MASTER TO..'语句中增加'MASTER_HOST=&lt;host&gt;，MASTER_PORT=&lt;port&gt;'  </span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --include-master-host-port`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--insert-ignore**</span>
+
+在插入行时使用<span class="token keyword">INSERT</span> <span class="token keyword">IGNORE</span>语句<span class="token punctuation">.</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --insert-ignore`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--lines-terminated-by**</span>
+
+输出文件的每行用给定字符串划分。与<span class="token comment">--tab选项一起使用，不能用于--databases和--all-databases选项。</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost test test --tab=”/tmp/mysql”  --lines-terminated-by=”##”`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--lock-all-tables,  -x**</span>
+
+提交请求锁定所有数据库中的所有表，以保证数据的一致性。这是一个全局读锁，并且自动关闭<span class="token comment">--single-transaction 和--lock-tables 选项。</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --lock-all-tables`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--lock-tables,  -l**</span>
+
+开始导出前，锁定所有表。用<span class="token keyword">READ</span>  <span class="token keyword">LOCAL</span>锁定表以允许MyISAM表并行插入。对于支持事务的表例如<span class="token keyword">InnoDB</span>和<span class="token keyword">BDB</span>，<span class="token comment">--single-transaction是一个更好的选择，因为它根本不需要锁定表。</span>
+请注意当导出多个数据库时，<span class="token comment">--lock-tables分别为每个数据库锁定表。因此，该选项不能保证导出文件中的表在数据库之间的逻辑一致性。不同数据库表的导出状态可以完全不同。</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --lock-tables`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--log-error**</span>
+
+附加警告和错误信息到给定文件
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases  --log-error=/tmp/mysqldump_error_log.err`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--master-data**</span>
+
+该选项将binlog的位置和文件名追加到输出文件中。如果为<span class="token number">1</span>，将会输出CHANGE MASTER 命令；如果为<span class="token number">2</span>，输出的CHANGE  MASTER命令前添加注释信息。该选项将打开<span class="token comment">--lock-all-tables 选项，除非--single-transaction也被指定（在这种情况下，全局读锁在开始导出时获得很短的时间；其他内容参考下面的--single-transaction选项）。该选项自动关闭--lock-tables选项。</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --master-data=1;`</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --master-data=2;`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--max_allowed_packet**</span>
+
+服务器发送和接受的最大包长度。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --max_allowed_packet=10240`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--net_buffer_length**</span>
+
+TCP<span class="token operator">/</span>IP和socket连接的缓存大小。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --net_buffer_length=1024`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--no-autocommit**</span>
+
+使用autocommit<span class="token operator">/</span><span class="token keyword">commit</span> 语句包裹表。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --no-autocommit`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--no-create-db,  -n**</span>
+
+只导出数据，而不添加<span class="token keyword">CREATE</span> <span class="token keyword">DATABASE</span> 语句。
+
+mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --no-create-db</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--no-create-info,  -t**</span>
+
+只导出数据，而不添加<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> 语句。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --no-create-info`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--no-data, -d**</span>
+
+不导出任何数据，只导出数据库表结构。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --no-data`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--no-set-names,  -N**</span>
+
+等同于<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--skip-set-charset**</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --no-set-names`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--opt**</span>
+
+等同于<span class="token comment">--add-drop-table,  --add-locks, --create-options, --quick, --extended-insert, --lock-tables,  --set-charset, --disable-keys 该选项默认开启,  可以用--skip-opt禁用.</span>
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --opt`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--order-by-primary**</span>
+
+如果存在主键，或者第一个唯一键，对每个表的记录进行排序。在导出MyISAM表到<span class="token keyword">InnoDB</span>表时有效，但会使得导出工作花费很长时间。 
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --order-by-primary`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--password, -p**</span>
+
+连接数据库密码
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--pipe(windows系统可用)**</span>
+
+使用命名管道连接mysql
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --pipe`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--port, -P**</span>
+
+连接数据库端口号
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--protocol**</span>
+
+使用的连接协议，包括：tcp<span class="token punctuation">,</span> socket<span class="token punctuation">,</span> pipe<span class="token punctuation">,</span> memory<span class="token punctuation">.</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --protocol=tcp`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--quick, -q**</span>
+
+不缓冲查询，直接导出到标准输出。默认为打开状态，使用<span class="token comment">--skip-quick取消该选项。</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases`</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --skip-quick`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--quote-names,-Q**</span>
+
+使用（<span class="token string">'）引起表和列名。默认为打开状态，使用--skip-quote-names取消该选项。
+
+`mysqldump  -uroot -p --host=localhost --all-databases`
+
+`mysqldump  -uroot -p --host=localhost --all-databases --skip-quote-names`
+
+**--replace**
+
+使用REPLACE INTO 取代INSERT INTO.
+
+`mysqldump  -uroot -p --host=localhost --all-databases --replace`
+
+**--result-file,  -r**
+
+直接输出到指定文件中。该选项应该用在使用回车换行对（\\r\\n）换行的系统上（例如：DOS，Windows）。该选项确保只有一行被使用。
+
+`mysqldump  -uroot -p --host=localhost --all-databases --result-file=/tmp/mysqldump_result_file.txt`
+
+**--routines, -R**
+
+导出存储过程以及自定义函数。
+
+`mysqldump  -uroot -p --host=localhost --all-databases --routines`
+
+**--set-charset**
+
+添加'</span><span class="token keyword">SET</span> NAMES  default_character_set<span class="token string">'到输出文件。默认为打开状态，使用--skip-set-charset关闭选项。
+
+`mysqldump  -uroot -p --host=localhost --all-databases `
+
+m`ysqldump  -uroot -p --host=localhost --all-databases --skip-set-charset`
+
+**--single-transaction**
+
+该选项在导出数据之前提交一个BEGIN SQL语句，BEGIN 不会阻塞任何应用程序且能保证导出时数据库的一致性状态。它只适用于多版本存储引擎，仅InnoDB。本选项和--lock-tables 选项是互斥的，因为LOCK  TABLES 会使任何挂起的事务隐含提交。要想导出大表的话，应结合使用--quick 选项。
+
+`mysqldump  -uroot -p --host=localhost --all-databases --single-transaction`
+
+**--dump-date**
+
+将导出时间添加到输出文件中。默认为打开状态，使用--skip-dump-date关闭选项。
+
+`mysqldump  -uroot -p --host=localhost --all-databases`
+
+`mysqldump  -uroot -p --host=localhost --all-databases --skip-dump-date`
+
+**--skip-opt**
+
+禁用–opt选项.
+
+`mysqldump  -uroot -p --host=localhost --all-databases --skip-opt`
+
+**--socket,-S**
+
+指定连接mysql的socket文件位置，默认路径/tmp/mysql.sock
+
+`mysqldump  -uroot -p --host=localhost --all-databases --socket=/tmp/mysqld.sock`
+
+**--tab,-T**
+
+为每个表在给定路径创建tab分割的文本文件。注意：仅仅用于mysqldump和mysqld服务器运行在相同机器上。
+
+`mysqldump  -uroot -p --host=localhost test test --tab=&quot;/home/mysql&quot;`
+
+**--tables**
+
+覆盖--databases (-B)参数，指定需要导出的表名。
+
+`mysqldump  -uroot -p --host=localhost --databases test --tables test`
+
+**--triggers**
+
+导出触发器。该选项默认启用，用--skip-triggers禁用它。
+
+`mysqldump  -uroot -p --host=localhost --all-databases --triggers`
+
+**--tz-utc**
+
+在导出顶部设置时区TIME_ZONE='</span><span class="token operator">+</span><span class="token number">00</span>:<span class="token number">00</span>' ，以保证在不同时区导出的<span class="token keyword">TIMESTAMP</span> 数据或者数据被移动其他时区时的正确性。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --tz-utc`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--user, -u**</span>
+
+指定连接的用户名。
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--verbose, --v**</span>
+
+输出多种平台信息。
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--version, -V**</span>
+
+输出mysqldump版本信息并退出
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--where, -w**</span>
+
+只转储给定的<span class="token keyword">WHERE</span>条件选择的记录。请注意如果条件包含命令解释符专用空格或字符，一定要将条件引用起来。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --where=” user=’root’”`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--xml, -X**</span>
+
+导出XML格式<span class="token punctuation">.</span>
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --xml`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--plugin_dir**</span>
+
+客户端插件的目录，用于兼容不同的插件版本。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --plugin_dir=”/usr/local/lib/plugin”`</span>
+
+<span class="token operator">*</span><span class="token operator">*</span><span class="token comment">--default_auth**</span>
+
+客户端插件默认使用权限。
+
+<span class="token punctuation">`</span>mysqldump  <span class="token operator">-</span>uroot <span class="token operator">-</span>p <span class="token comment">--host=localhost --all-databases --default-auth=”/usr/local/lib/plugin/&lt;PLUGIN&gt;”`</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/database/2014-07-31-mysql-daxiaoxie.html" class="prev">Windows下MySQL无法区分大小写解决方案</a></span> <span class="next"><a href="/database/2014-07-25-mysql-instet-other-table.html">MySql中把一个表的数据插入到另一个表中的实现</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.d547739a.js" defer></script><script src="/assets/js/2.24623497.js" defer></script><script src="/assets/js/18.9278d1c2.js" defer></script>
+  </body>
+</html>
