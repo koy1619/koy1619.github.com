@@ -1,6 +1,7 @@
 cd /home/wwwroot/koy1619.github.com
-rm -f `ls *|egrep -v '(CNAME|upload.sh)'`
-cp -Rf /home/wwwroot/linux48.com/docs/.vuepress/dist/*   ./
+#rm -f `ls *|egrep -v '(CNAME|upload.sh)'`
+rm -rf `ls |egrep -v '(CNAME|upload.sh)'`
+cp -Rf /opt/dist/*   ./
 
 touch `date +%Y-%m-%d-----%H:%M:%S`
 
